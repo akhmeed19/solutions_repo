@@ -6,7 +6,7 @@ Below is a comprehensive Markdown document that outlines the derivation, analysi
 
 # Investigating the Range as a Function of the Angle of Projection
 
-### 1. Introduction
+## 1. Introduction
 
 Projectile motion is a classic problem in mechanics that offers deep insights into the interplay between linear and quadratic relationships. By varying parameters such as the initial velocity, gravitational acceleration, and launch height, one can obtain a rich family of solutions that model real-world phenomena ranging from sports to aerospace engineering.
 
@@ -158,3 +158,7 @@ This investigation has provided:
 - A Python-based simulation that visualizes these relationships.
 
 While the idealized model offers significant insights, real-world applications require accounting for additional factors like air resistance, wind, and variable terrain. Future extensions might include these effects to provide a more comprehensive understanding of projectile motion in practical scenarios.
+
+---
+
+This document should serve as a solid starting point for further exploration into projectile dynamics and can be expanded with more sophisticated models to simulate realistic conditions.
