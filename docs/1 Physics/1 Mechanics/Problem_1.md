@@ -174,4 +174,4 @@ This document should serve as a solid starting point for further exploration int
 
 Below is the static image generated from the Python simulation:
 
-![Projectile Range vs Angle](Projectile_Range_vs_Angle.png)
+<img src="Projectile_Range_vs_Angle.png" alt="Projectile Range vs Angle" style="max-width:100%; display:block; margin: 0 auto;">
