@@ -24,39 +24,42 @@ In this document, we:
 
 ### Derivation of Equations of Motion
 
-Assume a projectile is launched with an initial speed \( v_0 \) at an angle \( \theta \) relative to the horizontal. Under the assumption of uniform gravitational acceleration \( g \) and no air resistance, the equations of motion are:
+Assume a projectile is launched with an initial speed $v_0$ at an angle $\theta$ relative to the horizontal. Under the assumption of uniform gravitational acceleration $g$ and no air resistance, the equations of motion are:
 
-\[
+$$
 x(t) = v_0 \cos(\theta) \, t,
-\]
-\[
+$$
+
+$$
 y(t) = v_0 \sin(\theta) \, t - \frac{1}{2} g t^2.
-\]
+$$
 
 ### Time of Flight and Range
 
-For a projectile launched from and landing at the same vertical level (\( y = 0 \)), setting \( y(T) = 0 \) gives:
+For a projectile launched from and landing at the same vertical level ($y = 0$), setting $y(T) = 0$ gives:
 
-\[
+$$
 0 = v_0 \sin(\theta) \, T - \frac{1}{2} g T^2.
-\]
+$$
 
 This yields two solutions:
 
-1. \( T = 0 \) (the launch moment), and
-2. \( T = \frac{2 v_0 \sin(\theta)}{g} \) (the total flight time).
+1. $T = 0$ (the launch moment), and
+2. $$
+   T = \frac{2 v_0 \sin(\theta)}{g}.
+   $$
 
-The horizontal range \( R \) is the horizontal displacement at \( T \):
+The horizontal range $R$ is the horizontal displacement at $T$:
 
-\[
+$$
 R = x(T) = v_0 \cos(\theta) \, T = v_0 \cos(\theta) \cdot \frac{2 v_0 \sin(\theta)}{g} = \frac{v_0^2 \sin(2\theta)}{g}.
-\]
+$$
 
-Thus, the range as a function of the angle \( \theta \) is:
+Thus, the range as a function of the angle $\theta$ is:
 
-\[
+$$
 R(\theta) = \frac{v_0^2 \sin(2\theta)}{g}.
-\]
+$$
 
 ---
 
@@ -65,19 +68,19 @@ R(\theta) = \frac{v_0^2 \sin(2\theta)}{g}.
 ### Dependence on the Angle of Projection
 
 - **Optimal Angle:**  
-  For a given \( v_0 \) and \( g \), the maximum range is achieved when \( \sin(2\theta) \) is maximized. Since \( \sin(2\theta) \) reaches its maximum value of 1 when \( 2\theta = 90^\circ \), the optimal angle is:
+  For a given $v_0$ and $g$, the maximum range is achieved when $\sin(2\theta)$ is maximized. Since $\sin(2\theta)$ reaches its maximum value of 1 when $2\theta = 90^\circ$, the optimal angle is:
 
-  \[
+  $$
   \theta = 45^\circ.
-  \]
+  $$
 
 - **Parameter Influences:**
-  - **Initial Velocity \( v_0 \):**  
-    The range scales with \( v_0^2 \); increasing \( v_0 \) results in a quadratic increase in the range.
-  - **Gravitational Acceleration \( g \):**  
-    A higher gravitational acceleration reduces the range. On celestial bodies with lower \( g \), the projectile would travel farther.
+  - **Initial Velocity $v_0$:**  
+    The range scales with $v_0^2$; increasing $v_0$ results in a quadratic increase in the range.
+  - **Gravitational Acceleration $g$:**  
+    A higher gravitational acceleration reduces the range. On celestial bodies with lower $g$, the projectile would travel farther.
   - **Launch Height:**  
-    For non-zero launch heights, the time of flight and range are modified. This case introduces additional complexity and typically requires solving a quadratic equation for \( T \).
+    For non-zero launch heights, the time of flight and range are modified. This case introduces additional complexity and typically requires solving a quadratic equation for $T$.
 
 ---
 
@@ -99,7 +102,7 @@ R(\theta) = \frac{v_0^2 \sin(2\theta)}{g}.
 - **Wind Effects:**  
   Lateral forces are not considered.
 - **Non-uniform Gravitational Fields:**  
-  For large-scale projectiles (e.g., rockets), the assumption of constant \( g \) is not valid.
+  For large-scale projectiles (e.g., rockets), the assumption of constant $g$ is not valid.
 - **Uneven Terrain:**  
   The analysis assumes level ground; varying terrain requires more complex modeling.
 
@@ -138,7 +141,7 @@ plt.show()
 ### Explanation of the Code
 
 - **Parameter Setup:**  
-  We define the gravitational acceleration \( g \) and the initial velocity \( v_0 \).
+  We define the gravitational acceleration $g$ and the initial velocity $v_0$.
 - **Angle Range:**  
   Angles are sampled from 0° to 90° and converted to radians.
 - **Range Calculation:**  
