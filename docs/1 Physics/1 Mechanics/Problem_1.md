@@ -6,7 +6,7 @@ Below is a comprehensive Markdown document that outlines the derivation, analysi
 
 # Investigating the Range as a Function of the Angle of Projection
 
- <summary> 1. Introduction </summary>
+## 1. Introduction
 
 Projectile motion is a classic problem in mechanics that offers deep insights into the interplay between linear and quadratic relationships. By varying parameters such as the initial velocity, gravitational acceleration, and launch height, one can obtain a rich family of solutions that model real-world phenomena ranging from sports to aerospace engineering.
 
