@@ -172,6 +172,84 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h1 id="investigating-the-range-as-a-function-of-the-angle-of-projection">Investigating the Range as a Function of the Angle of Projection</h1>
+<h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
+<h3 id="derivation-of-governing-equations">Derivation of Governing Equations</h3>
+<p>Projectile motion can be modeled using basic principles of classical mechanics. Under gravity and ignoring air resistance, the equations of motion in the horizontal (x) and vertical (y) directions are given by:</p>
+<p>[
+x(t) = v_0 \cos(\theta) t
+]
+[
+y(t) = v_0 \sin(\theta) t - \frac{1}{2} g t^2
+]</p>
+<p>Where:</p>
+<ul>
+<li><span class="arithmatex">\( v_0 \)</span> is the initial velocity</li>
+<li><span class="arithmatex">\( \theta \)</span> is the angle of projection</li>
+<li><span class="arithmatex">\( g \)</span> is gravitational acceleration</li>
+</ul>
+<h3 id="family-of-solutions">Family of Solutions</h3>
+<p>The solution to these equations gives a family of trajectories dependent on initial conditions such as initial velocity, launch angle, and gravitational acceleration. Varying these conditions alters the trajectory shape significantly.</p>
+<h2 id="2-analysis-of-the-range">2. Analysis of the Range</h2>
+<p>The horizontal range <span class="arithmatex">\( R \)</span> is defined as the horizontal distance traveled when the projectile returns to the initial vertical height (assuming level ground). It is given by:</p>
+<div class="arithmatex">\[
+R = \frac{v_0^2 \sin(2\theta)}{g}
+\]</div>
+<p>Key Observations:</p>
+<ul>
+<li>Maximum range occurs at <span class="arithmatex">\( \theta = 45^\circ \)</span>.</li>
+<li>Increasing initial velocity increases the range quadratically.</li>
+<li>Increasing gravitational acceleration decreases the range proportionally.</li>
+</ul>
+<h2 id="3-practical-applications">3. Practical Applications</h2>
+<p>This idealized projectile model serves as the basis for various practical applications, including:</p>
+<ul>
+<li>Sports: determining optimal angles for throwing or kicking.</li>
+<li>Engineering: planning trajectories for missiles or rockets.</li>
+<li>Astrophysics: predicting motion under gravitational fields.</li>
+</ul>
+<p>Real-world adaptations include factors like uneven terrain, air resistance, drag, and wind conditions, which can be included using numerical methods and simulations.</p>
+<h2 id="4-implementation">4. Implementation</h2>
+<p>Here's a Python implementation to simulate projectile motion and visualize how the range varies with projection angle:</p>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Parameters
+g = 9.81  # gravitational acceleration (m/s^2)
+v0 = 20   # initial velocity (m/s)
+angles = np.linspace(0, np.pi/2, 180)
+
+# Calculate range for each angle
+def calculate_range(v0, angle, g):
+    return (v0**2) * np.sin(2*angle) / g
+
+ranges = calculate_range(v0, angles, g)
+
+# Plotting
+plt.figure(figsize=(10, 6))
+plt.plot(np.degrees(angles), ranges, label=f'Initial velocity = {v0} m/s')
+plt.xlabel('Angle of Projection (degrees)')
+plt.ylabel('Range (m)')
+plt.title('Projectile Range as a Function of Launch Angle')
+plt.grid(True)
+plt.legend()
+plt.show()
+</code></pre>
+<h3 id="visual-analysis">Visual Analysis</h3>
+<p>The visualization clearly shows the parabolic relationship between angle and range, confirming the maximum range at 45°.</p>
+<h2 id="limitations-and-realistic-enhancements">Limitations and Realistic Enhancements</h2>
+<h3 id="limitations-of-the-idealized-model">Limitations of the Idealized Model:</h3>
+<ul>
+<li>Neglects air resistance (drag), wind, and uneven terrain.</li>
+<li>Assumes constant gravitational acceleration.</li>
+</ul>
+<h3 id="suggestions-for-enhancements">Suggestions for Enhancements:</h3>
+<ul>
+<li>Incorporate drag using velocity-dependent forces.</li>
+<li>Include elevation differences or uneven ground.</li>
+<li>Consider variable gravitational acceleration for high-altitude or space applications.</li>
+</ul>
+<p>Such enhancements will make the model more realistic and applicable to practical engineering scenarios.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
