@@ -8,7 +8,7 @@ Below is a comprehensive Markdown document that outlines the derivation, analysi
 
 <br/>
 
-<details>  <summary><strong> 1. Introduction </strong></summary> </
+## 1. Introduction
 
 Projectile motion is a classic problem in mechanics that offers deep insights into the interplay between linear and quadratic relationships. By varying parameters such as the initial velocity, gravitational acceleration, and launch height, one can obtain a rich family of solutions that model real-world phenomena ranging from sports to aerospace engineering.
 
@@ -19,7 +19,6 @@ In this document, we:
 - Discuss the influence of initial velocity and gravitational acceleration.
 - Explore practical applications and limitations of the idealized model.
 - Implement a simulation in Python to visualize these relationships.
-</details>
 
 ---
 
