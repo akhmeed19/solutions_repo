@@ -188,28 +188,32 @@
 <hr/>
 <h2 id="2-theoretical-foundation">2. Theoretical Foundation</h2>
 <h3 id="derivation-of-equations-of-motion">Derivation of Equations of Motion</h3>
-<p>Assume a projectile is launched with an initial speed <span class="arithmatex">\( v_0 \)</span> at an angle <span class="arithmatex">\( \theta \)</span> relative to the horizontal. Under the assumption of uniform gravitational acceleration <span class="arithmatex">\( g \)</span> and no air resistance, the equations of motion are:</p>
-<p>[
+<p>Assume a projectile is launched with an initial speed <span class="arithmatex">\(v_0\)</span> at an angle <span class="arithmatex">\(\theta\)</span> relative to the horizontal. Under the assumption of uniform gravitational acceleration <span class="arithmatex">\(g\)</span> and no air resistance, the equations of motion are:</p>
+<div class="arithmatex">\[
 x(t) = v_0 \cos(\theta) \, t,
-]
-[
+\]</div>
+<div class="arithmatex">\[
 y(t) = v_0 \sin(\theta) \, t - \frac{1}{2} g t^2.
-]</p>
+\]</div>
 <h3 id="time-of-flight-and-range">Time of Flight and Range</h3>
-<p>For a projectile launched from and landing at the same vertical level (<span class="arithmatex">\( y = 0 \)</span>), setting <span class="arithmatex">\( y(T) = 0 \)</span> gives:</p>
+<p>For a projectile launched from and landing at the same vertical level (<span class="arithmatex">\(y = 0\)</span>), setting <span class="arithmatex">\(y(T) = 0\)</span> gives:</p>
 <div class="arithmatex">\[
 0 = v_0 \sin(\theta) \, T - \frac{1}{2} g T^2.
 \]</div>
 <p>This yields two solutions:</p>
 <ol>
-<li><span class="arithmatex">\( T = 0 \)</span> (the launch moment), and</li>
-<li><span class="arithmatex">\( T = \frac{2 v_0 \sin(\theta)}{g} \)</span> (the total flight time).</li>
+<li><span class="arithmatex">\(T = 0\)</span> (the launch moment), and</li>
+<li>
+<div class="arithmatex">\[
+   T = \frac{2 v_0 \sin(\theta)}{g}.
+   \]</div>
+</li>
 </ol>
-<p>The horizontal range <span class="arithmatex">\( R \)</span> is the horizontal displacement at <span class="arithmatex">\( T \)</span>:</p>
+<p>The horizontal range <span class="arithmatex">\(R\)</span> is the horizontal displacement at <span class="arithmatex">\(T\)</span>:</p>
 <div class="arithmatex">\[
 R = x(T) = v_0 \cos(\theta) \, T = v_0 \cos(\theta) \cdot \frac{2 v_0 \sin(\theta)}{g} = \frac{v_0^2 \sin(2\theta)}{g}.
 \]</div>
-<p>Thus, the range as a function of the angle <span class="arithmatex">\( \theta \)</span> is:</p>
+<p>Thus, the range as a function of the angle <span class="arithmatex">\(\theta\)</span> is:</p>
 <div class="arithmatex">\[
 R(\theta) = \frac{v_0^2 \sin(2\theta)}{g}.
 \]</div>
@@ -218,19 +222,19 @@ R(\theta) = \frac{v_0^2 \sin(2\theta)}{g}.
 <h3 id="dependence-on-the-angle-of-projection">Dependence on the Angle of Projection</h3>
 <ul>
 <li><strong>Optimal Angle:</strong><br/>
-  For a given <span class="arithmatex">\( v_0 \)</span> and <span class="arithmatex">\( g \)</span>, the maximum range is achieved when <span class="arithmatex">\( \sin(2\theta) \)</span> is maximized. Since <span class="arithmatex">\( \sin(2\theta) \)</span> reaches its maximum value of 1 when <span class="arithmatex">\( 2\theta = 90^\circ \)</span>, the optimal angle is:</li>
+  For a given <span class="arithmatex">\(v_0\)</span> and <span class="arithmatex">\(g\)</span>, the maximum range is achieved when <span class="arithmatex">\(\sin(2\theta)\)</span> is maximized. Since <span class="arithmatex">\(\sin(2\theta)\)</span> reaches its maximum value of 1 when <span class="arithmatex">\(2\theta = 90^\circ\)</span>, the optimal angle is:</li>
 </ul>
-<p>[
+<p>$$
   \theta = 45^\circ.
-  ]</p>
+  $$</p>
 <ul>
 <li><strong>Parameter Influences:</strong></li>
-<li><strong>Initial Velocity <span class="arithmatex">\( v_0 \)</span>:</strong><br/>
-    The range scales with <span class="arithmatex">\( v_0^2 \)</span>; increasing <span class="arithmatex">\( v_0 \)</span> results in a quadratic increase in the range.</li>
-<li><strong>Gravitational Acceleration <span class="arithmatex">\( g \)</span>:</strong><br/>
-    A higher gravitational acceleration reduces the range. On celestial bodies with lower <span class="arithmatex">\( g \)</span>, the projectile would travel farther.</li>
+<li><strong>Initial Velocity <span class="arithmatex">\(v_0\)</span>:</strong><br/>
+    The range scales with <span class="arithmatex">\(v_0^2\)</span>; increasing <span class="arithmatex">\(v_0\)</span> results in a quadratic increase in the range.</li>
+<li><strong>Gravitational Acceleration <span class="arithmatex">\(g\)</span>:</strong><br/>
+    A higher gravitational acceleration reduces the range. On celestial bodies with lower <span class="arithmatex">\(g\)</span>, the projectile would travel farther.</li>
 <li><strong>Launch Height:</strong><br/>
-    For non-zero launch heights, the time of flight and range are modified. This case introduces additional complexity and typically requires solving a quadratic equation for <span class="arithmatex">\( T \)</span>.</li>
+    For non-zero launch heights, the time of flight and range are modified. This case introduces additional complexity and typically requires solving a quadratic equation for <span class="arithmatex">\(T\)</span>.</li>
 </ul>
 <hr/>
 <h2 id="4-practical-applications-and-limitations">4. Practical Applications and Limitations</h2>
@@ -250,7 +254,7 @@ R(\theta) = \frac{v_0^2 \sin(2\theta)}{g}.
 <li><strong>Wind Effects:</strong><br/>
   Lateral forces are not considered.</li>
 <li><strong>Non-uniform Gravitational Fields:</strong><br/>
-  For large-scale projectiles (e.g., rockets), the assumption of constant <span class="arithmatex">\( g \)</span> is not valid.</li>
+  For large-scale projectiles (e.g., rockets), the assumption of constant <span class="arithmatex">\(g\)</span> is not valid.</li>
 <li><strong>Uneven Terrain:</strong><br/>
   The analysis assumes level ground; varying terrain requires more complex modeling.</li>
 </ul>
@@ -284,7 +288,7 @@ plt.show()
 <h3 id="explanation-of-the-code">Explanation of the Code</h3>
 <ul>
 <li><strong>Parameter Setup:</strong><br/>
-  We define the gravitational acceleration <span class="arithmatex">\( g \)</span> and the initial velocity <span class="arithmatex">\( v_0 \)</span>.</li>
+  We define the gravitational acceleration <span class="arithmatex">\(g\)</span> and the initial velocity <span class="arithmatex">\(v_0\)</span>.</li>
 <li><strong>Angle Range:</strong><br/>
   Angles are sampled from 0° to 90° and converted to radians.</li>
 <li><strong>Range Calculation:</strong><br/>
