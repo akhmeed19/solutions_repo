@@ -167,3 +167,11 @@ While the idealized model offers significant insights, real-world applications r
 ---
 
 This document should serve as a solid starting point for further exploration into projectile dynamics and can be expanded with more sophisticated models to simulate realistic conditions.
+
+---
+
+## Simulation Output
+
+Below is the static image generated from the Python simulation:
+
+![Projectile Range vs Angle](Projectile_Range_vs_Angle.png)
