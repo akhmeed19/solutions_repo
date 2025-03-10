@@ -6,7 +6,7 @@ Below is a comprehensive Markdown document that outlines the derivation, analysi
 
 # Investigating the Range as a Function of the Angle of Projection
 
-#### 1. Introduction
+### 1. Introduction
 
 Projectile motion is a classic problem in mechanics that offers deep insights into the interplay between linear and quadratic relationships. By varying parameters such as the initial velocity, gravitational acceleration, and launch height, one can obtain a rich family of solutions that model real-world phenomena ranging from sports to aerospace engineering.
 
@@ -71,7 +71,7 @@ $$
   For a given $v_0$ and $g$, the maximum range is achieved when $\sin(2\theta)$ is maximized. Since $\sin(2\theta)$ reaches its maximum value of 1 when $2\theta = 90^\circ$, the optimal angle is:
 
   $$
-  \theta = 45^\circ.
+  \theta = 45^\circ
   $$
 
 - **Parameter Influences:**
