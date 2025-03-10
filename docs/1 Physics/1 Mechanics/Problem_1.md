@@ -1,3 +1,5 @@
+# Problem 1
+
 # Investigating Projectile Motion: Range as a Function of Projection Angle
 
 ## Theoretical Foundation
