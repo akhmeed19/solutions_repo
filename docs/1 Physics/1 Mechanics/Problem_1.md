@@ -94,4 +94,4 @@ plt.show()
   - **Wind:** Add horizontal acceleration to the motion equations.
   - **Uneven Terrain:** Adjust final vertical position conditions.
 
-By incorporating these real-world factors, the model becomes increasingly robust and versatile, accurately describing diverse physical scenarios
+By incorporating these real-world factors, the model becomes increasingly robust and versatile, accurately describing diverse physical scenarios.
