@@ -145,7 +145,9 @@ plt.show()
 Below is the static image generated from the Python simulation:
 
 <br>
-<img src="pics/Projectile_Range_vs_Angle.png" alt="Projectile Range" />
+<img src="https://akhmeed19.github.io/solutions_repo/pics/Projectile_Range_vs_Angle.png"
+     alt="Projectile Range vs Angle"
+     style="max-width:100%; display:block; margin: 0 auto;">
 <br>
 
 ---
