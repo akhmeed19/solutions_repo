@@ -140,6 +140,18 @@ plt.grid(True)
 plt.show()
 ```
 
+### Simulation Output
+
+Below is the static image generated from the Python simulation:
+
+<br>
+<img src="/Users/ahmadyardimli/Desktop/physics basics/solutions_repo/docs/_pics/Projectile_Range_vs_Angle.png"
+     alt="Projectile Range vs Angle"
+     style="max-width:100%; display:block; margin: 0 auto;">
+<br>
+
+---
+
 ### Explanation of the Code
 
 - **Parameter Setup:**  
@@ -163,15 +175,3 @@ This investigation has provided:
 - A Python-based simulation that visualizes these relationships.
 
 While the idealized model offers significant insights, real-world applications require accounting for additional factors like air resistance, wind, and variable terrain. Future extensions might include these effects to provide a more comprehensive understanding of projectile motion in practical scenarios.
-
----
-
-This document should serve as a solid starting point for further exploration into projectile dynamics and can be expanded with more sophisticated models to simulate realistic conditions.
-
----
-
-## Simulation Output
-
-Below is the static image generated from the Python simulation:
-
-<img src="Projectile_Range_vs_Angle.png" alt="Projectile Range vs Angle" style="max-width:100%; display:block; margin: 0 auto;">
