@@ -234,28 +234,27 @@ if __name__ == "__main__":
 
 ### Outputs for the First Simulation
 
-Running this script with $(\beta=0.25)$, $(F_D=1.2)$, $(\Omega=2/3)$, and `use_small_angle=True` produces **three plots**:
+Running this script with $(\beta=0.25)$, $(F_D=1.2)$, $(\Omega=2/3)$, and `use_small_angle = True` produces **three plots**:
 
-1. **Time Series**
-  
+1. **Time Series**                                  
+
    ![Time Series Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/time%20series.png)
 
    A nearly sinusoidal wave indicates stable periodic motion.
 
-2. **Phase Portrait**
+2. **Phase Portrait**                                         
 
    ![Phase Portrait Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/phase%20portrait.png)
 
    A closed loop in $\theta$–$\dot{\theta}$ space, showing a periodic orbit.
    <br><br>
 
-3. **Poincaré Section**
+3. **Poincaré Section**                                   
 
    ![Poincaré Section Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/poincare%20section.png)
 
    A small set of points implies non-chaotic, regular motion.
 
-</br>
 
 ### Explanation
 1. **Time Series:**         
