@@ -409,37 +409,35 @@ if __name__ == "__main__":
 <p><img alt="Poincaré Section Output" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/poincare%20section.png"/></p>
 <p>A small set of points implies non-chaotic, regular motion.</p>
 <p></p>
-<hr/>
 <h3 id="explanation">Explanation</h3>
 <ol>
-<li><strong>Time Series:</strong></li>
-</ol>
-<p>Shows how <span class="arithmatex">\(\theta(t)\)</span> evolves over time. A nearly sinusoidal plot indicates that the pendulum exhibits stable periodic motion.</p>
-<ol>
-<li><strong>Phase Portrait:</strong></li>
-</ol>
-<p>Plots <span class="arithmatex">\(\theta\)</span> versus <span class="arithmatex">\(\dot{\theta}\)</span>. A closed loop in <span class="arithmatex">\(\theta\)</span>–<span class="arithmatex">\(\dot{\theta}\)</span> space indicates a stable periodic orbit.</p>
-<ol>
-<li><strong>Poincaré Section:</strong></li>
-</ol>
-<p>Samples the phase space at intervals of the driving period. A small set of discrete points indicates that the system is in regular, periodic motion rather than chaotic behavior.</p>
-<ol>
-<li><strong>Small-Angle Approximation:</strong></li>
-</ol>
-<p>Since <code>use_small_angle = True</code>, we use <span class="arithmatex">\(\sin(\theta) \approx \theta\)</span>. This typically yields simpler, near-harmonic motion for moderate parameter values.</p>
-<ol>
-<li><strong>Stable Periodic Orbit:</strong></li>
-</ol>
-<p>Under <span class="arithmatex">\((\beta = 0.25)\)</span>, <span class="arithmatex">\((F_D = 1.2)\)</span>, and <span class="arithmatex">\((\Omega = \tfrac{2}{3})\)</span>, the pendulum exhibits a stable periodic solution—evident from the sinusoidal time series, single-loop phase portrait, and a small set of points in the Poincaré section.</p>
-<ol>
+<li>
+<p><strong>Time Series:</strong>
+   Shows how <span class="arithmatex">\(\theta(t)\)</span> evolves over time. A nearly sinusoidal plot indicates that the pendulum exhibits stable periodic motion.</p>
+</li>
+<li>
+<p><strong>Phase Portrait:</strong>
+   Plots <span class="arithmatex">\(\theta\)</span> versus <span class="arithmatex">\(\dot{\theta}\)</span>. A closed loop in <span class="arithmatex">\(\theta\)</span>–<span class="arithmatex">\(\dot{\theta}\)</span> space indicates a stable periodic orbit.</p>
+</li>
+<li>
+<p><strong>Poincaré Section:</strong>
+   Samples the phase space at intervals of the driving period. A small set of discrete points indicates that the system is in regular, periodic motion rather than chaotic behavior.</p>
+</li>
+<li>
+<p><strong>Small-Angle Approximation:</strong>
+   Since <code>use_small_angle = True</code>, we use <span class="arithmatex">\(\sin(\theta) \approx \theta\)</span>. This typically yields simpler, near-harmonic motion for moderate parameter values.</p>
+</li>
+<li>
+<p><strong>Stable Periodic Orbit:</strong>
+   Under <span class="arithmatex">\((\beta = 0.25)\)</span>, <span class="arithmatex">\((F_D = 1.2)\)</span>, and <span class="arithmatex">\((\Omega = \tfrac{2}{3})\)</span>, the pendulum exhibits a stable periodic solution—evident from the sinusoidal time series, single-loop phase portrait, and a small set of points in the Poincaré section.</p>
+</li>
 <li>
 <p><strong>Potential Extensions:</strong></p>
 </li>
-<li>
-<p>Set <code>use_small_angle = False</code> to use the <strong>full nonlinear</strong> equation <span class="arithmatex">\(\sin(\theta)\)</span>, which can yield chaotic solutions for certain parameter ranges.</p>
-</li>
+<li>Set <code>use_small_angle = False</code> to use the <strong>full nonlinear</strong> equation <span class="arithmatex">\(\sin(\theta)\)</span>, which can yield chaotic solutions for certain parameter ranges.</li>
 <li>Vary <span class="arithmatex">\(\beta\)</span> (damping), <span class="arithmatex">\(F_D\)</span> (driving amplitude), and <span class="arithmatex">\(\Omega\)</span> (driving frequency) to see more complex dynamics, including chaos.</li>
 </ol>
+<p></p>
 <hr/>
 <h2 id="6-simulation-output">6. Simulation Output</h2>
 <p>Below is a representative static image of the forced damped pendulum’s motion under these conditions:</p>
