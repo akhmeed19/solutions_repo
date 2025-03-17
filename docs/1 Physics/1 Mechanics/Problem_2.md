@@ -367,21 +367,23 @@ if __name__ == "__main__":
 
 Running this script with \((\beta=0.2)\), \((F_D=1.5)\), \(\Omega=\tfrac{2}{3}\), and `use_small_angle=False` often yields **more complex** or **chaotic** motion. You might see:
 
-1. **Time Series**  
+1. **Time Series:**                                                                
 
-  ![Time Series Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/simulation%202/time%20series.png)
+    ![Time Series Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/simulation%202/time%20series.png)
 
-   - The waveform can become irregular, indicating non-periodic or chaotic behavior.
+    The waveform can become irregular, indicating non-periodic or chaotic behavior.
 
-2. **Phase Portrait** 
+2. **Phase Portrait**                                                              
 
-![Phase Portrait Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/simulation%202/phase%20portrait.png)
-   - Instead of a single closed loop, the trajectory in \(\theta\)–\(\dot{\theta}\) space may fill an area or form a strange attractor, characteristic of chaos.
+    ![Phase Portrait Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/simulation%202/phase%20portrait.png)
 
-3. **Poincaré Section**  
+    Instead of a single closed loop, the trajectory in \(\theta\)–\(\dot{\theta}\) space may fill an area or form a strange attractor, characteristic of chaos.
 
-![Poincaré Section Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/simulation%202/poincare%20section.png)
-   - A scattered “cloud” of points, rather than a finite set, implies **chaotic** dynamics.
+3. **Poincaré Section**                                                               
+    
+    ![Poincaré Section Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/simulation%202/poincare%20section.png)
+    
+    A scattered “cloud” of points, rather than a finite set, implies **chaotic** dynamics.
 
 ### Explanation
 
