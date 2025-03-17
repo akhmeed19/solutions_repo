@@ -34,7 +34,7 @@ where:
 - $(\theta)$ is the angular displacement,
 - $(\beta)$ is the damping coefficient,
 - $\omega_0 = \sqrt{\frac{g}{L}}$ is the natural frequency of the pendulum (with $ L $ being the pendulum length),
-- $ F_D $ is the amplitude of the driving force,
+- $F_D$ is the amplitude of the driving force,
 - $( m )$ is the mass of the pendulum bob,
 - $( L )$ is the length of the pendulum,
 - $( \Omega )$ is the driving frequency.
@@ -58,7 +58,7 @@ The general solution is the sum of the homogeneous solution (which decays due to
 ### Resonance Conditions
 
 - **Resonance:**  
-  The system experiences resonance when the driving frequency $ \Omega $ is close to the natural frequency $ \omega_0 $. At resonance, the amplitude of the steady-state oscillations becomes large, limited by the damping.
+  The system experiences resonance when the driving frequency $\Omega$ is close to the natural frequency $\omega_0$. At resonance, the amplitude of the steady-state oscillations becomes large, limited by the damping.
 
 - **Energy Implications:**  
   Under resonance, the system efficiently absorbs energy from the external force, resulting in significant oscillation amplitudes.
@@ -76,7 +76,7 @@ The general solution is the sum of the homogeneous solution (which decays due to
   Increasing the driving amplitude increases the steady-state oscillation amplitude. Very high driving amplitudes can push the system into a nonlinear regime, potentially resulting in chaotic motion.
 
 - **Driving Frequency ($\Omega$):**  
-  When $ \Omega $ is near $ \omega_0 $, the system experiences resonance. As $ \Omega $ varies, the system may transition between regular (periodic) motion and chaotic behavior.
+  When $\Omega$ is near $\omega_0$, the system experiences resonance. As $\Omega$ varies, the system may transition between regular (periodic) motion and chaotic behavior.
 
 ### Transition to Chaos
 
@@ -114,8 +114,8 @@ The general solution is the sum of the homogeneous solution (which decays due to
 
 In this first simulation, we produce three key plots to analyze the forced damped pendulum’s motion:
 
-- A time series plot of $ \theta(t) $
-- A phase portrait ($ \theta $ vs. $ \dot{\theta} $)
+- A time series plot of $\theta(t)$
+- A phase portrait ($\theta$ vs. $\dot{\theta}$)
 - A Poincaré section to capture periodic and chaotic dynamics
 
 Below is the Python code for our **initial simulation** under the small-angle approximation. It uses `solve_ivp` to integrate the system, then plots the results. For now, we run **one** set of parameters ($\beta=0.25$, $F_D=1.2$, $\Omega=2/3$, etc.):
@@ -247,7 +247,7 @@ Running this script with $(\beta=0.25)$, $(F_D=1.2)$, $(\Omega=2/3)$, and `use_s
 
    ![Phase Portrait Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/phase%20portrait.png)
 
-   A closed loop in $ \theta $–$ \dot{\theta} $ space, showing a periodic orbit.
+   A closed loop in $\theta$–$\dot{\theta}$ space, showing a periodic orbit.
    <br><br>
 
 3. **Poincaré Section**
@@ -259,10 +259,10 @@ Running this script with $(\beta=0.25)$, $(F_D=1.2)$, $(\Omega=2/3)$, and `use_s
 ### Explanation
 
 1. **Time Series:**  
-   Shows how $ \theta(t) $ evolves over time. A nearly sinusoidal plot indicates that the pendulum exhibits stable periodic motion.
+   Shows how $\theta(t)$ evolves over time. A nearly sinusoidal plot indicates that the pendulum exhibits stable periodic motion.
 
 2. **Phase Portrait:**  
-   Plots $ \theta $ versus $ \dot{\theta} $. A closed loop in this phase space indicates a stable periodic orbit.
+   Plots $\theta$ versus $\dot{\theta}$. A closed loop in this phase space indicates a stable periodic orbit.
 
 3. **Poincaré Section:**  
    Samples the phase space at intervals of the driving period. A small set of discrete points indicates that the system is in regular, periodic motion rather than chaotic behavior.
@@ -294,12 +294,12 @@ _(Update the URL to match the actual published location of your simulation image
 ## 7. Discussion
 
 - **General Solutions:**
-  With the small-angle approximation and moderate parameters, the pendulum typically remains in a **regular periodic orbit**. However, for certain parameter sets (e.g., lower damping, higher driving amplitude, or using the full \(\sin(\theta)\)), it can transition to **chaotic motion**.
+  With the small-angle approximation and moderate parameters, the pendulum typically remains in a **regular periodic orbit**. However, for certain parameter sets (e.g., lower damping, higher driving amplitude, or using the full $\sin(\theta)$), it can transition to **chaotic motion**.
 
 - **Graphical Representations:**
 
-  1. **Time Series:** Depicts how \(\theta\) changes over time.
-  2. **Phase Portrait:** Shows \(\theta\) vs. \(\dot{\theta}\), revealing periodic loops or chaotic attractors.
+  1. **Time Series:** Depicts how $\theta$ changes over time.
+  2. **Phase Portrait:** Shows $\theta$ vs. $\dot{\theta}$, revealing periodic loops or chaotic attractors.
   3. **Poincaré Section:** Captures the system’s state once every driving period, distinguishing periodic from chaotic dynamics.
 
 - **Limitations & Future Work:**
