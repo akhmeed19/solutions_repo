@@ -1,4 +1,3 @@
-````markdown
 # Problem 2
 
 Below is a comprehensive Markdown document that outlines the derivation, analysis, and simulation of a forced damped pendulum with a focus on its dynamic behavior under external forcing and damping. The document includes theoretical derivations, discussion of parameter effects and limitations, as well as a Python simulation to visualize the pendulum’s motion.
@@ -234,32 +233,33 @@ if __name__ == "__main__":
         use_small_angle=True
     )
 ```
-````
+
+```
 
 ### Outputs for the First Simulation
 
 Running this script with \(\beta=0.25\), \(F_D=1.2\), \(\Omega=2/3\), and `use_small_angle=True` produces **three plots**:
 
-1. **Time Series**  
-   ![Time Series Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Projectile_Range_vs_Angle.png)  
+1. **Time Series**
+   ![Time Series Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/time%20series.png)
    A nearly sinusoidal wave indicates stable periodic motion.
 
-2. **Phase Portrait**  
-   ![Phase Portrait Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Projectile_Range_vs_Angle.png)  
+2. **Phase Portrait**
+   ![Phase Portrait Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Projectile_Range_vs_Angle.png)
    A closed loop in \(\theta\)–\(\dot{\theta}\) space, showing a periodic orbit.
 
-3. **Poincaré Section**  
-   ![Poincaré Section Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Projectile_Range_vs_Angle.png)  
+3. **Poincaré Section**
+   ![Poincaré Section Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Projectile_Range_vs_Angle.png)
    A small set of points implies non-chaotic, regular motion.
 
 _(Replace these image links with your own screenshots if desired.)_
 
 ### Explanation
 
-1. **Small-Angle Approximation:**  
+1. **Small-Angle Approximation:**
    Since `use_small_angle=True`, we use \(\sin(\theta) \approx \theta\). This typically yields simpler, near-harmonic motion for moderate parameter values.
 
-2. **Stable Periodic Orbit:**  
+2. **Stable Periodic Orbit:**
    Under \(\beta=0.25\), \(F_D=1.2\), and \(\Omega=2/3\), the pendulum exhibits a stable periodic solution—evident from the sinusoidal time series, single-loop phase portrait, and a single or small set of points in the Poincaré section.
 
 3. **Potential Extensions:**
@@ -282,7 +282,7 @@ _(Update the URL to match the actual published location of your simulation image
 
 ## 7. Discussion
 
-- **General Solutions:**  
+- **General Solutions:**
   With the small-angle approximation and moderate parameters, the pendulum typically remains in a **regular periodic orbit**. However, for certain parameter sets (e.g., lower damping, higher driving amplitude, or using the full \(\sin(\theta)\)), it can transition to **chaotic motion**.
 
 - **Graphical Representations:**
@@ -307,3 +307,4 @@ This investigation of the forced damped pendulum has:
 - Demonstrated a computational simulation in Python that visualizes these dynamics.
 
 Overall, this study reinforces key concepts in nonlinear dynamics and provides a foundation for further exploration, including adjusting parameters to observe chaotic regimes or incorporating more realistic effects such as nonlinear damping.
+```
