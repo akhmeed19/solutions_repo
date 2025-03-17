@@ -242,14 +242,13 @@ Running this script with $(\beta=0.25)$, $(F_D=1.2)$, $(\Omega=2/3)$, and `use_s
 
     A nearly sinusoidal wave indicates stable periodic motion.
 
-2. **Phase Portrait**                                         
+2. **Phase Portrait**                                                              
 
    ![Phase Portrait Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/phase%20portrait.png)
 
-   A closed loop in $\theta$–$\dot{\theta}$ space, showing a periodic orbit.
-   <br><br>
+   A closed loop in $\theta$–$\dot{\theta}$ space, showing a periodic orbit.                                                                            
 
-3. **Poincaré Section**                                   
+3. **Poincaré Section**                                               
 
    ![Poincaré Section Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/poincare%20section.png)
 
