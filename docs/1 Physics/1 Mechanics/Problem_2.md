@@ -259,7 +259,7 @@ Running this script with $(\beta=0.25)$, $(F_D=1.2)$, $(\Omega=2/3)$, and `use_s
 
 ### Explanation
 
-1. **Time Series:**  
+1. **Time Series:**
    Shows how $\theta(t)$ evolves over time. A nearly sinusoidal plot indicates that the pendulum exhibits stable periodic motion.
 
 2. **Phase Portrait:**  
@@ -278,7 +278,6 @@ Running this script with $(\beta=0.25)$, $(F_D=1.2)$, $(\Omega=2/3)$, and `use_s
    - Set `use_small_angle = False` to use the **full nonlinear** equation $\sin(\theta)$, which can yield chaotic solutions for certain parameter ranges.
    - Vary $\beta$ (damping), $F_D$ (driving amplitude), and $\Omega$ (driving frequency) to see more complex dynamics, including chaos.
 
-</br>
 
 ---
 
