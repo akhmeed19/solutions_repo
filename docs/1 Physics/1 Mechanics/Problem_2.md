@@ -289,18 +289,18 @@ _(Update the URL to match the actual published location of your simulation image
 
 ## 7. Discussion
 
-- **General Solutions:**
+- **General Solutions:**                    
   With the small-angle approximation and moderate parameters, the pendulum typically remains in a **regular periodic orbit**. However, for certain parameter sets (e.g., lower damping, higher driving amplitude, or using the full $\sin(\theta)$), it can transition to **chaotic motion**.
 
-- **Graphical Representations:**
+- **Graphical Representations:**                      
 
   1. **Time Series:** Depicts how $\theta$ changes over time.
   2. **Phase Portrait:** Shows $\theta$ vs. $\dot{\theta}$, revealing periodic loops or chaotic attractors.
   3. **Poincaré Section:** Captures the system’s state once every driving period, distinguishing periodic from chaotic dynamics.
 
-- **Limitations & Future Work:**
-  - The small-angle approximation may fail for larger amplitudes.
-  - Nonlinear damping or non-periodic driving forces can further complicate real-world behavior.
+- **Limitations & Future Work:**                
+  1. The small-angle approximation may fail for larger amplitudes.
+  2. Nonlinear damping or non-periodic driving forces can further complicate real-world behavior.
 
 ---
 
