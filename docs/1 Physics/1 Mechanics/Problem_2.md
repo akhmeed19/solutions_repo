@@ -31,9 +31,9 @@ $$
 
 where:
 
-- $ (\theta) $ is the angular displacement,
-- $ (\beta) $ is the damping coefficient,
-- $ \omega_0 = \sqrt{\frac{g}{L}} $ is the natural frequency of the pendulum (with $ L $ being the pendulum length),
+- $(\theta)$ is the angular displacement,
+- $(\beta)$ is the damping coefficient,
+- $\omega_0 = \sqrt{\frac{g}{L}}$ is the natural frequency of the pendulum (with $ L $ being the pendulum length),
 - $ F_D $ is the amplitude of the driving force,
 - $( m )$ is the mass of the pendulum bob,
 - $( L )$ is the length of the pendulum,
