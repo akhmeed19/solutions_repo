@@ -6,8 +6,6 @@ Below is a comprehensive Markdown document that outlines the derivation, analysi
 
 # Investigating the Dynamics of a Forced Damped Pendulum
 
-<br/>
-
 ## 1. Introduction
 
 The forced damped pendulum is a classic nonlinear system that exhibits a rich variety of behaviors—from simple periodic oscillations to complex chaotic motion—due to the interplay between damping, restoring forces, and an external periodic drive. By varying parameters such as the damping coefficient, driving amplitude, and driving frequency, one can obtain a diverse set of solutions that model real-world phenomena ranging from energy harvesting to structural vibrations.
