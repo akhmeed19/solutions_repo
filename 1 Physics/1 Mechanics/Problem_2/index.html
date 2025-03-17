@@ -396,8 +396,7 @@ if __name__ == "__main__":
 <li><strong>Time Series</strong></li>
 </ol>
 <p><img alt="Time Series Output" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/time%20series.png"/></p>
-<p>A nearly sinusoidal wave indicates stable periodic motion.
-   <br/><br/></p>
+<p>A nearly sinusoidal wave indicates stable periodic motion.</p>
 <ol>
 <li><strong>Phase Portrait</strong></li>
 </ol>
@@ -411,27 +410,29 @@ if __name__ == "__main__":
 <p>A small set of points implies non-chaotic, regular motion.</p>
 <h3 id="explanation">Explanation</h3>
 <ol>
-<li><strong>Time Series:</strong></li>
-</ol>
-<p>Shows how <span class="arithmatex">\(\theta(t)\)</span> evolves over time. A nearly sinusoidal plot indicates that the pendulum exhibits stable periodic motion.</p>
-<ol>
-<li><strong>Phase Portrait:</strong></li>
-</ol>
-<p>Plots <span class="arithmatex">\(\theta\)</span> versus <span class="arithmatex">\(\dot{\theta}\)</span>. A closed loop in this phase space indicates a stable periodic orbit.</p>
-<ol>
-<li><strong>Poincaré Section:</strong></li>
-</ol>
-<p>Samples the phase space at intervals of the driving period. A small set of discrete points indicates that the system is in regular, periodic motion rather than chaotic behavior.</p>
-<ol>
-<li><strong>Small-Angle Approximation:</strong></li>
-</ol>
-<p>Since <code>use_small_angle = True</code>, we use <span class="arithmatex">\(\sin(\theta) \approx \theta\)</span>. This typically yields simpler, near-harmonic motion for moderate parameter values.</p>
-<ol>
-<li><strong>Stable Periodic Orbit:</strong></li>
-</ol>
-<p>Under <span class="arithmatex">\((\beta=0.25)\)</span>, <span class="arithmatex">\((F_D=1.2)\)</span>, and <span class="arithmatex">\((\Omega=2/3)\)</span>, the pendulum exhibits a stable periodic solution—evident from the sinusoidal time series, single-loop phase portrait, and a single or small set of points in the Poincaré section.</p>
-<ol>
-<li><strong>Potential Extensions:</strong></li>
+<li>
+<p><strong><em>Time Series:</em></strong><br>
+   Shows how <span class="arithmatex">\(\theta(t)\)</span> evolves over time. A nearly sinusoidal plot indicates that the pendulum exhibits stable periodic motion.</br></p>
+</li>
+<li>
+<p><strong>Phase Portrait:</strong><br>
+   Plots <span class="arithmatex">\(\theta\)</span> versus <span class="arithmatex">\(\dot{\theta}\)</span>. A closed loop in this phase space indicates a stable periodic orbit.</br></p>
+</li>
+<li>
+<p><strong>Poincaré Section:</strong><br/>
+   Samples the phase space at intervals of the driving period. A small set of discrete points indicates that the system is in regular, periodic motion rather than chaotic behavior.</p>
+</li>
+<li>
+<p><strong>Small-Angle Approximation:</strong>
+   Since <code>use_small_angle = True</code>, we use <span class="arithmatex">\(\sin(\theta) \approx \theta\)</span>. This typically yields simpler, near-harmonic motion for moderate parameter values.</p>
+</li>
+<li>
+<p><strong>Stable Periodic Orbit:</strong>
+   Under <span class="arithmatex">\((\beta=0.25)\)</span>, <span class="arithmatex">\((F_D=1.2)\)</span>, and <span class="arithmatex">\((\Omega=2/3)\)</span>, the pendulum exhibits a stable periodic solution—evident from the sinusoidal time series, single-loop phase portrait, and a single or small set of points in the Poincaré section.</p>
+</li>
+<li>
+<p><strong><em>Potential Extensions:</em></strong></p>
+</li>
 <li>Set <code>use_small_angle = False</code> to use the <strong>full nonlinear</strong> equation, which can yield chaotic solutions for certain parameter ranges.</li>
 <li>Vary <span class="arithmatex">\(\beta\)</span> (damping), <span class="arithmatex">\(F_D\)</span> (driving amplitude), and <span class="arithmatex">\(\Omega\)</span> (driving frequency) to see more complex dynamics, including chaos.</li>
 </ol>
