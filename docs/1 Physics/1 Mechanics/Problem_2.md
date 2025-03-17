@@ -234,13 +234,13 @@ if __name__ == "__main__":
 
 ### Outputs for the First Simulation
 
-Running this script with $(\beta=0.25)$, $(F_D=1.2)$, $(\Omega=2/3)$, and `use_small_angle = True` produces **three plots**:
+Running this script with $(\beta=0.25)$, $(F_D=1.2)$, $(\Omega=2/3)$, and `use_small_angle = True` produces **three plots**:                                 
 
-1. **Time Series**                                  
+1. **Time Series:**                                                                
 
-   ![Time Series Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/time%20series.png)
+    ![Time Series Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/time%20series.png)
 
-   A nearly sinusoidal wave indicates stable periodic motion.
+    A nearly sinusoidal wave indicates stable periodic motion.
 
 2. **Phase Portrait**                                         
 
