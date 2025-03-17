@@ -273,6 +273,7 @@
 </ul>
 <hr/>
 <h2 id="5-implementation-python-simulation">5. Implementation: Python Simulation</h2>
+<h3 id="51-first-simulation">5.1. First Simulation</h3>
 <p>In this first simulation, we produce three key plots to analyze the forced damped pendulum’s motion:</p>
 <ul>
 <li>A time series plot of <span class="arithmatex">\(\theta(t)\)</span></li>
@@ -437,6 +438,134 @@ if __name__ == "__main__":
 </ul>
 </li>
 </ol>
+<h3 id="52-second-simulation-exploring-more-complex-dynamics">5.2. Second Simulation (Exploring More Complex Dynamics)</h3>
+<p>To explore more complex or chaotic behavior, we can <strong>turn off</strong> the small‐angle approximation and <strong>adjust</strong> parameters such as damping and driving amplitude. In the following example, we lower the damping and increase the driving force:</p>
+<ul>
+<li>Damping coefficient: <span class="arithmatex">\( \beta = 0.2 \)</span></li>
+<li>Driving amplitude: <span class="arithmatex">\( F_D = 1.5 \)</span></li>
+<li>Driving frequency: <span class="arithmatex">\( \Omega = \tfrac{2}{3} \)</span></li>
+<li>Full nonlinear equation (i.e., <span class="arithmatex">\(\sin(\theta)\)</span> instead of <span class="arithmatex">\(\theta\)</span>)</li>
+</ul>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+def run_forced_damped_pendulum(beta=0.2, F_D=1.5, Omega=2/3,
+                               t_span=(0, 200), y0=(0.2, 0.0),
+                               use_small_angle=False):
+    """
+    Simulates and plots the forced damped pendulum with more
+    extreme parameters, potentially leading to chaotic motion.
+    """
+    g = 9.81
+    L = 1.0
+    m = 1.0
+
+    omega0 = np.sqrt(g / L)
+    driving_force = F_D / (m * L)
+
+    def forced_damped_pendulum(t, y):
+        theta, omega = y
+        dtheta_dt = omega
+
+        if use_small_angle:
+            restoring = -omega0**2 * theta
+        else:
+            restoring = -omega0**2 * np.sin(theta)
+
+        domega_dt = -2 * beta * omega + restoring + driving_force * np.cos(Omega * t)
+        return [dtheta_dt, domega_dt]
+
+    t_eval = np.linspace(t_span[0], t_span[1], 20000)
+    sol = solve_ivp(forced_damped_pendulum, t_span, y0, t_eval=t_eval, rtol=1e-8)
+    t = sol.t
+    theta = sol.y[0]
+    omega = sol.y[1]
+
+    # Time Series
+    plt.figure(figsize=(10, 4))
+    plt.plot(t, theta, 'b-', label=r'$\theta(t)$')
+    plt.xlabel('Time (s)')
+    plt.ylabel('Angle (rad)')
+    plt.title(f'Time Series (beta={beta}, F_D={F_D}, Omega={Omega}, Nonlinear)')
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+    # Phase Portrait
+    plt.figure(figsize=(6, 6))
+    plt.plot(theta, omega, 'r-', lw=0.8)
+    plt.xlabel(r'$\theta$ (rad)')
+    plt.ylabel(r'$\dot{\theta}$ (rad/s)')
+    plt.title(f'Phase Portrait (beta={beta}, F_D={F_D}, Omega={Omega}, Nonlinear)')
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+    # Poincaré Section
+    T_drive = 2 * np.pi / Omega
+    skip_cycles = 50
+    poincare_times = np.arange(skip_cycles * T_drive, t_span[1], T_drive)
+    poincare_thetas = np.interp(poincare_times, t, theta)
+    poincare_omegas = np.interp(poincare_times, t, omega)
+
+    plt.figure(figsize=(6, 6))
+    plt.scatter(poincare_thetas, poincare_omegas, c='green', s=25)
+    plt.xlabel(r'$\theta$ (rad)')
+    plt.ylabel(r'$\dot{\theta}$ (rad/s)')
+    plt.title(f'Poincaré Section (beta={beta}, F_D={F_D}, Omega={Omega}, Nonlinear)')
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+if __name__ == "__main__":
+    run_forced_damped_pendulum()
+
+</code></pre>
+<h3 id="outputs-for-the-second-simulation">Outputs for the Second Simulation</h3>
+<p>Running this script with <span class="arithmatex">\((\beta=0.2)\)</span>, <span class="arithmatex">\((F_D=1.5)\)</span>, <span class="arithmatex">\(\Omega=\tfrac{2}{3}\)</span>, and <code>use_small_angle=False</code> often yields <strong>more complex</strong> or <strong>chaotic</strong> motion. You might see:</p>
+<ol>
+<li><strong>Time Series</strong> </li>
+<li>
+<p>The waveform can become irregular, indicating non-periodic or chaotic behavior.</p>
+</li>
+<li>
+<p><strong>Phase Portrait</strong> </p>
+</li>
+<li>
+<p>Instead of a single closed loop, the trajectory in <span class="arithmatex">\(\theta\)</span>–<span class="arithmatex">\(\dot{\theta}\)</span> space may fill an area or form a strange attractor, characteristic of chaos.</p>
+</li>
+<li>
+<p><strong>Poincaré Section</strong> </p>
+</li>
+<li>A scattered “cloud” of points, rather than a finite set, implies <strong>chaotic</strong> dynamics.</li>
+</ol>
+<h3 id="explanation_1">Explanation</h3>
+<ol>
+<li>
+<p><strong>Nonlinear Equation</strong>:<br/>
+   We set <code>use_small_angle=False</code> so that <span class="arithmatex">\(\sin(\theta)\)</span> is used instead of <span class="arithmatex">\(\theta\)</span>. This allows for larger amplitude oscillations and the possibility of chaos.</p>
+</li>
+<li>
+<p><strong>Lower Damping, Higher Drive</strong>:  </p>
+</li>
+<li><span class="arithmatex">\(\beta=0.2\)</span> is smaller than the previous 0.25, so the system loses energy more slowly.  </li>
+<li><span class="arithmatex">\(F_D=1.5\)</span> is greater than 1.2, delivering more external energy per cycle.  </li>
+<li>
+<p>Together, these changes push the pendulum into a regime where chaotic behavior is more likely.</p>
+</li>
+<li>
+<p><strong>Longer Time Span</strong>:<br/>
+   We increased <code>t_span</code> to (0, 200) to observe the long-term evolution. Chaos sometimes takes a while to emerge or settle into an attractor.</p>
+</li>
+<li>
+<p><strong>Potential Observations</strong>:  </p>
+</li>
+<li><strong>If</strong> the motion is chaotic, the phase portrait and Poincaré section won’t settle into a simple loop or small set of points.  </li>
+<li>You may see a scattered or more “filled-in” region in phase space.</li>
+</ol>
+<p>With this second simulation, I demonstrate how changing parameters (especially lowering damping and increasing driving amplitude) can lead from stable periodic motion to more <strong>complex or chaotic</strong> behavior in the forced damped pendulum.</p>
 <hr/>
 <h2 id="6-discussion">6. Discussion</h2>
 <ul>
