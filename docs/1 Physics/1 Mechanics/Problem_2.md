@@ -275,19 +275,7 @@ Running this script with $(\beta=0.25)$, $(F_D=1.2)$, $(\Omega=2/3)$, and `use_s
 
 ---
 
-## 6. Simulation Output
-
-Below is a representative static image of the forced damped pendulum’s motion under these conditions:
-
-<br>
-![Forced Damped Pendulum Simulation](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Projectile_Range_vs_Angle.png)
-<br>
-
-_(Update the URL to match the actual published location of your simulation image.)_
-
----
-
-## 7. Discussion
+## 6. Discussion
 
 - **General Solutions:**                            
   
@@ -306,7 +294,7 @@ _(Update the URL to match the actual published location of your simulation image
 
 ---
 
-## 8. Conclusion
+## 7. Conclusion
 
 This investigation of the forced damped pendulum has:
 
