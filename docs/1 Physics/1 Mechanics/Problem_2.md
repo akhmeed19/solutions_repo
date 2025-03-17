@@ -33,13 +33,13 @@ $$
 
 where:
 
-- \( \theta \) is the angular displacement,
-- \( \beta \) is the damping coefficient,
-- \( \omega_0 = \sqrt{\frac{g}{L}} \) is the natural frequency of the pendulum (with \( L \) being the pendulum length),
-- \( F_D \) is the amplitude of the driving force,
-- \( m \) is the mass of the pendulum bob,
-- \( L \) is the length of the pendulum,
-- \( \Omega \) is the driving frequency.
+- $ \theta $ is the angular displacement,
+- $ \beta $ is the damping coefficient,
+- $ \omega_0 = \sqrt{\frac{g}{L}} $ is the natural frequency of the pendulum (with $ L $ being the pendulum length),
+- $ F_D $ is the amplitude of the driving force,
+- $( m )$ is the mass of the pendulum bob,
+- $( L )$ is the length of the pendulum,
+- $( \Omega )$ is the driving frequency.
 
 ### Small-Angle Approximation
 
@@ -60,7 +60,7 @@ The general solution is the sum of the homogeneous solution (which decays due to
 ### Resonance Conditions
 
 - **Resonance:**  
-  The system experiences resonance when the driving frequency \( \Omega \) is close to the natural frequency \( \omega_0 \). At resonance, the amplitude of the steady-state oscillations becomes large, limited by the damping.
+  The system experiences resonance when the driving frequency $ \Omega $ is close to the natural frequency $ \omega_0 $. At resonance, the amplitude of the steady-state oscillations becomes large, limited by the damping.
 
 - **Energy Implications:**  
   Under resonance, the system efficiently absorbs energy from the external force, resulting in significant oscillation amplitudes.
@@ -71,14 +71,14 @@ The general solution is the sum of the homogeneous solution (which decays due to
 
 ### Parameter Influences
 
-- **Damping Coefficient (\(\beta\)):**  
+- **Damping Coefficient ($\beta$):**  
   Higher damping reduces the amplitude of oscillations and can suppress chaotic behavior, while lower damping allows for larger amplitudes and may lead to complex dynamics.
 
-- **Driving Amplitude (\(F_D/(mL)\)):**  
+- **Driving Amplitude ($F_D/(mL)$):**  
   Increasing the driving amplitude increases the steady-state oscillation amplitude. Very high driving amplitudes can push the system into a nonlinear regime, potentially resulting in chaotic motion.
 
-- **Driving Frequency (\(\Omega\)):**  
-  When \( \Omega \) is near \( \omega_0 \), the system experiences resonance. As \( \Omega \) varies, the system may transition between regular (periodic) motion and chaotic behavior.
+- **Driving Frequency ($\Omega$):**  
+  When $ \Omega $ is near $ \omega_0 $, the system experiences resonance. As $ \Omega $ varies, the system may transition between regular (periodic) motion and chaotic behavior.
 
 ### Transition to Chaos
 
@@ -108,7 +108,7 @@ The general solution is the sum of the homogeneous solution (which decays due to
 
 - The small-angle approximation simplifies the analysis but is only valid for small displacements.
 - The model neglects effects such as nonlinear damping and non-periodic driving forces, which may be significant in real-world systems.
-- For larger oscillations, the full nonlinear equation (with \(\sin\theta\)) should be used.
+- For larger oscillations, the full nonlinear equation (with $\sin\theta$) should be used.
 
 ---
 
@@ -116,11 +116,11 @@ The general solution is the sum of the homogeneous solution (which decays due to
 
 In this first simulation, we produce three key plots to analyze the forced damped pendulum’s motion:
 
-- A time series plot of \( \theta(t) \)
-- A phase portrait (\( \theta \) vs. \( \dot{\theta} \))
+- A time series plot of $ \theta(t) $
+- A phase portrait ($ \theta $ vs. $ \dot{\theta} $)
 - A Poincaré section to capture periodic and chaotic dynamics
 
-Below is the Python code for our **initial simulation** under the small-angle approximation. It uses `solve_ivp` to integrate the system, then plots the results. For now, we run **one** set of parameters (\(\beta=0.25\), \(F_D=1.2\), \(\Omega=2/3\), etc.):
+Below is the Python code for our **initial simulation** under the small-angle approximation. It uses `solve_ivp` to integrate the system, then plots the results. For now, we run **one** set of parameters ($\beta=0.25$, $F_D=1.2$, $\Omega=2/3$, etc.):
 
 ```python
 import numpy as np
@@ -234,37 +234,33 @@ if __name__ == "__main__":
     )
 ```
 
-```
-
 ### Outputs for the First Simulation
 
-Running this script with \(\beta=0.25\), \(F_D=1.2\), \(\Omega=2/3\), and `use_small_angle=True` produces **three plots**:
+Running this script with $(\beta=0.25)$, $(F_D=1.2)$, $(\Omega=2/3)$, and `use_small_angle = True` produces **three plots**:
 
 1. **Time Series**
    ![Time Series Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/time%20series.png)
    A nearly sinusoidal wave indicates stable periodic motion.
 
 2. **Phase Portrait**
-   ![Phase Portrait Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Projectile_Range_vs_Angle.png)
-   A closed loop in \(\theta\)–\(\dot{\theta}\) space, showing a periodic orbit.
+   ![Phase Portrait Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/phase%20portrait.png)
+   A closed loop in $\theta$–$\dot{\theta}$ space, showing a periodic orbit.
 
 3. **Poincaré Section**
-   ![Poincaré Section Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Projectile_Range_vs_Angle.png)
+   ![Poincaré Section Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/poincare%20section.png)
    A small set of points implies non-chaotic, regular motion.
-
-_(Replace these image links with your own screenshots if desired.)_
 
 ### Explanation
 
 1. **Small-Angle Approximation:**
-   Since `use_small_angle=True`, we use \(\sin(\theta) \approx \theta\). This typically yields simpler, near-harmonic motion for moderate parameter values.
+   Since `use_small_angle = True`, we use $\sin(\theta) \approx \theta$. This typically yields simpler, near-harmonic motion for moderate parameter values.
 
 2. **Stable Periodic Orbit:**
-   Under \(\beta=0.25\), \(F_D=1.2\), and \(\Omega=2/3\), the pendulum exhibits a stable periodic solution—evident from the sinusoidal time series, single-loop phase portrait, and a single or small set of points in the Poincaré section.
+   Under $(\beta=0.25)$, $(F_D=1.2)$, and $(\Omega=2/3)$, the pendulum exhibits a stable periodic solution—evident from the sinusoidal time series, single-loop phase portrait, and a single or small set of points in the Poincaré section.
 
 3. **Potential Extensions:**
-   - Set `use_small_angle=False` to use the **full nonlinear** equation, which can yield chaotic solutions for certain parameter ranges.
-   - Vary \(\beta\) (damping), \(F_D\) (driving amplitude), and \(\Omega\) (driving frequency) to see more complex dynamics, including chaos.
+   - Set `use_small_angle = False` to use the **full nonlinear** equation, which can yield chaotic solutions for certain parameter ranges.
+   - Vary $\beta$ (damping), $F_D$ (driving amplitude), and $\Omega$ (driving frequency) to see more complex dynamics, including chaos.
 
 ---
 
@@ -307,4 +303,3 @@ This investigation of the forced damped pendulum has:
 - Demonstrated a computational simulation in Python that visualizes these dynamics.
 
 Overall, this study reinforces key concepts in nonlinear dynamics and provides a foundation for further exploration, including adjusting parameters to observe chaotic regimes or incorporating more realistic effects such as nonlinear damping.
-```
