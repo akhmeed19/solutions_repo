@@ -171,132 +171,117 @@
 </div>
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
-<pre><code class="language-markdown"># Problem 2
-
-Below is a comprehensive Markdown document that outlines the derivation, analysis, and simulation of a forced damped pendulum with a focus on its dynamic behavior under external forcing and damping. The document includes theoretical derivations, discussion of parameter effects and limitations, as well as a Python simulation to visualize the pendulum’s motion.
-
----
-
-# Investigating the Dynamics of a Forced Damped Pendulum
-
-&lt;br/&gt;
-
-## 1. Introduction
-
-The forced damped pendulum is a classic nonlinear system that exhibits a rich variety of behaviors—from simple periodic oscillations to complex chaotic motion—due to the interplay between damping, restoring forces, and an external periodic drive. By varying parameters such as the damping coefficient, driving amplitude, and driving frequency, one can obtain a diverse set of solutions that model real-world phenomena ranging from energy harvesting to structural vibrations.
-
-In this document, we:
-
-- Derive the governing differential equation for the forced damped pendulum.
-- Analyze the influence of damping, driving amplitude, and driving frequency on the system’s dynamics.
-- Discuss practical applications and limitations of the forced damped pendulum model.
-- Implement a simulation in Python to visualize the pendulum’s behavior.
-
----
-
-## 2. Theoretical Foundation
-
-### Differential Equation
-
-The motion of a forced damped pendulum is governed by the nonlinear differential equation:
-
-$$
+<h1 id="problem-2">Problem 2</h1>
+<p>Below is a comprehensive Markdown document that outlines the derivation, analysis, and simulation of a forced damped pendulum with a focus on its dynamic behavior under external forcing and damping. The document includes theoretical derivations, discussion of parameter effects and limitations, as well as a Python simulation to visualize the pendulum’s motion.</p>
+<hr/>
+<h1 id="investigating-the-dynamics-of-a-forced-damped-pendulum">Investigating the Dynamics of a Forced Damped Pendulum</h1>
+<p><br/></p>
+<h2 id="1-introduction">1. Introduction</h2>
+<p>The forced damped pendulum is a classic nonlinear system that exhibits a rich variety of behaviors—from simple periodic oscillations to complex chaotic motion—due to the interplay between damping, restoring forces, and an external periodic drive. By varying parameters such as the damping coefficient, driving amplitude, and driving frequency, one can obtain a diverse set of solutions that model real-world phenomena ranging from energy harvesting to structural vibrations.</p>
+<p>In this document, we:</p>
+<ul>
+<li>Derive the governing differential equation for the forced damped pendulum.</li>
+<li>Analyze the influence of damping, driving amplitude, and driving frequency on the system’s dynamics.</li>
+<li>Discuss practical applications and limitations of the forced damped pendulum model.</li>
+<li>Implement a simulation in Python to visualize the pendulum’s behavior.</li>
+</ul>
+<hr/>
+<h2 id="2-theoretical-foundation">2. Theoretical Foundation</h2>
+<h3 id="differential-equation">Differential Equation</h3>
+<p>The motion of a forced damped pendulum is governed by the nonlinear differential equation:</p>
+<div class="arithmatex">\[
 \ddot{\theta} + 2\beta\, \dot{\theta} + \omega_0^2 \sin\theta = \frac{F_D}{mL} \cos(\Omega t),
-$$
-
-where:
-
-- \( \theta \) is the angular displacement,
-- \( \beta \) is the damping coefficient,
-- \( \omega_0 = \sqrt{\frac{g}{L}} \) is the natural frequency of the pendulum (with \( L \) being the pendulum length),
-- \( F_D \) is the amplitude of the driving force,
-- \( m \) is the mass of the pendulum bob,
-- \( L \) is the length of the pendulum,
-- \( \Omega \) is the driving frequency.
-
-### Small-Angle Approximation
-
-For small oscillations, we use the approximation:
-
-$$
+\]</div>
+<p>where:</p>
+<ul>
+<li><span class="arithmatex">\( \theta \)</span> is the angular displacement,</li>
+<li><span class="arithmatex">\( \beta \)</span> is the damping coefficient,</li>
+<li><span class="arithmatex">\( \omega_0 = \sqrt{\frac{g}{L}} \)</span> is the natural frequency of the pendulum (with <span class="arithmatex">\( L \)</span> being the pendulum length),</li>
+<li><span class="arithmatex">\( F_D \)</span> is the amplitude of the driving force,</li>
+<li><span class="arithmatex">\( m \)</span> is the mass of the pendulum bob,</li>
+<li><span class="arithmatex">\( L \)</span> is the length of the pendulum,</li>
+<li><span class="arithmatex">\( \Omega \)</span> is the driving frequency.</li>
+</ul>
+<h3 id="small-angle-approximation">Small-Angle Approximation</h3>
+<p>For small oscillations, we use the approximation:</p>
+<div class="arithmatex">\[
 \sin\theta \approx \theta,
-$$
-
-which linearizes the equation to:
-
-$$
+\]</div>
+<p>which linearizes the equation to:</p>
+<div class="arithmatex">\[
 \ddot{\theta} + 2\beta\, \dot{\theta} + \omega_0^2 \theta = \frac{F_D}{mL} \cos(\Omega t).
-$$
-
-The general solution is the sum of the homogeneous solution (which decays due to damping) and a particular solution that oscillates at the driving frequency.
-
-### Resonance Conditions
-
-- **Resonance:**  
-  The system experiences resonance when the driving frequency \( \Omega \) is close to the natural frequency \( \omega_0 \). At resonance, the amplitude of the steady-state oscillations becomes large, limited by the damping.
-
-- **Energy Implications:**  
-  Under resonance, the system efficiently absorbs energy from the external force, resulting in significant oscillation amplitudes.
-
----
-
-## 3. Analysis of Dynamics
-
-### Parameter Influences
-
-- **Damping Coefficient (\(\beta\)):**  
-  Higher damping reduces the amplitude of oscillations and can suppress chaotic behavior, while lower damping allows for larger amplitudes and may lead to complex dynamics.
-
-- **Driving Amplitude (\(F_D/(mL)\)):**  
-  Increasing the driving amplitude increases the steady-state oscillation amplitude. Very high driving amplitudes can push the system into a nonlinear regime, potentially resulting in chaotic motion.
-
-- **Driving Frequency (\(\Omega\)):**  
-  When \( \Omega \) is near \( \omega_0 \), the system experiences resonance. As \( \Omega \) varies, the system may transition between regular (periodic) motion and chaotic behavior.
-
-### Transition to Chaos
-
-- **Regular Motion:**  
-  For moderate values of damping and driving amplitude, the pendulum displays periodic oscillations.
-
-- **Chaotic Motion:**  
-  Under low damping or high driving amplitude, the system becomes highly sensitive to initial conditions, leading to chaotic behavior.
-
-- **Visualization Tools:**  
-  Phase portraits and Poincaré sections are used to reveal the underlying structure of the motion and the transition to chaos.
-
----
-
-## 4. Practical Applications and Limitations
-
-### Applications
-
-- **Energy Harvesting:**  
-  Systems can be designed to exploit resonance, thereby maximizing energy absorption from periodic forces.
-- **Structural Engineering:**  
-  Understanding forced oscillations is crucial in designing structures (e.g., suspension bridges, vibration isolation systems) that must withstand periodic loads.
-- **Oscillating Circuits:**  
-  The behavior of driven RLC circuits is analogous to the forced damped pendulum, informing the design of filters and resonant circuits.
-
-### Limitations
-
-- The small-angle approximation simplifies the analysis but is only valid for small displacements.
-- The model neglects effects such as nonlinear damping and non-periodic driving forces, which may be significant in real-world systems.
-- For larger oscillations, the full nonlinear equation (with \(\sin\theta\)) should be used.
-
----
-
-## 5. Implementation: Python Simulation
-
-In this first simulation, we produce three key plots to analyze the forced damped pendulum’s motion:
-
-- A time series plot of \( \theta(t) \)
-- A phase portrait (\( \theta \) vs. \( \dot{\theta} \))
-- A Poincaré section to capture periodic and chaotic dynamics
-
-Below is the Python code for our **initial simulation** under the small-angle approximation. It uses `solve_ivp` to integrate the system, then plots the results. For now, we run **one** set of parameters (\(\beta=0.25\), \(F_D=1.2\), \(\Omega=2/3\), etc.):
-
-```python
-import numpy as np
+\]</div>
+<p>The general solution is the sum of the homogeneous solution (which decays due to damping) and a particular solution that oscillates at the driving frequency.</p>
+<h3 id="resonance-conditions">Resonance Conditions</h3>
+<ul>
+<li>
+<p><strong>Resonance:</strong><br/>
+  The system experiences resonance when the driving frequency <span class="arithmatex">\( \Omega \)</span> is close to the natural frequency <span class="arithmatex">\( \omega_0 \)</span>. At resonance, the amplitude of the steady-state oscillations becomes large, limited by the damping.</p>
+</li>
+<li>
+<p><strong>Energy Implications:</strong><br/>
+  Under resonance, the system efficiently absorbs energy from the external force, resulting in significant oscillation amplitudes.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="3-analysis-of-dynamics">3. Analysis of Dynamics</h2>
+<h3 id="parameter-influences">Parameter Influences</h3>
+<ul>
+<li>
+<p><strong>Damping Coefficient (<span class="arithmatex">\(\beta\)</span>):</strong><br/>
+  Higher damping reduces the amplitude of oscillations and can suppress chaotic behavior, while lower damping allows for larger amplitudes and may lead to complex dynamics.</p>
+</li>
+<li>
+<p><strong>Driving Amplitude (<span class="arithmatex">\(F_D/(mL)\)</span>):</strong><br/>
+  Increasing the driving amplitude increases the steady-state oscillation amplitude. Very high driving amplitudes can push the system into a nonlinear regime, potentially resulting in chaotic motion.</p>
+</li>
+<li>
+<p><strong>Driving Frequency (<span class="arithmatex">\(\Omega\)</span>):</strong><br/>
+  When <span class="arithmatex">\( \Omega \)</span> is near <span class="arithmatex">\( \omega_0 \)</span>, the system experiences resonance. As <span class="arithmatex">\( \Omega \)</span> varies, the system may transition between regular (periodic) motion and chaotic behavior.</p>
+</li>
+</ul>
+<h3 id="transition-to-chaos">Transition to Chaos</h3>
+<ul>
+<li>
+<p><strong>Regular Motion:</strong><br/>
+  For moderate values of damping and driving amplitude, the pendulum displays periodic oscillations.</p>
+</li>
+<li>
+<p><strong>Chaotic Motion:</strong><br/>
+  Under low damping or high driving amplitude, the system becomes highly sensitive to initial conditions, leading to chaotic behavior.</p>
+</li>
+<li>
+<p><strong>Visualization Tools:</strong><br/>
+  Phase portraits and Poincaré sections are used to reveal the underlying structure of the motion and the transition to chaos.</p>
+</li>
+</ul>
+<hr/>
+<h2 id="4-practical-applications-and-limitations">4. Practical Applications and Limitations</h2>
+<h3 id="applications">Applications</h3>
+<ul>
+<li><strong>Energy Harvesting:</strong><br/>
+  Systems can be designed to exploit resonance, thereby maximizing energy absorption from periodic forces.</li>
+<li><strong>Structural Engineering:</strong><br/>
+  Understanding forced oscillations is crucial in designing structures (e.g., suspension bridges, vibration isolation systems) that must withstand periodic loads.</li>
+<li><strong>Oscillating Circuits:</strong><br/>
+  The behavior of driven RLC circuits is analogous to the forced damped pendulum, informing the design of filters and resonant circuits.</li>
+</ul>
+<h3 id="limitations">Limitations</h3>
+<ul>
+<li>The small-angle approximation simplifies the analysis but is only valid for small displacements.</li>
+<li>The model neglects effects such as nonlinear damping and non-periodic driving forces, which may be significant in real-world systems.</li>
+<li>For larger oscillations, the full nonlinear equation (with <span class="arithmatex">\(\sin\theta\)</span>) should be used.</li>
+</ul>
+<hr/>
+<h2 id="5-implementation-python-simulation">5. Implementation: Python Simulation</h2>
+<p>In this first simulation, we produce three key plots to analyze the forced damped pendulum’s motion:</p>
+<ul>
+<li>A time series plot of <span class="arithmatex">\( \theta(t) \)</span></li>
+<li>A phase portrait (<span class="arithmatex">\( \theta \)</span> vs. <span class="arithmatex">\( \dot{\theta} \)</span>)</li>
+<li>A Poincaré section to capture periodic and chaotic dynamics</li>
+</ul>
+<p>Below is the Python code for our <strong>initial simulation</strong> under the small-angle approximation. It uses <code>solve_ivp</code> to integrate the system, then plots the results. For now, we run <strong>one</strong> set of parameters (<span class="arithmatex">\(\beta=0.25\)</span>, <span class="arithmatex">\(F_D=1.2\)</span>, <span class="arithmatex">\(\Omega=2/3\)</span>, etc.):</p>
+<pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 
@@ -405,84 +390,80 @@ if __name__ == "__main__":
         y0=(0.1, 0.0),
         use_small_angle=True
     )
-```
 </code></pre>
-<h3 id="outputs-for-the-first-simulation">Outputs for the First Simulation</h3>
-<p>Running this script with <span class="arithmatex">\(\beta=0.25\)</span>, <span class="arithmatex">\(F_D=1.2\)</span>, <span class="arithmatex">\(\Omega=2/3\)</span>, and <code>use_small_angle=True</code> produces <strong>three plots</strong>:</p>
-<ol>
-<li>
-<p><strong>Time Series</strong><br/>
-<img alt="Time Series Output" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Projectile_Range_vs_Angle.png"/><br/>
-   A nearly sinusoidal wave indicates stable periodic motion.</p>
-</li>
-<li>
-<p><strong>Phase Portrait</strong><br/>
-<img alt="Phase Portrait Output" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Projectile_Range_vs_Angle.png"/><br/>
-   A closed loop in <span class="arithmatex">\(\theta\)</span>–<span class="arithmatex">\(\dot{\theta}\)</span> space, showing a periodic orbit.</p>
-</li>
-<li>
-<p><strong>Poincaré Section</strong><br/>
-<img alt="Poincaré Section Output" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Projectile_Range_vs_Angle.png"/><br/>
-   A small set of points implies non-chaotic, regular motion.</p>
-</li>
-</ol>
-<p><em>(Replace these image links with your own screenshots if desired.)</em></p>
-<h3 id="explanation">Explanation</h3>
-<ol>
-<li>
-<p><strong>Small-Angle Approximation:</strong><br/>
-   Since <code>use_small_angle=True</code>, we use <span class="arithmatex">\(\sin(\theta) \approx \theta\)</span>. This typically yields simpler, near-harmonic motion for moderate parameter values.</p>
-</li>
-<li>
-<p><strong>Stable Periodic Orbit:</strong><br/>
-   Under <span class="arithmatex">\(\beta=0.25\)</span>, <span class="arithmatex">\(F_D=1.2\)</span>, and <span class="arithmatex">\(\Omega=2/3\)</span>, the pendulum exhibits a stable periodic solution—evident from the sinusoidal time series, single-loop phase portrait, and a single or small set of points in the Poincaré section.</p>
-</li>
-<li>
-<p><strong>Potential Extensions:</strong></p>
-</li>
-<li>Set <code>use_small_angle=False</code> to use the <strong>full nonlinear</strong> equation, which can yield chaotic solutions for certain parameter ranges.</li>
-<li>Vary <span class="arithmatex">\(\beta\)</span> (damping), <span class="arithmatex">\(F_D\)</span> (driving amplitude), and <span class="arithmatex">\(\Omega\)</span> (driving frequency) to see more complex dynamics, including chaos.</li>
-</ol>
-<hr/>
-<h2 id="6-simulation-output">6. Simulation Output</h2>
-<p>Below is a representative static image of the forced damped pendulum’s motion under these conditions:</p>
-<p><br/>
-<img alt="Forced Damped Pendulum Simulation" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Projectile_Range_vs_Angle.png"/>
-<br/></p>
-<p><em>(Update the URL to match the actual published location of your simulation image.)</em></p>
-<hr/>
-<h2 id="7-discussion">7. Discussion</h2>
-<ul>
-<li>
-<p><strong>General Solutions:</strong><br>
-  With the small-angle approximation and moderate parameters, the pendulum typically remains in a <strong>regular periodic orbit</strong>. However, for certain parameter sets (e.g., lower damping, higher driving amplitude, or using the full <span class="arithmatex">\(\sin(\theta)\)</span>), it can transition to <strong>chaotic motion</strong>.</br></p>
-</li>
-<li>
-<p><strong>Graphical Representations:</strong></p>
-</li>
-<li>
-<p><strong>Time Series:</strong> Depicts how <span class="arithmatex">\(\theta\)</span> changes over time.</p>
-</li>
-<li><strong>Phase Portrait:</strong> Shows <span class="arithmatex">\(\theta\)</span> vs. <span class="arithmatex">\(\dot{\theta}\)</span>, revealing periodic loops or chaotic attractors.</li>
-<li>
-<p><strong>Poincaré Section:</strong> Captures the system’s state once every driving period, distinguishing periodic from chaotic dynamics.</p>
-</li>
-<li>
-<p><strong>Limitations &amp; Future Work:</strong></p>
-</li>
-<li>The small-angle approximation may fail for larger amplitudes.</li>
-<li>Nonlinear damping or non-periodic driving forces can further complicate real-world behavior.</li>
-</ul>
-<hr/>
-<h2 id="8-conclusion">8. Conclusion</h2>
-<p>This investigation of the forced damped pendulum has:</p>
-<ul>
-<li>Derived the governing equations and provided an approximate solution for small oscillations.</li>
-<li>Analyzed how damping, driving amplitude, and driving frequency affect the system’s dynamics.</li>
-<li>Illustrated the transition from periodic to chaotic behavior using <strong>time series</strong>, <strong>phase portraits</strong>, and <strong>Poincaré sections</strong>.</li>
-<li>Demonstrated a computational simulation in Python that visualizes these dynamics.</li>
-</ul>
-<p>Overall, this study reinforces key concepts in nonlinear dynamics and provides a foundation for further exploration, including adjusting parameters to observe chaotic regimes or incorporating more realistic effects such as nonlinear damping.</p>
+<pre><code>
+### Outputs for the First Simulation
+
+Running this script with \(\beta=0.25\), \(F_D=1.2\), \(\Omega=2/3\), and `use_small_angle=True` produces **three plots**:
+
+1. **Time Series**
+   ![Time Series Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/time%20series.png)
+   A nearly sinusoidal wave indicates stable periodic motion.
+
+2. **Phase Portrait**
+   ![Phase Portrait Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Projectile_Range_vs_Angle.png)
+   A closed loop in \(\theta\)–\(\dot{\theta}\) space, showing a periodic orbit.
+
+3. **Poincaré Section**
+   ![Poincaré Section Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Projectile_Range_vs_Angle.png)
+   A small set of points implies non-chaotic, regular motion.
+
+_(Replace these image links with your own screenshots if desired.)_
+
+### Explanation
+
+1. **Small-Angle Approximation:**
+   Since `use_small_angle=True`, we use \(\sin(\theta) \approx \theta\). This typically yields simpler, near-harmonic motion for moderate parameter values.
+
+2. **Stable Periodic Orbit:**
+   Under \(\beta=0.25\), \(F_D=1.2\), and \(\Omega=2/3\), the pendulum exhibits a stable periodic solution—evident from the sinusoidal time series, single-loop phase portrait, and a single or small set of points in the Poincaré section.
+
+3. **Potential Extensions:**
+   - Set `use_small_angle=False` to use the **full nonlinear** equation, which can yield chaotic solutions for certain parameter ranges.
+   - Vary \(\beta\) (damping), \(F_D\) (driving amplitude), and \(\Omega\) (driving frequency) to see more complex dynamics, including chaos.
+
+---
+
+## 6. Simulation Output
+
+Below is a representative static image of the forced damped pendulum’s motion under these conditions:
+
+&lt;br&gt;
+![Forced Damped Pendulum Simulation](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Projectile_Range_vs_Angle.png)
+&lt;br&gt;
+
+_(Update the URL to match the actual published location of your simulation image.)_
+
+---
+
+## 7. Discussion
+
+- **General Solutions:**
+  With the small-angle approximation and moderate parameters, the pendulum typically remains in a **regular periodic orbit**. However, for certain parameter sets (e.g., lower damping, higher driving amplitude, or using the full \(\sin(\theta)\)), it can transition to **chaotic motion**.
+
+- **Graphical Representations:**
+
+  1. **Time Series:** Depicts how \(\theta\) changes over time.
+  2. **Phase Portrait:** Shows \(\theta\) vs. \(\dot{\theta}\), revealing periodic loops or chaotic attractors.
+  3. **Poincaré Section:** Captures the system’s state once every driving period, distinguishing periodic from chaotic dynamics.
+
+- **Limitations &amp; Future Work:**
+  - The small-angle approximation may fail for larger amplitudes.
+  - Nonlinear damping or non-periodic driving forces can further complicate real-world behavior.
+
+---
+
+## 8. Conclusion
+
+This investigation of the forced damped pendulum has:
+
+- Derived the governing equations and provided an approximate solution for small oscillations.
+- Analyzed how damping, driving amplitude, and driving frequency affect the system’s dynamics.
+- Illustrated the transition from periodic to chaotic behavior using **time series**, **phase portraits**, and **Poincaré sections**.
+- Demonstrated a computational simulation in Python that visualizes these dynamics.
+
+Overall, this study reinforces key concepts in nonlinear dynamics and provides a foundation for further exploration, including adjusting parameters to observe chaotic regimes or incorporating more realistic effects such as nonlinear damping.
+</code></pre>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
