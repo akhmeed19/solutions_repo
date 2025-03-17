@@ -294,9 +294,9 @@ _(Update the URL to match the actual published location of your simulation image
 
 - **Graphical Representations:**                      
 
-  1. **Time Series:** Depicts how $\theta$ changes over time.
-  2. **Phase Portrait:** Shows $\theta$ vs. $\dot{\theta}$, revealing periodic loops or chaotic attractors.
-  3. **Poincaré Section:** Captures the system’s state once every driving period, distinguishing periodic from chaotic dynamics.
+    1. **Time Series:** Depicts how $\theta$ changes over time.
+    2. **Phase Portrait:** Shows $\theta$ vs. $\dot{\theta}$, revealing periodic loops or chaotic attractors.
+    3. **Poincaré Section:** Captures the system’s state once every driving period, distinguishing periodic from chaotic dynamics.
 
 - **Limitations & Future Work:**                
   1. The small-angle approximation may fail for larger amplitudes.
