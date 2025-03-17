@@ -248,16 +248,12 @@ Running this script with $(\beta=0.25)$, $(F_D=1.2)$, $(\Omega=2/3)$, and `use_s
 
    A closed loop in $\theta$–$\dot{\theta}$ space, showing a periodic orbit.
 
-3. **Poincaré Section**
 
+3. **Poincaré Section**                                                                        
     ![Poincaré Section Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/poincare%20section.png)
     
-    A small set of points implies non-chaotic, regular motion. -->
-<!-- 3. **Poincaré Section**                                             
+    A small set of points implies non-chaotic, regular motion. 
 
-  ![Poincaré Section Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/poincare%20section.png)
-
-   A small set of points implies non-chaotic, regular motion. -->
 ### Explanation
 1. **Time Series:**         
     Shows how $\theta(t)$ evolves over time. A nearly sinusoidal plot indicates that the pendulum exhibits stable periodic motion.
