@@ -388,8 +388,9 @@ Running this script with $(\beta=0.2$), $(F_D=1.5)$, $\Omega=\tfrac{2}{3}$, and 
 ### Explanation
 
   1. **Nonlinear Equation**:                  
-    We set `use_small_angle = False` so that $\sin(\theta)$ is used instead of $\theta$. This allows for larger amplitude oscillations and the possibility of chaos.                                                                        
+    We set `use_small_angle = False` so that $\sin(\theta)$ is used instead of $\theta$. This allows for larger amplitude oscillations and the possibility of chaos.
   
+  <br>
 
   2. **Lower Damping, Higher Drive**:
     -  $\beta=0.2$ is smaller than the previous 0.25, so the system loses energy more slowly.  
