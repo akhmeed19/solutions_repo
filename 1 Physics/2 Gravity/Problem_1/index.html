@@ -347,24 +347,20 @@ plt.show()
 <li>
 <p><strong>Scatter Plot of <span class="arithmatex">\(T^2\)</span> vs. <span class="arithmatex">\(r^3\)</span></strong><br/>
 <img alt="Verification of Kepler's Third Law: Scatter Plot" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem1/kepler_scatter.png"/></p>
-</li>
-<li>
-<p><strong>What the Plot Shows:</strong> Each blue dot represents a particular orbital radius <span class="arithmatex">\(r\)</span> and the corresponding orbital period <span class="arithmatex">\(T\)</span>. We then plot <span class="arithmatex">\(T^2\)</span> on the y-axis and <span class="arithmatex">\(r^3\)</span> on the x-axis. The near-perfect alignment of these points along a straight line confirms the proportionality <span class="arithmatex">\(T^2 \propto r^3\)</span>.  </p>
-</li>
-<li>
-<p><strong>Physical Meaning:</strong> If you double <span class="arithmatex">\(r\)</span> (and keep the central mass <span class="arithmatex">\(M\)</span> fixed), the new orbital period <span class="arithmatex">\(T\)</span> changes in such a way that <span class="arithmatex">\(T^2 / r^3\)</span> remains nearly constant (the slope of the line). This is the essence of Kepler’s Third Law for circular orbits.</p>
+<pre><code>- **What the Plot Shows:** Each blue dot represents a particular orbital radius $r$ and the corresponding orbital period $T$. We then plot $T^2$ on the y-axis and $r^3$ on the x-axis. The near-perfect alignment of these points along a straight line confirms the proportionality $T^2 \propto r^3$.  
+- **Physical Meaning:** If you double $r$ (and keep the central mass $M$ fixed), the new orbital period $T$ changes in such a way that $T^2 / r^3$ remains nearly constant (the slope of the line). This is the essence of Kepler’s Third Law for circular orbits.
+</code></pre>
 </li>
 <li>
 <p><strong>Comparison of Calculated <span class="arithmatex">\(T^2\)</span> and Theoretical <span class="arithmatex">\(T^2\)</span></strong><br/>
 <img alt="Verification of Kepler's Third Law: Comparison Plot" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem1/kepler_comparison.png"/></p>
+<pre><code>- **Calculated vs. Theoretical:** The blue dots are the numerically computed $T^2$ values for each $r$. The red line is the theoretical prediction from Kepler’s Third Law:
+    $$
+    T^2 = \frac{4\pi^2}{G M} \; r^3.
+    $$
+- **Interpretation:** The excellent overlap between the blue points and the red line indicates that the simulated orbits precisely match the analytical formula. This reaffirms that $T^2$ scales with $r^3$ by the constant factor $\tfrac{4\pi^2}{G M}$.
+</code></pre>
 </li>
-<li>
-<p><strong>Calculated vs. Theoretical:</strong> The blue dots are the numerically computed <span class="arithmatex">\(T^2\)</span> values for each <span class="arithmatex">\(r\)</span>. The red line is the theoretical prediction from Kepler’s Third Law:
-     $$
-     T^2 = \frac{4\pi^2}{G M} \; r^3.
-     $$</p>
-</li>
-<li><strong>Interpretation:</strong> The excellent overlap between the blue points and the red line indicates that the simulated orbits precisely match the analytical formula. This reaffirms that <span class="arithmatex">\(T^2\)</span> scales with <span class="arithmatex">\(r^3\)</span> by the constant factor <span class="arithmatex">\(\tfrac{4\pi^2}{G M}\)</span>.</li>
 </ol>
 <h3 id="explanation-of-the-plots">Explanation of the Plots</h3>
 <ol>
