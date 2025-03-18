@@ -279,10 +279,10 @@ Running this script with $(\beta=0.25)$, $(F_D=1.2)$, $(\Omega=2/3)$, and `use_s
 
 To explore more complex or chaotic behavior, we can **turn off** the small‐angle approximation and **adjust** parameters such as damping and driving amplitude. In the following example, we lower the damping and increase the driving force:
 
-- Damping coefficient: \( \beta = 0.2 \)
-- Driving amplitude: \( F_D = 1.5 \)
-- Driving frequency: \( \Omega = \tfrac{2}{3} \)
-- Full nonlinear equation (i.e., \(\sin(\theta)\) instead of \(\theta\))
+- Damping coefficient: $\beta = 0.2$
+- Driving amplitude: $F_D = 1.5$
+- Driving frequency: $\Omega = \tfrac{2}{3}$
+- Full nonlinear equation (i.e., $\sin(\theta)$ instead of $\theta$)
 
 ```python
 import numpy as np
@@ -365,7 +365,7 @@ if __name__ == "__main__":
 
 ### Outputs for the Second Simulation
 
-Running this script with \((\beta=0.2)\), \((F_D=1.5)\), \(\Omega=\tfrac{2}{3}\), and `use_small_angle=False` often yields **more complex** or **chaotic** motion. You might see:
+Running this script with $(\beta=0.2$), $(F_D=1.5)$, $\Omega=\tfrac{2}{3}$, and `use_small_angle = False` often yields **more complex** or **chaotic** motion. You might see:
 
 1. **Time Series:**                                                                
 
@@ -377,7 +377,7 @@ Running this script with \((\beta=0.2)\), \((F_D=1.5)\), \(\Omega=\tfrac{2}{3}\)
 
     ![Phase Portrait Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Mechanics%20P2/simulation%202/phase%20portrait.png)
 
-    Instead of a single closed loop, the trajectory in \(\theta\)–\(\dot{\theta}\) space may fill an area or form a strange attractor, characteristic of chaos.
+    Instead of a single closed loop, the trajectory in $\theta$–$\dot{\theta}$ space may fill an area or form a strange attractor, characteristic of chaos.
 
 3. **Poincaré Section**                                                               
     
@@ -388,11 +388,11 @@ Running this script with \((\beta=0.2)\), \((F_D=1.5)\), \(\Omega=\tfrac{2}{3}\)
 ### Explanation
 
 1. **Nonlinear Equation**:  
-   We set `use_small_angle=False` so that \(\sin(\theta)\) is used instead of \(\theta\). This allows for larger amplitude oscillations and the possibility of chaos.
+   We set `use_small_angle = False` so that $\sin(\theta)$ is used instead of $\theta$. This allows for larger amplitude oscillations and the possibility of chaos.
 
 2. **Lower Damping, Higher Drive**:  
-   - \(\beta=0.2\) is smaller than the previous 0.25, so the system loses energy more slowly.  
-   - \(F_D=1.5\) is greater than 1.2, delivering more external energy per cycle.  
+   - $\beta=0.2$ is smaller than the previous 0.25, so the system loses energy more slowly.  
+   - $F_D=1.5$ is greater than 1.2, delivering more external energy per cycle.  
    - Together, these changes push the pendulum into a regime where chaotic behavior is more likely.
 
 3. **Longer Time Span**:  
