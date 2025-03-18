@@ -11,7 +11,6 @@ Below is a comprehensive Markdown document that outlines the derivation, analysi
 The forced damped pendulum is a classic nonlinear system that exhibits a rich variety of behaviors—from simple periodic oscillations to complex chaotic motion—due to the interplay between damping, restoring forces, and an external periodic drive. By varying parameters such as the damping coefficient, driving amplitude, and driving frequency, one can obtain a diverse set of solutions that model real-world phenomena ranging from energy harvesting to structural vibrations.
 
 In this document, we:
-
 - Derive the governing differential equation for the forced damped pendulum.
 - Analyze the influence of damping, driving amplitude, and driving frequency on the system’s dynamics.
 - Discuss practical applications and limitations of the forced damped pendulum model.
@@ -257,7 +256,7 @@ Running this script with $(\beta=0.25)$, $(F_D=1.2)$, $(\Omega=2/3)$, and `use_s
 
 ### Explanation
 1. **Time Series:**         
-    Shows how $\theta(t)$ evolves over time. A nearly sinusoidal plot indicates that the pendulum exhibits stable periodic motion.                                <br>
+    Shows how $\theta(t)$ evolves over time. A nearly sinusoidal plot indicates that the pendulum exhibits stable periodic motion.                                <br><br>
 
 2. **Phase Portrait:**                                
     Plots $\theta$ versus $\dot{\theta}$. A closed loop in $\theta$–$\dot{\theta}$ space indicates a stable periodic orbit.                                 <br>
@@ -426,6 +425,36 @@ With this second simulation, I demonstrate how changing parameters (especially l
   
     1. The small-angle approximation may fail for larger amplitudes.
     2. Nonlinear damping or non-periodic driving forces can further complicate real-world behavior.
+
+### Comparison of the Two Simulations
+
+1. **Equations and Approximations:**
+   - **First Simulation** uses the **small-angle approximation** $\sin(\theta)\approx \theta$. This linearizes the pendulum’s restoring force, typically yielding **stable, near-harmonic** motion for moderate parameters.
+   - **Second Simulation** employs the **full nonlinear** equation $\sin(\theta)$. This allows for **larger amplitude** oscillations and the possibility of **chaotic** regimes under more extreme parameters.
+
+2. **Parameter Choices:**
+   - **First Simulation**:  
+     $\beta=0.25,\; F_D=1.2,\; \Omega=\tfrac{2}{3},\; \text{use\_small\_angle = True}$.  
+     These moderate values produce a **stable periodic** orbit.
+   - **Second Simulation**:  
+     $\beta=0.2,\; F_D=1.5,\; \Omega=\tfrac{2}{3},\; \text{use\_small\_angle=False}$.  
+     Lower damping and higher driving force are designed to **push the system** into more **complex** or **chaotic** motion.
+
+3. **Observations in the Plots:**
+   - **Time Series**:  
+     - *First Simulation*: A smooth, sinusoidal-like wave indicating **periodic** motion.  
+     - *Second Simulation*: Potentially more irregular or broader swings if chaos emerges.  
+   - **Phase Portrait** $(\theta$ vs. $\dot{\theta}$):  
+     - *First Simulation*: A single **closed loop** consistent with a **periodic** orbit.  
+     - *Second Simulation*: May fill an area or produce more complicated loops, indicative of **chaos** or **quasiperiodicity** (depending on parameters).  
+   - **Poincaré Section**:  
+     - *First Simulation*: A **small set of discrete points** reflects the **regular** (periodic) solution.  
+     - *Second Simulation*: If truly chaotic, you’d see a **scattered cloud** of points. However, it may still appear periodic if the parameters don’t sufficiently drive chaos.
+
+4. **Key Takeaways:**
+   - The **first** (small-angle) simulation demonstrates how a forced damped pendulum can settle into a **stable periodic** orbit with moderate damping and driving.  
+   - The **second** (full nonlinear) simulation attempts to highlight **more extreme** dynamics by reducing damping and increasing the driving force, thereby increasing the likelihood of **chaos**.  
+   - If you still observe a **periodic** solution in the second simulation, you can **further adjust** parameters (e.g., reduce $\beta$ or raise $F_D$) or **extend** the simulation time to reveal chaotic behavior.
 
 ---
 
