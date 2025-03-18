@@ -412,23 +412,25 @@ if __name__ == "__main__":
 </ol>
 <h3 id="explanation">Explanation</h3>
 <ol>
-<li><strong>Time Series:</strong> <br/>
-    Shows how <span class="arithmatex">\(\theta(t)\)</span> evolves over time. A nearly sinusoidal plot indicates that the pendulum exhibits stable periodic motion.</li>
 <li>
-<p><strong>Phase Portrait:</strong> <br/>
-    Plots <span class="arithmatex">\(\theta\)</span> versus <span class="arithmatex">\(\dot{\theta}\)</span>. A closed loop in <span class="arithmatex">\(\theta\)</span>–<span class="arithmatex">\(\dot{\theta}\)</span> space indicates a stable periodic orbit.</p>
+<p><strong>Time Series:</strong> <br/>
+    Shows how <span class="arithmatex">\(\theta(t)\)</span> evolves over time. A nearly sinusoidal plot indicates that the pendulum exhibits stable periodic motion.                                <br/><br/></p>
 </li>
 <li>
-<p><strong>Poincaré Section:</strong> <br/>
-   Samples the phase space at intervals of the driving period. A small set of discrete points indicates that the system is in regular, periodic motion rather than chaotic behavior.</p>
+<p><strong>Phase Portrait:</strong> <br>
+    Plots <span class="arithmatex">\(\theta\)</span> versus <span class="arithmatex">\(\dot{\theta}\)</span>. A closed loop in <span class="arithmatex">\(\theta\)</span>–<span class="arithmatex">\(\dot{\theta}\)</span> space indicates a stable periodic orbit.                                 <br/><br/></br></p>
 </li>
 <li>
-<p><strong>Small-Angle Approximation:</strong> <br/>
-   Since <code>use_small_angle = True</code>, we use <span class="arithmatex">\(\sin(\theta) \approx \theta\)</span>. This typically yields simpler, near-harmonic motion for moderate parameter values.</p>
+<p><strong>Poincaré Section:</strong> <br>
+   Samples the phase space at intervals of the driving period. A small set of discrete points indicates that the system is in regular, periodic motion rather than chaotic behavior.                                <br/><br/></br></p>
 </li>
 <li>
-<p><strong>Stable Periodic Orbit:</strong> <br/>
-    Under <span class="arithmatex">\((\beta = 0.25)\)</span>, <span class="arithmatex">\((F_D = 1.2)\)</span>, and <span class="arithmatex">\((\Omega = \tfrac{2}{3})\)</span>, the pendulum exhibits a stable periodic solution—evident from the sinusoidal time series, single-loop phase portrait, and a small set of points in the Poincaré section.</p>
+<p><strong>Small-Angle Approximation:</strong> <br>
+   Since <code>use_small_angle = True</code>, we use <span class="arithmatex">\(\sin(\theta) \approx \theta\)</span>. This typically yields simpler, near-harmonic motion for moderate parameter values.                                 <br/><br/></br></p>
+</li>
+<li>
+<p><strong>Stable Periodic Orbit:</strong> <br>
+    Under <span class="arithmatex">\((\beta = 0.25)\)</span>, <span class="arithmatex">\((F_D = 1.2)\)</span>, and <span class="arithmatex">\((\Omega = \tfrac{2}{3})\)</span>, the pendulum exhibits a stable periodic solution—evident from the sinusoidal time series, single-loop phase portrait, and a small set of points in the Poincaré section.                              <br/><br/></br></p>
 </li>
 <li>
 <p><strong>Potential Extensions:</strong> </p>
@@ -545,9 +547,9 @@ if __name__ == "__main__":
 <h3 id="explanation_1">Explanation</h3>
 <ol>
 <li>
-<p><strong>Nonlinear Equation</strong>:               <br/>
+<p><strong>Nonlinear Equation</strong>:               <br>
       We set <code>use_small_angle = False</code> so that <span class="arithmatex">\(\sin(\theta)\)</span> is used instead of <span class="arithmatex">\(\theta\)</span>. This allows for larger amplitude oscillations and the possibility of chaos. 
-      <br/><br/></p>
+      <br/><br/></br></p>
 </li>
 <li>
 <p><strong>Lower Damping, Higher Drive</strong>:</p>
