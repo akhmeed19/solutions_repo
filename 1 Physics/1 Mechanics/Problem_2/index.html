@@ -549,7 +549,7 @@ if __name__ == "__main__":
 <li>
 <p><strong>Nonlinear Equation</strong>:               <br>
       We set <code>use_small_angle = False</code> so that <span class="arithmatex">\(\sin(\theta)\)</span> is used instead of <span class="arithmatex">\(\theta\)</span>. This allows for larger amplitude oscillations and the possibility of chaos. 
-      <br/><br/></br></p>
+      <br/></br></p>
 </li>
 <li>
 <p><strong>Lower Damping, Higher Drive</strong>:</p>
@@ -599,21 +599,27 @@ With this second simulation, I demonstrate how changing parameters (especially l
 </ul>
 <h3 id="comparison-of-the-two-simulations">Comparison of the Two Simulations</h3>
 <ol>
-<li><strong>Equations and Approximations:</strong></li>
-<li><strong>First Simulation</strong> uses the <strong>small-angle approximation</strong> <span class="arithmatex">\(\sin(\theta)\approx \theta\)</span>. This linearizes the pendulum’s restoring force, typically yielding <strong>stable, near-harmonic</strong> motion for moderate parameters.</li>
 <li>
-<p><strong>Second Simulation</strong> employs the <strong>full nonlinear</strong> equation <span class="arithmatex">\(\sin(\theta)\)</span>. This allows for <strong>larger amplitude</strong> oscillations and the possibility of <strong>chaotic</strong> regimes under more extreme parameters.</p>
+<p><strong>Equations and Approximations:</strong></p>
+<ul>
+<li><strong>First Simulation</strong> uses the <strong>small-angle approximation</strong> <span class="arithmatex">\(\sin(\theta)\approx \theta\)</span>. This linearizes the pendulum’s restoring force, typically yielding <strong>stable, near-harmonic</strong> motion for moderate parameters.</li>
+<li><strong>Second Simulation</strong> employs the <strong>full nonlinear</strong> equation <span class="arithmatex">\(\sin(\theta)\)</span>. This allows for <strong>larger amplitude</strong> oscillations and the possibility of <strong>chaotic</strong> regimes under more extreme parameters.</li>
+</ul>
 </li>
 <li>
 <p><strong>Parameter Choices:</strong></p>
+<ul>
+<li>
+<p><strong>First Simulation</strong>:<br>
+<span class="arithmatex">\(\beta=0.25,\; F_D=1.2,\; \Omega=\tfrac{2}{3},\; \text{use\_small\_angle = True}\)</span>.<br/>
+These moderate values produce a <strong>stable periodic</strong> orbit.</br></p>
 </li>
-<li><strong>First Simulation</strong>:<br>
-<span class="arithmatex">\(\beta=0.25,\; F_D=1.2,\; \Omega=\tfrac{2}{3},\; \text{use\_small\_angle = True}\)</span>.<br>
-     These moderate values produce a <strong>stable periodic</strong> orbit.</br></br></li>
 <li>
 <p><strong>Second Simulation</strong>:<br/>
 <span class="arithmatex">\(\beta=0.2,\; F_D=1.5,\; \Omega=\tfrac{2}{3},\; \text{use\_small\_angle=False}\)</span>.<br/>
-     Lower damping and higher driving force are designed to <strong>push the system</strong> into more <strong>complex</strong> or <strong>chaotic</strong> motion.</p>
+Lower damping and higher driving force are designed to <strong>push the system</strong> into more <strong>complex</strong> or <strong>chaotic</strong> motion.</p>
+</li>
+</ul>
 </li>
 <li>
 <p><strong>Observations in the Plots:</strong></p>
@@ -637,10 +643,12 @@ With this second simulation, I demonstrate how changing parameters (especially l
 </li>
 <li>
 <p><strong>Key Takeaways:</strong></p>
-</li>
+<ul>
 <li>The <strong>first</strong> (small-angle) simulation demonstrates how a forced damped pendulum can settle into a <strong>stable periodic</strong> orbit with moderate damping and driving.  </li>
 <li>The <strong>second</strong> (full nonlinear) simulation attempts to highlight <strong>more extreme</strong> dynamics by reducing damping and increasing the driving force, thereby increasing the likelihood of <strong>chaos</strong>.  </li>
 <li>If you still observe a <strong>periodic</strong> solution in the second simulation, you can <strong>further adjust</strong> parameters (e.g., reduce <span class="arithmatex">\(\beta\)</span> or raise <span class="arithmatex">\(F_D\)</span>) or <strong>extend</strong> the simulation time to reveal chaotic behavior.</li>
+</ul>
+</li>
 </ol>
 <hr/>
 <h2 id="7-conclusion">7. Conclusion</h2>
