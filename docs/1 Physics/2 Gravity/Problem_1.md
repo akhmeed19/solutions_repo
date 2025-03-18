@@ -250,4 +250,4 @@ This investigation of the orbital period and orbital radius has:
 - Implemented a computational model in Python to simulate circular orbits and verify the linear relationship between $T^2$ and $r^3$.
 - Highlighted how this relationship extends to elliptical orbits and its relevance in various astronomical contexts.
 
-Overall, this study reinforces the fundamental principles of gravitational interactions and provides a computational approach to verify one of the key laws of celestial mechanics.
+Overall, this study reinforces the fundamental principles of gravitational interactions and provides a computational approach to verify one of the key laws of celestial mechanics. 
