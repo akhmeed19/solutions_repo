@@ -441,9 +441,9 @@ if __name__ == "__main__":
 <h3 id="52-second-simulation-exploring-more-complex-dynamics">5.2. Second Simulation (Exploring More Complex Dynamics)</h3>
 <p>To explore more complex or chaotic behavior, we can <strong>turn off</strong> the small‐angle approximation and <strong>adjust</strong> parameters such as damping and driving amplitude. In the following example, we lower the damping and increase the driving force:</p>
 <ul>
-<li>Damping coefficient: <span class="arithmatex">\( \beta = 0.2 \)</span></li>
-<li>Driving amplitude: <span class="arithmatex">\( F_D = 1.5 \)</span></li>
-<li>Driving frequency: <span class="arithmatex">\( \Omega = \tfrac{2}{3} \)</span></li>
+<li>Damping coefficient: <span class="arithmatex">\(\beta = 0.2\)</span></li>
+<li>Driving amplitude: <span class="arithmatex">\(F_D = 1.5\)</span></li>
+<li>Driving frequency: <span class="arithmatex">\(\Omega = \tfrac{2}{3}\)</span></li>
 <li>Full nonlinear equation (i.e., <span class="arithmatex">\(\sin(\theta)\)</span> instead of <span class="arithmatex">\(\theta\)</span>)</li>
 </ul>
 <pre><code class="language-python">import numpy as np
@@ -524,7 +524,7 @@ if __name__ == "__main__":
 
 </code></pre>
 <h3 id="outputs-for-the-second-simulation">Outputs for the Second Simulation</h3>
-<p>Running this script with <span class="arithmatex">\((\beta=0.2)\)</span>, <span class="arithmatex">\((F_D=1.5)\)</span>, <span class="arithmatex">\(\Omega=\tfrac{2}{3}\)</span>, and <code>use_small_angle=False</code> often yields <strong>more complex</strong> or <strong>chaotic</strong> motion. You might see:</p>
+<p>Running this script with <span class="arithmatex">\((\beta=0.2\)</span>), <span class="arithmatex">\((F_D=1.5)\)</span>, <span class="arithmatex">\(\Omega=\tfrac{2}{3}\)</span>, and <code>use_small_angle = False</code> often yields <strong>more complex</strong> or <strong>chaotic</strong> motion. You might see:</p>
 <ol>
 <li>
 <p><strong>Time Series:</strong> </p>
@@ -546,7 +546,7 @@ if __name__ == "__main__":
 <ol>
 <li>
 <p><strong>Nonlinear Equation</strong>:<br/>
-   We set <code>use_small_angle=False</code> so that <span class="arithmatex">\(\sin(\theta)\)</span> is used instead of <span class="arithmatex">\(\theta\)</span>. This allows for larger amplitude oscillations and the possibility of chaos.</p>
+   We set <code>use_small_angle = False</code> so that <span class="arithmatex">\(\sin(\theta)\)</span> is used instead of <span class="arithmatex">\(\theta\)</span>. This allows for larger amplitude oscillations and the possibility of chaos.</p>
 </li>
 <li>
 <p><strong>Lower Damping, Higher Drive</strong>:  </p>
