@@ -397,8 +397,8 @@ Running this script with $(\beta=0.2$), $(F_D=1.5)$, $\Omega=\tfrac{2}{3}$, and 
     - Together, these changes push the pendulum into a regime where chaotic behavior is more likely.
 
   3. **Longer Time Span**:                                
-    We increased `t_span` to (0, 200) to observe the long-term evolution. Chaos sometimes takes a while to emerge or settle into an attractor.
-    </br>
+      We increased `t_span` to (0, 200) to observe the long-term evolution. Chaos sometimes takes a while to emerge or settle into an attractor.
+     <br><br>
 
   4. **Potential Observations**:     
     - **If** the motion is chaotic, the phase portrait and Poincaré section won’t settle into a simple loop or small set of points.  
