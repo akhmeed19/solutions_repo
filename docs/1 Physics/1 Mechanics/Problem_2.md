@@ -387,27 +387,23 @@ Running this script with $(\beta=0.2$), $(F_D=1.5)$, $\Omega=\tfrac{2}{3}$, and 
 
 ### Explanation
 
-1. **Nonlinear Equation**:  
+1. **Nonlinear Equation**:                  
+We set `use_small_angle = False` so that $\sin(\theta)$ is used instead of $\theta$. This allows for larger amplitude oscillations and the possibility of chaos.
+
+
+2. **Lower Damping, Higher Drive**:                                  
   
-   We set `use_small_angle = False` so that $\sin(\theta)$ is used instead of $\theta$. This allows for larger amplitude oscillations and the possibility of chaos.
+    1. $\beta=0.2$ is smaller than the previous 0.25, so the system loses energy more slowly.  
+    2. $F_D=1.5$ is greater than 1.2, delivering more external energy per cycle.  
+    3. Together, these changes push the pendulum into a regime where chaotic behavior is more likely.
 
 
-2. **Lower Damping, Higher Drive**:                                   
-  
-   1. $\beta=0.2$ is smaller than the previous 0.25, so the system loses energy more slowly.  
-   2. $F_D=1.5$ is greater than 1.2, delivering more external energy per cycle.  
-   3. Together, these changes push the pendulum into a regime where chaotic behavior is more likely.
+3. **Longer Time Span**:                                    We increased `t_span` to (0, 200) to observe the long-term evolution. Chaos sometimes takes a while to emerge or settle into an attractor.
 
 
-3. **Longer Time Span**:                                    
-  
-   We increased `t_span` to (0, 200) to observe the long-term evolution. Chaos sometimes takes a while to emerge or settle into an attractor.
-
-
-4. **Potential Observations**:                            
-  
-   1. **If** the motion is chaotic, the phase portrait and Poincaré section won’t settle into a simple loop or small set of points.  
-   2. You may see a scattered or more “filled-in” region in phase space.
+4. **Potential Observations**:                           
+    1. **If** the motion is chaotic, the phase portrait and Poincaré section won’t settle into a simple loop or small set of points.  
+    2. You may see a scattered or more “filled-in” region in phase space.
 
 With this second simulation, I demonstrate how changing parameters (especially lowering damping and increasing driving amplitude) can lead from stable periodic motion to more **complex or chaotic** behavior in the forced damped pendulum.
 
