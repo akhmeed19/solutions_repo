@@ -390,7 +390,7 @@ Running this script with $(\beta=0.2$), $(F_D=1.5)$, $\Omega=\tfrac{2}{3}$, and 
 
   1. **Nonlinear Equation**:                 
       We set `use_small_angle = False` so that $\sin(\theta)$ is used instead of $\theta$. This allows for larger amplitude oscillations and the possibility of chaos. 
-      <br><br>
+      <br>
     
   2. **Lower Damping, Higher Drive**:
       -  $\beta=0.2$ is smaller than the previous 0.25, so the system loses energy more slowly.  
@@ -430,32 +430,33 @@ With this second simulation, I demonstrate how changing parameters (especially l
 ### Comparison of the Two Simulations
 
 1. **Equations and Approximations:**
-   - **First Simulation** uses the **small-angle approximation** $\sin(\theta)\approx \theta$. This linearizes the pendulum’s restoring force, typically yielding **stable, near-harmonic** motion for moderate parameters.
-   - **Second Simulation** employs the **full nonlinear** equation $\sin(\theta)$. This allows for **larger amplitude** oscillations and the possibility of **chaotic** regimes under more extreme parameters.
+    - **First Simulation** uses the **small-angle approximation** $\sin(\theta)\approx \theta$. This linearizes the pendulum’s restoring force, typically yielding **stable, near-harmonic** motion for moderate parameters.
+    - **Second Simulation** employs the **full nonlinear** equation $\sin(\theta)$. This allows for **larger amplitude** oscillations and the possibility of **chaotic** regimes under more extreme parameters.
 
 2. **Parameter Choices:**
-   - **First Simulation**:  
-     $\beta=0.25,\; F_D=1.2,\; \Omega=\tfrac{2}{3},\; \text{use\_small\_angle = True}$.  
-     These moderate values produce a **stable periodic** orbit.
-   - **Second Simulation**:  
-     $\beta=0.2,\; F_D=1.5,\; \Omega=\tfrac{2}{3},\; \text{use\_small\_angle=False}$.  
-     Lower damping and higher driving force are designed to **push the system** into more **complex** or **chaotic** motion.
+    - **First Simulation**:  
+    $\beta=0.25,\; F_D=1.2,\; \Omega=\tfrac{2}{3},\; \text{use\_small\_angle = True}$.  
+    These moderate values produce a **stable periodic** orbit.
+
+    - **Second Simulation**:  
+    $\beta=0.2,\; F_D=1.5,\; \Omega=\tfrac{2}{3},\; \text{use\_small\_angle=False}$.  
+    Lower damping and higher driving force are designed to **push the system** into more **complex** or **chaotic** motion.
 
 3. **Observations in the Plots:**
    - **Time Series**:  
-     - *First Simulation*: A smooth, sinusoidal-like wave indicating **periodic** motion.  
-     - *Second Simulation*: Potentially more irregular or broader swings if chaos emerges.  
+      - *First Simulation*: A smooth, sinusoidal-like wave indicating **periodic** motion.  
+      - *Second Simulation*: Potentially more irregular or broader swings if chaos emerges.  
    - **Phase Portrait** $(\theta$ vs. $\dot{\theta}$):  
-     - *First Simulation*: A single **closed loop** consistent with a **periodic** orbit.  
-     - *Second Simulation*: May fill an area or produce more complicated loops, indicative of **chaos** or **quasiperiodicity** (depending on parameters).  
+      - *First Simulation*: A single **closed loop** consistent with a **periodic** orbit.  
+      - *Second Simulation*: May fill an area or produce more complicated loops, indicative of **chaos** or **quasiperiodicity** (depending on parameters).  
    - **Poincaré Section**:  
-     - *First Simulation*: A **small set of discrete points** reflects the **regular** (periodic) solution.  
-     - *Second Simulation*: If truly chaotic, you’d see a **scattered cloud** of points. However, it may still appear periodic if the parameters don’t sufficiently drive chaos.
+      - *First Simulation*: A **small set of discrete points** reflects the **regular** (periodic) solution.  
+      - *Second Simulation*: If truly chaotic, you’d see a **scattered cloud** of points. However, it may still appear periodic if the parameters don’t sufficiently drive chaos.
 
 4. **Key Takeaways:**
-   - The **first** (small-angle) simulation demonstrates how a forced damped pendulum can settle into a **stable periodic** orbit with moderate damping and driving.  
-   - The **second** (full nonlinear) simulation attempts to highlight **more extreme** dynamics by reducing damping and increasing the driving force, thereby increasing the likelihood of **chaos**.  
-   - If you still observe a **periodic** solution in the second simulation, you can **further adjust** parameters (e.g., reduce $\beta$ or raise $F_D$) or **extend** the simulation time to reveal chaotic behavior.
+    - The **first** (small-angle) simulation demonstrates how a forced damped pendulum can settle into a **stable periodic** orbit with moderate damping and driving.  
+    - The **second** (full nonlinear) simulation attempts to highlight **more extreme** dynamics by reducing damping and increasing the driving force, thereby increasing the likelihood of **chaos**.  
+    - If you still observe a **periodic** solution in the second simulation, you can **further adjust** parameters (e.g., reduce $\beta$ or raise $F_D$) or **extend** the simulation time to reveal chaotic behavior.
 
 ---
 
