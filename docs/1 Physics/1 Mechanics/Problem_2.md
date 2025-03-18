@@ -443,15 +443,15 @@ With this second simulation, I demonstrate how changing parameters (especially l
     Lower damping and higher driving force are designed to **push the system** into more **complex** or **chaotic** motion.
 
 3. **Observations in the Plots:**
-   - **Time Series**:  
-      - *First Simulation*: A smooth, sinusoidal-like wave indicating **periodic** motion.  
-      - *Second Simulation*: Potentially more irregular or broader swings if chaos emerges.  
-   - **Phase Portrait** $(\theta$ vs. $\dot{\theta}$):  
-      - *First Simulation*: A single **closed loop** consistent with a **periodic** orbit.  
-      - *Second Simulation*: May fill an area or produce more complicated loops, indicative of **chaos** or **quasiperiodicity** (depending on parameters).  
-   - **Poincaré Section**:  
-      - *First Simulation*: A **small set of discrete points** reflects the **regular** (periodic) solution.  
-      - *Second Simulation*: If truly chaotic, you’d see a **scattered cloud** of points. However, it may still appear periodic if the parameters don’t sufficiently drive chaos.
+      - **Time Series**:  
+        - *First Simulation*: A smooth, sinusoidal-like wave indicating **periodic** motion.  
+        - *Second Simulation*: Potentially more irregular or broader swings if chaos emerges.  
+      - **Phase Portrait** $(\theta$ vs. $\dot{\theta}$):  
+        - *First Simulation*: A single **closed loop** consistent with a **periodic** orbit.  
+        - *Second Simulation*: May fill an area or produce more complicated loops, indicative of **chaos** or **quasiperiodicity** (depending on parameters).  
+      - **Poincaré Section**:  
+        - *First Simulation*: A **small set of discrete points** reflects the **regular** (periodic) solution.  
+        - *Second Simulation*: If truly chaotic, you’d see a **scattered cloud** of points. However, it may still appear periodic if the parameters don’t sufficiently drive chaos.
 
 4. **Key Takeaways:**
     - The **first** (small-angle) simulation demonstrates how a forced damped pendulum can settle into a **stable periodic** orbit with moderate damping and driving.  
