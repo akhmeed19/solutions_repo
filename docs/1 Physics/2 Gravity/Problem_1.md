@@ -85,7 +85,7 @@ $$
 ### Parameter Influences
 
 - **Orbital Period:**  
-  The equation $T = 2\pi \sqrt{\frac{r^3}{G M}} $ shows that the orbital period increases as the $3/2$ power of the orbital radius.
+  The equation $T = 2\pi \sqrt{\frac{r^3}{G M}}$ shows that the orbital period increases as the $3/2$ power of the orbital radius.
   
 - **Implications for Different Systems:**  
   This relationship applies to any two bodies in orbit around a common central mass (provided the orbiting body's mass is negligible compared to $M$), making it a powerful tool for understanding both satellite orbits and planetary systems.
