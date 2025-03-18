@@ -177,13 +177,11 @@
 <h1 id="investigating-the-dynamics-of-a-forced-damped-pendulum">Investigating the Dynamics of a Forced Damped Pendulum</h1>
 <h2 id="1-introduction">1. Introduction</h2>
 <p>The forced damped pendulum is a classic nonlinear system that exhibits a rich variety of behaviors—from simple periodic oscillations to complex chaotic motion—due to the interplay between damping, restoring forces, and an external periodic drive. By varying parameters such as the damping coefficient, driving amplitude, and driving frequency, one can obtain a diverse set of solutions that model real-world phenomena ranging from energy harvesting to structural vibrations.</p>
-<p>In this document, we:</p>
-<ul>
-<li>Derive the governing differential equation for the forced damped pendulum.</li>
-<li>Analyze the influence of damping, driving amplitude, and driving frequency on the system’s dynamics.</li>
-<li>Discuss practical applications and limitations of the forced damped pendulum model.</li>
-<li>Implement a simulation in Python to visualize the pendulum’s behavior.</li>
-</ul>
+<p>In this document, we:
+- Derive the governing differential equation for the forced damped pendulum.
+- Analyze the influence of damping, driving amplitude, and driving frequency on the system’s dynamics.
+- Discuss practical applications and limitations of the forced damped pendulum model.
+- Implement a simulation in Python to visualize the pendulum’s behavior.</p>
 <hr/>
 <h2 id="2-theoretical-foundation">2. Theoretical Foundation</h2>
 <h3 id="differential-equation">Differential Equation</h3>
@@ -414,7 +412,7 @@ if __name__ == "__main__":
 <ol>
 <li>
 <p><strong>Time Series:</strong> <br/>
-    Shows how <span class="arithmatex">\(\theta(t)\)</span> evolves over time. A nearly sinusoidal plot indicates that the pendulum exhibits stable periodic motion.                                <br/></p>
+    Shows how <span class="arithmatex">\(\theta(t)\)</span> evolves over time. A nearly sinusoidal plot indicates that the pendulum exhibits stable periodic motion.                                <br/><br/></p>
 </li>
 <li>
 <p><strong>Phase Portrait:</strong> <br>
@@ -597,6 +595,51 @@ With this second simulation, I demonstrate how changing parameters (especially l
 </ol>
 </li>
 </ul>
+<h3 id="comparison-of-the-two-simulations">Comparison of the Two Simulations</h3>
+<ol>
+<li><strong>Equations and Approximations:</strong></li>
+<li><strong>First Simulation</strong> uses the <strong>small-angle approximation</strong> <span class="arithmatex">\(\sin(\theta)\approx \theta\)</span>. This linearizes the pendulum’s restoring force, typically yielding <strong>stable, near-harmonic</strong> motion for moderate parameters.</li>
+<li>
+<p><strong>Second Simulation</strong> employs the <strong>full nonlinear</strong> equation <span class="arithmatex">\(\sin(\theta)\)</span>. This allows for <strong>larger amplitude</strong> oscillations and the possibility of <strong>chaotic</strong> regimes under more extreme parameters.</p>
+</li>
+<li>
+<p><strong>Parameter Choices:</strong></p>
+</li>
+<li><strong>First Simulation</strong>:<br>
+<span class="arithmatex">\(\beta=0.25,\; F_D=1.2,\; \Omega=\tfrac{2}{3},\; \text{use\_small\_angle = True}\)</span>.<br>
+     These moderate values produce a <strong>stable periodic</strong> orbit.</br></br></li>
+<li>
+<p><strong>Second Simulation</strong>:<br/>
+<span class="arithmatex">\(\beta=0.2,\; F_D=1.5,\; \Omega=\tfrac{2}{3},\; \text{use\_small\_angle=False}\)</span>.<br/>
+     Lower damping and higher driving force are designed to <strong>push the system</strong> into more <strong>complex</strong> or <strong>chaotic</strong> motion.</p>
+</li>
+<li>
+<p><strong>Observations in the Plots:</strong></p>
+</li>
+<li><strong>Time Series</strong>:  <ul>
+<li><em>First Simulation</em>: A smooth, sinusoidal-like wave indicating <strong>periodic</strong> motion.  </li>
+<li><em>Second Simulation</em>: Potentially more irregular or broader swings if chaos emerges.  </li>
+</ul>
+</li>
+<li><strong>Phase Portrait</strong> <span class="arithmatex">\((\theta\)</span> vs. <span class="arithmatex">\(\dot{\theta}\)</span>):  <ul>
+<li><em>First Simulation</em>: A single <strong>closed loop</strong> consistent with a <strong>periodic</strong> orbit.  </li>
+<li><em>Second Simulation</em>: May fill an area or produce more complicated loops, indicative of <strong>chaos</strong> or <strong>quasiperiodicity</strong> (depending on parameters).  </li>
+</ul>
+</li>
+<li>
+<p><strong>Poincaré Section</strong>:  </p>
+<ul>
+<li><em>First Simulation</em>: A <strong>small set of discrete points</strong> reflects the <strong>regular</strong> (periodic) solution.  </li>
+<li><em>Second Simulation</em>: If truly chaotic, you’d see a <strong>scattered cloud</strong> of points. However, it may still appear periodic if the parameters don’t sufficiently drive chaos.</li>
+</ul>
+</li>
+<li>
+<p><strong>Key Takeaways:</strong></p>
+</li>
+<li>The <strong>first</strong> (small-angle) simulation demonstrates how a forced damped pendulum can settle into a <strong>stable periodic</strong> orbit with moderate damping and driving.  </li>
+<li>The <strong>second</strong> (full nonlinear) simulation attempts to highlight <strong>more extreme</strong> dynamics by reducing damping and increasing the driving force, thereby increasing the likelihood of <strong>chaos</strong>.  </li>
+<li>If you still observe a <strong>periodic</strong> solution in the second simulation, you can <strong>further adjust</strong> parameters (e.g., reduce <span class="arithmatex">\(\beta\)</span> or raise <span class="arithmatex">\(F_D\)</span>) or <strong>extend</strong> the simulation time to reveal chaotic behavior.</li>
+</ol>
 <hr/>
 <h2 id="7-conclusion">7. Conclusion</h2>
 <p>This investigation of the forced damped pendulum has:</p>
