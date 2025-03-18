@@ -387,22 +387,20 @@ Running this script with $(\beta=0.2$), $(F_D=1.5)$, $\Omega=\tfrac{2}{3}$, and 
 
 ### Explanation
 
-1. **Nonlinear Equation**:                  
+  1. **Nonlinear Equation**:                  
     We set `use_small_angle = False` so that $\sin(\theta)$ is used instead of $\theta$. This allows for larger amplitude oscillations and the possibility of chaos.
 
-</br>
 
-2. **Lower Damping, Higher Drive**:
-  - $\beta=0.2$ is smaller than the previous 0.25, so the system loses energy more slowly.  
-  - $F_D=1.5$ is greater than 1.2, delivering more external energy per cycle.  
-  - Together, these changes push the pendulum into a regime where chaotic behavior is more likely.
 
-3. **Longer Time Span**:                                
+  2. **Lower Damping, Higher Drive**:
+    -  $\beta=0.2$ is smaller than the previous 0.25, so the system loses energy more slowly.  
+    - $F_D=1.5$ is greater than 1.2, delivering more external energy per cycle.  
+    - Together, these changes push the pendulum into a regime where chaotic behavior is more likely.
+
+  3. **Longer Time Span**:                                
     We increased `t_span` to (0, 200) to observe the long-term evolution. Chaos sometimes takes a while to emerge or settle into an attractor.
 
-</br>
-
-4. **Potential Observations**:     
+  4. **Potential Observations**:     
     - **If** the motion is chaotic, the phase portrait and Poincaré section won’t settle into a simple loop or small set of points.  
     - You may see a scattered or more “filled-in” region in phase space.
 
