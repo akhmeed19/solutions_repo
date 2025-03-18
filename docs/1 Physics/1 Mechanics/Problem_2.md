@@ -257,19 +257,19 @@ Running this script with $(\beta=0.25)$, $(F_D=1.2)$, $(\Omega=2/3)$, and `use_s
 
 ### Explanation
 1. **Time Series:**         
-    Shows how $\theta(t)$ evolves over time. A nearly sinusoidal plot indicates that the pendulum exhibits stable periodic motion.                                <br><br>
+    Shows how $\theta(t)$ evolves over time. A nearly sinusoidal plot indicates that the pendulum exhibits stable periodic motion.                                <br>
 
 2. **Phase Portrait:**                                
-    Plots $\theta$ versus $\dot{\theta}$. A closed loop in $\theta$–$\dot{\theta}$ space indicates a stable periodic orbit.                                 <br><br>
+    Plots $\theta$ versus $\dot{\theta}$. A closed loop in $\theta$–$\dot{\theta}$ space indicates a stable periodic orbit.                                 <br>
 
 3. **Poincaré Section:**                          
-   Samples the phase space at intervals of the driving period. A small set of discrete points indicates that the system is in regular, periodic motion rather than chaotic behavior.                                <br><br>
+   Samples the phase space at intervals of the driving period. A small set of discrete points indicates that the system is in regular, periodic motion rather than chaotic behavior.                                <br>
 
 4. **Small-Angle Approximation:**                       
-   Since `use_small_angle = True`, we use $\sin(\theta) \approx \theta$. This typically yields simpler, near-harmonic motion for moderate parameter values.                                 <br><br>
+   Since `use_small_angle = True`, we use $\sin(\theta) \approx \theta$. This typically yields simpler, near-harmonic motion for moderate parameter values.                                 <br>
 
 5. **Stable Periodic Orbit:**                            
-    Under $(\beta = 0.25)$, $(F_D = 1.2)$, and $(\Omega = \tfrac{2}{3})$, the pendulum exhibits a stable periodic solution—evident from the sinusoidal time series, single-loop phase portrait, and a small set of points in the Poincaré section.                              <br><br>
+    Under $(\beta = 0.25)$, $(F_D = 1.2)$, and $(\Omega = \tfrac{2}{3})$, the pendulum exhibits a stable periodic solution—evident from the sinusoidal time series, single-loop phase portrait, and a small set of points in the Poincaré section.                              <br>
 
 6. **Potential Extensions:**                                          
     - Set `use_small_angle = False` to use the **full nonlinear** equation $\sin(\theta)$, which can yield chaotic solutions for certain parameter ranges.
