@@ -544,33 +544,28 @@ if __name__ == "__main__":
 </ol>
 <h3 id="explanation_1">Explanation</h3>
 <ol>
-<li><strong>Nonlinear Equation</strong>:  </li>
-</ol>
-<p>We set <code>use_small_angle = False</code> so that <span class="arithmatex">\(\sin(\theta)\)</span> is used instead of <span class="arithmatex">\(\theta\)</span>. This allows for larger amplitude oscillations and the possibility of chaos.</p>
+<li>
+<p><strong>Nonlinear Equation</strong>:                <br/>
+We set <code>use_small_angle = False</code> so that <span class="arithmatex">\(\sin(\theta)\)</span> is used instead of <span class="arithmatex">\(\theta\)</span>. This allows for larger amplitude oscillations and the possibility of chaos.</p>
+</li>
+<li>
+<p><strong>Lower Damping, Higher Drive</strong>:                                  </p>
 <ol>
-<li>
-<p><strong>Lower Damping, Higher Drive</strong>:                                   </p>
-</li>
-<li>
-<p><span class="arithmatex">\(\beta=0.2\)</span> is smaller than the previous 0.25, so the system loses energy more slowly.  </p>
-</li>
+<li><span class="arithmatex">\(\beta=0.2\)</span> is smaller than the previous 0.25, so the system loses energy more slowly.  </li>
 <li><span class="arithmatex">\(F_D=1.5\)</span> is greater than 1.2, delivering more external energy per cycle.  </li>
-<li>
-<p>Together, these changes push the pendulum into a regime where chaotic behavior is more likely.</p>
-</li>
-<li>
-<p><strong>Longer Time Span</strong>:                                    </p>
-</li>
+<li>Together, these changes push the pendulum into a regime where chaotic behavior is more likely.</li>
 </ol>
-<p>We increased <code>t_span</code> to (0, 200) to observe the long-term evolution. Chaos sometimes takes a while to emerge or settle into an attractor.</p>
+</li>
+<li>
+<p><strong>Longer Time Span</strong>:                                    We increased <code>t_span</code> to (0, 200) to observe the long-term evolution. Chaos sometimes takes a while to emerge or settle into an attractor.</p>
+</li>
+<li>
+<p><strong>Potential Observations</strong>:                           </p>
 <ol>
-<li>
-<p><strong>Potential Observations</strong>:                            </p>
-</li>
-<li>
-<p><strong>If</strong> the motion is chaotic, the phase portrait and Poincaré section won’t settle into a simple loop or small set of points.  </p>
-</li>
+<li><strong>If</strong> the motion is chaotic, the phase portrait and Poincaré section won’t settle into a simple loop or small set of points.  </li>
 <li>You may see a scattered or more “filled-in” region in phase space.</li>
+</ol>
+</li>
 </ol>
 <p>With this second simulation, I demonstrate how changing parameters (especially lowering damping and increasing driving amplitude) can lead from stable periodic motion to more <strong>complex or chaotic</strong> behavior in the forced damped pendulum.</p>
 <hr/>
