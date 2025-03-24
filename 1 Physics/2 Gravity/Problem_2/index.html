@@ -187,50 +187,50 @@
 <hr/>
 <h2 id="detailed-physics-and-derivations">Detailed Physics and Derivations</h2>
 <h3 id="1-first-cosmic-velocity-v1-orbital-mechanics">1. First Cosmic Velocity (v₁) – Orbital Mechanics</h3>
-<p>For a celestial body with mass <span class="arithmatex">\( M \)</span> and radius <span class="arithmatex">\( R \)</span>, the first cosmic velocity is derived by equating the gravitational force to the centripetal force required for a circular orbit:</p>
-<p>[
+<p>For a celestial body with mass <span class="arithmatex">\((M)\)</span> and radius <span class="arithmatex">\((R)\)</span>, the first cosmic velocity is derived by equating the gravitational force to the centripetal force required for a circular orbit:</p>
+<div class="arithmatex">\[
 \frac{GM}{R^2} = \frac{v_1^2}{R}
-]
-[
+$$
+$$
 \Rightarrow v_1 = \sqrt{\frac{GM}{R}}
-]</p>
+\]</div>
 <ul>
 <li><strong>Physics Insight</strong>:<br/>
   This velocity decreases with increasing orbital radius as the gravitational pull weakens. For non-circular (elliptical) orbits, the vis-viva equation generalizes the orbital speed:
-  [
+  $$
   v = \sqrt{GM\left(\frac{2}{r} - \frac{1}{a}\right)}
-  ]
-  where <span class="arithmatex">\( a \)</span> is the semi-major axis. In a low circular orbit, <span class="arithmatex">\( r \approx R \)</span> and <span class="arithmatex">\( a \approx R \)</span>, so <span class="arithmatex">\( v \approx v_1 \)</span>.</li>
+  $$
+  where <span class="arithmatex">\(a\)</span> is the semi-major axis. In a low circular orbit, <span class="arithmatex">\(r \approx R\)</span> and <span class="arithmatex">\(a \approx R\)</span>, so <span class="arithmatex">\(v \approx v_1\)</span>.</li>
 </ul>
 <h3 id="2-second-cosmic-velocity-v2-escape-energy">2. Second Cosmic Velocity (v₂) – Escape Energy</h3>
 <p>Escape velocity is determined by setting the total mechanical energy (kinetic plus potential) to zero so that the object reaches infinity with no residual speed:</p>
-<p>[
+<div class="arithmatex">\[
 \frac{1}{2}v_2^2 - \frac{GM}{R} = 0
-]
-[
+$$
+$$
 \Rightarrow v_2 = \sqrt{\frac{2GM}{R}} = \sqrt{2}\, v_1
-]</p>
+\]</div>
 <ul>
 <li><strong>Physics Insight</strong>:<br/>
-  The factor of <span class="arithmatex">\(\sqrt{2}\)</span> signifies the extra kinetic energy required to overcome the gravitational potential well. For <span class="arithmatex">\( v &lt; v_2 \)</span>, the object remains bound (elliptical orbit), while for <span class="arithmatex">\( v \ge v_2 \)</span>, the trajectory becomes parabolic or hyperbolic.</li>
+  The factor of <span class="arithmatex">\(\sqrt{2}\)</span> signifies the extra kinetic energy required to overcome the gravitational potential well. For <span class="arithmatex">\(v &lt; v_2\)</span>, the object remains bound (elliptical orbit), while for <span class="arithmatex">\(v \ge v_2\)</span>, the trajectory becomes parabolic or hyperbolic.</li>
 </ul>
 <h3 id="3-third-cosmic-velocity-v3-stellar-escape">3. Third Cosmic Velocity (v₃) – Stellar Escape</h3>
-<p>Escaping a star’s gravitational field from a planet involves combining the planet’s escape velocity with the dynamics of the star’s gravity. Consider a planet at orbital radius <span class="arithmatex">\( r \)</span> from its star:
+<p>Escaping a star’s gravitational field from a planet involves combining the planet’s escape velocity with the dynamics of the star’s gravity. Consider a planet at orbital radius <span class="arithmatex">\(r\)</span> from its star:
 - The orbital speed of the planet is:
-  [
+  $$
   v_{\text{orbit}} = \sqrt{\frac{GM_\odot}{r}}
-  ]
+  $$
 - The escape speed from the star at that distance is:
-  [
+  $$
   v_{\text{esc,Sun}} = \sqrt{\frac{2GM_\odot}{r}}
-  ]</p>
+  $$</p>
 <p>A spacecraft leaving the planet benefits from the planet’s orbital speed. Hence, the additional speed needed relative to the star is given by:
-[
+$$
 v_3 = v_{\text{esc,Sun}} - v_{\text{orbit}} = \sqrt{\frac{GM_\odot}{r}}\,(\sqrt{2} - 1)
-]</p>
+$$</p>
 <ul>
 <li><strong>Physics Insight</strong>:<br/>
-  The subtraction of <span class="arithmatex">\( v_{\text{orbit}} \)</span> reflects that the planet’s motion already contributes to the required energy for stellar escape. This makes <span class="arithmatex">\( v_3 \)</span> lower than <span class="arithmatex">\( v_{\text{esc,Sun}} \)</span> and highlights why gravitational assists (e.g., flybys of massive planets) can further reduce the propulsion needed.</li>
+  The subtraction of <span class="arithmatex">\(v_{\text{orbit}}\)</span> reflects that the planet’s motion already contributes to the required energy for stellar escape. This makes <span class="arithmatex">\(v_3\)</span> lower than <span class="arithmatex">\(v_{\text{esc,Sun}}\)</span> and highlights why gravitational assists (e.g., flybys of massive planets) can further reduce the propulsion needed.</li>
 </ul>
 <h3 id="additional-effects">Additional Effects</h3>
 <ol>
