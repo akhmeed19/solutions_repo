@@ -195,6 +195,33 @@ ax.legend()
 
 plt.show()
 ```
+---
+## Simulation output
+
+![Cosmic Velocities Simulation Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/gravity%20problem%202%20cosmic%20velocities.png)
+
+## Explanation
+
+The above image is the result of the Python simulation, which visually compares the three cosmic velocities—first, second, and third—for Earth, Mars, and Jupiter. Each group of bars represents one celestial body and illustrates the following:
+
+- **First Cosmic Velocity (v₁):**  
+  This is the orbital speed required for a spacecraft to maintain a low, circular orbit near the surface. It reflects the balance between gravitational pull and the centripetal force needed for circular motion.
+
+- **Second Cosmic Velocity (v₂):**  
+  Equal to √2 times the first cosmic velocity, this is the escape speed needed to overcome the gravitational binding of the planet. It indicates the extra kinetic energy required to move an object from the planet’s gravitational well to infinity with zero residual speed.
+
+- **Third Cosmic Velocity (v₃):**  
+  This represents the additional speed necessary for a spacecraft, once it has escaped the planet’s gravity, to overcome the Sun’s gravitational pull. The calculation takes into account the planet’s orbital velocity around the Sun, thereby reducing the overall speed requirement for escaping the solar system.
+
+### Key Insights
+
+- **Comparative Dynamics:**  
+  The graph highlights how each celestial body's gravitational characteristics (mass and radius) affect the required velocities. For instance, although Earth’s first cosmic velocity is lower than that of Jupiter, the scaling of the second cosmic velocity remains consistent (√2 factor), and the third cosmic velocity is significantly influenced by the body's orbital dynamics around the Sun.
+
+- **Mission Planning:**  
+  Understanding these velocities is crucial for designing efficient trajectories for satellites, interplanetary transfers, and potential interstellar missions. The simulation underlines the benefits of leveraging a planet’s orbital speed (via gravitational assists) to reduce the additional thrust needed to escape the star’s gravity.
+
+This comprehensive visualization not only reinforces the theoretical derivations provided earlier but also offers practical insights into how these velocities impact space exploration and mission design.
 
 ---
 
