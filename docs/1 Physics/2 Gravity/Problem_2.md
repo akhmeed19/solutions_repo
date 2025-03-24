@@ -28,9 +28,7 @@ For a celestial body with mass $(M)$ and radius $(R)$, the first cosmic velocity
 
 $$
 \frac{GM}{R^2} = \frac{v_1^2}{R}
-$$
-$$\Rightarrow $$
-$$
+\Rightarrow 
 v_1 = \sqrt{\frac{GM}{R}}
 $$
 
