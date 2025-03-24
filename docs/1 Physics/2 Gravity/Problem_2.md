@@ -92,23 +92,23 @@ $$
 
 For the simulations, we use the following parameters:
 
--  **Earth**:                               
+-  **Earth:**                               
     - Mass: $5.972 \times 10^{24}$ $kg$  
     - Radius: $6.371 \times 10^{6}$ $m$  
     - Orbital radius: $1.496 \times 10^{11}$ $m$
 
-- **Mars**:                                 
+- **Mars:**                                 
     - Mass: $6.4171 \times 10^{23}$ $kg$  
     - Radius: $3.3895 \times 10^{6}$ $m$  
     - Orbital radius: $2.279 \times 10^{11}$ $m$
 
-- **Jupiter**:                              
+- **Jupiter:**                              
     - Mass: $1.898 \times 10^{27}$ $kg$  
     - Radius: $6.9911 \times 10^{7}$ $m$  
     - Orbital radius: $7.785 \times 10^{11}$ $m$
 
-For the Sun:                                     
-   - Mass: $1.989 \times 10^{30}$ $kg$
+- **For the Sun:**                           
+    - Mass: $1.989 \times 10^{30}$ $kg$
 
 ---
 
