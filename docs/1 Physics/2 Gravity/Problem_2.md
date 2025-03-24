@@ -103,12 +103,12 @@ For the simulations, we use the following parameters:
     - Orbital radius: $2.279 \times 10^{11}$ $m$
 
 - **Jupiter**:                              
-   - Mass: $1.898 \times 10^{27}$ $kg$  
-   - Radius: $6.9911 \times 10^{7}$ $m$  
-   - Orbital radius: $7.785 \times 10^{11}$ $m$
+    - Mass: $1.898 \times 10^{27}$ $kg$  
+    - Radius: $6.9911 \times 10^{7}$ $m$  
+    - Orbital radius: $7.785 \times 10^{11}$ $m$
 
-For the Sun:                              
-   - Mass: $1.989 \times 10^{30}$ $kg$
+For the Sun: 
+- Mass: $1.989 \times 10^{30}$ $kg$
 
 ---
 
