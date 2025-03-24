@@ -208,10 +208,10 @@ The simulation output is presented as a bar chart that compares the three key co
 - **X-axis**: The different celestial bodies (Earth, Mars, Jupiter).
 - **Y-axis**: The computed velocities in km/s.
 
-For each celestial body, three sets of bars are displayed:
-- **First Cosmic Velocity (v₁)**: Indicates the orbital speed necessary for a stable, circular orbit near the body's surface.
-- **Second Cosmic Velocity (v₂)**: Represents the escape speed required to overcome the gravitational binding of the body. Note that this value is always $\sqrt{2}$ times the first cosmic velocity.
-- **Third Cosmic Velocity (v₃)**: Shows the additional velocity needed (beyond the planet’s orbital speed) to escape the gravitational influence of the Sun.
+For each celestial body, three sets of bars are displayed:                              
+   - **First Cosmic Velocity (v₁)**: Indicates the orbital speed necessary for a stable, circular orbit near the body's surface.                                
+   - **Second Cosmic Velocity (v₂)**: Represents the escape speed required to overcome the gravitational binding of the body. Note that this value is always $\sqrt{2}$ times the first cosmic velocity.                                  
+   - **Third Cosmic Velocity (v₃)**: Shows the additional velocity needed (beyond the planet’s orbital speed) to escape the gravitational influence of the Sun.
 
 This visualization clearly illustrates the differences between the velocities for various celestial bodies and highlights the impact of their mass, size, and orbital distances on mission planning. The reduced third cosmic velocity (compared to the solar escape speed) underscores the advantage provided by a planet’s orbital motion in reducing the energy requirements for interplanetary travel.
 
