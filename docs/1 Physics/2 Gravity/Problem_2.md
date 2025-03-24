@@ -77,10 +77,10 @@ $$
 
 1. **Atmospheric Drag**:  
    At low altitudes, air resistance reduces the effective velocity. It is modeled by:
-   \[
+   $
    F_{\text{drag}} = \frac{1}{2}\rho v^2 C_d A
-   \]
-   where \(\rho\) is air density, \(C_d\) is the drag coefficient, and \(A\) is the cross-sectional area.
+   $
+   where $(\rho)$ is air density, $(C_d)$ is the drag coefficient, and $(A)$ is the cross-sectional area.
 
 2. **Gravitational Assists**:  
    Maneuvers near massive bodies (e.g., Jupiter) can boost a spacecraft’s velocity via the Oberth effect, where applying thrust at high speeds in deep gravity wells yields maximum energy gain.
@@ -94,10 +94,10 @@ $$
 
 For the simulations, we use the following parameters:
 
-- **Earth**:  
-  - Mass: \(5.972 \times 10^{24}\) kg  
-  - Radius: \(6.371 \times 10^{6}\) m  
-  - Orbital radius: \(1.496 \times 10^{11}\) m
+-  **Earth**:                               
+    - Mass: $5.972 \times 10^{24}$ $kg$  
+    - Radius: $6.371 \times 10^{6}$ $m$  
+    - Orbital radius: $1.496 \times 10^{11}$ $m$
 
 - **Mars**:  
   - Mass: \(6.4171 \times 10^{23}\) kg  
