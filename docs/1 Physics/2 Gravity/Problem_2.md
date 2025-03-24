@@ -24,55 +24,55 @@ Space missions require a thorough grasp of the velocities necessary to achieve v
 
 ### 1. First Cosmic Velocity (v₁) – Orbital Mechanics
 
-For a celestial body with mass \( M \) and radius \( R \), the first cosmic velocity is derived by equating the gravitational force to the centripetal force required for a circular orbit:
+For a celestial body with mass $(M)$ and radius $(R)$, the first cosmic velocity is derived by equating the gravitational force to the centripetal force required for a circular orbit:
 
-\[
+$$
 \frac{GM}{R^2} = \frac{v_1^2}{R}
-\]
-\[
+$$
+$$
 \Rightarrow v_1 = \sqrt{\frac{GM}{R}}
-\]
+$$
 
 - **Physics Insight**:  
   This velocity decreases with increasing orbital radius as the gravitational pull weakens. For non-circular (elliptical) orbits, the vis-viva equation generalizes the orbital speed:
-  \[
+  $$
   v = \sqrt{GM\left(\frac{2}{r} - \frac{1}{a}\right)}
-  \]
-  where \( a \) is the semi-major axis. In a low circular orbit, \( r \approx R \) and \( a \approx R \), so \( v \approx v_1 \).
+  $$
+  where $a$ is the semi-major axis. In a low circular orbit, $r \approx R$ and $a \approx R$, so $v \approx v_1$.
 
 ### 2. Second Cosmic Velocity (v₂) – Escape Energy
 
 Escape velocity is determined by setting the total mechanical energy (kinetic plus potential) to zero so that the object reaches infinity with no residual speed:
 
-\[
+$$
 \frac{1}{2}v_2^2 - \frac{GM}{R} = 0
-\]
-\[
+$$
+$$
 \Rightarrow v_2 = \sqrt{\frac{2GM}{R}} = \sqrt{2}\, v_1
-\]
+$$
 
 - **Physics Insight**:  
-  The factor of \(\sqrt{2}\) signifies the extra kinetic energy required to overcome the gravitational potential well. For \( v < v_2 \), the object remains bound (elliptical orbit), while for \( v \ge v_2 \), the trajectory becomes parabolic or hyperbolic.
+  The factor of $\sqrt{2}$ signifies the extra kinetic energy required to overcome the gravitational potential well. For $v < v_2$, the object remains bound (elliptical orbit), while for $v \ge v_2$, the trajectory becomes parabolic or hyperbolic.
 
 ### 3. Third Cosmic Velocity (v₃) – Stellar Escape
 
-Escaping a star’s gravitational field from a planet involves combining the planet’s escape velocity with the dynamics of the star’s gravity. Consider a planet at orbital radius \( r \) from its star:
+Escaping a star’s gravitational field from a planet involves combining the planet’s escape velocity with the dynamics of the star’s gravity. Consider a planet at orbital radius $r$ from its star:
 - The orbital speed of the planet is:
-  \[
+  $$
   v_{\text{orbit}} = \sqrt{\frac{GM_\odot}{r}}
-  \]
+  $$
 - The escape speed from the star at that distance is:
-  \[
+  $$
   v_{\text{esc,Sun}} = \sqrt{\frac{2GM_\odot}{r}}
-  \]
+  $$
   
 A spacecraft leaving the planet benefits from the planet’s orbital speed. Hence, the additional speed needed relative to the star is given by:
-\[
+$$
 v_3 = v_{\text{esc,Sun}} - v_{\text{orbit}} = \sqrt{\frac{GM_\odot}{r}}\,(\sqrt{2} - 1)
-\]
+$$
 
 - **Physics Insight**:  
-  The subtraction of \( v_{\text{orbit}} \) reflects that the planet’s motion already contributes to the required energy for stellar escape. This makes \( v_3 \) lower than \( v_{\text{esc,Sun}} \) and highlights why gravitational assists (e.g., flybys of massive planets) can further reduce the propulsion needed.
+  The subtraction of $v_{\text{orbit}}$ reflects that the planet’s motion already contributes to the required energy for stellar escape. This makes $v_3$ lower than $v_{\text{esc,Sun}}$ and highlights why gravitational assists (e.g., flybys of massive planets) can further reduce the propulsion needed.
 
 ### Additional Effects
 
