@@ -218,11 +218,11 @@ This visualization clearly illustrates the differences between the velocities fo
 **Purpose**: Demonstrate how cosmic velocities are applied in interplanetary travel by simulating the most fuel-efficient path between Earth and Mars.
 
 **Physics Link**:  
-- Uses the **vis-viva equation** (from your derivations) to calculate transfer orbit velocities.
-- Shows how **partial escape velocity** (not full \(v_2\)) is sufficient when leveraging the Sun’s gravity.
+- Uses the **vis-viva equation** (from the derivations) to calculate transfer orbit velocities.  
+- Shows how a **partial escape velocity** (not full \(v_2\)) is sufficient when leveraging the Sun’s gravity.
 
 **How It Differs from the Previous Simulation**:  
-- Your bar chart compared *theoretical thresholds* (\(v_1\), \(v_2\), \(v_3\)).
+- The bar chart compares *theoretical thresholds* (\(v_1\), \(v_2\), \(v_3\)).  
 - This simulation models a *practical application*: computing the delta‑v needed for a Hohmann transfer between Earth and Mars, and visualizing the transfer trajectory.
 
 ```python
@@ -278,7 +278,7 @@ ax.plot(r_mars * np.cos(theta), r_mars * np.sin(theta), label="Mars Orbit")
 # Calculate Hohmann transfer ellipse
 eccentricity = (r_mars - r_earth) / (r_mars + r_earth)
 theta_transfer = np.linspace(0, np.pi, 100)
-r_transfer = (r_earth + r_mars)/2 * (1 - eccentricity**2) / (1 + eccentricity * np.cos(theta_transfer))
+r_transfer = (r_earth + r_mars) / 2 * (1 - eccentricity**2) / (1 + eccentricity * np.cos(theta_transfer))
 x_transfer = r_transfer * np.cos(theta_transfer)
 y_transfer = r_transfer * np.sin(theta_transfer)
 ax.plot(x_transfer, y_transfer, 'r--', label="Hohmann Transfer")
@@ -301,9 +301,7 @@ Total Δv: 5.59 km/s
 Transfer Time: 259 days
 ```
 
-![Hohmann Transfer Plot](https://i.imgur.com/XYQZ3Lk.png)
-
----
+![Hohmann Transfer Plot](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/HohmannTransferGravity2.png)
 
 ### Explanation of the Hohmann Transfer Simulation
 
@@ -319,7 +317,7 @@ Transfer Time: 259 days
 - Demonstrates that only a partial delta‑v (compared to full escape velocities) is necessary for interplanetary transfers.
 - Connects the theoretical cosmic velocity concepts with practical mission design, illustrating how energy-efficient transfers are achieved in space exploration.
 
-This section integrates a practical Hohmann transfer simulation with your cosmic velocities analysis, providing clear insight into how these theoretical concepts are applied to real-world space mission planning.
+This section integrates a practical Hohmann transfer simulation with the cosmic velocities analysis, providing clear insight into how these theoretical concepts are applied to real-world space mission planning.
 
 ---
 ## Discussion and Relevance
