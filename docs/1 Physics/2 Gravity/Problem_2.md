@@ -213,6 +213,115 @@ This visualization clearly illustrates the differences between the velocities fo
 
 ---
 
+### 2. Hohmann Transfer Simulation
+
+**Purpose**: Demonstrate how cosmic velocities are applied in interplanetary travel by simulating the most fuel-efficient path between Earth and Mars.
+
+**Physics Link**:  
+- Uses the **vis-viva equation** (from your derivations) to calculate transfer orbit velocities.
+- Shows how **partial escape velocity** (not full \(v_2\)) is sufficient when leveraging the Sun’s gravity.
+
+**How It Differs from the Previous Simulation**:  
+- Your bar chart compared *theoretical thresholds* (\(v_1\), \(v_2\), \(v_3\)).
+- This simulation models a *practical application*: computing the delta‑v needed for a Hohmann transfer between Earth and Mars, and visualizing the transfer trajectory.
+
+```python
+import numpy as np
+
+def hohmann_transfer(r1, r2, M_central):
+    """
+    Compute velocities and delta-v for a Hohmann transfer between two circular orbits.
+    Args:
+        r1 (float): Initial orbital radius (m).
+        r2 (float): Target orbital radius (m).
+        M_central (float): Mass of the central body (kg).
+    Returns:
+        dict: Delta-v values and transfer parameters.
+    """
+    # Circular orbit velocities
+    v1 = np.sqrt(G * M_central / r1)  # Initial orbit (Earth)
+    v2 = np.sqrt(G * M_central / r2)  # Target orbit (Mars)
+    
+    # Transfer ellipse velocities (at perihelion and aphelion)
+    a_transfer = (r1 + r2) / 2  # Semi-major axis of the transfer ellipse
+    v_peri = np.sqrt(2 * G * M_central * (1/r1 - 1/(2*a_transfer)))  # Velocity at departure burn
+    v_aphel = np.sqrt(2 * G * M_central * (1/r2 - 1/(2*a_transfer)))   # Velocity at arrival burn
+    
+    # Delta-v maneuvers
+    delta_v1 = v_peri - v1  # Burn to leave Earth orbit
+    delta_v2 = v2 - v_aphel  # Burn to match Mars orbit
+    
+    return {
+        'delta_v1': delta_v1,
+        'delta_v2': delta_v2,
+        'total_delta_v': delta_v1 + delta_v2,
+        'transfer_time': np.pi * np.sqrt(a_transfer**3 / (G * M_central))  # Using Kepler's third law
+    }
+
+# Earth to Mars transfer parameters
+r_earth = 1.496e11  # Earth's orbital radius (m)
+r_mars = 2.279e11   # Mars' orbital radius (m)
+transfer = hohmann_transfer(r_earth, r_mars, M_sun)
+
+print("Hohmann Transfer Earth → Mars:")
+print(f"Delta-v1: {transfer['delta_v1']/1000:.2f} km/s (Departure burn)")
+print(f"Delta-v2: {transfer['delta_v2']/1000:.2f} km/s (Arrival burn)")
+print(f"Total Δv: {transfer['total_delta_v']/1000:.2f} km/s")
+print(f"Transfer Time: {transfer['transfer_time'] / (60*60*24):.0f} days")
+
+# Plot the transfer trajectory
+theta = np.linspace(0, 2*np.pi, 100)
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.plot(r_earth * np.cos(theta), r_earth * np.sin(theta), label="Earth Orbit")
+ax.plot(r_mars * np.cos(theta), r_mars * np.sin(theta), label="Mars Orbit")
+
+# Calculate Hohmann transfer ellipse
+eccentricity = (r_mars - r_earth) / (r_mars + r_earth)
+theta_transfer = np.linspace(0, np.pi, 100)
+r_transfer = (r_earth + r_mars)/2 * (1 - eccentricity**2) / (1 + eccentricity * np.cos(theta_transfer))
+x_transfer = r_transfer * np.cos(theta_transfer)
+y_transfer = r_transfer * np.sin(theta_transfer)
+ax.plot(x_transfer, y_transfer, 'r--', label="Hohmann Transfer")
+
+ax.set_title("Hohmann Transfer: Earth to Mars")
+ax.set_xlabel("Distance (m)")
+ax.set_ylabel("Distance (m)")
+ax.legend()
+ax.grid()
+plt.axis('equal')
+plt.show()
+```
+
+**Output**:
+```
+Hohmann Transfer Earth → Mars:
+Delta-v1: 2.94 km/s (Departure burn)
+Delta-v2: 2.65 km/s (Arrival burn)
+Total Δv: 5.59 km/s
+Transfer Time: 259 days
+```
+
+![Hohmann Transfer Plot](https://i.imgur.com/XYQZ3Lk.png)
+
+---
+
+### Explanation of the Hohmann Transfer Simulation
+
+**Relationship to Cosmic Velocities**:  
+1. **First Cosmic Velocity (\(v_1\))**:  
+   The spacecraft starts in Earth’s orbit, moving at its heliocentric speed.
+2. **Second Cosmic Velocity (\(v_2\))**:  
+   The departure burn (\(\Delta v_1\)) is less than Earth's full escape speed because the transfer only requires leaving Earth's sphere of influence.
+3. **Third Cosmic Velocity (\(v_3\))**:  
+   Instead of achieving full solar escape speed, the spacecraft performs an arrival burn (\(\Delta v_2\)) to match Mars' orbital speed.
+
+**Why This Matters**:  
+- Demonstrates that only a partial delta‑v (compared to full escape velocities) is necessary for interplanetary transfers.
+- Connects the theoretical cosmic velocity concepts with practical mission design, illustrating how energy-efficient transfers are achieved in space exploration.
+
+This section integrates a practical Hohmann transfer simulation with your cosmic velocities analysis, providing clear insight into how these theoretical concepts are applied to real-world space mission planning.
+
+---
 ## Discussion and Relevance
 
 - **First Cosmic Velocity:**  
