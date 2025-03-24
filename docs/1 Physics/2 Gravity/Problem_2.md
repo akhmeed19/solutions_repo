@@ -28,7 +28,7 @@ For a celestial body with mass $(M)$ and radius $(R)$, the first cosmic velocity
 
 $$
 \frac{GM}{R^2} = \frac{v_1^2}{R}
-\Rightarrow 
+\Rightarrow
 v_1 = \sqrt{\frac{GM}{R}}
 $$
 
@@ -46,9 +46,8 @@ Escape velocity is determined by setting the total mechanical energy (kinetic pl
 
 $$
 \frac{1}{2}v_2^2 - \frac{GM}{R} = 0
-$$
-$$
-\Rightarrow v_2 = \sqrt{\frac{2GM}{R}} = \sqrt{2}\, v_1
+\Rightarrow
+v_2 = \sqrt{\frac{2GM}{R}} = \sqrt{2}\, v_1
 $$
 
 - **Physics Insight**:  
