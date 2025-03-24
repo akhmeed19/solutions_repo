@@ -1,5 +1,5 @@
 # Problem 2
-
+---
 # Escape Velocities and Cosmic Velocities: Analysis and Simulation
 
 This solution presents a comprehensive explanation of the three key cosmic velocities—first, second, and third—along with their physical significance, detailed derivations, and simulations for Earth, Mars, and Jupiter. The content covers the theoretical background, advanced physics insights, computational implementation, and relevance to space exploration.
