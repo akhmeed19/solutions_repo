@@ -28,9 +28,10 @@ For a celestial body with mass $(M)$ and radius $(R)$, the first cosmic velocity
 
 $$
 \frac{GM}{R^2} = \frac{v_1^2}{R}
-
-\Rightarrow v_1 = \sqrt{\frac{GM}{R}}
+\Rightarrow 
+v_1 = \sqrt{\frac{GM}{R}}
 $$
+
 
 - **Physics Insight**:  
   This velocity decreases with increasing orbital radius as the gravitational pull weakens. For non-circular (elliptical) orbits, the vis-viva equation generalizes the orbital speed:
