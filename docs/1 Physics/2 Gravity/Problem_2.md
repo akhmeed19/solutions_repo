@@ -378,6 +378,114 @@ The black $“X”$ markers at the nominal mass (mass factor = 1.0) indicate the
 Overall, this exercise reveals the direct relationship between planetary mass and the speeds needed for orbiting and escaping. It provides insight into how sensitive these speeds are to changes in $GM$, even though in practice a planet’s mass does not change.
 
 ---
+### 3. Additional Simulation: Nominal Cosmic Velocities for Earth
+
+**Purpose:**  
+This simulation visualizes Earth's nominal (actual) cosmic velocities using vector arrows. Each arrow represents a different key velocity computed at Earth’s real mass and orbital parameters.
+
+Below is the code and the resulting image, followed by a brief explanation.
+
+---
+
+```python
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Constants
+G = 6.67430e-11        # Gravitational constant (m^3 kg^-1 s^-2)
+M_sun = 1.989e30       # Mass of the Sun (kg)
+
+# Earth nominal parameters
+mass = 5.972e24        # kg
+radius = 6.371e6       # m
+orbital_radius = 1.496e11  # m
+
+# Compute nominal velocities for Earth
+v1 = math.sqrt(G * mass / radius)          # Orbital velocity at Earth's surface [m/s]
+v2 = math.sqrt(2 * G * mass / radius)      # Escape velocity from Earth's surface [m/s]
+v_orbit = math.sqrt(G * M_sun / orbital_radius)     # Earth's orbital speed around the Sun [m/s]
+v_esc_sun = math.sqrt(2 * G * M_sun / orbital_radius)  # Solar escape speed at Earth’s orbit [m/s]
+v3 = v_esc_sun - v_orbit                   # Additional speed needed for solar escape [m/s]
+
+# Convert to km/s
+v1_km = v1 / 1000
+v2_km = v2 / 1000
+v_orbit_km = v_orbit / 1000
+v_esc_sun_km = v_esc_sun / 1000
+v3_km = v3 / 1000
+
+# We give each velocity a unique color and an angle for clarity
+velocities = [
+    {'label': 'v₁ (Orbital)', 'speed': v1_km,       'angle': 0,   'color': 'C0'},
+    {'label': 'v₂ (Escape)',  'speed': v2_km,       'angle': 45,  'color': 'C1'},
+    {'label': 'v_orbit',      'speed': v_orbit_km,  'angle': 90,  'color': 'C2'},
+    {'label': 'v_esc,Sun',    'speed': v_esc_sun_km,'angle': 135, 'color': 'C3'},
+    {'label': 'v₃',           'speed': v3_km,       'angle': 180, 'color': 'C4'}
+]
+
+plt.figure(figsize=(8,8))
+origin = (0,0)
+
+# Plot each velocity as an arrow and label it near the arrow tip
+for vel in velocities:
+    label = vel['label']
+    speed = vel['speed']
+    angle_deg = vel['angle']
+    color = vel['color']
+    
+    angle = np.deg2rad(angle_deg)
+    dx = speed * np.cos(angle)
+    dy = speed * np.sin(angle)
+    
+    # Draw the arrow
+    plt.arrow(origin[0], origin[1], dx, dy,
+              head_width=0.5, head_length=1,
+              length_includes_head=True,
+              color=color, alpha=0.8, label=label)
+    
+    # Place text near the arrow tip (a bit beyond the arrow head)
+    text_x = dx * 1.05
+    text_y = dy * 1.05
+    plt.text(text_x, text_y, label, fontsize=10, color=color,
+             ha='center', va='center')
+
+# Rebuild the legend from unique labels (optional)
+handles, labels = plt.gca().get_legend_handles_labels()
+by_label = dict(zip(labels, handles))
+plt.legend(by_label.values(), by_label.keys())
+
+max_speed = max(vel['speed'] for vel in velocities)
+plt.xlim(-max_speed - 5, max_speed + 5)
+plt.ylim(-max_speed - 5, max_speed + 5)
+
+plt.xlabel('Velocity component (km/s)')
+plt.ylabel('Velocity component (km/s)')
+plt.title('Nominal Cosmic Velocities for Earth')
+plt.grid(True)
+plt.show()
+```
+
+---
+
+#### Simulation Output
+
+![Nominal Cosmic Velocities for Earth](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/nominal%20cosmic%20velocities%20for%20earth.png)
+
+---
+
+### Explanation
+
+This simulation displays Earth’s nominal cosmic velocities as vector arrows:        
+ - **$v₁$ (Orbital)**: The speed required to maintain a circular orbit near Earth's surface.
+ - **$v₂$ (Escape)**: The speed needed to escape Earth's gravity (which is $\sqrt{2}$ times $v₁$).
+ - **$v_orbit$**: Earth’s orbital speed around the Sun.
+ - **$v_esc,Sun$**: The solar escape speed at Earth's orbital distance.
+ - **$v₃$**: The extra speed needed to leave the Sun’s gravitational influence (calculated as $v_{\text{esc,Sun}} - v_{\text{orbit}}$).
+
+Each arrow is plotted with a unique angle and color, and text labels are placed near the arrow tips for clarity. This vector-based representation allows you to compare the magnitudes of these velocities directly.
+
+---
 ### 2. Hohmann Transfer Simulation
 
 **Purpose**: Demonstrate how cosmic velocities are applied in interplanetary travel by simulating the most fuel-efficient path between Earth and Mars.
