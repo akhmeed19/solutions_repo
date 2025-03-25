@@ -212,7 +212,76 @@ For each celestial body, three sets of bars are displayed:
 This visualization clearly illustrates the differences between the velocities for various celestial bodies and highlights the impact of their mass, size, and orbital distances on mission planning. The reduced third cosmic velocity (compared to the solar escape speed) underscores the advantage provided by a planet’s orbital motion in reducing the energy requirements for interplanetary travel.
 
 ---
+### Additional Simulation: Variation of Cosmic Velocities with Planet Mass
 
+```python
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Constants
+G = 6.67430e-11        # Gravitational constant (m^3 kg^-1 s^-2)
+M_sun = 1.989e30       # Mass of the Sun (kg) - not directly used here
+
+# Parameters for celestial bodies: mass (kg), radius (m), and orbital radius (m)
+bodies = {
+    'Earth': {
+        'mass': 5.972e24,
+        'radius': 6.371e6,
+        'orbital_radius': 1.496e11
+    },
+    'Mars': {
+        'mass': 6.4171e23,
+        'radius': 3.3895e6,
+        'orbital_radius': 2.279e11
+    },
+    'Jupiter': {
+        'mass': 1.898e27,
+        'radius': 6.9911e7,
+        'orbital_radius': 7.785e11
+    }
+}
+
+# Define a range for the mass factor (from 80% to 120% of the nominal mass)
+mass_factors = np.linspace(0.8, 1.2, 10)
+
+plt.figure(figsize=(12, 7))
+
+# Loop over each planet and calculate v1 and v2 as a function of the varied mass.
+for planet, params in bodies.items():
+    nominal_mass = params['mass']
+    radius = params['radius']
+    
+    # Arrays to store computed velocities (in km/s)
+    v1_values = []
+    v2_values = []
+    
+    # Vary the planet's mass by the given factor and compute the velocities
+    for factor in mass_factors:
+        mass = factor * nominal_mass
+        v1 = math.sqrt(G * mass / radius)      # First cosmic velocity
+        v2 = math.sqrt(2 * G * mass / radius)  # Second cosmic velocity
+        v1_values.append(v1 / 1000)  # convert to km/s
+        v2_values.append(v2 / 1000)  # convert to km/s
+
+    # Plot the curves for v1 and v2 for the current planet
+    plt.plot(mass_factors * nominal_mass / 1e24, v1_values, marker='o', linestyle='-', label=f'{planet} v₁')
+    plt.plot(mass_factors * nominal_mass / 1e24, v2_values, marker='s', linestyle='--', label=f'{planet} v₂')
+
+plt.xlabel('Mass (10^24 kg)')
+plt.ylabel('Velocity (km/s)')
+plt.title('Variation of Cosmic Velocities with Planet Mass')
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+
+**Explanation**  
+- In this simulation, we take the **nominal mass** of Earth, Mars, and Jupiter and vary each from **80% to 120%** of its real value.  
+- We compute how the **first (v₁)** and **second (v₂)** cosmic velocities scale with changing mass. The result is purely **theoretical**—a planet’s mass does not spontaneously change in reality.  
+- This exercise shows the **relationship** between mass and orbital/escape velocities: as mass increases, both v₁ and v₂ increase, following the formula \(v \propto \sqrt{M}\).  
+
+---
 ### 2. Hohmann Transfer Simulation
 
 **Purpose**: Demonstrate how cosmic velocities are applied in interplanetary travel by simulating the most fuel-efficient path between Earth and Mars.
