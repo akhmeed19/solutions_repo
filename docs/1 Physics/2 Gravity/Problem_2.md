@@ -476,7 +476,8 @@ plt.show()
 
 ### Explanation
 
-This simulation displays Earth’s nominal cosmic velocities as vector arrows:                                 
+This simulation displays Earth’s nominal cosmic velocities as vector arrows: 
+                                
   - **$v₁$ (Orbital)**: The speed required to maintain a circular orbit near Earth's surface.
   - **$v₂$ (Escape)**: The speed needed to escape Earth's gravity (which is $\sqrt{2}$ times $v₁$).
   - **$v_orbit$**: Earth’s orbital speed around the Sun.
