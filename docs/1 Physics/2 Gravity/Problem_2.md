@@ -470,14 +470,31 @@ plt.show()
 
 #### Simulation Output
 
-![Nominal Cosmic Velocities for Earth](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/nominal%20cosmic%20velocities%20for%20earth.png)
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/nominal%20cosmic%20velocities%20for%20earth.png" width="300"><br>
+      <strong>Earth</strong>
+    </td>
+    <td align="center">
+      <img src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/nominal%20cosmic%20velocities%20for%20mars.png" width="300"><br>
+      <strong>Mars</strong>
+    </td>
+    <td align="center">
+      <img src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/nominal%20cosmic%20velocities%20for%20jupiter.png" width="300"><br>
+      <strong>Jupiter</strong>
+    </td>
+  </tr>
+</table>
+
+<!-- ![Nominal Cosmic Velocities for Earth](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/nominal%20cosmic%20velocities%20for%20earth.png) -->
 
 ---
 
 ### Explanation
 
 This simulation displays Earth’s nominal cosmic velocities as vector arrows: 
-                                
+
   - **$v₁$ (Orbital)**: The speed required to maintain a circular orbit near Earth's surface.
   - **$v₂$ (Escape)**: The speed needed to escape Earth's gravity (which is $\sqrt{2}$ times $v₁$).
   - **$v_orbit$**: Earth’s orbital speed around the Sun.
