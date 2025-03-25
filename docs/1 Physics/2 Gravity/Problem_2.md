@@ -597,19 +597,20 @@ plt.show()
 <table>
   <tr>
     <td align="center">
-      <img src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/nominal%20cosmic%20velocities%20for%20earth.png" width="300"><br>
+      <img src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/nominal%20cosmic%20velocities%20for%20earth.png" width="400"><br>
       <strong>Earth</strong>
     </td>
     <td align="center">
-      <img src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/nominal%20v-s%20for%20mars.png" width="300"><br>
+      <img src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/nominal%20v-s%20for%20mars.png" width="400"><br>
       <strong>Mars</strong>
     </td>
     <td align="center">
-      <img src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/nominal%20v-s%20for%20jupiter.png" width="300"><br>
+      <img src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/nominal%20v-s%20for%20jupiter.png" width="400"><br>
       <strong>Jupiter</strong>
     </td>
   </tr>
 </table>
+
 ---
 
 ### Explanation
