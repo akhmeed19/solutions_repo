@@ -212,6 +212,7 @@ For each celestial body, three sets of bars are displayed:
 This visualization clearly illustrates the differences between the velocities for various celestial bodies and highlights the impact of their mass, size, and orbital distances on mission planning. The reduced third cosmic velocity (compared to the solar escape speed) underscores the advantage provided by a planet’s orbital motion in reducing the energy requirements for interplanetary travel.
 
 ---
+
 ### Additional Simulation: Variation of Cosmic Velocities with Planet Mass
 
 ```python
@@ -298,10 +299,27 @@ plt.grid(True)
 plt.show()
 ```
 
-**Explanation**  
-- In this simulation, we take the **nominal mass** of Earth, Mars, and Jupiter and vary each from **80% to 120%** of its real value.  
-- We compute how the **first (v₁)** and **second (v₂)** cosmic velocities scale with changing mass. The result is purely **theoretical**—a planet’s mass does not spontaneously change in reality.  
-- This exercise shows the **relationship** between mass and orbital/escape velocities: as mass increases, both v₁ and v₂ increase, following the formula \(v \propto \sqrt{M}\).  
+#### Simulation Output
+
+![Variation of Cosmic Velocities with Planet Mass](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/variation%20of%20cosmic%20vel%20gravity2.png)
+
+### Explanation of the Mass-Variation Simulation
+
+In this simulation, we consider the **first (v₁)** and **second (v₂)** cosmic velocities for Earth, Mars, and Jupiter as we vary each planet’s mass from **80%** to **120%** of its real (nominal) value. 
+
+- **Why Change the Mass?**  
+  This is purely a **theoretical exercise**—planets don’t spontaneously gain or lose 20% of their mass in reality. Varying the mass helps us understand how strongly these orbital and escape velocities depend on a planet’s gravitational parameter \(GM\).  
+
+- **Real Mass Markers**  
+  We highlight each planet’s **actual** (nominal) mass with a **black “X”** on its v₁ curve. This clearly shows which data point corresponds to the **real** planet mass, while the other points are “what‑if” scenarios.
+
+- **Logarithmic X-axis**  
+  Because Jupiter’s mass is orders of magnitude larger than Earth’s or Mars’, we use a **log scale** on the x-axis. This prevents the smaller masses from being squashed together near zero.
+
+- **Interpretation**  
+  As the mass increases, both **v₁** and **v₂** **increase** in accordance with \(\sqrt{M}\). This explains why Jupiter’s velocities are significantly higher than Earth’s or Mars’. 
+
+Overall, this exercise reveals the direct relationship between **planetary mass** and the **orbital/escape speeds** needed for spacecraft missions, while distinguishing between the **actual** planet masses (black “X”) and the **hypothetical** mass variations.
 
 ---
 ### 2. Hohmann Transfer Simulation
