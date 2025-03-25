@@ -377,7 +377,8 @@ plt.show()
    - <strong>Third Cosmic Velocity (v₃)</strong>: Shows the additional velocity needed (beyond the planet’s orbital speed) to escape the gravitational influence of the Sun.</p>
 <p>This visualization clearly illustrates the differences between the velocities for various celestial bodies and highlights the impact of their mass, size, and orbital distances on mission planning. The reduced third cosmic velocity (compared to the solar escape speed) underscores the advantage provided by a planet’s orbital motion in reducing the energy requirements for interplanetary travel.</p>
 <hr/>
-<h3 id="additional-simulation-variation-of-cosmic-velocities-with-planet-mass">Additional Simulation: Variation of Cosmic Velocities with Planet Mass</h3>
+<h3 id="additional-simulation">Additional Simulation:</h3>
+<h3 id="1-variation-of-cosmic-velocities-with-planet-mass">1. Variation of Cosmic Velocities with Planet Mass</h3>
 <pre><code class="language-python">import math
 import numpy as np
 import matplotlib.pyplot as plt
@@ -550,7 +551,7 @@ plt.show()
 <p>The black <span class="arithmatex">\(“X”\)</span> markers at the nominal mass (mass factor = 1.0) indicate the actual speeds computed using the planet’s true mass, while the other points show “what-if” scenarios.</p>
 <p>Overall, this exercise reveals the direct relationship between planetary mass and the speeds needed for orbiting and escaping. It provides insight into how sensitive these speeds are to changes in <span class="arithmatex">\(GM\)</span>, even though in practice a planet’s mass does not change.</p>
 <hr/>
-<h3 id="3-additional-simulation-nominal-cosmic-velocities-for-earth-mars-and-jupiter">3. Additional Simulation: Nominal Cosmic Velocities for Earth, Mars, and Jupiter</h3>
+<h3 id="2-additional-simulation-nominal-cosmic-velocities-for-earth-mars-and-jupiter">2. Additional Simulation: Nominal Cosmic Velocities for Earth, Mars, and Jupiter</h3>
 <p><strong>Purpose:</strong><br/>
 Each velocity is represented as a uniquely colored arrow with a label placed near its tip. This approach not only shows the individual values but also allows direct visual comparison of how these velocities differ among Earth, Mars, and Jupiter.</p>
 <hr/>
@@ -749,8 +750,7 @@ plt.grid(True)
 plt.show()
 </code></pre>
 <hr/>
-<h3 id="displaying-the-images-side-by-side-in-markdown">Displaying the Images Side by Side in Markdown</h3>
-<p>You can use an HTML table in your Markdown file to show the resulting images for Earth, Mars, and Jupiter in one row:</p>
+<h3 id="outputs">Outputs</h3>
 <table>
 <tr>
 <td align="center">
@@ -783,10 +783,9 @@ plt.show()
 <li><strong>Mars’ arrows</strong> are noticeably shorter, reflecting its lower mass and weaker gravity.</li>
 <li><strong>Jupiter’s arrows</strong> are much longer, indicating significantly higher speeds due to its massive gravitational pull.</li>
 </ul>
-<p>Using an HTML table in Markdown, you can display the images for all three planets side by side, allowing you to visually compare their nominal cosmic velocities.</p>
 <p>This comprehensive simulation and the side-by-side image display help illustrate how planetary properties influence key cosmic speeds, which is vital for space mission planning.</p>
 <hr/>
-<h3 id="2-hohmann-transfer-simulation">2. Hohmann Transfer Simulation</h3>
+<h3 id="3-hohmann-transfer-simulation">3. Hohmann Transfer Simulation</h3>
 <p><strong>Purpose</strong>: Demonstrate how cosmic velocities are applied in interplanetary travel by simulating the most fuel-efficient path between Earth and Mars.</p>
 <p><strong>Physics Link</strong>:<br>
 - Uses the <strong>vis-viva equation</strong> (from the derivations) to calculate transfer orbit velocities.<br>
