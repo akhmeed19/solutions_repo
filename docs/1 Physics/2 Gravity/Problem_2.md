@@ -477,11 +477,11 @@ plt.show()
 ### Explanation
 
 This simulation displays Earth’s nominal cosmic velocities as vector arrows:                                 
-- **$v₁$ (Orbital)**: The speed required to maintain a circular orbit near Earth's surface.
-- **$v₂$ (Escape)**: The speed needed to escape Earth's gravity (which is $\sqrt{2}$ times $v₁$).
-- **$v_orbit$**: Earth’s orbital speed around the Sun.
-- **$v_esc,Sun$**: The solar escape speed at Earth's orbital distance.
-- **$v₃$**: The extra speed needed to leave the Sun’s gravitational influence (calculated as $v_{\text{esc,Sun}} - v_{\text{orbit}}$).
+  - **$v₁$ (Orbital)**: The speed required to maintain a circular orbit near Earth's surface.
+  - **$v₂$ (Escape)**: The speed needed to escape Earth's gravity (which is $\sqrt{2}$ times $v₁$).
+  - **$v_orbit$**: Earth’s orbital speed around the Sun.
+  - **$v_esc,Sun$**: The solar escape speed at Earth's orbital distance.
+  - **$v₃$**: The extra speed needed to leave the Sun’s gravitational influence (calculated as $v_{\text{esc,Sun}} - v_{\text{orbit}}$).
 
 Each arrow is plotted with a unique angle and color, and text labels are placed near the arrow tips for clarity. This vector-based representation allows you to compare the magnitudes of these velocities directly.
 
