@@ -220,10 +220,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Constants
-G = 6.67430e-11        # Gravitational constant (m^3 kg^-1 s^-2)
-M_sun = 1.989e30       # Mass of the Sun (kg) - not directly used here
+G = 6.67430e-11
+M_sun = 1.989e30
 
-# Parameters for celestial bodies: mass (kg), radius (m), and orbital radius (m)
 bodies = {
     'Earth': {
         'mass': 5.972e24,
@@ -242,21 +241,18 @@ bodies = {
     }
 }
 
-# Define a range for the mass factor (from 80% to 120% of the nominal mass)
-mass_factors = np.linspace(0.8, 1.2, 10)
-
+mass_factors = np.array([0.8, 0.9, 1.0, 1.1, 1.2])
 plt.figure(figsize=(12, 7))
 
-# Loop over each planet and calculate v1 and v2 as a function of the varied mass.
+real_mass_label_added = False
+
 for planet, params in bodies.items():
     nominal_mass = params['mass']
     radius = params['radius']
     
-    # Arrays to store computed velocities (in km/s)
     v1_values = []
     v2_values = []
     
-    # Vary the planet's mass by the given factor and compute the velocities
     for factor in mass_factors:
         mass = factor * nominal_mass
         v1 = math.sqrt(G * mass / radius)      # First cosmic velocity
@@ -264,14 +260,40 @@ for planet, params in bodies.items():
         v1_values.append(v1 / 1000)  # convert to km/s
         v2_values.append(v2 / 1000)  # convert to km/s
 
-    # Plot the curves for v1 and v2 for the current planet
-    plt.plot(mass_factors * nominal_mass / 1e24, v1_values, marker='o', linestyle='-', label=f'{planet} v₁')
-    plt.plot(mass_factors * nominal_mass / 1e24, v2_values, marker='s', linestyle='--', label=f'{planet} v₂')
+    x_values = mass_factors * nominal_mass / 1e24
 
-plt.xlabel('Mass (10^24 kg)')
+    # Increase marker size (markersize) and line thickness (linewidth)
+    plt.plot(x_values, v1_values, marker='o', linestyle='-', 
+             markersize=10, linewidth=2, label=f'{planet} v₁')
+    plt.plot(x_values, v2_values, marker='s', linestyle='--', 
+             markersize=10, linewidth=2, label=f'{planet} v₂')
+    
+    # Add a black 'X' for the real mass on v1
+    real_idx = np.where(mass_factors == 1.0)[0][0]
+    real_mass_x = x_values[real_idx]
+    real_mass_v1 = v1_values[real_idx]
+    if not real_mass_label_added:
+        plt.scatter(real_mass_x, real_mass_v1, color='black', marker='X', s=200, 
+                    zorder=5, label='Real Mass')
+        real_mass_label_added = True
+    else:
+        plt.scatter(real_mass_x, real_mass_v1, color='black', marker='X', s=200, zorder=5)
+
+# Switch the x-axis to a log scale so Earth & Mars aren’t squashed by Jupiter’s large mass
+plt.xscale('log')
+
+plt.xlabel('Mass (10^24 kg) [log scale]')
 plt.ylabel('Velocity (km/s)')
-plt.title('Variation of Cosmic Velocities with Planet Mass')
+plt.title('Variation of Cosmic Velocities with Planet Mass (Highlighting Real Mass)')
+
+# Draw the legend once, then reorder so "Real Mass" is placed first
 plt.legend()
+handles, labels = plt.gca().get_legend_handles_labels()
+rm_index = labels.index('Real Mass')
+new_handles = [handles[rm_index]] + handles[:rm_index] + handles[rm_index+1:]
+new_labels = [labels[rm_index]] + labels[:rm_index] + labels[rm_index+1:]
+plt.legend(new_handles, new_labels)
+
 plt.grid(True)
 plt.show()
 ```
