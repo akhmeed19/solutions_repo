@@ -213,7 +213,8 @@ This visualization clearly illustrates the differences between the velocities fo
 
 ---
 
-### Additional Simulation: Variation of Cosmic Velocities with Planet Mass
+### Additional Simulation: 
+### 1. Variation of Cosmic Velocities with Planet Mass
 
 ```python
 import math
@@ -378,7 +379,7 @@ The black $“X”$ markers at the nominal mass (mass factor = 1.0) indicate the
 Overall, this exercise reveals the direct relationship between planetary mass and the speeds needed for orbiting and escaping. It provides insight into how sensitive these speeds are to changes in $GM$, even though in practice a planet’s mass does not change.
 
 ---
-### 3. Additional Simulation: Nominal Cosmic Velocities for Earth, Mars, and Jupiter
+### 2. Additional Simulation: Nominal Cosmic Velocities for Earth, Mars, and Jupiter
 
 **Purpose:**  
 Each velocity is represented as a uniquely colored arrow with a label placed near its tip. This approach not only shows the individual values but also allows direct visual comparison of how these velocities differ among Earth, Mars, and Jupiter.
@@ -591,9 +592,7 @@ plt.show()
 ```
 
 ---
-### Displaying the Images Side by Side in Markdown
-
-You can use an HTML table in your Markdown file to show the resulting images for Earth, Mars, and Jupiter in one row:
+### Outputs
 
 <table>
   <tr>
@@ -629,12 +628,11 @@ Each arrow is plotted with a unique angle and color and labeled near its tip for
 - **Mars’ arrows** are noticeably shorter, reflecting its lower mass and weaker gravity.
 - **Jupiter’s arrows** are much longer, indicating significantly higher speeds due to its massive gravitational pull.
 
-Using an HTML table in Markdown, you can display the images for all three planets side by side, allowing you to visually compare their nominal cosmic velocities.
 
 This comprehensive simulation and the side-by-side image display help illustrate how planetary properties influence key cosmic speeds, which is vital for space mission planning.
 
 ---
-### 2. Hohmann Transfer Simulation
+### 3. Hohmann Transfer Simulation
 
 **Purpose**: Demonstrate how cosmic velocities are applied in interplanetary travel by simulating the most fuel-efficient path between Earth and Mars.
 
