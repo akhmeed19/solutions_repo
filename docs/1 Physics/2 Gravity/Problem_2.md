@@ -381,13 +381,6 @@ Overall, this exercise reveals the direct relationship between planetary mass an
 ### 3. Additional Simulation: Nominal Cosmic Velocities for Earth, Mars, and Jupiter
 
 **Purpose:**  
-This simulation visualizes the nominal (actual) cosmic velocities for Earth, Mars, and Jupiter using vector arrows. For each planet, the simulation computes and displays five key velocities based on the planet’s true mass and size:
-- **v₁ (Orbital Velocity):** The speed required to maintain a circular orbit at the planet’s surface.
-- **v₂ (Escape Velocity):** The speed needed to overcome the planet’s gravitational pull (always \(\sqrt{2}\) times \(v₁\)).
-- **v_orbit:** The orbital speed of the planet around the Sun.
-- **v_esc,Sun:** The solar escape speed at the planet’s orbital distance.
-- **v₃:** The additional speed required to escape the Sun’s gravity (i.e. \(v_{\text{esc,Sun}} - v_{\text{orbit}}\)).
-
 Each velocity is represented as a uniquely colored arrow with a label placed near its tip. This approach not only shows the individual values but also allows direct visual comparison of how these velocities differ among Earth, Mars, and Jupiter.
 
 ---
@@ -598,12 +591,10 @@ plt.show()
 ```
 
 ---
-
 ### Displaying the Images Side by Side in Markdown
 
 You can use an HTML table in your Markdown file to show the resulting images for Earth, Mars, and Jupiter in one row:
 
-```html
 <table>
   <tr>
     <td align="center">
@@ -620,19 +611,17 @@ You can use an HTML table in your Markdown file to show the resulting images for
     </td>
   </tr>
 </table>
-```
-
 ---
 
 ### Explanation
 
 This set of simulations displays the nominal cosmic velocities for Earth, Mars, and Jupiter as vector arrows. Each simulation computes five key velocities for the given planet:
   
-- **v₁ (Orbital Velocity):** The speed needed for a circular orbit at the planet’s surface.
-- **v₂ (Escape Velocity):** The speed required to escape the planet’s gravitational pull (\(\sqrt{2}\) times \(v₁\)).
-- **v_orbit:** The orbital speed of the planet around the Sun.
-- **v_esc,Sun:** The escape speed from the Sun at the planet’s orbital distance.
-- **v₃:** The extra speed needed to overcome the Sun’s gravitational pull (i.e. \(v_{\text{esc,Sun}} - v_{\text{orbit}}\)).
+- **$v₁$ (Orbital Velocity):** The speed needed for a circular orbit at the planet’s surface.
+- **$v₂$ (Escape Velocity):** The speed required to escape the planet’s gravitational pull $(\sqrt{2} times(v₁))$.
+- **$v_orbit$:** The orbital speed of the planet around the Sun.
+- **$v_esc,Sun$:** The escape speed from the Sun at the planet’s orbital distance.
+- **$v$₃:** The extra speed needed to overcome the Sun’s gravitational pull (i.e. $v_{\text{esc,Sun}} - v_{\text{orbit}})$.
 
 Each arrow is plotted with a unique angle and color and labeled near its tip for clarity. By comparing these vector diagrams:
 
