@@ -220,82 +220,107 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Constants
-G = 6.67430e-11
-M_sun = 1.989e30
+"""
+This script varies each planet's mass from 80% to 120% of its nominal (real) mass
+and plots two key velocities:
 
+1) v₁ (Orbital) = √(GM/R), the speed for a circular orbit near the surface.
+2) v₂ (Escape) = √(2GM/R), the speed required to escape the planet's gravity.
+
+We highlight the real (nominal) mass point on BOTH v₁ and v₂ with black 'X' markers,
+but we do not show any arrow/text annotations. All other points are hypothetical.
+"""
+
+# Constants
+G = 6.67430e-11         # Gravitational constant [m^3 kg^-1 s^-2]
+M_sun = 1.989e30        # Mass of the Sun [kg] - not directly used here
+
+# Planetary parameters
 bodies = {
     'Earth': {
         'mass': 5.972e24,
-        'radius': 6.371e6,
-        'orbital_radius': 1.496e11
+        'radius': 6.371e6
     },
     'Mars': {
         'mass': 6.4171e23,
-        'radius': 3.3895e6,
-        'orbital_radius': 2.279e11
+        'radius': 3.3895e6
     },
     'Jupiter': {
         'mass': 1.898e27,
-        'radius': 6.9911e7,
-        'orbital_radius': 7.785e11
+        'radius': 6.9911e7
     }
 }
 
+# Range of mass factors (80% to 120% of nominal)
 mass_factors = np.array([0.8, 0.9, 1.0, 1.1, 1.2])
+
 plt.figure(figsize=(12, 7))
 
+# We'll only add the 'Real Mass' label once in the legend
 real_mass_label_added = False
 
 for planet, params in bodies.items():
     nominal_mass = params['mass']
     radius = params['radius']
     
-    v1_values = []
-    v2_values = []
+    # Arrays for v₁ and v₂ over the specified mass factors
+    v1_values = []  # v₁ (Orbital)
+    v2_values = []  # v₂ (Escape)
     
     for factor in mass_factors:
         mass = factor * nominal_mass
-        v1 = math.sqrt(G * mass / radius)      # First cosmic velocity
-        v2 = math.sqrt(2 * G * mass / radius)  # Second cosmic velocity
-        v1_values.append(v1 / 1000)  # convert to km/s
-        v2_values.append(v2 / 1000)  # convert to km/s
+        v1 = math.sqrt(G * mass / radius)       # m/s
+        v2 = math.sqrt(2 * G * mass / radius)   # m/s
+        v1_values.append(v1 / 1000)  # Convert to km/s
+        v2_values.append(v2 / 1000)  # Convert to km/s
 
+    # x-axis in units of 10^24 kg
     x_values = mass_factors * nominal_mass / 1e24
-
-    # Increase marker size (markersize) and line thickness (linewidth)
-    plt.plot(x_values, v1_values, marker='o', linestyle='-', 
-             markersize=10, linewidth=2, label=f'{planet} v₁')
-    plt.plot(x_values, v2_values, marker='s', linestyle='--', 
-             markersize=10, linewidth=2, label=f'{planet} v₂')
     
-    # Add a black 'X' for the real mass on v1
-    real_idx = np.where(mass_factors == 1.0)[0][0]
-    real_mass_x = x_values[real_idx]
-    real_mass_v1 = v1_values[real_idx]
+    # Plot v₁ (Orbital) and v₂ (Escape)
+    plt.plot(x_values, v1_values, marker='o', linestyle='-', 
+             markersize=8, linewidth=2, label=f'{planet} v₁ (Orbital)')
+    plt.plot(x_values, v2_values, marker='s', linestyle='--', 
+             markersize=8, linewidth=2, label=f'{planet} v₂ (Escape)')
+
+    # Find the index for the nominal mass (factor=1.0)
+    idx_nom = np.where(mass_factors == 1.0)[0][0]
+    real_mass_x = x_values[idx_nom]
+    
+    # Extract the v₁ and v₂ values at the nominal mass
+    real_mass_v1 = v1_values[idx_nom]
+    real_mass_v2 = v2_values[idx_nom]
+    
+    # Plot black X marker on v₁ at nominal mass
     if not real_mass_label_added:
-        plt.scatter(real_mass_x, real_mass_v1, color='black', marker='X', s=200, 
-                    zorder=5, label='Real Mass')
+        # Add the label for the FIRST black X only
+        plt.scatter(real_mass_x, real_mass_v1, color='black', marker='X', s=100, zorder=5,
+                    label='Real Mass (Nominal)')
         real_mass_label_added = True
     else:
-        plt.scatter(real_mass_x, real_mass_v1, color='black', marker='X', s=200, zorder=5)
+        plt.scatter(real_mass_x, real_mass_v1, color='black', marker='X', s=100, zorder=5)
+    
+    # Plot black X marker on v₂ at nominal mass (no legend label)
+    plt.scatter(real_mass_x, real_mass_v2, color='black', marker='X', s=100, zorder=5)
 
-# Switch the x-axis to a log scale so Earth & Mars aren’t squashed by Jupiter’s large mass
+# Optional: use a log scale if masses differ by orders of magnitude
 plt.xscale('log')
 
-plt.xlabel('Mass (10^24 kg) [log scale]')
+plt.xlabel('Planet Mass (10^24 kg) [log scale]')
 plt.ylabel('Velocity (km/s)')
-plt.title('Variation of Cosmic Velocities with Planet Mass (Highlighting Real Mass)')
+plt.title('Variation of Cosmic Velocities with Planet Mass (v₁ and v₂)')
+plt.grid(True)
 
-# Draw the legend once, then reorder so "Real Mass" is placed first
+# Initial legend call
 plt.legend()
+
+# Reorder legend so 'Real Mass (Nominal)' is first
 handles, labels = plt.gca().get_legend_handles_labels()
-rm_index = labels.index('Real Mass')
+rm_index = labels.index('Real Mass (Nominal)')
 new_handles = [handles[rm_index]] + handles[:rm_index] + handles[rm_index+1:]
 new_labels = [labels[rm_index]] + labels[:rm_index] + labels[rm_index+1:]
 plt.legend(new_handles, new_labels)
 
-plt.grid(True)
 plt.show()
 ```
 
@@ -305,20 +330,20 @@ plt.show()
 
 ### Explanation of the Mass-Variation Simulation
 
-In this simulation, we consider the **first (v₁)** and **second (v₂)** cosmic velocities for Earth, Mars, and Jupiter as we vary each planet’s mass from **80%** to **120%** of its real (nominal) value. 
+In this simulation, we consider the **first $(v₁)$** and **second $(v₂)$** cosmic velocities for Earth, Mars, and Jupiter as we vary each planet’s mass from **80%** to **120%** of its real (nominal) value. 
 
 
 - **Why Change the Mass?**  
-  This is purely a **theoretical exercise**—planets don’t spontaneously gain or lose 20% of their mass in reality. Varying the mass helps us understand how strongly these orbital and escape velocities depend on a planet’s gravitational parameter \(GM\).  
+  This is purely a **theoretical exercise**—planets don’t spontaneously gain or lose 20% of their mass in reality. Varying the mass helps us understand how strongly these orbital and escape velocities depend on a planet’s gravitational parameter $GM$.  
 
 - **Real Mass Markers**  
-  We highlight each planet’s **actual** (nominal) mass with a **black “X”** on its v₁ curve. This clearly shows which data point corresponds to the **real** planet mass, while the other points are “what‑if” scenarios.
+  We highlight each planet’s **actual** (nominal) mass with a **black “$X$”** on its $v₁$ curve. This clearly shows which data point corresponds to the **real** planet mass, while the other points are “what‑if” scenarios.
 
 - **Logarithmic X-axis**  
   Because Jupiter’s mass is orders of magnitude larger than Earth’s or Mars’, we use a **log scale** on the x-axis. This prevents the smaller masses from being squashed together near zero.
 
 - **Interpretation**  
-  As the mass increases, both **v₁** and **v₂** **increase** in accordance with \(\sqrt{M}\). This explains why Jupiter’s velocities are significantly higher than Earth’s or Mars’. 
+  As the mass increases, both **v₁** and **v₂** **increase** in accordance with $\sqrt{M}$. This explains why Jupiter’s velocities are significantly higher than Earth’s or Mars’. 
 
 Overall, this exercise reveals the direct relationship between **planetary mass** and the **orbital/escape speeds** needed for spacecraft missions, while distinguishing between the **actual** planet masses (black “X”) and the **hypothetical** mass variations.
 
