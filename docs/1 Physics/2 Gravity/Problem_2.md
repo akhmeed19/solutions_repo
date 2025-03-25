@@ -305,7 +305,7 @@ Transfer Time: 259 days
 
 ### Explanation of the Hohmann Transfer Simulation
 
-**Relationship to Cosmic Velocities**:                             
+**Relationship to Cosmic Velocities**:      
   1. **First Cosmic Velocity (\(v_1\))**:                                   
      The spacecraft starts in Earth’s orbit, moving at its heliocentric speed.                          
 
