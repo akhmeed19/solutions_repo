@@ -307,6 +307,7 @@ plt.show()
 
 In this simulation, we consider the **first (v₁)** and **second (v₂)** cosmic velocities for Earth, Mars, and Jupiter as we vary each planet’s mass from **80%** to **120%** of its real (nominal) value. 
 
+
 - **Why Change the Mass?**  
   This is purely a **theoretical exercise**—planets don’t spontaneously gain or lose 20% of their mass in reality. Varying the mass helps us understand how strongly these orbital and escape velocities depend on a planet’s gravitational parameter \(GM\).  
 
