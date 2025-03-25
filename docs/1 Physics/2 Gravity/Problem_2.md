@@ -314,8 +314,9 @@ Transfer Time: 259 days
 3. **Third Cosmic Velocity ($v_3$)**:                                  Instead of achieving full solar escape speed, the spacecraft performs an arrival burn $(\Delta v_2)$ to match Mars' orbital speed.
 
 **Why This Matters**:                                 
-- Demonstrates that only a partial delta‑v (compared to full escape velocities) is necessary for interplanetary transfers.
-- Connects the theoretical cosmic velocity concepts with practical mission design, illustrating how energy-efficient transfers are achieved in space exploration.
+ - Demonstrates that only a partial delta‑v (compared to full escape velocities) is necessary for interplanetary transfers.
+    
+ - Connects the theoretical cosmic velocity concepts with practical mission design, illustrating how energy-efficient transfers are achieved in space exploration.
 
 This section integrates a practical Hohmann transfer simulation with the cosmic velocities analysis, providing clear insight into how these theoretical concepts are applied to real-world space mission planning.
 
