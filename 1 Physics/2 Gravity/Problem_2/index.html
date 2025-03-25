@@ -460,10 +460,29 @@ plt.legend(new_handles, new_labels)
 plt.grid(True)
 plt.show()
 </code></pre>
-<p><strong>Explanation</strong><br/>
-- In this simulation, we take the <strong>nominal mass</strong> of Earth, Mars, and Jupiter and vary each from <strong>80% to 120%</strong> of its real value.<br/>
-- We compute how the <strong>first (v₁)</strong> and <strong>second (v₂)</strong> cosmic velocities scale with changing mass. The result is purely <strong>theoretical</strong>—a planet’s mass does not spontaneously change in reality.<br/>
-- This exercise shows the <strong>relationship</strong> between mass and orbital/escape velocities: as mass increases, both v₁ and v₂ increase, following the formula <span class="arithmatex">\(v \propto \sqrt{M}\)</span>.  </p>
+<h4 id="simulation-output_1">Simulation Output</h4>
+<p><img alt="Variation of Cosmic Velocities with Planet Mass" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/variation%20of%20cosmic%20vel%20gravity2.png"/></p>
+<h3 id="explanation-of-the-mass-variation-simulation">Explanation of the Mass-Variation Simulation</h3>
+<p>In this simulation, we consider the <strong>first (v₁)</strong> and <strong>second (v₂)</strong> cosmic velocities for Earth, Mars, and Jupiter as we vary each planet’s mass from <strong>80%</strong> to <strong>120%</strong> of its real (nominal) value. </p>
+<ul>
+<li>
+<p><strong>Why Change the Mass?</strong><br/>
+  This is purely a <strong>theoretical exercise</strong>—planets don’t spontaneously gain or lose 20% of their mass in reality. Varying the mass helps us understand how strongly these orbital and escape velocities depend on a planet’s gravitational parameter <span class="arithmatex">\(GM\)</span>.  </p>
+</li>
+<li>
+<p><strong>Real Mass Markers</strong><br/>
+  We highlight each planet’s <strong>actual</strong> (nominal) mass with a <strong>black “X”</strong> on its v₁ curve. This clearly shows which data point corresponds to the <strong>real</strong> planet mass, while the other points are “what‑if” scenarios.</p>
+</li>
+<li>
+<p><strong>Logarithmic X-axis</strong><br/>
+  Because Jupiter’s mass is orders of magnitude larger than Earth’s or Mars’, we use a <strong>log scale</strong> on the x-axis. This prevents the smaller masses from being squashed together near zero.</p>
+</li>
+<li>
+<p><strong>Interpretation</strong><br/>
+  As the mass increases, both <strong>v₁</strong> and <strong>v₂</strong> <strong>increase</strong> in accordance with <span class="arithmatex">\(\sqrt{M}\)</span>. This explains why Jupiter’s velocities are significantly higher than Earth’s or Mars’. </p>
+</li>
+</ul>
+<p>Overall, this exercise reveals the direct relationship between <strong>planetary mass</strong> and the <strong>orbital/escape speeds</strong> needed for spacecraft missions, while distinguishing between the <strong>actual</strong> planet masses (black “X”) and the <strong>hypothetical</strong> mass variations.</p>
 <hr/>
 <h3 id="2-hohmann-transfer-simulation">2. Hohmann Transfer Simulation</h3>
 <p><strong>Purpose</strong>: Demonstrate how cosmic velocities are applied in interplanetary travel by simulating the most fuel-efficient path between Earth and Mars.</p>
