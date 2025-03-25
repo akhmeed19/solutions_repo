@@ -307,13 +307,13 @@ Transfer Time: 259 days
 
 **Relationship to Cosmic Velocities:**                          
 
-1. **First Cosmic Velocity (\(v_1\))**:                                      The spacecraft starts in Earth’s orbit, moving at its heliocentric speed.
+1. **First Cosmic Velocity ($v_1$)**:                                      The spacecraft starts in Earth’s orbit, moving at its heliocentric speed.
 
-2. **Second Cosmic Velocity (\(v_2\))**:                                   The departure burn (\(\Delta v_1\)) is less than Earth's full escape speed because the transfer only requires leaving Earth's sphere of influence.
+2. **Second Cosmic Velocity ($v_2$)**:                                   The departure burn $(\Delta v_1)$ is less than Earth's full escape speed because the transfer only requires leaving Earth's sphere of influence.
 
-3. **Third Cosmic Velocity (\(v_3\))**:                                  Instead of achieving full solar escape speed, the spacecraft performs an arrival burn (\(\Delta v_2\)) to match Mars' orbital speed.
+3. **Third Cosmic Velocity ($v_3$)**:                                  Instead of achieving full solar escape speed, the spacecraft performs an arrival burn $(\Delta v_2)$ to match Mars' orbital speed.
 
-**Why This Matters**:  
+**Why This Matters**:                                 
 - Demonstrates that only a partial delta‑v (compared to full escape velocities) is necessary for interplanetary transfers.
 - Connects the theoretical cosmic velocity concepts with practical mission design, illustrating how energy-efficient transfers are achieved in space exploration.
 
