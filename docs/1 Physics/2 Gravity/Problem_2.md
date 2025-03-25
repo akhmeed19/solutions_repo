@@ -334,10 +334,10 @@ This is purely a **theoretical exercise**—planets don’t spontaneously gain o
 
 In this simulation we explore how two key velocities—**v₁ (Orbital Velocity)** and **v₂ (Escape Velocity)**—depend on a planet’s mass, using hypothetical variations of 80% to 120% of its nominal (actual) mass. Here’s what each part means:
 
-1. **Varying the Mass:**
-   - We multiply the nominal mass of each planet by factors of 0.8, 0.9, 1.0, 1.1, and 1.2.
-   - This produces a set of hypothetical masses. Only the factor 1.0 corresponds to the real, physically measured mass.
-   - Changing the mass in the equations allows us to see how the gravitational parameter $GM$ influences the speeds, even though in reality a planet’s mass remains fixed.
+1. **Varying the Mass:**                        
+    - We multiply the nominal mass of each planet by factors of 0.8, 0.9, 1.0, 1.1, and 1.2.
+    - This produces a set of hypothetical masses. Only the factor 1.0 corresponds to the real, physically measured mass.
+    - Changing the mass in the equations allows us to see how the gravitational parameter $GM$ influences the speeds, even though in reality a planet’s mass remains fixed.
 
 2. **Calculating the Velocities:**
    - **v₁ (Orbital Velocity):**  
