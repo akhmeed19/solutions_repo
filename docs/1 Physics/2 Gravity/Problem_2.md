@@ -345,7 +345,7 @@ In this simulation we explore how two key velocities—**$v₁$ (Orbital Velocit
      $$ v₁ = \sqrt{\frac{GM}{R}} $$  
      This is the speed required to maintain a circular orbit right at the planet’s surface. It depends on both the planet’s mass and its radius (which remains constant in our simulation).
     - **v₂ (Escape Velocity):**  
-     $$v₂ = \sqrt{\frac{2GM}{R}}$$  
+     $$ v₂ = \sqrt{\frac{2GM}{R}} $$  
      This is the speed required for a spacecraft to escape the planet’s gravitational pull. It is always $\sqrt{2}$ times $v₁$.
 
 3. **Real Mass Markers:**                   
