@@ -378,87 +378,80 @@ The black $“X”$ markers at the nominal mass (mass factor = 1.0) indicate the
 Overall, this exercise reveals the direct relationship between planetary mass and the speeds needed for orbiting and escaping. It provides insight into how sensitive these speeds are to changes in $GM$, even though in practice a planet’s mass does not change.
 
 ---
-### 3. Additional Simulation: Nominal Cosmic Velocities for Earth
+### 3. Additional Simulation: Nominal Cosmic Velocities for Earth, Mars, and Jupiter
 
 **Purpose:**  
-This simulation visualizes Earth's nominal (actual) cosmic velocities using vector arrows. Each arrow represents a different key velocity computed at Earth’s real mass and orbital parameters.
+This simulation visualizes the nominal (actual) cosmic velocities for Earth, Mars, and Jupiter using vector arrows. For each planet, the simulation computes and displays five key velocities based on the planet’s true mass and size:
+- **v₁ (Orbital Velocity):** The speed required to maintain a circular orbit at the planet’s surface.
+- **v₂ (Escape Velocity):** The speed needed to overcome the planet’s gravitational pull (always \(\sqrt{2}\) times \(v₁\)).
+- **v_orbit:** The orbital speed of the planet around the Sun.
+- **v_esc,Sun:** The solar escape speed at the planet’s orbital distance.
+- **v₃:** The additional speed required to escape the Sun’s gravity (i.e. \(v_{\text{esc,Sun}} - v_{\text{orbit}}\)).
 
-Below is the code and the resulting image, followed by a brief explanation.
+Each velocity is represented as a uniquely colored arrow with a label placed near its tip. This approach not only shows the individual values but also allows direct visual comparison of how these velocities differ among Earth, Mars, and Jupiter.
 
 ---
+
+#### Code for Earth
 
 ```python
 import math
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Constants
-G = 6.67430e-11        # Gravitational constant (m^3 kg^-1 s^-2)
-M_sun = 1.989e30       # Mass of the Sun (kg)
-
+# -------------------------- Nominal Cosmic Velocities for Earth --------------------------
 # Earth nominal parameters
-mass = 5.972e24        # kg
-radius = 6.371e6       # m
-orbital_radius = 1.496e11  # m
+mass_earth = 5.972e24        # kg
+radius_earth = 6.371e6       # m
+orbital_radius_earth = 1.496e11  # m
 
-# Compute nominal velocities for Earth
-v1 = math.sqrt(G * mass / radius)          # Orbital velocity at Earth's surface [m/s]
-v2 = math.sqrt(2 * G * mass / radius)      # Escape velocity from Earth's surface [m/s]
-v_orbit = math.sqrt(G * M_sun / orbital_radius)     # Earth's orbital speed around the Sun [m/s]
-v_esc_sun = math.sqrt(2 * G * M_sun / orbital_radius)  # Solar escape speed at Earth’s orbit [m/s]
-v3 = v_esc_sun - v_orbit                   # Additional speed needed for solar escape [m/s]
+# Compute Earth's nominal velocities
+v1_earth = math.sqrt(6.67430e-11 * mass_earth / radius_earth)          # Orbital velocity [m/s]
+v2_earth = math.sqrt(2 * 6.67430e-11 * mass_earth / radius_earth)        # Escape velocity [m/s]
+v_orbit_earth = math.sqrt(6.67430e-11 * 1.989e30 / orbital_radius_earth)  # Earth's orbital speed around the Sun [m/s]
+v_esc_sun_earth = math.sqrt(2 * 6.67430e-11 * 1.989e30 / orbital_radius_earth)  # Solar escape speed [m/s]
+v3_earth = v_esc_sun_earth - v_orbit_earth  # Additional speed for solar escape [m/s]
 
 # Convert to km/s
-v1_km = v1 / 1000
-v2_km = v2 / 1000
-v_orbit_km = v_orbit / 1000
-v_esc_sun_km = v_esc_sun / 1000
-v3_km = v3 / 1000
+v1_earth_km = v1_earth / 1000
+v2_earth_km = v2_earth / 1000
+v_orbit_earth_km = v_orbit_earth / 1000
+v_esc_sun_earth_km = v_esc_sun_earth / 1000
+v3_earth_km = v3_earth / 1000
 
-# We give each velocity a unique color and an angle for clarity
-velocities = [
-    {'label': 'v₁ (Orbital)', 'speed': v1_km,       'angle': 0,   'color': 'C0'},
-    {'label': 'v₂ (Escape)',  'speed': v2_km,       'angle': 45,  'color': 'C1'},
-    {'label': 'v_orbit',      'speed': v_orbit_km,  'angle': 90,  'color': 'C2'},
-    {'label': 'v_esc,Sun',    'speed': v_esc_sun_km,'angle': 135, 'color': 'C3'},
-    {'label': 'v₃',           'speed': v3_km,       'angle': 180, 'color': 'C4'}
+# Define velocities for Earth with unique angles and colors
+velocities_earth = [
+    {'label': 'v₁ (Orbital)', 'speed': v1_earth_km, 'angle': 0,   'color': 'C0'},
+    {'label': 'v₂ (Escape)',  'speed': v2_earth_km, 'angle': 45,  'color': 'C1'},
+    {'label': 'v_orbit',      'speed': v_orbit_earth_km, 'angle': 90,  'color': 'C2'},
+    {'label': 'v_esc,Sun',    'speed': v_esc_sun_earth_km, 'angle': 135, 'color': 'C3'},
+    {'label': 'v₃',           'speed': v3_earth_km, 'angle': 180, 'color': 'C4'}
 ]
 
 plt.figure(figsize=(8,8))
 origin = (0,0)
 
-# Plot each velocity as an arrow and label it near the arrow tip
-for vel in velocities:
+for vel in velocities_earth:
     label = vel['label']
     speed = vel['speed']
-    angle_deg = vel['angle']
-    color = vel['color']
-    
-    angle = np.deg2rad(angle_deg)
+    angle = np.deg2rad(vel['angle'])
     dx = speed * np.cos(angle)
     dy = speed * np.sin(angle)
     
-    # Draw the arrow
     plt.arrow(origin[0], origin[1], dx, dy,
               head_width=0.5, head_length=1,
               length_includes_head=True,
-              color=color, alpha=0.8, label=label)
-    
-    # Place text near the arrow tip (a bit beyond the arrow head)
-    text_x = dx * 1.05
-    text_y = dy * 1.05
-    plt.text(text_x, text_y, label, fontsize=10, color=color,
+              color=vel['color'], alpha=0.8, label=label)
+    plt.text(dx * 1.05, dy * 1.05, label, fontsize=10, color=vel['color'],
              ha='center', va='center')
 
-# Rebuild the legend from unique labels (optional)
 handles, labels = plt.gca().get_legend_handles_labels()
 by_label = dict(zip(labels, handles))
 plt.legend(by_label.values(), by_label.keys())
 
-max_speed = max(vel['speed'] for vel in velocities)
+max_speed = max(vel['speed'] for vel in velocities_earth)
 plt.xlim(-max_speed - 5, max_speed + 5)
 plt.ylim(-max_speed - 5, max_speed + 5)
-
 plt.xlabel('Velocity component (km/s)')
 plt.ylabel('Velocity component (km/s)')
 plt.title('Nominal Cosmic Velocities for Earth')
@@ -468,8 +461,149 @@ plt.show()
 
 ---
 
-#### Simulation Output
+#### Code for Mars
 
+```python
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+
+# -------------------------- Nominal Cosmic Velocities for Mars --------------------------
+# Mars nominal parameters
+mass_mars = 6.4171e23       # kg
+radius_mars = 3.3895e6      # m
+orbital_radius_mars = 2.279e11  # m
+
+# Compute Mars' nominal velocities
+v1_mars = math.sqrt(6.67430e-11 * mass_mars / radius_mars)          # Orbital velocity [m/s]
+v2_mars = math.sqrt(2 * 6.67430e-11 * mass_mars / radius_mars)        # Escape velocity [m/s]
+v_orbit_mars = math.sqrt(6.67430e-11 * 1.989e30 / orbital_radius_mars)  # Mars' orbital speed around the Sun [m/s]
+v_esc_sun_mars = math.sqrt(2 * 6.67430e-11 * 1.989e30 / orbital_radius_mars)  # Solar escape speed [m/s]
+v3_mars = v_esc_sun_mars - v_orbit_mars  # Additional speed for solar escape [m/s]
+
+# Convert to km/s
+v1_mars_km = v1_mars / 1000
+v2_mars_km = v2_mars / 1000
+v_orbit_mars_km = v_orbit_mars / 1000
+v_esc_sun_mars_km = v_esc_sun_mars / 1000
+v3_mars_km = v3_mars / 1000
+
+# Define velocities for Mars with unique angles and colors
+velocities_mars = [
+    {'label': 'v₁ (Orbital)', 'speed': v1_mars_km, 'angle': 0,   'color': 'C0'},
+    {'label': 'v₂ (Escape)',  'speed': v2_mars_km, 'angle': 45,  'color': 'C1'},
+    {'label': 'v_orbit',      'speed': v_orbit_mars_km, 'angle': 90,  'color': 'C2'},
+    {'label': 'v_esc,Sun',    'speed': v_esc_sun_mars_km, 'angle': 135, 'color': 'C3'},
+    {'label': 'v₃',           'speed': v3_mars_km, 'angle': 180, 'color': 'C4'}
+]
+
+plt.figure(figsize=(8,8))
+origin = (0,0)
+
+for vel in velocities_mars:
+    label = vel['label']
+    speed = vel['speed']
+    angle = np.deg2rad(vel['angle'])
+    dx = speed * np.cos(angle)
+    dy = speed * np.sin(angle)
+    
+    plt.arrow(origin[0], origin[1], dx, dy,
+              head_width=0.5, head_length=1,
+              length_includes_head=True,
+              color=vel['color'], alpha=0.8, label=label)
+    plt.text(dx * 1.05, dy * 1.05, label, fontsize=10, color=vel['color'],
+             ha='center', va='center')
+
+handles, labels = plt.gca().get_legend_handles_labels()
+by_label = dict(zip(labels, handles))
+plt.legend(by_label.values(), by_label.keys())
+
+max_speed = max(vel['speed'] for vel in velocities_mars)
+plt.xlim(-max_speed - 5, max_speed + 5)
+plt.ylim(-max_speed - 5, max_speed + 5)
+plt.xlabel('Velocity component (km/s)')
+plt.ylabel('Velocity component (km/s)')
+plt.title('Nominal Cosmic Velocities for Mars')
+plt.grid(True)
+plt.show()
+```
+
+---
+
+#### Code for Jupiter
+
+```python
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+
+# -------------------------- Nominal Cosmic Velocities for Jupiter --------------------------
+# Jupiter nominal parameters
+mass_jupiter = 1.898e27        # kg
+radius_jupiter = 6.9911e7      # m
+orbital_radius_jupiter = 7.785e11  # m
+
+# Compute Jupiter's nominal velocities
+v1_jupiter = math.sqrt(6.67430e-11 * mass_jupiter / radius_jupiter)          # Orbital velocity [m/s]
+v2_jupiter = math.sqrt(2 * 6.67430e-11 * mass_jupiter / radius_jupiter)        # Escape velocity [m/s]
+v_orbit_jupiter = math.sqrt(6.67430e-11 * 1.989e30 / orbital_radius_jupiter)  # Jupiter's orbital speed around the Sun [m/s]
+v_esc_sun_jupiter = math.sqrt(2 * 6.67430e-11 * 1.989e30 / orbital_radius_jupiter)  # Solar escape speed [m/s]
+v3_jupiter = v_esc_sun_jupiter - v_orbit_jupiter  # Additional speed for solar escape [m/s]
+
+# Convert to km/s
+v1_jupiter_km = v1_jupiter / 1000
+v2_jupiter_km = v2_jupiter / 1000
+v_orbit_jupiter_km = v_orbit_jupiter / 1000
+v_esc_sun_jupiter_km = v_esc_sun_jupiter / 1000
+v3_jupiter_km = v3_jupiter / 1000
+
+# Define velocities for Jupiter with unique angles and colors
+velocities_jupiter = [
+    {'label': 'v₁ (Orbital)', 'speed': v1_jupiter_km, 'angle': 0,   'color': 'C0'},
+    {'label': 'v₂ (Escape)',  'speed': v2_jupiter_km, 'angle': 45,  'color': 'C1'},
+    {'label': 'v_orbit',      'speed': v_orbit_jupiter_km, 'angle': 90,  'color': 'C2'},
+    {'label': 'v_esc,Sun',    'speed': v_esc_sun_jupiter_km, 'angle': 135, 'color': 'C3'},
+    {'label': 'v₃',           'speed': v3_jupiter_km, 'angle': 180, 'color': 'C4'}
+]
+
+plt.figure(figsize=(8,8))
+origin = (0,0)
+
+for vel in velocities_jupiter:
+    label = vel['label']
+    speed = vel['speed']
+    angle = np.deg2rad(vel['angle'])
+    dx = speed * np.cos(angle)
+    dy = speed * np.sin(angle)
+    
+    plt.arrow(origin[0], origin[1], dx, dy,
+              head_width=0.5, head_length=1,
+              length_includes_head=True,
+              color=vel['color'], alpha=0.8, label=label)
+    plt.text(dx * 1.05, dy * 1.05, label, fontsize=10, color=vel['color'],
+             ha='center', va='center')
+
+handles, labels = plt.gca().get_legend_handles_labels()
+by_label = dict(zip(labels, handles))
+plt.legend(by_label.values(), by_label.keys())
+
+max_speed = max(vel['speed'] for vel in velocities_jupiter)
+plt.xlim(-max_speed - 5, max_speed + 5)
+plt.ylim(-max_speed - 5, max_speed + 5)
+plt.xlabel('Velocity component (km/s)')
+plt.ylabel('Velocity component (km/s)')
+plt.title('Nominal Cosmic Velocities for Jupiter')
+plt.grid(True)
+plt.show()
+```
+
+---
+
+### Displaying the Images Side by Side in Markdown
+
+You can use an HTML table in your Markdown file to show the resulting images for Earth, Mars, and Jupiter in one row:
+
+```html
 <table>
   <tr>
     <td align="center">
@@ -486,20 +620,29 @@ plt.show()
     </td>
   </tr>
 </table>
+```
 
 ---
 
 ### Explanation
 
-This simulation displays Earth’s nominal cosmic velocities as vector arrows: 
+This set of simulations displays the nominal cosmic velocities for Earth, Mars, and Jupiter as vector arrows. Each simulation computes five key velocities for the given planet:
+  
+- **v₁ (Orbital Velocity):** The speed needed for a circular orbit at the planet’s surface.
+- **v₂ (Escape Velocity):** The speed required to escape the planet’s gravitational pull (\(\sqrt{2}\) times \(v₁\)).
+- **v_orbit:** The orbital speed of the planet around the Sun.
+- **v_esc,Sun:** The escape speed from the Sun at the planet’s orbital distance.
+- **v₃:** The extra speed needed to overcome the Sun’s gravitational pull (i.e. \(v_{\text{esc,Sun}} - v_{\text{orbit}}\)).
 
-  - **$v₁$ (Orbital)**: The speed required to maintain a circular orbit near Earth's surface.
-  - **$v₂$ (Escape)**: The speed needed to escape Earth's gravity (which is $\sqrt{2}$ times $v₁$).
-  - **$v_orbit$**: Earth’s orbital speed around the Sun.
-  - **$v_esc,Sun$**: The solar escape speed at Earth's orbital distance.
-  - **$v₃$**: The extra speed needed to leave the Sun’s gravitational influence (calculated as $v_{\text{esc,Sun}} - v_{\text{orbit}}$).
+Each arrow is plotted with a unique angle and color and labeled near its tip for clarity. By comparing these vector diagrams:
 
-Each arrow is plotted with a unique angle and color, and text labels are placed near the arrow tips for clarity. This vector-based representation allows you to compare the magnitudes of these velocities directly.
+- **Earth’s arrows** provide a baseline of speeds for a planet with moderate mass and size.
+- **Mars’ arrows** are noticeably shorter, reflecting its lower mass and weaker gravity.
+- **Jupiter’s arrows** are much longer, indicating significantly higher speeds due to its massive gravitational pull.
+
+Using an HTML table in Markdown, you can display the images for all three planets side by side, allowing you to visually compare their nominal cosmic velocities.
+
+This comprehensive simulation and the side-by-side image display help illustrate how planetary properties influence key cosmic speeds, which is vital for space mission planning.
 
 ---
 ### 2. Hohmann Transfer Simulation
