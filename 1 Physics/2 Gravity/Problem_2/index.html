@@ -634,7 +634,23 @@ plt.show()
 </code></pre>
 <hr/>
 <h4 id="simulation-output_2">Simulation Output</h4>
-<p><img alt="Nominal Cosmic Velocities for Earth" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/nominal%20cosmic%20velocities%20for%20earth.png"/></p>
+<table>
+<tr>
+<td align="center">
+<img src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/nominal%20cosmic%20velocities%20for%20earth.png" width="300"/><br/>
+<strong>Earth</strong>
+</td>
+<td align="center">
+<img src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/nominal%20cosmic%20velocities%20for%20mars.png" width="300"/><br/>
+<strong>Mars</strong>
+</td>
+<td align="center">
+<img src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/nominal%20cosmic%20velocities%20for%20jupiter.png" width="300"/><br/>
+<strong>Jupiter</strong>
+</td>
+</tr>
+</table>
+<!-- ![Nominal Cosmic Velocities for Earth](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem2/nominal%20cosmic%20velocities%20for%20earth.png) -->
 <hr/>
 <h3 id="explanation">Explanation</h3>
 <p>This simulation displays Earth’s nominal cosmic velocities as vector arrows: </p>
@@ -649,12 +665,12 @@ plt.show()
 <hr/>
 <h3 id="2-hohmann-transfer-simulation">2. Hohmann Transfer Simulation</h3>
 <p><strong>Purpose</strong>: Demonstrate how cosmic velocities are applied in interplanetary travel by simulating the most fuel-efficient path between Earth and Mars.</p>
-<p><strong>Physics Link</strong>:<br/>
-- Uses the <strong>vis-viva equation</strong> (from the derivations) to calculate transfer orbit velocities.<br/>
-- Shows how a <strong>partial escape velocity</strong> (not full <span class="arithmatex">\(v_2\)</span>) is sufficient when leveraging the Sun’s gravity.</p>
-<p><strong>How It Differs from the Previous Simulation</strong>:<br/>
+<p><strong>Physics Link</strong>:<br>
+- Uses the <strong>vis-viva equation</strong> (from the derivations) to calculate transfer orbit velocities.<br>
+- Shows how a <strong>partial escape velocity</strong> (not full <span class="arithmatex">\(v_2\)</span>) is sufficient when leveraging the Sun’s gravity.</br></br></p>
+<p><strong>How It Differs from the Previous Simulation</strong>:<br>
 - The bar chart compares <em>theoretical thresholds</em> (<span class="arithmatex">\(v_1\)</span>, <span class="arithmatex">\(v_2\)</span>, <span class="arithmatex">\(v_3\)</span>).<br/>
-- This simulation models a <em>practical application</em>: computing the delta‑v needed for a Hohmann transfer between Earth and Mars, and visualizing the transfer trajectory.</p>
+- This simulation models a <em>practical application</em>: computing the delta‑v needed for a Hohmann transfer between Earth and Mars, and visualizing the transfer trajectory.</br></p>
 <pre><code class="language-python">import numpy as np
 
 def hohmann_transfer(r1, r2, M_central):
