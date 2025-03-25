@@ -339,39 +339,41 @@ In this simulation we explore how two key velocities—**v₁ (Orbital Velocity)
     - This produces a set of hypothetical masses. Only the factor 1.0 corresponds to the real, physically measured mass.
     - Changing the mass in the equations allows us to see how the gravitational parameter $GM$ influences the speeds, even though in reality a planet’s mass remains fixed.
 
-2. **Calculating the Velocities:**
-   - **v₁ (Orbital Velocity):**  
+2. **Calculating the Velocities:**          
+    - **v₁ (Orbital Velocity):**  
      $$ v₁ = \sqrt{\frac{GM}{R}} $$  
      This is the speed required to maintain a circular orbit right at the planet’s surface. It depends on both the planet’s mass and its radius (which remains constant in our simulation).
-   - **v₂ (Escape Velocity):**  
+    - **v₂ (Escape Velocity):**  
      $$v₂ = \sqrt{\frac{2GM}{R}}$$  
      This is the speed required for a spacecraft to escape the planet’s gravitational pull. It is always $\sqrt{2}$ times $v₁$.
 
-3. **Real Mass Markers:**
-   - For each planet, the data point computed at the mass factor of 1.0 is the only physically real value because it uses the planet’s actual mass.
-   - We mark this real (nominal) mass point on both the $v₁$ and $v₂$ curves with a black “X.”
-   - Although the two markers appear at the same mass value on the x-axis, they represent two different speeds: one for orbital motion $(v₁)$ and one for escape $(v₂)$.
-   - These markers help you distinguish between the **real** (nominal) scenario and the other hypothetical cases (0.8, 0.9, 1.1, and 1.2 factors).
+3. **Real Mass Markers:**                   
+    - For each planet, the data point computed at the mass factor of 1.0 is the only physically real value because it uses the planet’s actual mass.
+    - We mark this real (nominal) mass point on both the $v₁$ and $v₂$ curves with a black “X.”
+    - Although the two markers appear at the same mass value on the x-axis, they represent two different speeds: one for orbital motion $(v₁)$ and one for escape $(v₂)$.
+    - These markers help you distinguish between the **real** (nominal) scenario and the other hypothetical cases (0.8, 0.9, 1.1, and 1.2 factors).
 
-4. **Logarithmic X-axis:**
-   - The x-axis is set to a log scale because Jupiter’s mass is many orders of magnitude larger than Earth’s or Mars’.
-   - This scaling prevents the smaller masses from being squashed near zero and makes all data points easier to compare visually.
+4. **Logarithmic X-axis:**                  
+    - The x-axis is set to a log scale because Jupiter’s mass is many orders of magnitude larger than Earth’s or Mars’.
+    - This scaling prevents the smaller masses from being squashed near zero and makes all data points easier to compare visually.
 
 ---
 
 ### Interpretation
 
-- **Scaling with Mass:**  
-  As the mass increases, both **v₁** and **v₂** increase in accordance with $\sqrt{M}$. This explains why Jupiter’s velocities are significantly higher than Earth’s or Mars’.
+- **Scaling with Mass:**                      
+   As the mass increases, both **v₁** and **v₂** increase in accordance with $\sqrt{M}$. This explains why Jupiter’s velocities are significantly higher than Earth’s or Mars’.
 
-- **Sensitivity Analysis:**  
-  Although the mass variations are purely hypothetical, they illustrate how changes in the gravitational parameter $GM$ affect the orbital and escape speeds.
+- **Sensitivity Analysis:**                  
+   Although the mass variations are purely hypothetical, they illustrate how changes in the gravitational parameter $GM$ affect the orbital and escape speeds.
 
-- **Practical Distinction:**  
-  The two velocities represent different physical requirements:  
-  - **v₁ (Orbital Velocity)** is the speed needed for a stable orbit near the planet’s surface.
-  - **v₂ (Escape Velocity)** is the higher speed required to overcome the planet’s gravitational pull.
-  The black $“X”$ markers at the nominal mass (mass factor = 1.0) indicate the actual speeds computed using the planet’s true mass, while the other points show “what-if” scenarios.
+- **Practical Distinction:**                  
+   The two velocities represent different physical requirements:                  
+     - **v₁ (Orbital Velocity)** is the speed needed for a stable orbit near the planet’s surface.
+     - **v₂ (Escape Velocity)** is the higher speed required to overcome the planet’s gravitational pull.
+  
+  
+The black $“X”$ markers at the nominal mass (mass factor = 1.0) indicate the actual speeds computed using the planet’s true mass, while the other points show “what-if” scenarios.
 
 Overall, this exercise reveals the direct relationship between planetary mass and the speeds needed for orbiting and escaping. It provides insight into how sensitive these speeds are to changes in $GM$, even though in practice a planet’s mass does not change.
 
