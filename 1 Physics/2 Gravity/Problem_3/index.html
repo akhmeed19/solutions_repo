@@ -292,12 +292,14 @@ V_{\text{eff}}(r) = -\frac{\mu}{r} + \frac{L^2}{2r^2}.
 - <strong>Energy considerations:</strong> Classifying orbits as elliptical, parabolic, or hyperbolic based on the specific orbital energy.
 - <strong>Effective potential:</strong> Providing insight into the stability of orbits.</p>
 <p>This theoretical framework forms the basis for designing simulations and computational tools to predict payload trajectories for space missions.</p>
+<p>Below is the updated Markdown document that includes the code, the image of the <strong>output</strong>, and a detailed explanation of that output. Note that we’ve replaced references to "simulation" with "output," as requested.</p>
+<hr/>
 <h2 id="numerical-simulation">Numerical Simulation</h2>
 <p>We use Python along with the <code>scipy.integrate.solve_ivp</code> solver to numerically integrate the equations of motion. The payload is assumed to be released at a given altitude above Earth's surface. Three cases are simulated:</p>
 <ol>
 <li><strong>Circular Orbit:</strong> Initial speed equal to <span class="arithmatex">\(v_{\text{circ}} = \sqrt{\mu/r}\)</span>.</li>
-<li><strong>Elliptical / Reentry:</strong> A lower initial speed (e.g., <span class="arithmatex">\(0.8 \times v_{\text{circ}}\)</span>) causing an elliptical path that may intersect Earth.</li>
-<li><strong>Hyperbolic Trajectory:</strong> A speed greater than the escape velocity (<span class="arithmatex">\(v_{\text{esc}} = \sqrt{2\mu/r}\)</span>), for example, <span class="arithmatex">\(1.1 \times v_{\text{esc}}\)</span>.</li>
+<li><strong>Elliptical / Reentry:</strong> A lower initial speed (e.g., <span class="arithmatex">\(0.8 \times v_{\text{circ}})\)</span> causing an elliptical path that may intersect Earth.</li>
+<li><strong>Hyperbolic Trajectory:</strong> A speed greater than the escape velocity <span class="arithmatex">\(\bigl(v_{\text{esc}} = \sqrt{2\mu/r}\bigr)\)</span>, for example, <span class="arithmatex">\(1.1 \times v_{\text{esc}}\)</span>.</li>
 </ol>
 <h2 id="python-script">Python Script</h2>
 <p>Below is the complete Python script:</p>
@@ -321,6 +323,19 @@ def dynamics(t, state):
     ay = -mu * y / r**3
     return [vx, vy, ax, ay]
 
+def collision_event(t, state):
+    """
+    Event function to detect collision with Earth.
+    Integration stops when r - R_earth = 0.
+    """
+    x, y, _, _ = state
+    r = np.sqrt(x**2 + y**2)
+    return r - R_earth
+
+# Set the event to terminate the integration and only trigger when decreasing through zero.
+collision_event.terminal = True
+collision_event.direction = -1
+
 def simulate_trajectory(r0, v0, t_span, t_eval):
     """
     Simulates the payload trajectory given initial conditions.
@@ -328,11 +343,15 @@ def simulate_trajectory(r0, v0, t_span, t_eval):
     Parameters:
     - r0: Initial position vector [x, y]
     - v0: Initial velocity vector [vx, vy]
-    - t_span: Tuple for the simulation time span (start, end)
+    - t_span: Tuple for the time span (start, end) of the integration
     - t_eval: Array of time points at which to store the solution
+
+    Returns:
+    - sol: The solution object from solve_ivp.
     """
     state0 = [r0[0], r0[1], v0[0], v0[1]]
-    sol = solve_ivp(dynamics, t_span, state0, t_eval=t_eval, rtol=1e-8)
+    sol = solve_ivp(dynamics, t_span, state0, t_eval=t_eval,
+                    events=collision_event, rtol=1e-8)
     return sol
 
 # Initial Conditions
@@ -351,7 +370,7 @@ v0_ellipse = [0, 0.8 * v_circ]
 v_esc = np.sqrt(2 * mu / r_mag)
 v0_hyper = [0, 1.1 * v_esc]
 
-# Simulation time parameters
+# Time parameters
 t_span = (0, 6000)  # seconds
 t_eval = np.linspace(t_span[0], t_span[1], 10000)
 
@@ -360,22 +379,22 @@ sol_circ = simulate_trajectory(r0, v0_circ, t_span, t_eval)
 sol_ellipse = simulate_trajectory(r0, v0_ellipse, t_span, t_eval)
 sol_hyper = simulate_trajectory(r0, v0_hyper, t_span, t_eval)
 
-# Plot the trajectories
+# Plot the trajectories normalized by Earth's radius for better visualization
 plt.figure(figsize=(8, 8))
 
-# Draw Earth
+# Draw Earth (normalized)
 theta = np.linspace(0, 2 * np.pi, 500)
-earth_x = R_earth * np.cos(theta)
-earth_y = R_earth * np.sin(theta)
+earth_x = np.cos(theta)  # Normalized x-coordinates (R_earth = 1)
+earth_y = np.sin(theta)  # Normalized y-coordinates
 plt.fill(earth_x, earth_y, 'b', alpha=0.3, label="Earth")
 
-# Plot each trajectory
-plt.plot(sol_circ.y[0], sol_circ.y[1], 'r', label="Circular Orbit")
-plt.plot(sol_ellipse.y[0], sol_ellipse.y[1], 'g', label="Elliptical / Reentry")
-plt.plot(sol_hyper.y[0], sol_hyper.y[1], 'm', label="Hyperbolic Trajectory")
+# Plot each trajectory (normalize coordinates by dividing by R_earth)
+plt.plot(sol_circ.y[0] / R_earth, sol_circ.y[1] / R_earth, 'r', label="Circular Orbit")
+plt.plot(sol_ellipse.y[0] / R_earth, sol_ellipse.y[1] / R_earth, 'g', label="Elliptical / Reentry")
+plt.plot(sol_hyper.y[0] / R_earth, sol_hyper.y[1] / R_earth, 'm', label="Hyperbolic Trajectory")
 
-plt.xlabel("x (m)")
-plt.ylabel("y (m)")
+plt.xlabel("x (in Earth radii)")
+plt.ylabel("y (in Earth radii)")
 plt.title("Payload Trajectories Near Earth")
 plt.legend()
 plt.axis('equal')
@@ -386,11 +405,11 @@ plt.show()
 <ol>
 <li>
 <p><strong>Dynamics Function:</strong><br/>
-   The <code>dynamics</code> function computes the derivatives of the state vector (position and velocity) using Newton’s law of gravitation.</p>
+   The <code>dynamics</code> function computes the derivatives of the state vector <span class="arithmatex">\([x, y, vx, vy]\)</span> using Newton’s law of gravitation, <span class="arithmatex">\(\ddot{\vec{r}} = -\mu \vec{r}/r^3\)</span>.</p>
 </li>
 <li>
 <p><strong>Simulation Function:</strong><br/>
-   The <code>simulate_trajectory</code> function sets up the initial state and integrates the equations over the defined time span using the <code>solve_ivp</code> solver.</p>
+   The <code>simulate_trajectory</code> function sets up the initial state and integrates the equations over the defined time span using the <code>solve_ivp</code> solver. The collision event stops the integration when the payload intersects Earth’s surface.</p>
 </li>
 <li>
 <p><strong>Initial Conditions:</strong> </p>
@@ -399,25 +418,58 @@ plt.show()
 <li>
 <p>Three initial velocity cases are defined:</p>
 <ul>
-<li><strong>Circular orbit:</strong> using the circular velocity.</li>
+<li><strong>Circular orbit:</strong> using the circular velocity (<span class="arithmatex">\(v_{\text{circ}} = \sqrt{\mu / r}\)</span>).</li>
 <li><strong>Elliptical trajectory:</strong> using 80% of the circular velocity.</li>
-<li><strong>Hyperbolic trajectory:</strong> using 110% of the escape velocity.</li>
+<li><strong>Hyperbolic trajectory:</strong> using 110% of the escape velocity (<span class="arithmatex">\(v_{\text{esc}} = \sqrt{2\mu / r}\)</span>).</li>
 </ul>
 </li>
 <li>
 <p><strong>Plotting:</strong><br/>
-   The trajectories are plotted in the <span class="arithmatex">\(xy\)</span>-plane, with Earth represented as a filled circle. Each trajectory is labeled for clarity.</p>
+   The code normalizes positions by Earth's radius to make the planet appear as a unit circle. Each trajectory is plotted in the <span class="arithmatex">\(xy\)</span>-plane, with Earth shown as a filled blue circle.</p>
 </li>
 </ol>
-<h2 id="graphical-representations">Graphical Representations</h2>
-<p>The script produces a plot showing:</p>
+<h2 id="graphical-representations-output">Graphical Representations (Output)</h2>
+<p><img alt="Payload Trajectories Near Earth" src="attachment:image.png"/></p>
+<h3 id="explanation-of-the-output">Explanation of the Output</h3>
+<p>The figure above is the <strong>output</strong> produced by running the code. The <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> axes are measured in units of Earth’s radius. Here is what you see:</p>
 <ul>
-<li><strong>Circular Orbit:</strong> A closed, circular path around Earth.</li>
-<li><strong>Elliptical / Reentry Trajectory:</strong> An ellipse that may intersect Earth’s surface, indicating a reentry scenario.</li>
-<li><strong>Hyperbolic Trajectory:</strong> An open curve representing an escape trajectory.</li>
+<li>
+<p><strong>Blue Circle (Earth):</strong><br/>
+  This represents Earth, normalized to have radius <span class="arithmatex">\(1\)</span>. The payloads start at <span class="arithmatex">\(1 + \frac{200\text{ km}}{R_{\text{earth}}}\approx 1.03\)</span> Earth radii from the center.</p>
+</li>
+<li>
+<p><strong>Red Curve (Circular Orbit):</strong><br/>
+  This path remains nearly at a constant distance from Earth’s center, indicating the payload has just enough velocity to maintain a circular orbit at that altitude.</p>
+</li>
+<li>
+<p><strong>Green Curve (Elliptical / Reentry):</strong><br/>
+  With an initial velocity of <span class="arithmatex">\(0.8 \times v_{\text{circ}}\)</span>, the payload lacks the speed to sustain orbit. Its trajectory intersects Earth’s surface, meaning it reenters. The code’s event detection stops the integration once it “collides” with Earth.</p>
+</li>
+<li>
+<p><strong>Magenta Curve (Hyperbolic Trajectory):</strong><br/>
+  With a speed of <span class="arithmatex">\(1.1 \times v_{\text{esc}}\)</span>, the payload follows an open-ended path. It approaches Earth but ultimately escapes Earth’s gravity, heading away indefinitely on a hyperbolic trajectory.</p>
+</li>
 </ul>
-<hr/>
-<p>This simulation demonstrates how different initial conditions can lead to dramatically different paths—critical for applications like satellite deployment, payload recovery, or interplanetary missions.</p>
+<h4 id="key-takeaways">Key Takeaways</h4>
+<ol>
+<li>
+<p><strong>Different Speeds, Different Paths:</strong><br/>
+   The output shows how altering the initial velocity changes the shape of the path—circular, elliptical (with reentry), or hyperbolic (escape).</p>
+</li>
+<li>
+<p><strong>Relationship of <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span>:</strong><br/>
+   The axes represent the horizontal and vertical positions in Earth-radii. A point on the plot <span class="arithmatex">\((x, y)\)</span> tells you the payload’s distance and direction from Earth’s center at a given time.</p>
+</li>
+<li>
+<p><strong>Collision Detection:</strong><br/>
+   The green ellipse stops exactly at the planet’s surface because the code terminates the integration once the payload radius <span class="arithmatex">\(r\)</span> becomes less than or equal to Earth’s radius.</p>
+</li>
+<li>
+<p><strong>Normalization Improves Clarity:</strong><br/>
+   By dividing by <span class="arithmatex">\(R_{\text{earth}}\)</span>, the plot clearly shows Earth as a unit circle and highlights the relative size and shape of each trajectory.</p>
+</li>
+</ol>
+<p>This <strong>output</strong> illustrates how varying initial velocities near Earth can result in bound orbits, reentry paths, or escape trajectories, a concept central to orbital mechanics and space mission planning.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
