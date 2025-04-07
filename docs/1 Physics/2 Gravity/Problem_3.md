@@ -176,9 +176,9 @@ Below is the updated Markdown document that includes the code, the image of the 
 
 We use Python along with the `scipy.integrate.solve_ivp` solver to numerically integrate the equations of motion. The payload is assumed to be released at a given altitude above Earth's surface. Three cases are simulated:
 
-1. **Circular Orbit:** Initial speed equal to \(v_{\text{circ}} = \sqrt{\mu/r}\).
-2. **Elliptical / Reentry:** A lower initial speed (e.g., \(0.8 \times v_{\text{circ}})\) causing an elliptical path that may intersect Earth.
-3. **Hyperbolic Trajectory:** A speed greater than the escape velocity \(\bigl(v_{\text{esc}} = \sqrt{2\mu/r}\bigr)\), for example, \(1.1 \times v_{\text{esc}}\).
+1. **Circular Orbit:** Initial speed equal to $v_{\text{circ}} = \sqrt{\mu/r}$.
+2. **Elliptical / Reentry:** A lower initial speed (e.g., $0.8 \times v_{\text{circ}})$ causing an elliptical path that may intersect Earth.
+3. **Hyperbolic Trajectory:** A speed greater than the escape velocity $\bigl(v_{\text{esc}} = \sqrt{2\mu/r}\bigr)$, for example, $1.1 \times v_{\text{esc}}$.
 
 ## Python Script
 
@@ -287,7 +287,7 @@ plt.show()
 ## Explanation of the Code
 
 1. **Dynamics Function:**  
-   The `dynamics` function computes the derivatives of the state vector \([x, y, vx, vy]\) using Newton’s law of gravitation, \(\ddot{\vec{r}} = -\mu \vec{r}/r^3\).
+   The `dynamics` function computes the derivatives of the state vector $[x, y, vx, vy]$ using Newton’s law of gravitation, $\ddot{\vec{r}} = -\mu \vec{r}/r^3$.
 
 2. **Simulation Function:**  
    The `simulate_trajectory` function sets up the initial state and integrates the equations over the defined time span using the `solve_ivp` solver. The collision event stops the integration when the payload intersects Earth’s surface.
@@ -295,45 +295,45 @@ plt.show()
 3. **Initial Conditions:**  
    - The payload is assumed to be released from a position 200 km above Earth's surface.
    - Three initial velocity cases are defined:
-     - **Circular orbit:** using the circular velocity (\(v_{\text{circ}} = \sqrt{\mu / r}\)).
+     - **Circular orbit:** using the circular velocity ($v_{\text{circ}} = \sqrt{\mu / r}$).
      - **Elliptical trajectory:** using 80% of the circular velocity.
-     - **Hyperbolic trajectory:** using 110% of the escape velocity (\(v_{\text{esc}} = \sqrt{2\mu / r}\)).
+     - **Hyperbolic trajectory:** using 110% of the escape velocity ($v_{\text{esc}} = \sqrt{2\mu / r}$).
 
 4. **Plotting:**  
-   The code normalizes positions by Earth's radius to make the planet appear as a unit circle. Each trajectory is plotted in the \(xy\)-plane, with Earth shown as a filled blue circle.
+   The code normalizes positions by Earth's radius to make the planet appear as a unit circle. Each trajectory is plotted in the $xy$-plane, with Earth shown as a filled blue circle.
 
 ## Graphical Representations (Output)
 
-![Payload Trajectories Near Earth](attachment:image.png)
+![Payload Trajectories Near Earth](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem3/PayloadTrajectoriesNearEarth.png)
 
 ### Explanation of the Output
 
-The figure above is the **output** produced by running the code. The \(x\) and \(y\) axes are measured in units of Earth’s radius. Here is what you see:
+The figure above is the **output** produced by running the code. The $x$ and $y$ axes are measured in units of Earth’s radius. Here is what you see:
 
 - **Blue Circle (Earth):**  
-  This represents Earth, normalized to have radius \(1\). The payloads start at \(1 + \frac{200\text{ km}}{R_{\text{earth}}}\approx 1.03\) Earth radii from the center.
+  This represents Earth, normalized to have radius $1$. The payloads start at $1 + \frac{200\text{ km}}{R_{\text{earth}}}\approx 1.03$ Earth radii from the center.
 
 - **Red Curve (Circular Orbit):**  
   This path remains nearly at a constant distance from Earth’s center, indicating the payload has just enough velocity to maintain a circular orbit at that altitude.
 
 - **Green Curve (Elliptical / Reentry):**  
-  With an initial velocity of \(0.8 \times v_{\text{circ}}\), the payload lacks the speed to sustain orbit. Its trajectory intersects Earth’s surface, meaning it reenters. The code’s event detection stops the integration once it “collides” with Earth.
+  With an initial velocity of $0.8 \times v_{\text{circ}}$, the payload lacks the speed to sustain orbit. Its trajectory intersects Earth’s surface, meaning it reenters. The code’s event detection stops the integration once it “collides” with Earth.
 
 - **Magenta Curve (Hyperbolic Trajectory):**  
-  With a speed of \(1.1 \times v_{\text{esc}}\), the payload follows an open-ended path. It approaches Earth but ultimately escapes Earth’s gravity, heading away indefinitely on a hyperbolic trajectory.
+  With a speed of $1.1 \times v_{\text{esc}}$, the payload follows an open-ended path. It approaches Earth but ultimately escapes Earth’s gravity, heading away indefinitely on a hyperbolic trajectory.
 
 #### Key Takeaways
 
 1. **Different Speeds, Different Paths:**  
    The output shows how altering the initial velocity changes the shape of the path—circular, elliptical (with reentry), or hyperbolic (escape).
 
-2. **Relationship of \(x\) and \(y\):**  
-   The axes represent the horizontal and vertical positions in Earth-radii. A point on the plot \((x, y)\) tells you the payload’s distance and direction from Earth’s center at a given time.
+2. **Relationship of $x$ and $y$:**  
+   The axes represent the horizontal and vertical positions in Earth-radii. A point on the plot $(x, y)$ tells you the payload’s distance and direction from Earth’s center at a given time.
 
 3. **Collision Detection:**  
-   The green ellipse stops exactly at the planet’s surface because the code terminates the integration once the payload radius \(r\) becomes less than or equal to Earth’s radius.
+   The green ellipse stops exactly at the planet’s surface because the code terminates the integration once the payload radius $r$ becomes less than or equal to Earth’s radius.
 
 4. **Normalization Improves Clarity:**  
-   By dividing by \(R_{\text{earth}}\), the plot clearly shows Earth as a unit circle and highlights the relative size and shape of each trajectory.
+   By dividing by $R_{\text{earth}}$, the plot clearly shows Earth as a unit circle and highlights the relative size and shape of each trajectory.
 
 This **output** illustrates how varying initial velocities near Earth can result in bound orbits, reentry paths, or escape trajectories, a concept central to orbital mechanics and space mission planning.
