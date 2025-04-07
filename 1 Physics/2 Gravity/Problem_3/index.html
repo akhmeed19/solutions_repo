@@ -295,26 +295,38 @@ V_{\text{eff}}(r) = -\frac{\mu}{r} + \frac{L^2}{2r^2}.
 <p>Below is the updated Markdown document that includes the code, the image of the <strong>output</strong>, and a detailed explanation of that output. Note that we’ve replaced references to "simulation" with "output," as requested.</p>
 <hr/>
 <h2 id="numerical-simulation">Numerical Simulation</h2>
-<p>We use Python along with the <code>scipy.integrate.solve_ivp</code> solver to numerically integrate the equations of motion. The payload is assumed to be released at a given altitude above Earth's surface. Three cases are simulated:</p>
-<ol>
-<li><strong>Circular Orbit:</strong> Initial speed equal to <span class="arithmatex">\(v_{\text{circ}} = \sqrt{\mu/r}\)</span>.</li>
-<li><strong>Elliptical / Reentry:</strong> A lower initial speed (e.g., <span class="arithmatex">\(0.8 \times v_{\text{circ}})\)</span> causing an elliptical path that may intersect Earth.</li>
-<li><strong>Hyperbolic Trajectory:</strong> A speed greater than the escape velocity <span class="arithmatex">\(\bigl(v_{\text{esc}} = \sqrt{2\mu/r}\bigr)\)</span>, for example, <span class="arithmatex">\(1.1 \times v_{\text{esc}}\)</span>.</li>
-</ol>
-<h2 id="python-script">Python Script</h2>
-<p>Below is the complete Python script:</p>
+<p>Below are two separate simulation scenarios for comparison. The left side shows <strong>Scenario 1 (200 km Altitude)</strong> and the right side shows <strong>Scenario 2 (400 km Altitude)</strong>. In Scenario 1, the payload is released from 200 km altitude with:</p>
+<ul>
+<li><strong>Circular Orbit:</strong><br/>
+<span class="arithmatex">\( v = \sqrt{\mu/(R_{\text{earth}}+200\,\text{km})} \)</span></li>
+<li><strong>Elliptical / Reentry:</strong><br/>
+<span class="arithmatex">\( v = 0.8 \times v_{\text{circ}} \)</span> (which leads to reentry)</li>
+<li><strong>Hyperbolic Trajectory:</strong><br/>
+<span class="arithmatex">\( v = 1.1 \times v_{\text{esc}} \)</span></li>
+</ul>
+<p>In Scenario 2, the payload is released from 400 km altitude with:</p>
+<ul>
+<li><strong>Circular Orbit:</strong><br/>
+<span class="arithmatex">\( v = \sqrt{\mu/(R_{\text{earth}}+400\,\text{km})} \)</span></li>
+<li><strong>Elliptical Orbit:</strong><br/>
+<span class="arithmatex">\( v = 0.9 \times v_{\text{circ}} \)</span> (producing a stable, bound elliptical orbit)</li>
+<li><strong>Hyperbolic Trajectory:</strong><br/>
+<span class="arithmatex">\( v = 1.1 \times v_{\text{esc}} \)</span></li>
+</ul>
+<hr/>
+<h3 id="scenario-1-200-km-altitude">Scenario 1 (200 km Altitude)</h3>
+<h4 id="code">Code</h4>
 <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import solve_ivp
 
 # Constants
-mu = 3.986004418e14   # Earth's gravitational parameter, m^3/s^2
-R_earth = 6.371e6     # Earth's radius, m
+mu = 3.986004418e14   # Earth's gravitational parameter (m^3/s^2)
+R_earth = 6.371e6     # Earth's radius (m)
 
 def dynamics(t, state):
     """
     Computes the derivatives for the state vector.
-
     state = [x, y, vx, vy]
     """
     x, y, vx, vy = state
@@ -332,84 +344,64 @@ def collision_event(t, state):
     r = np.sqrt(x**2 + y**2)
     return r - R_earth
 
-# Set the event to terminate the integration and only trigger when decreasing through zero.
 collision_event.terminal = True
 collision_event.direction = -1
 
 def simulate_trajectory(r0, v0, t_span, t_eval):
     """
     Simulates the payload trajectory given initial conditions.
-
-    Parameters:
-    - r0: Initial position vector [x, y]
-    - v0: Initial velocity vector [vx, vy]
-    - t_span: Tuple for the time span (start, end) of the integration
-    - t_eval: Array of time points at which to store the solution
-
-    Returns:
-    - sol: The solution object from solve_ivp.
     """
     state0 = [r0[0], r0[1], v0[0], v0[1]]
-    sol = solve_ivp(dynamics, t_span, state0, t_eval=t_eval,
-                    events=collision_event, rtol=1e-8)
-    return sol
+    return solve_ivp(dynamics, t_span, state0, t_eval=t_eval,
+                     events=collision_event, rtol=1e-8)
 
-# Initial Conditions
-altitude = 200e3                # Altitude above Earth's surface: 200 km
+# Initial Conditions for 200 km altitude
+altitude = 200e3                # 200 km altitude
 r_mag = R_earth + altitude      # Distance from Earth's center
 r0 = [r_mag, 0]                 # Starting along the x-axis
 
-# Case 1: Circular Orbit (v = sqrt(mu/r))
-v_circ = np.sqrt(mu / r_mag)
+# Trajectory Cases
+v_circ = np.sqrt(mu / r_mag)           # Circular Orbit speed
 v0_circ = [0, v_circ]
-
-# Case 2: Elliptical (suborbital) trajectory (v = 0.8 * v_circ)
-v0_ellipse = [0, 0.8 * v_circ]
-
-# Case 3: Hyperbolic trajectory (v = 1.1 * v_esc, where v_esc = sqrt(2*mu/r))
-v_esc = np.sqrt(2 * mu / r_mag)
-v0_hyper = [0, 1.1 * v_esc]
+v0_ellipse = [0, 0.8 * v_circ]         # Elliptical / Reentry (0.8×v_circ)
+v_esc = np.sqrt(2 * mu / r_mag)          # Escape Velocity
+v0_hyper = [0, 1.1 * v_esc]            # Hyperbolic Trajectory (1.1×v_esc)
 
 # Time parameters
 t_span = (0, 6000)  # seconds
 t_eval = np.linspace(t_span[0], t_span[1], 10000)
 
-# Simulate each trajectory
+# Simulate trajectories for 200 km altitude
 sol_circ = simulate_trajectory(r0, v0_circ, t_span, t_eval)
 sol_ellipse = simulate_trajectory(r0, v0_ellipse, t_span, t_eval)
 sol_hyper = simulate_trajectory(r0, v0_hyper, t_span, t_eval)
 
-# Plot the trajectories normalized by Earth's radius for better visualization
+# Plot the trajectories (normalized by Earth's radius)
 plt.figure(figsize=(8, 8))
-
-# Draw Earth (normalized)
-theta = np.linspace(0, 2 * np.pi, 500)
-earth_x = np.cos(theta)  # Normalized x-coordinates (R_earth = 1)
-earth_y = np.sin(theta)  # Normalized y-coordinates
+theta = np.linspace(0, 2*np.pi, 500)
+earth_x = np.cos(theta)
+earth_y = np.sin(theta)
 plt.fill(earth_x, earth_y, 'b', alpha=0.3, label="Earth")
-
-# Plot each trajectory (normalize coordinates by dividing by R_earth)
 plt.plot(sol_circ.y[0] / R_earth, sol_circ.y[1] / R_earth, 'r', label="Circular Orbit")
 plt.plot(sol_ellipse.y[0] / R_earth, sol_ellipse.y[1] / R_earth, 'g', label="Elliptical / Reentry")
 plt.plot(sol_hyper.y[0] / R_earth, sol_hyper.y[1] / R_earth, 'm', label="Hyperbolic Trajectory")
-
 plt.xlabel("x (in Earth radii)")
 plt.ylabel("y (in Earth radii)")
-plt.title("Payload Trajectories Near Earth")
+plt.title("Payload Trajectories Near Earth (200 km Altitude)")
 plt.legend()
 plt.axis('equal')
 plt.grid()
 plt.show()
 </code></pre>
-<h2 id="explanation-of-the-code">Explanation of the Code</h2>
+<h4 id="explanation-of-the-code-scenario-1">Explanation of the Code (Scenario 1)</h4>
 <ol>
 <li>
 <p><strong>Dynamics Function:</strong><br/>
-   The <code>dynamics</code> function computes the derivatives of the state vector <span class="arithmatex">\([x, y, vx, vy]\)</span> using Newton’s law of gravitation, <span class="arithmatex">\(\ddot{\vec{r}} = -\mu \vec{r}/r^3\)</span>.</p>
+   The dynamics function computes the derivatives of the state vector <span class="arithmatex">\([x, y, vx, vy]\)</span> using Newton’s law of gravitation, <span class="arithmatex">\(\ddot{\vec{r}} = -\mu \vec{r}/r^3\)</span>.</p>
 </li>
 <li>
 <p><strong>Simulation Function:</strong><br/>
-   The <code>simulate_trajectory</code> function sets up the initial state and integrates the equations over the defined time span using the <code>solve_ivp</code> solver. The collision event stops the integration when the payload intersects Earth’s surface.</p>
+   The simulate_trajectory function sets up the initial state and integrates the equations over the defined time span using the solve_ivp solver. The collision event stops the integration when the payload intersects Earth’s surface.</p>
 </li>
 <li>
 <p><strong>Initial Conditions:</strong> </p>
@@ -418,58 +410,186 @@ plt.show()
 <li>
 <p>Three initial velocity cases are defined:</p>
 <ul>
-<li><strong>Circular orbit:</strong> using the circular velocity (<span class="arithmatex">\(v_{\text{circ}} = \sqrt{\mu / r}\)</span>).</li>
+<li><strong>Circular orbit:</strong> using the circular velocity <span class="arithmatex">\(v_{\text{circ}} = \sqrt{\mu / r}\)</span>.</li>
 <li><strong>Elliptical trajectory:</strong> using 80% of the circular velocity.</li>
-<li><strong>Hyperbolic trajectory:</strong> using 110% of the escape velocity (<span class="arithmatex">\(v_{\text{esc}} = \sqrt{2\mu / r}\)</span>).</li>
+<li><strong>Hyperbolic trajectory:</strong> using 110% of the escape velocity <span class="arithmatex">\(v_{\text{esc}} = \sqrt{2\mu / r}\)</span>.</li>
 </ul>
 </li>
 <li>
 <p><strong>Plotting:</strong><br/>
-   The code normalizes positions by Earth's radius to make the planet appear as a unit circle. Each trajectory is plotted in the <span class="arithmatex">\(xy\)</span>-plane, with Earth shown as a filled blue circle.</p>
+   The code normalizes positions by Earth's radius to display Earth as a unit circle. Each trajectory is plotted in the <span class="arithmatex">\(xy\)</span>-plane.</p>
 </li>
 </ol>
-<h2 id="graphical-representations-output">Graphical Representations (Output)</h2>
+<h4 id="graphical-representations-output">Graphical Representations (Output)</h4>
 <p><img alt="Payload Trajectories Near Earth" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem3/PayloadTrajectoriesNearEarth.png"/></p>
-<h3 id="explanation-of-the-output">Explanation of the Output</h3>
-<p>The figure above is the <strong>output</strong> produced by running the code. The <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> axes are measured in units of Earth’s radius. Here is what you see:</p>
+<h4 id="output-explanation-scenario-1">Output Explanation (Scenario 1)</h4>
 <ul>
 <li>
 <p><strong>Blue Circle (Earth):</strong><br/>
-  This represents Earth, normalized to have radius <span class="arithmatex">\(1\)</span>. The payloads start at <span class="arithmatex">\(1 + \frac{200\text{ km}}{R_{\text{earth}}}\approx 1.03\)</span> Earth radii from the center.</p>
+  Represents Earth as a unit circle. The payload is released at approximately 1.03 Earth radii.</p>
 </li>
 <li>
 <p><strong>Red Curve (Circular Orbit):</strong><br/>
-  This path remains nearly at a constant distance from Earth’s center, indicating the payload has just enough velocity to maintain a circular orbit at that altitude.</p>
+  The payload maintains a tight circular orbit at 200 km altitude.</p>
 </li>
 <li>
 <p><strong>Green Curve (Elliptical / Reentry):</strong><br/>
-  With an initial velocity of <span class="arithmatex">\(0.8 \times v_{\text{circ}}\)</span>, the payload lacks the speed to sustain orbit. Its trajectory intersects Earth’s surface, meaning it reenters. The code’s event detection stops the integration once it “collides” with Earth.</p>
+  With <span class="arithmatex">\(0.8 \times v_{\text{circ}}\)</span>, the payload’s trajectory intersects Earth (reentry).</p>
 </li>
 <li>
 <p><strong>Magenta Curve (Hyperbolic Trajectory):</strong><br/>
-  With a speed of <span class="arithmatex">\(1.1 \times v_{\text{esc}}\)</span>, the payload follows an open-ended path. It approaches Earth but ultimately escapes Earth’s gravity, heading away indefinitely on a hyperbolic trajectory.</p>
+  The payload follows an escape trajectory.</p>
 </li>
 </ul>
-<h4 id="key-takeaways">Key Takeaways</h4>
+<h4 id="key-takeaways-scenario-1">Key Takeaways (Scenario 1)</h4>
 <ol>
-<li>
-<p><strong>Different Speeds, Different Paths:</strong><br/>
-   The output shows how altering the initial velocity changes the shape of the path—circular, elliptical (with reentry), or hyperbolic (escape).</p>
-</li>
-<li>
-<p><strong>Relationship of <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span>:</strong><br/>
-   The axes represent the horizontal and vertical positions in Earth-radii. A point on the plot <span class="arithmatex">\((x, y)\)</span> tells you the payload’s distance and direction from Earth’s center at a given time.</p>
-</li>
-<li>
-<p><strong>Collision Detection:</strong><br/>
-   The green ellipse stops exactly at the planet’s surface because the code terminates the integration once the payload radius <span class="arithmatex">\(r\)</span> becomes less than or equal to Earth’s radius.</p>
-</li>
-<li>
-<p><strong>Normalization Improves Clarity:</strong><br/>
-   By dividing by <span class="arithmatex">\(R_{\text{earth}}\)</span>, the plot clearly shows Earth as a unit circle and highlights the relative size and shape of each trajectory.</p>
-</li>
+<li>Altering the initial velocity significantly changes the orbital path.</li>
+<li>At 200 km, using <span class="arithmatex">\(0.8 \times v_{\text{circ}}\)</span> leads to reentry.</li>
+<li>The hyperbolic trajectory clearly demonstrates escape conditions.</li>
 </ol>
-<p>This <strong>output</strong> illustrates how varying initial velocities near Earth can result in bound orbits, reentry paths, or escape trajectories, a concept central to orbital mechanics and space mission planning.</p>
+<hr/>
+<h3 id="scenario-2-400-km-altitude">Scenario 2 (400 km Altitude)</h3>
+<h4 id="code_1">Code</h4>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+# Constants
+mu = 3.986004418e14   # Earth's gravitational parameter (m^3/s^2)
+R_earth = 6.371e6     # Earth's radius (m)
+
+def dynamics(t, state):
+    """Computes the derivatives for the state vector [x, y, vx, vy] using Newton's law."""
+    x, y, vx, vy = state
+    r = np.sqrt(x**2 + y**2)
+    ax = -mu * x / r**3
+    ay = -mu * y / r**3
+    return [vx, vy, ax, ay]
+
+def collision_event(t, state):
+    """Stops integration when the payload reaches Earth's surface."""
+    x, y, _, _ = state
+    return np.sqrt(x**2 + y**2) - R_earth
+
+collision_event.terminal = True
+collision_event.direction = -1
+
+def simulate_trajectory(r0, v0, t_span, t_eval):
+    """Simulates the payload trajectory given initial conditions."""
+    state0 = [r0[0], r0[1], v0[0], v0[1]]
+    return solve_ivp(dynamics, t_span, state0, t_eval=t_eval,
+                     events=collision_event, rtol=1e-8)
+
+# Initial Conditions for 400 km altitude
+altitude = 400e3                # 400 km altitude
+r_mag = R_earth + altitude      # Distance from Earth's center
+r0 = [r_mag, 0]                 # Starting along the x-axis
+
+# Trajectory Cases
+v_circ = np.sqrt(mu / r_mag)         # Circular Orbit speed
+v0_circ = [0, v_circ]
+v0_ellipse = [0, 0.9 * v_circ]       # Elliptical Orbit (bound) using 0.9×v_circ
+v_esc = np.sqrt(2 * mu / r_mag)        # Escape Velocity
+v0_hyper = [0, 1.1 * v_esc]          # Hyperbolic Trajectory (1.1×v_esc)
+
+# Time parameters
+t_span = (0, 6000)  # seconds
+t_eval = np.linspace(t_span[0], t_span[1], 10000)
+
+# Simulate trajectories for 400 km altitude
+sol_circ_new = simulate_trajectory(r0, v0_circ, t_span, t_eval)
+sol_ellipse_new = simulate_trajectory(r0, v0_ellipse, t_span, t_eval)
+sol_hyper_new = simulate_trajectory(r0, v0_hyper, t_span, t_eval)
+
+# Plot the trajectories (normalized by Earth's radius)
+plt.figure(figsize=(8, 8))
+theta = np.linspace(0, 2*np.pi, 500)
+earth_x = np.cos(theta)
+earth_y = np.sin(theta)
+plt.fill(earth_x, earth_y, 'b', alpha=0.3, label="Earth")
+plt.plot(sol_circ_new.y[0] / R_earth, sol_circ_new.y[1] / R_earth, 'r', label="Circular Orbit (400 km)")
+plt.plot(sol_ellipse_new.y[0] / R_earth, sol_ellipse_new.y[1] / R_earth, 'g', label="Elliptical Orbit (400 km)")
+plt.plot(sol_hyper_new.y[0] / R_earth, sol_hyper_new.y[1] / R_earth, 'm', label="Hyperbolic Trajectory (400 km)")
+plt.xlabel("x (in Earth radii)")
+plt.ylabel("y (in Earth radii)")
+plt.title("Payload Trajectories at 400 km Altitude")
+plt.legend()
+plt.axis('equal')
+plt.grid()
+plt.show()
+</code></pre>
+<h4 id="explanation-of-the-code-scenario-2">Explanation of the Code (Scenario 2)</h4>
+<ol>
+<li><strong>Dynamics Function:</strong><br/>
+   Computes the derivatives of the state vector <span class="arithmatex">\([x, y, vx, vy]\)</span> using Newton’s law.</li>
+<li><strong>Simulation Function:</strong><br/>
+   Sets up the initial state and integrates the equations over time using solve_ivp, with a collision event stopping the integration when the payload hits Earth.</li>
+<li><strong>Initial Conditions (400 km):</strong><br/>
+   The payload is released from 400 km altitude (approximately 1.06 Earth radii).  </li>
+<li><strong>Circular Orbit:</strong> <span class="arithmatex">\(v = \sqrt{\mu/(R_{\text{earth}}+400\,\text{km})}\)</span></li>
+<li><strong>Elliptical Orbit:</strong> <span class="arithmatex">\(v = 0.9 \times v_{\text{circ}}\)</span> (producing a bound elliptical orbit)</li>
+<li><strong>Hyperbolic Trajectory:</strong> <span class="arithmatex">\(v = 1.1 \times v_{\text{esc}}\)</span></li>
+<li><strong>Plotting:</strong><br/>
+   Normalizes the trajectories by Earth's radius to display Earth as a unit circle.</li>
+</ol>
+<h4 id="graphical-representations-output_1">Graphical Representations (Output)</h4>
+<p><img alt="Payload Trajectories Near Earth" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem3/PayloadTrajectoriesNearEarth.png"/></p>
+<h4 id="output-explanation-400-km-altitude">Output Explanation (400 km Altitude)</h4>
+<ul>
+<li><strong>Blue Circle (Earth):</strong><br/>
+  Represents Earth as a unit circle; the payload starts at approximately 1.06 Earth radii.</li>
+<li><strong>Red Curve (Circular Orbit):</strong><br/>
+  The payload maintains a stable circular orbit at 400 km altitude.</li>
+<li><strong>Green Curve (Elliptical Orbit):</strong><br/>
+  With <span class="arithmatex">\(0.9 \times v_{\text{circ}}\)</span>, the payload follows a bound elliptical orbit that does not reenter.</li>
+<li><strong>Magenta Curve (Hyperbolic Trajectory):</strong><br/>
+  The payload follows an escape trajectory, with slight differences due to the higher altitude.</li>
+</ul>
+<h4 id="key-takeaways-scenario-2">Key Takeaways (Scenario 2)</h4>
+<ol>
+<li>Higher altitude produces larger, more stable orbits.</li>
+<li>Using <span class="arithmatex">\(0.9 \times v_{\text{circ}}\)</span> yields a bound elliptical orbit without reentry.</li>
+<li>Both scenarios exhibit hyperbolic escape trajectories when <span class="arithmatex">\(v\)</span> exceeds <span class="arithmatex">\(v_{\text{esc}}\)</span>.</li>
+</ol>
+<hr/>
+<h3 id="side-by-side-comparison-of-outputs">Side-by-Side Comparison of Outputs</h3>
+<p>Below is a side-by-side comparison of the outputs from Scenario 1 and Scenario 2.</p>
+<pre><code class="language-html">&lt;table&gt;
+  &lt;tr&gt;
+    &lt;td align="center"&gt;
+      &lt;strong&gt;200 km Altitude Output&lt;/strong&gt;&lt;br&gt;
+      &lt;img src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem3/PayloadTrajectoriesNearEarth.png" alt="200 km Output" style="width:300px;"&gt;
+    &lt;/td&gt;
+    &lt;td align="center"&gt;
+      &lt;strong&gt;400 km Altitude Output&lt;/strong&gt;&lt;br&gt;
+      &lt;img src="URL_FOR_400km_OUTPUT_IMAGE" alt="400 km Output" style="width:300px;"&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+</code></pre>
+<h3 id="comparison-explanation">Comparison Explanation</h3>
+<ul>
+<li><strong>Altitude Difference:</strong> </li>
+<li><em>Scenario 1 (200 km):</em> The payload starts at about 1.03 Earth radii, resulting in a tight circular orbit, a reentry elliptical trajectory (with <span class="arithmatex">\(0.8 \times v_{\text{circ}}\)</span>), and an escape hyperbolic path.</li>
+<li>
+<p><em>Scenario 2 (400 km):</em> The payload starts at about 1.06 Earth radii, producing a larger, more stable circular orbit, a bound elliptical orbit (with <span class="arithmatex">\(0.9 \times v_{\text{circ}}\)</span>) that does not reenter, and a hyperbolic trajectory with a slightly modified curvature.</p>
+</li>
+<li>
+<p><strong>Orbital Stability and Realism:</strong><br/>
+  A 400 km altitude is more typical for operational satellites due to lower atmospheric drag. The elliptical orbit remains bound at 400 km, whereas at 200 km the elliptical trajectory leads to reentry.</p>
+</li>
+<li>
+<p><strong>Velocity Multipliers:</strong><br/>
+  A multiplier of 0.8 at 200 km results in reentry, while 0.9 at 400 km yields a stable elliptical orbit, demonstrating the sensitivity of orbital dynamics to initial velocity.</p>
+</li>
+<li>
+<p><strong>Hyperbolic Trajectories:</strong><br/>
+  Both scenarios use <span class="arithmatex">\(1.1 \times v_{\text{esc}}\)</span> to produce escape trajectories; however, the lower escape velocity at 400 km slightly modifies the hyperbolic path's curvature.</p>
+</li>
+</ul>
+<p>This comparison illustrates how realistic changes in initial altitude and velocity multipliers can lead to significantly different orbital behaviors, providing valuable insights for mission planning.</p>
+<hr/>
+<p>You can now copy and paste this entire section (from "Below are two separate simulation scenarios for comparison..." to the end) into your Markdown file after <strong>## Numerical Simulation</strong>.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
