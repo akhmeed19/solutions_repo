@@ -172,7 +172,6 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-3">Problem 3</h1>
-<p>Below is the complete Markdown document with the updated theoretical background section integrated into the previous solution.</p>
 <hr/>
 <h1 id="trajectories-of-a-freely-released-payload-near-earth">Trajectories of a Freely Released Payload Near Earth</h1>
 <h2 id="introduction">Introduction</h2>
@@ -186,11 +185,11 @@
 <h2 id="extended-theoretical-background">Extended Theoretical Background</h2>
 <p>Understanding the trajectories of a freely released payload near Earth begins with Newton's Law of Gravitation and the conservation laws of energy and angular momentum. Here, we expand on these principles, derive key equations, and explain how they govern orbital motion.</p>
 <h3 id="newtons-law-of-gravitation-and-equations-of-motion">Newton’s Law of Gravitation and Equations of Motion</h3>
-<p>The gravitational force acting on a payload at a distance <span class="arithmatex">\( r \)</span> from Earth's center is given by</p>
+<p>The gravitational force acting on a payload at a distance <span class="arithmatex">\(r\)</span> from Earth's center is given by</p>
 <div class="arithmatex">\[
 \vec{F} = -\frac{\mu}{r^3}\vec{r},
 \]</div>
-<p>where <span class="arithmatex">\( \mu = GM \)</span> is Earth’s gravitational parameter (<span class="arithmatex">\( G \)</span> is the gravitational constant and <span class="arithmatex">\( M \)</span> is the mass of Earth).</p>
+<p>where <span class="arithmatex">\(\mu = GM\)</span> is Earth’s gravitational parameter (<span class="arithmatex">\(G\)</span> is the gravitational constant and <span class="arithmatex">\(M\)</span> is the mass of Earth).</p>
 <p>Using Newton's second law, the acceleration of the payload is:</p>
 <div class="arithmatex">\[
 \ddot{\vec{r}} = -\frac{\mu}{r^3}\vec{r}.
@@ -205,16 +204,16 @@
 <ul>
 <li><strong>Radial acceleration:</strong></li>
 </ul>
-<p>[
+<p>$$
   \ddot{r} - r\dot{\theta}^2 = -\frac{\mu}{r^2},
-  ]</p>
+  $$</p>
 <ul>
 <li><strong>Transverse (angular) acceleration:</strong></li>
 </ul>
-<p>[
+<p>$$
   r\ddot{\theta} + 2\dot{r}\dot{\theta} = 0.
-  ]</p>
-<p>The second equation implies the conservation of angular momentum <span class="arithmatex">\( L \)</span>:</p>
+  $$</p>
+<p>The second equation implies the conservation of angular momentum <span class="arithmatex">\(L\)</span>:</p>
 <div class="arithmatex">\[
 L = r^2 \dot{\theta} = \text{constant}.
 \]</div>
@@ -227,7 +226,7 @@ u = \frac{1}{r},
 <div class="arithmatex">\[
 \frac{dr}{d\theta} = -\frac{1}{u^2} \frac{du}{d\theta},
 \]</div>
-<p>the radial acceleration term can be expressed in terms of <span class="arithmatex">\( u \)</span> and <span class="arithmatex">\(\theta \)</span>. After some manipulation, the radial equation transforms into the differential equation:</p>
+<p>the radial acceleration term can be expressed in terms of <span class="arithmatex">\(u\)</span> and <span class="arithmatex">\(\theta\)</span>. After some manipulation, the radial equation transforms into the differential equation:</p>
 <div class="arithmatex">\[
 \frac{d^2 u}{d\theta^2} + u = \frac{\mu}{L^2}.
 \]</div>
@@ -239,26 +238,26 @@ u(\theta) = \frac{\mu}{L^2}\left(1 + e\cos(\theta)\right),
 <div class="arithmatex">\[
 r(\theta) = \frac{L^2/\mu}{1 + e\cos(\theta)}.
 \]</div>
-<p>Here, <span class="arithmatex">\( e \)</span> is the eccentricity of the orbit:
-- <span class="arithmatex">\( 0 \leq e &lt; 1 \)</span>: Elliptical (or circular if <span class="arithmatex">\( e=0 \)</span>)
-- <span class="arithmatex">\( e = 1 \)</span>: Parabolic (the threshold between bound and unbound)
-- <span class="arithmatex">\( e &gt; 1 \)</span>: Hyperbolic (unbound)</p>
+<p>Here, <span class="arithmatex">\(e\)</span> is the eccentricity of the orbit:
+- <span class="arithmatex">\(0 \leq e &lt; 1\)</span>: Elliptical (or circular if <span class="arithmatex">\(e=0\)</span>)
+- <span class="arithmatex">\(e = 1\)</span>: Parabolic (the threshold between bound and unbound)
+- <span class="arithmatex">\(e &gt; 1\)</span>: Hyperbolic (unbound)</p>
 <h3 id="energy-considerations-the-vis-viva-equation">Energy Considerations: The Vis-Viva Equation</h3>
 <p>The specific orbital energy (energy per unit mass) is given by</p>
 <div class="arithmatex">\[
 \epsilon = \frac{v^2}{2} - \frac{\mu}{r},
 \]</div>
-<p>where <span class="arithmatex">\( v \)</span> is the speed of the payload. The sign of <span class="arithmatex">\(\epsilon\)</span> determines the type of orbit:</p>
+<p>where <span class="arithmatex">\(v\)</span> is the speed of the payload. The sign of <span class="arithmatex">\(\epsilon\)</span> determines the type of orbit:</p>
 <ul>
 <li><strong>Elliptical orbits:</strong> <span class="arithmatex">\(\epsilon &lt; 0\)</span></li>
 <li><strong>Parabolic trajectory:</strong> <span class="arithmatex">\(\epsilon = 0\)</span></li>
 <li><strong>Hyperbolic trajectory:</strong> <span class="arithmatex">\(\epsilon &gt; 0\)</span></li>
 </ul>
-<p>For a given orbit, the vis-viva equation relates the velocity <span class="arithmatex">\( v \)</span> at any distance <span class="arithmatex">\( r \)</span> to the semi-major axis <span class="arithmatex">\( a \)</span>:</p>
+<p>For a given orbit, the vis-viva equation relates the velocity <span class="arithmatex">\(v\)</span> at any distance <span class="arithmatex">\(r\)</span> to the semi-major axis <span class="arithmatex">\(a\)</span>:</p>
 <div class="arithmatex">\[
 v^2 = \mu\left(\frac{2}{r} - \frac{1}{a}\right).
 \]</div>
-<p>For a circular orbit (<span class="arithmatex">\( r = a \)</span>), this simplifies to:</p>
+<p>For a circular orbit (<span class="arithmatex">\(r = a\)</span>), this simplifies to:</p>
 <div class="arithmatex">\[
 v_{\text{circ}} = \sqrt{\frac{\mu}{r}},
 \]</div>
@@ -271,7 +270,7 @@ v_{\text{esc}} = \sqrt{\frac{2\mu}{r}}.
 <div class="arithmatex">\[
 \epsilon = \frac{1}{2}\dot{r}^2 + V_{\text{eff}}(r),
 \]</div>
-<p>where the effective potential <span class="arithmatex">\( V_{\text{eff}}(r) \)</span> is defined as:</p>
+<p>where the effective potential <span class="arithmatex">\(V_{\text{eff}}(r)\)</span> is defined as:</p>
 <div class="arithmatex">\[
 V_{\text{eff}}(r) = -\frac{\mu}{r} + \frac{L^2}{2r^2}.
 \]</div>
@@ -279,13 +278,13 @@ V_{\text{eff}}(r) = -\frac{\mu}{r} + \frac{L^2}{2r^2}.
 <li>The first term represents gravitational potential energy.</li>
 <li>The second term represents the "centrifugal" potential energy due to the payload's angular momentum.</li>
 </ul>
-<p>The effective potential provides insight into radial stability. The minimum of <span class="arithmatex">\( V_{\text{eff}}(r) \)</span> corresponds to a stable circular orbit, while deviations lead to oscillatory changes in <span class="arithmatex">\( r \)</span>, characteristic of elliptical orbits.</p>
+<p>The effective potential provides insight into radial stability. The minimum of <span class="arithmatex">\(V_{\text{eff}}(r)\)</span> corresponds to a stable circular orbit, while deviations lead to oscillatory changes in <span class="arithmatex">\(r\)</span>, characteristic of elliptical orbits.</p>
 <h3 id="connecting-initial-conditions-to-orbit-types">Connecting Initial Conditions to Orbit Types</h3>
-<p>The initial position and velocity determine both the specific energy <span class="arithmatex">\( \epsilon \)</span> and the angular momentum <span class="arithmatex">\( L \)</span>:</p>
+<p>The initial position and velocity determine both the specific energy <span class="arithmatex">\(\epsilon\)</span> and the angular momentum <span class="arithmatex">\(L\)</span>:</p>
 <ul>
-<li><strong>Circular Orbit:</strong> The velocity is exactly <span class="arithmatex">\( v_{\text{circ}} \)</span>, balancing gravitational pull and centripetal force for a constant <span class="arithmatex">\( r \)</span>.</li>
-<li><strong>Elliptical Orbit:</strong> A velocity lower than <span class="arithmatex">\( v_{\text{circ}} \)</span> results in an elliptical path with varying <span class="arithmatex">\( r \)</span>.</li>
-<li><strong>Hyperbolic Trajectory:</strong> A velocity exceeding <span class="arithmatex">\( v_{\text{esc}} \)</span> results in a positive energy orbit, allowing the payload to escape Earth’s gravitational influence.</li>
+<li><strong>Circular Orbit:</strong> The velocity is exactly <span class="arithmatex">\(v_{\text{circ}}\)</span>, balancing gravitational pull and centripetal force for a constant <span class="arithmatex">\(r\)</span>.</li>
+<li><strong>Elliptical Orbit:</strong> A velocity lower than <span class="arithmatex">\(v_{\text{circ}}\)</span> results in an elliptical path with varying <span class="arithmatex">\(r\)</span>.</li>
+<li><strong>Hyperbolic Trajectory:</strong> A velocity exceeding <span class="arithmatex">\(v_{\text{esc}}\)</span> results in a positive energy orbit, allowing the payload to escape Earth’s gravitational influence.</li>
 </ul>
 <h3 id="summary">Summary</h3>
 <p>The trajectory of a payload released near Earth is governed by:
