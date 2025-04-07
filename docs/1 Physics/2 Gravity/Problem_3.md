@@ -297,7 +297,7 @@ plt.show()
 
 #### Graphical Representations (Output)
 
-![Payload Trajectories Near Earth](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem3/Payload400.png)
+![Payload Trajectories Near Earth](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem3/Payload200.png)
 
 #### Output Explanation (Scenario 1)
 
