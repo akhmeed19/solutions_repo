@@ -401,11 +401,11 @@ plt.show()
    Computes the derivatives of the state vector \([x, y, vx, vy]\) using Newton’s law.
 2. **Simulation Function:**  
    Sets up the initial state and integrates the equations over time using solve_ivp, with a collision event stopping the integration when the payload hits Earth.
-3. **Initial Conditions (400 km):**  
-   The payload is released from 400 km altitude (approximately 1.06 Earth radii).  
-   - **Circular Orbit:** \(v = \sqrt{\mu/(R_{\text{earth}}+400\,\text{km})}\)
-   - **Elliptical Orbit:** \(v = 0.9 \times v_{\text{circ}}\) (producing a bound elliptical orbit)
-   - **Hyperbolic Trajectory:** \(v = 1.1 \times v_{\text{esc}}\)
+3. **Initial Conditions (400 km):**                                                   
+    The payload is released from 400 km altitude (approximately 1.06 Earth radii).  
+    - **Circular Orbit:** \(v = \sqrt{\mu/(R_{\text{earth}}+400\,\text{km})}\)
+    - **Elliptical Orbit:** \(v = 0.9 \times v_{\text{circ}}\) (producing a bound elliptical orbit)
+    - **Hyperbolic Trajectory:** \(v = 1.1 \times v_{\text{esc}}\)
 4. **Plotting:**  
    Normalizes the trajectories by Earth's radius to display Earth as a unit circle.
 
