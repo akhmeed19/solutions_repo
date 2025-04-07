@@ -1,7 +1,5 @@
 # Problem 3
 
-Below is the complete Markdown document with the updated theoretical background section integrated into the previous solution.
-
 ---
 
 # Trajectories of a Freely Released Payload Near Earth
@@ -22,145 +20,145 @@ Understanding the trajectories of a freely released payload near Earth begins wi
 
 ### Newton’s Law of Gravitation and Equations of Motion
 
-The gravitational force acting on a payload at a distance \( r \) from Earth's center is given by
+The gravitational force acting on a payload at a distance $r$ from Earth's center is given by
 
-\[
+$$
 \vec{F} = -\frac{\mu}{r^3}\vec{r},
-\]
+$$
 
-where \( \mu = GM \) is Earth’s gravitational parameter (\( G \) is the gravitational constant and \( M \) is the mass of Earth).
+where $\mu = GM$ is Earth’s gravitational parameter ($G$ is the gravitational constant and $M$ is the mass of Earth).
 
 Using Newton's second law, the acceleration of the payload is:
 
-\[
+$$
 \ddot{\vec{r}} = -\frac{\mu}{r^3}\vec{r}.
-\]
+$$
 
-While these equations can be expressed in Cartesian coordinates, gravity as a central force (always pointing toward the center) is more insightfully described in polar coordinates \((r, \theta)\).
+While these equations can be expressed in Cartesian coordinates, gravity as a central force (always pointing toward the center) is more insightfully described in polar coordinates $(r, \theta)$.
 
 ### Polar Coordinates and Conservation Laws
 
 In polar coordinates, the position vector is represented as:
 
-\[
+$$
 \vec{r} = r \hat{r}.
-\]
+$$
 
 The acceleration in polar coordinates has two components:
 
 - **Radial acceleration:**
   
-  \[
+  $$
   \ddot{r} - r\dot{\theta}^2 = -\frac{\mu}{r^2},
-  \]
+  $$
 
 - **Transverse (angular) acceleration:**
 
-  \[
+  $$
   r\ddot{\theta} + 2\dot{r}\dot{\theta} = 0.
-  \]
+  $$
 
-The second equation implies the conservation of angular momentum \( L \):
+The second equation implies the conservation of angular momentum $L$:
 
-\[
+$$
 L = r^2 \dot{\theta} = \text{constant}.
-\]
+$$
 
 ### Deriving the Orbit Equation
 
 Using the conservation of angular momentum, we derive an equation for the shape of the orbit. Introducing the substitution:
 
-\[
+$$
 u = \frac{1}{r},
-\]
+$$
 
-and differentiating with respect to \(\theta\):
+and differentiating with respect to $\theta$:
 
-\[
+$$
 \frac{dr}{d\theta} = -\frac{1}{u^2} \frac{du}{d\theta},
-\]
+$$
 
-the radial acceleration term can be expressed in terms of \( u \) and \(\theta \). After some manipulation, the radial equation transforms into the differential equation:
+the radial acceleration term can be expressed in terms of $u$ and $\theta$. After some manipulation, the radial equation transforms into the differential equation:
 
-\[
+$$
 \frac{d^2 u}{d\theta^2} + u = \frac{\mu}{L^2}.
-\]
+$$
 
 This linear differential equation has the general solution:
 
-\[
+$$
 u(\theta) = \frac{\mu}{L^2}\left(1 + e\cos(\theta)\right),
-\]
+$$
 
 or equivalently, the orbital equation in polar form:
 
-\[
+$$
 r(\theta) = \frac{L^2/\mu}{1 + e\cos(\theta)}.
-\]
+$$
 
-Here, \( e \) is the eccentricity of the orbit:
-- \( 0 \leq e < 1 \): Elliptical (or circular if \( e=0 \))
-- \( e = 1 \): Parabolic (the threshold between bound and unbound)
-- \( e > 1 \): Hyperbolic (unbound)
+Here, $e$ is the eccentricity of the orbit:
+- $0 \leq e < 1$: Elliptical (or circular if $e=0$)
+- $e = 1$: Parabolic (the threshold between bound and unbound)
+- $e > 1$: Hyperbolic (unbound)
 
 ### Energy Considerations: The Vis-Viva Equation
 
 The specific orbital energy (energy per unit mass) is given by
 
-\[
+$$
 \epsilon = \frac{v^2}{2} - \frac{\mu}{r},
-\]
+$$
 
-where \( v \) is the speed of the payload. The sign of \(\epsilon\) determines the type of orbit:
+where $v$ is the speed of the payload. The sign of $\epsilon$ determines the type of orbit:
 
-- **Elliptical orbits:** \(\epsilon < 0\)
-- **Parabolic trajectory:** \(\epsilon = 0\)
-- **Hyperbolic trajectory:** \(\epsilon > 0\)
+- **Elliptical orbits:** $\epsilon < 0$
+- **Parabolic trajectory:** $\epsilon = 0$
+- **Hyperbolic trajectory:** $\epsilon > 0$
 
-For a given orbit, the vis-viva equation relates the velocity \( v \) at any distance \( r \) to the semi-major axis \( a \):
+For a given orbit, the vis-viva equation relates the velocity $v$ at any distance $r$ to the semi-major axis $a$:
 
-\[
+$$
 v^2 = \mu\left(\frac{2}{r} - \frac{1}{a}\right).
-\]
+$$
 
-For a circular orbit (\( r = a \)), this simplifies to:
+For a circular orbit ($r = a$), this simplifies to:
 
-\[
+$$
 v_{\text{circ}} = \sqrt{\frac{\mu}{r}},
-\]
+$$
 
 and the escape velocity (the speed needed for a parabolic trajectory) is:
 
-\[
+$$
 v_{\text{esc}} = \sqrt{\frac{2\mu}{r}}.
-\]
+$$
 
 ### Effective Potential and Radial Motion
 
 Another way to analyze orbital motion is through the effective potential. The total energy in the radial direction, considering the conservation of angular momentum, can be expressed as:
 
-\[
+$$
 \epsilon = \frac{1}{2}\dot{r}^2 + V_{\text{eff}}(r),
-\]
+$$
 
-where the effective potential \( V_{\text{eff}}(r) \) is defined as:
+where the effective potential $V_{\text{eff}}(r)$ is defined as:
 
-\[
+$$
 V_{\text{eff}}(r) = -\frac{\mu}{r} + \frac{L^2}{2r^2}.
-\]
+$$
 
 - The first term represents gravitational potential energy.
 - The second term represents the "centrifugal" potential energy due to the payload's angular momentum.
 
-The effective potential provides insight into radial stability. The minimum of \( V_{\text{eff}}(r) \) corresponds to a stable circular orbit, while deviations lead to oscillatory changes in \( r \), characteristic of elliptical orbits.
+The effective potential provides insight into radial stability. The minimum of $V_{\text{eff}}(r)$ corresponds to a stable circular orbit, while deviations lead to oscillatory changes in $r$, characteristic of elliptical orbits.
 
 ### Connecting Initial Conditions to Orbit Types
 
-The initial position and velocity determine both the specific energy \( \epsilon \) and the angular momentum \( L \):
+The initial position and velocity determine both the specific energy $\epsilon$ and the angular momentum $L$:
 
-- **Circular Orbit:** The velocity is exactly \( v_{\text{circ}} \), balancing gravitational pull and centripetal force for a constant \( r \).
-- **Elliptical Orbit:** A velocity lower than \( v_{\text{circ}} \) results in an elliptical path with varying \( r \).
-- **Hyperbolic Trajectory:** A velocity exceeding \( v_{\text{esc}} \) results in a positive energy orbit, allowing the payload to escape Earth’s gravitational influence.
+- **Circular Orbit:** The velocity is exactly $v_{\text{circ}}$, balancing gravitational pull and centripetal force for a constant $r$.
+- **Elliptical Orbit:** A velocity lower than $v_{\text{circ}}$ results in an elliptical path with varying $r$.
+- **Hyperbolic Trajectory:** A velocity exceeding $v_{\text{esc}}$ results in a positive energy orbit, allowing the payload to escape Earth’s gravitational influence.
 
 ### Summary
 
@@ -176,9 +174,9 @@ This theoretical framework forms the basis for designing simulations and computa
 
 We use Python along with the `scipy.integrate.solve_ivp` solver to numerically integrate the equations of motion. The payload is assumed to be released at a given altitude above Earth's surface. Three cases are simulated:
 
-1. **Circular Orbit:** Initial speed equal to \(v_{\text{circ}} = \sqrt{\mu/r}\).
-2. **Elliptical / Reentry:** A lower initial speed (e.g., \(0.8 \times v_{\text{circ}}\)) causing an elliptical path that may intersect Earth.
-3. **Hyperbolic Trajectory:** A speed greater than the escape velocity (\(v_{\text{esc}} = \sqrt{2\mu/r}\)), for example, \(1.1 \times v_{\text{esc}}\).
+1. **Circular Orbit:** Initial speed equal to $v_{\text{circ}} = \sqrt{\mu/r}$.
+2. **Elliptical / Reentry:** A lower initial speed (e.g., $0.8 \times v_{\text{circ}}$) causing an elliptical path that may intersect Earth.
+3. **Hyperbolic Trajectory:** A speed greater than the escape velocity ($v_{\text{esc}} = \sqrt{2\mu/r}$), for example, $1.1 \times v_{\text{esc}}$.
 
 ## Python Script
 
@@ -283,7 +281,7 @@ plt.show()
      - **Hyperbolic trajectory:** using 110% of the escape velocity.
 
 4. **Plotting:**  
-   The trajectories are plotted in the \(xy\)-plane, with Earth represented as a filled circle. Each trajectory is labeled for clarity.
+   The trajectories are plotted in the $xy$-plane, with Earth represented as a filled circle. Each trajectory is labeled for clarity.
 
 ## Graphical Representations
 
