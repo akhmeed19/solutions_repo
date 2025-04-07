@@ -450,7 +450,6 @@ Below is a side-by-side comparison of the outputs from Scenario 1 and Scenario 2
   </tr>
 </table>
 
-
 ### Comparison Explanation
 
 - **Altitude Difference:**  
