@@ -285,12 +285,12 @@ plt.show()
 2. **Simulation Function:**  
    The simulate_trajectory function sets up the initial state and integrates the equations over the defined time span using the solve_ivp solver. The collision event stops the integration when the payload intersects Earth’s surface.
 
-3. **Initial Conditions:**  
-   - The payload is assumed to be released from a position 200 km above Earth's surface.
-   - Three initial velocity cases are defined:
-     - **Circular orbit:** using the circular velocity \(v_{\text{circ}} = \sqrt{\mu / r}\).
-     - **Elliptical trajectory:** using 80% of the circular velocity.
-     - **Hyperbolic trajectory:** using 110% of the escape velocity \(v_{\text{esc}} = \sqrt{2\mu / r}\).
+3. **Initial Conditions:**                                                           
+    - The payload is assumed to be released from a position 200 km above Earth's surface.
+     - Three initial velocity cases are defined:
+        - **Circular orbit:** using the circular velocity \(v_{\text{circ}} = \sqrt{\mu / r}\).
+        - **Elliptical trajectory:** using 80% of the circular velocity.
+        - **Hyperbolic trajectory:** using 110% of the escape velocity \(v_{\text{esc}} = \sqrt{2\mu / r}\).
 
 4. **Plotting:**  
    The code normalizes positions by Earth's radius to display Earth as a unit circle. Each trajectory is plotted in the \(xy\)-plane.
