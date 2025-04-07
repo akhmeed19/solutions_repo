@@ -533,7 +533,7 @@ plt.show()
    Normalizes the trajectories by Earth's radius to display Earth as a unit circle.</li>
 </ol>
 <h4 id="graphical-representations-output_1">Graphical Representations (Output)</h4>
-<p><img alt="Payload Trajectories Near Earth" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem3/PayloadTrajectoriesNearEarth.png"/></p>
+<p><img alt="Payload Trajectories Near Earth" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem3/Payload400.png"/></p>
 <h4 id="output-explanation-400-km-altitude">Output Explanation (400 km Altitude)</h4>
 <ul>
 <li><strong>Blue Circle (Earth):</strong><br/>
@@ -554,19 +554,18 @@ plt.show()
 <hr/>
 <h3 id="side-by-side-comparison-of-outputs">Side-by-Side Comparison of Outputs</h3>
 <p>Below is a side-by-side comparison of the outputs from Scenario 1 and Scenario 2.</p>
-<pre><code class="language-html">&lt;table&gt;
-  &lt;tr&gt;
-    &lt;td align="center"&gt;
-      &lt;strong&gt;200 km Altitude Output&lt;/strong&gt;&lt;br&gt;
-      &lt;img src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem3/PayloadTrajectoriesNearEarth.png" alt="200 km Output" style="width:300px;"&gt;
-    &lt;/td&gt;
-    &lt;td align="center"&gt;
-      &lt;strong&gt;400 km Altitude Output&lt;/strong&gt;&lt;br&gt;
-      &lt;img src="URL_FOR_400km_OUTPUT_IMAGE" alt="400 km Output" style="width:300px;"&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-</code></pre>
+<table>
+<tr>
+<td align="center">
+<strong>200 km Altitude Output</strong><br/>
+<img alt="200 km Output" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem3/PayloadTrajectoriesNearEarth.png" style="width:300px;"/>
+</td>
+<td align="center">
+<strong>400 km Altitude Output</strong><br/>
+<img alt="400 km Output" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem3/Payload400.png" style="width:300px;"/>
+</td>
+</tr>
+</table>
 <h3 id="comparison-explanation">Comparison Explanation</h3>
 <ul>
 <li><strong>Altitude Difference:</strong> </li>
@@ -575,12 +574,12 @@ plt.show()
 <p><em>Scenario 2 (400 km):</em> The payload starts at about 1.06 Earth radii, producing a larger, more stable circular orbit, a bound elliptical orbit (with <span class="arithmatex">\(0.9 \times v_{\text{circ}}\)</span>) that does not reenter, and a hyperbolic trajectory with a slightly modified curvature.</p>
 </li>
 <li>
-<p><strong>Orbital Stability and Realism:</strong><br/>
-  A 400 km altitude is more typical for operational satellites due to lower atmospheric drag. The elliptical orbit remains bound at 400 km, whereas at 200 km the elliptical trajectory leads to reentry.</p>
+<p><strong>Orbital Stability and Realism:</strong><br>
+  A 400 km altitude is more typical for operational satellites due to lower atmospheric drag. The elliptical orbit remains bound at 400 km, whereas at 200 km the elliptical trajectory leads to reentry.</br></p>
 </li>
 <li>
-<p><strong>Velocity Multipliers:</strong><br/>
-  A multiplier of 0.8 at 200 km results in reentry, while 0.9 at 400 km yields a stable elliptical orbit, demonstrating the sensitivity of orbital dynamics to initial velocity.</p>
+<p><strong>Velocity Multipliers:</strong><br>
+  A multiplier of 0.8 at 200 km results in reentry, while 0.9 at 400 km yields a stable elliptical orbit, demonstrating the sensitivity of orbital dynamics to initial velocity.</br></p>
 </li>
 <li>
 <p><strong>Hyperbolic Trajectories:</strong><br/>
