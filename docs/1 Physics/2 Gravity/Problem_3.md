@@ -411,7 +411,7 @@ plt.show()
 
 #### Graphical Representations (Output)
 
-![Payload Trajectories Near Earth](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem3/PayloadTrajectoriesNearEarth.png)
+![Payload Trajectories Near Earth](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem3/Payload400.png)
 
 #### Output Explanation (400 km Altitude)
 
@@ -436,7 +436,7 @@ plt.show()
 
 Below is a side-by-side comparison of the outputs from Scenario 1 and Scenario 2.
 
-```html
+
 <table>
   <tr>
     <td align="center">
@@ -445,11 +445,11 @@ Below is a side-by-side comparison of the outputs from Scenario 1 and Scenario 2
     </td>
     <td align="center">
       <strong>400 km Altitude Output</strong><br>
-      <img src="URL_FOR_400km_OUTPUT_IMAGE" alt="400 km Output" style="width:300px;">
+      <img src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem3/Payload400.png" alt="400 km Output" style="width:300px;">
     </td>
   </tr>
 </table>
-```
+
 
 ### Comparison Explanation
 
