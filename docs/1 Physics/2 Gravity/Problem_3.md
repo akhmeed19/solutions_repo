@@ -452,9 +452,9 @@ Below is a side-by-side comparison of the outputs from Scenario 1 and Scenario 2
 
 ### Comparison Explanation
 
-- **Altitude Difference:**  
-  - *Scenario 1 (200 km):* The payload starts at about 1.03 Earth radii, resulting in a tight circular orbit, a reentry elliptical trajectory (with \(0.8 \times v_{\text{circ}}\)), and an escape hyperbolic path.
-  - *Scenario 2 (400 km):* The payload starts at about 1.06 Earth radii, producing a larger, more stable circular orbit, a bound elliptical orbit (with \(0.9 \times v_{\text{circ}}\)) that does not reenter, and a hyperbolic trajectory with a slightly modified curvature.
+- **Altitude Difference:**                                                           
+    - *Scenario 1 (200 km):* The payload starts at about 1.03 Earth radii, resulting in a tight circular orbit, a reentry elliptical trajectory (with \(0.8 \times v_{\text{circ}}\)), and an escape hyperbolic path.
+    - *Scenario 2 (400 km):* The payload starts at about 1.06 Earth radii, producing a larger, more stable circular orbit, a bound elliptical orbit (with \(0.9 \times v_{\text{circ}}\)) that does not reenter, and a hyperbolic trajectory with a slightly modified curvature.
 
 - **Orbital Stability and Realism:**  
   A 400 km altitude is more typical for operational satellites due to lower atmospheric drag. The elliptical orbit remains bound at 400 km, whereas at 200 km the elliptical trajectory leads to reentry.
