@@ -469,5 +469,3 @@ Below is a side-by-side comparison of the outputs from Scenario 1 and Scenario 2
 This comparison illustrates how realistic changes in initial altitude and velocity multipliers can lead to significantly different orbital behaviors, providing valuable insights for mission planning.
 
 ---
-
-You can now copy and paste this entire section (from "Below are two separate simulation scenarios for comparison..." to the end) into your Markdown file after **## Numerical Simulation**.
