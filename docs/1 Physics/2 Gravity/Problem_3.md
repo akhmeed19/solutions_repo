@@ -468,3 +468,161 @@ Below is a side-by-side comparison of the outputs from Scenario 1 and Scenario 2
 This comparison illustrates how realistic changes in initial altitude and velocity multipliers can lead to significantly different orbital behaviors, providing valuable insights for mission planning.
 
 ---
+
+## Exploring the Oberth Effect at Periapsis
+
+In this simulation, we compare two cases of a payload initially in an elliptical orbit having a periapsis at 300 km and an apogee at 600 km altitude. We consider:
+
+- **Case 1 (No Burn):** The payload follows the baseline elliptical orbit.
+- **Case 2 (With Burn):** At periapsis—where the payload is moving fastest—a small impulsive burn is applied (adding, for example, 100 m/s to the tangential velocity). This extra energy raises the apogee significantly, thereby demonstrating the Oberth effect.
+
+---
+
+## Python Code
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+# Constants
+mu = 3.986004418e14   # Earth's gravitational parameter (m^3/s^2)
+R_earth = 6.371e6     # Earth's radius (m)
+
+# Define orbital parameters for the elliptical orbit:
+# Periapsis at 300 km and Apogee at 600 km altitude
+r_p = R_earth + 300e3  # Periapsis radius
+r_a = R_earth + 600e3  # Apogee radius
+
+# Compute the velocity at periapsis for the desired elliptical orbit.
+# The velocity at periapsis for an ellipse is given by:
+#    v_p = sqrt(2*mu*r_a / (r_p * (r_a + r_p)))
+v_p = np.sqrt(2 * mu * r_a / (r_p * (r_a + r_p)))
+
+# Define a small delta-V to be applied at periapsis (demonstrating the Oberth effect).
+delta_V = 100  # m/s
+
+# Define two cases:
+# Case 1: No burn (baseline elliptical orbit)
+# Case 2: Burn applied at periapsis (adds delta_V to the tangential speed)
+initial_state_no_burn = [r_p, 0, 0, v_p]         # Position at (r_p, 0), velocity (0, v_p)
+initial_state_burn    = [r_p, 0, 0, v_p + delta_V]  # Position at (r_p, 0), velocity increased
+
+# Define the dynamics using Newton's law of gravitation.
+def dynamics(t, state):
+    x, y, vx, vy = state
+    r = np.sqrt(x**2 + y**2)
+    ax = -mu * x / r**3
+    ay = -mu * y / r**3
+    return [vx, vy, ax, ay]
+
+# Event function to stop integration if the payload impacts Earth.
+def collision_event(t, state):
+    x, y, _, _ = state
+    return np.sqrt(x**2 + y**2) - R_earth
+collision_event.terminal = True
+collision_event.direction = -1
+
+# Time parameters
+t_span = (0, 6000)    # seconds - roughly a simulation window covering one or more orbits
+t_eval = np.linspace(t_span[0], t_span[1], 10000)
+
+# Simulate the trajectories for both cases.
+sol_no_burn = solve_ivp(dynamics, t_span, initial_state_no_burn, t_eval=t_eval,
+                        events=collision_event, rtol=1e-8)
+sol_burn = solve_ivp(dynamics, t_span, initial_state_burn, t_eval=t_eval,
+                     events=collision_event, rtol=1e-8)
+
+# Plotting the results
+plt.figure(figsize=(8, 8))
+# Draw Earth as a filled circle (normalized by Earth's radius).
+theta = np.linspace(0, 2*np.pi, 500)
+earth_x = np.cos(theta)
+earth_y = np.sin(theta)
+plt.fill(earth_x, earth_y, 'b', alpha=0.3, label="Earth")
+
+# Plot both trajectories (positions normalized by Earth's radius).
+plt.plot(sol_no_burn.y[0] / R_earth, sol_no_burn.y[1] / R_earth, 'g', label="No Burn (Baseline)")
+plt.plot(sol_burn.y[0] / R_earth, sol_burn.y[1] / R_earth, 'r', label="With Burn (ΔV = 100 m/s)")
+
+plt.xlabel("x (in Earth radii)")
+plt.ylabel("y (in Earth radii)")
+plt.title("Effect of an Impulsive Burn at Periapsis (Oberth Effect)")
+plt.legend(loc="upper right")
+plt.axis('equal')
+plt.grid()
+plt.show()
+```
+
+---
+
+## Explanation of the Code
+
+- **Orbital Parameters and Initial Conditions:**
+  - **Altitudes:**  
+    The periapsis is set at 300 km and the apogee at 600 km above Earth’s surface. These values are converted into radii by adding them to Earth's radius.
+  - **Periapsis Velocity Calculation:**  
+    The velocity at periapsis is computed with:
+    \[
+    v_p = \sqrt{\frac{2\mu \, r_a}{r_p (r_a + r_p)}}
+    \]
+    This calculation ensures that the baseline elliptical orbit will have the specified periapsis and apogee.
+  - **Impulsive Burn:**  
+    A delta‑\(V\) of 100 m/s is applied at periapsis for the second case. Two initial state vectors are defined:
+    - **No Burn (Baseline):** \([r_p, 0, 0, v_p]\)
+    - **With Burn:** \([r_p, 0, 0, v_p + \Delta V]\)
+
+- **Dynamics and Numerical Integration:**
+  - **Dynamics Function:**  
+    The `dynamics` function calculates the acceleration using Newton’s law of gravitation:
+    \[
+    \ddot{x} = -\frac{\mu x}{r^3}, \quad \ddot{y} = -\frac{\mu y}{r^3}
+    \]
+  - **Event Function:**  
+    The `collision_event` function halts the integration if the payload reaches Earth's surface (i.e., when \( r = R_{\text{earth}} \)).
+  - **Integration:**  
+    Both trajectories are simulated over a 6000-second window using `solve_ivp` with a tight relative tolerance of \(1 \times 10^{-8}\) to ensure accuracy.
+
+- **Plotting:**
+  - **Earth Representation:**  
+    Earth is plotted as a blue filled circle after normalizing positions by Earth's radius, so it appears as a unit circle.
+  - **Trajectory Plotting:**  
+    The baseline elliptical orbit (no burn) is plotted in green, and the orbit after the impulsive burn is plotted in red.
+  - **Additional Plot Elements:**  
+    Labels for the axes, a title, and a legend are included to clarify the two different scenarios.
+
+---
+
+## Output Image
+
+Below is a representative sample output image from the simulation:
+
+![Oberth Effect Simulation Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Gravity/Problem3/OberthEffect.png)
+
+---
+
+## Explanation of the Output
+
+1. **Visualization Context:**
+   - **Normalized Display:**  
+     The plot displays Earth as a blue filled unit circle since all distances are normalized by Earth's radius.
+   - **Starting Point:**  
+     The simulation begins at a periapsis of 300 km (roughly \(1.05\,R_{\text{earth}}\)), which places the orbits near Earth’s surface on the normalized scale.
+
+2. **Baseline Orbit (No Burn):**
+   - **Green Curve:**  
+     The green curve represents the elliptical orbit with a periapsis at 300 km and an apogee at 600 km. This orbit follows the intended path without any modifications.
+
+3. **Orbit with Impulsive Burn (Oberth Effect):**
+   - **Red Curve:**  
+     The red curve shows the orbit after a 100 m/s impulsive burn is applied at periapsis.
+   - **Effect of the Burn:**  
+     The burn, performed at the point of highest orbital speed, efficiently increases the orbital energy due to the Oberth effect. This results in a significantly higher apogee compared to the baseline elliptical orbit.
+   - **Visual Distinction:**  
+     Although the altitude differences are small relative to Earth's overall size, the divergence between the red and green curves clearly illustrates the impact of the impulsive burn.
+
+4. **General Observations:**
+   - The simulation demonstrates that impulsive burns executed at periapsis are highly effective, as the added delta‑\(V\) results in a markedly altered orbit with a raised apogee.
+   - Modifying the value of \(\Delta V\) or changing the orbital parameters would result in more pronounced visual differences.
+
+---
