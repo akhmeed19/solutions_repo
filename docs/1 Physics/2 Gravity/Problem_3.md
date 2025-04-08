@@ -563,25 +563,25 @@ plt.show()
     The periapsis is set at 300 km and the apogee at 600 km above Earth’s surface. These values are converted into radii by adding them to Earth's radius.
     - **Periapsis Velocity Calculation:**  
     The velocity at periapsis is computed with:
-    \[
+    $$
     v_p = \sqrt{\frac{2\mu \, r_a}{r_p (r_a + r_p)}}
-    \]
+    $$
     This calculation ensures that the baseline elliptical orbit will have the specified periapsis and apogee.
     - **Impulsive Burn:**  
-    A delta‑\(V\) of 100 m/s is applied at periapsis for the second case. Two initial state vectors are defined:
-     - **No Burn (Baseline):** \([r_p, 0, 0, v_p]\)
-     - **With Burn:** \([r_p, 0, 0, v_p + \Delta V]\)
+    A delta‑$V$ of 100 m/s is applied at periapsis for the second case. Two initial state vectors are defined:
+     - **No Burn (Baseline):** $[r_p, 0, 0, v_p]$
+     - **With Burn:** $[r_p, 0, 0, v_p + \Delta V]$
 
 - **Dynamics and Numerical Integration:**                                                                      
     - **Dynamics Function:**  
     The `dynamics` function calculates the acceleration using Newton’s law of gravitation:
-    \[
+    $$
     \ddot{x} = -\frac{\mu x}{r^3}, \quad \ddot{y} = -\frac{\mu y}{r^3}
-    \]
+    $$
     - **Event Function:**  
-    The `collision_event` function halts the integration if the payload reaches Earth's surface (i.e., when \( r = R_{\text{earth}} \)).
+    The `collision_event` function halts the integration if the payload reaches Earth's surface (i.e., when  $r = R_{\text{earth}}$).
     - **Integration:**  
-    Both trajectories are simulated over a 6000-second window using `solve_ivp` with a tight relative tolerance of \(1 \times 10^{-8}\) to ensure accuracy.
+    Both trajectories are simulated over a 6000-second window using `solve_ivp` with a tight relative tolerance of $1 \times 10^{-8}$ to ensure accuracy.
 
 - **Plotting:**                                                                       
     - **Earth Representation:**  
@@ -607,7 +607,7 @@ Below is a representative sample output image from the simulation:
    - **Normalized Display:**  
      The plot displays Earth as a blue filled unit circle since all distances are normalized by Earth's radius.
    - **Starting Point:**  
-     The simulation begins at a periapsis of 300 km (roughly \(1.05\,R_{\text{earth}}\)), which places the orbits near Earth’s surface on the normalized scale.
+     The simulation begins at a periapsis of 300 km (roughly $1.05\,R_{\text{earth}}$), which places the orbits near Earth’s surface on the normalized scale.
 
 2. **Baseline Orbit (No Burn):**
    - **Green Curve:**  
@@ -622,7 +622,5 @@ Below is a representative sample output image from the simulation:
      Although the altitude differences are small relative to Earth's overall size, the divergence between the red and green curves clearly illustrates the impact of the impulsive burn.
 
 4. **General Observations:**
-   - The simulation demonstrates that impulsive burns executed at periapsis are highly effective, as the added delta‑\(V\) results in a markedly altered orbit with a raised apogee.
-   - Modifying the value of \(\Delta V\) or changing the orbital parameters would result in more pronounced visual differences.
-
----
+   - The simulation demonstrates that impulsive burns executed at periapsis are highly effective, as the added delta‑$V$ results in a markedly altered orbit with a raised apogee.
+   - Modifying the value of $\Delta V$ or changing the orbital parameters would result in more pronounced visual differences.
