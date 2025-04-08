@@ -398,14 +398,14 @@ plt.show()
 #### Explanation of the Code (Scenario 2)
 
 1. **Dynamics Function:**  
-   Computes the derivatives of the state vector \([x, y, vx, vy]\) using Newton’s law.
+   Computes the derivatives of the state vector $[x, y, vx, vy]$ using Newton’s law.
 2. **Simulation Function:**  
    Sets up the initial state and integrates the equations over time using solve_ivp, with a collision event stopping the integration when the payload hits Earth.
 3. **Initial Conditions (400 km):**                                                   
     The payload is released from 400 km altitude (approximately 1.06 Earth radii).  
-    - **Circular Orbit:** \(v = \sqrt{\mu/(R_{\text{earth}}+400\,\text{km})}\)
-    - **Elliptical Orbit:** \(v = 0.9 \times v_{\text{circ}}\) (producing a bound elliptical orbit)
-    - **Hyperbolic Trajectory:** \(v = 1.1 \times v_{\text{esc}}\)
+    - **Circular Orbit:** $v = \sqrt{\mu/(R_{\text{earth}}+400\,\text{km})}$
+    - **Elliptical Orbit:** $v = 0.9 \times v_{\text{circ}}$ (producing a bound elliptical orbit)
+    - **Hyperbolic Trajectory:** $v = 1.1 \times v_{\text{esc}}$
 4. **Plotting:**  
    Normalizes the trajectories by Earth's radius to display Earth as a unit circle.
 
@@ -420,15 +420,15 @@ plt.show()
 - **Red Curve (Circular Orbit):**  
   The payload maintains a stable circular orbit at 400 km altitude.
 - **Green Curve (Elliptical Orbit):**  
-  With \(0.9 \times v_{\text{circ}}\), the payload follows a bound elliptical orbit that does not reenter.
+  With $0.9 \times v_{\text{circ}}$, the payload follows a bound elliptical orbit that does not reenter.
 - **Magenta Curve (Hyperbolic Trajectory):**  
   The payload follows an escape trajectory, with slight differences due to the higher altitude.
 
 #### Key Takeaways (Scenario 2)
 
 1. Higher altitude produces larger, more stable orbits.
-2. Using \(0.9 \times v_{\text{circ}}\) yields a bound elliptical orbit without reentry.
-3. Both scenarios exhibit hyperbolic escape trajectories when \(v\) exceeds \(v_{\text{esc}}\).
+2. Using $0.9 \times v_{\text{circ}}$ yields a bound elliptical orbit without reentry.
+3. Both scenarios exhibit hyperbolic escape trajectories when $v$ exceeds $v_{\text{esc}}$.
 
 ---
 
@@ -453,8 +453,8 @@ Below is a side-by-side comparison of the outputs from Scenario 1 and Scenario 2
 ### Comparison Explanation
 
 - **Altitude Difference:**                                                           
-    - *Scenario 1 (200 km):* The payload starts at about 1.03 Earth radii, resulting in a tight circular orbit, a reentry elliptical trajectory (with \(0.8 \times v_{\text{circ}}\)), and an escape hyperbolic path.
-    - *Scenario 2 (400 km):* The payload starts at about 1.06 Earth radii, producing a larger, more stable circular orbit, a bound elliptical orbit (with \(0.9 \times v_{\text{circ}}\)) that does not reenter, and a hyperbolic trajectory with a slightly modified curvature.
+    - *Scenario 1 (200 km):* The payload starts at about 1.03 Earth radii, resulting in a tight circular orbit, a reentry elliptical trajectory (with $0.8 \times v_{\text{circ}}$), and an escape hyperbolic path.
+    - *Scenario 2 (400 km):* The payload starts at about 1.06 Earth radii, producing a larger, more stable circular orbit, a bound elliptical orbit (with $0.9 \times v_{\text{circ}}$) that does not reenter, and a hyperbolic trajectory with a slightly modified curvature.
 
 - **Orbital Stability and Realism:**  
   A 400 km altitude is more typical for operational satellites due to lower atmospheric drag. The elliptical orbit remains bound at 400 km, whereas at 200 km the elliptical trajectory leads to reentry.
@@ -463,7 +463,7 @@ Below is a side-by-side comparison of the outputs from Scenario 1 and Scenario 2
   A multiplier of 0.8 at 200 km results in reentry, while 0.9 at 400 km yields a stable elliptical orbit, demonstrating the sensitivity of orbital dynamics to initial velocity.
 
 - **Hyperbolic Trajectories:**  
-  Both scenarios use \(1.1 \times v_{\text{esc}}\) to produce escape trajectories; however, the lower escape velocity at 400 km slightly modifies the hyperbolic path's curvature.
+  Both scenarios use $1.1 \times v_{\text{esc}}$ to produce escape trajectories; however, the lower escape velocity at 400 km slightly modifies the hyperbolic path's curvature.
 
 This comparison illustrates how realistic changes in initial altitude and velocity multipliers can lead to significantly different orbital behaviors, providing valuable insights for mission planning.
 
