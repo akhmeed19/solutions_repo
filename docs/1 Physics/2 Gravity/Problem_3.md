@@ -558,37 +558,37 @@ plt.show()
 
 ## Explanation of the Code
 
-- **Orbital Parameters and Initial Conditions:**
-  - **Altitudes:**  
+- **Orbital Parameters and Initial Conditions:**                                        
+    - **Altitudes:**  
     The periapsis is set at 300 km and the apogee at 600 km above Earth’s surface. These values are converted into radii by adding them to Earth's radius.
-  - **Periapsis Velocity Calculation:**  
+    - **Periapsis Velocity Calculation:**  
     The velocity at periapsis is computed with:
     \[
     v_p = \sqrt{\frac{2\mu \, r_a}{r_p (r_a + r_p)}}
     \]
     This calculation ensures that the baseline elliptical orbit will have the specified periapsis and apogee.
-  - **Impulsive Burn:**  
+    - **Impulsive Burn:**  
     A delta‑\(V\) of 100 m/s is applied at periapsis for the second case. Two initial state vectors are defined:
-    - **No Burn (Baseline):** \([r_p, 0, 0, v_p]\)
-    - **With Burn:** \([r_p, 0, 0, v_p + \Delta V]\)
+     - **No Burn (Baseline):** \([r_p, 0, 0, v_p]\)
+     - **With Burn:** \([r_p, 0, 0, v_p + \Delta V]\)
 
-- **Dynamics and Numerical Integration:**
-  - **Dynamics Function:**  
+- **Dynamics and Numerical Integration:**                                                                      
+    - **Dynamics Function:**  
     The `dynamics` function calculates the acceleration using Newton’s law of gravitation:
     \[
     \ddot{x} = -\frac{\mu x}{r^3}, \quad \ddot{y} = -\frac{\mu y}{r^3}
     \]
-  - **Event Function:**  
+    - **Event Function:**  
     The `collision_event` function halts the integration if the payload reaches Earth's surface (i.e., when \( r = R_{\text{earth}} \)).
-  - **Integration:**  
+    - **Integration:**  
     Both trajectories are simulated over a 6000-second window using `solve_ivp` with a tight relative tolerance of \(1 \times 10^{-8}\) to ensure accuracy.
 
-- **Plotting:**
-  - **Earth Representation:**  
+- **Plotting:**                                                                       
+    - **Earth Representation:**  
     Earth is plotted as a blue filled circle after normalizing positions by Earth's radius, so it appears as a unit circle.
-  - **Trajectory Plotting:**  
+    - **Trajectory Plotting:**  
     The baseline elliptical orbit (no burn) is plotted in green, and the orbit after the impulsive burn is plotted in red.
-  - **Additional Plot Elements:**  
+    - **Additional Plot Elements:**  
     Labels for the axes, a title, and a legend are included to clarify the two different scenarios.
 
 ---
