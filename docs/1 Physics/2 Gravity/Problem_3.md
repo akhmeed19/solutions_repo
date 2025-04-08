@@ -603,24 +603,24 @@ Below is a representative sample output image from the simulation:
 
 ## Explanation of the Output
 
-1. **Visualization Context:**
-   - **Normalized Display:**  
+1. **Visualization Context:**                   
+    - **Normalized Display:**  
      The plot displays Earth as a blue filled unit circle since all distances are normalized by Earth's radius.
-   - **Starting Point:**  
+    - **Starting Point:**  
      The simulation begins at a periapsis of 300 km (roughly $1.05\,R_{\text{earth}}$), which places the orbits near Earth’s surface on the normalized scale.
 
-2. **Baseline Orbit (No Burn):**
-   - **Green Curve:**  
+2. **Baseline Orbit (No Burn):**                
+    - **Green Curve:**  
      The green curve represents the elliptical orbit with a periapsis at 300 km and an apogee at 600 km. This orbit follows the intended path without any modifications.
 
-3. **Orbit with Impulsive Burn (Oberth Effect):**
-   - **Red Curve:**  
+3. **Orbit with Impulsive Burn (Oberth Effect):**                                   
+    - **Red Curve:**  
      The red curve shows the orbit after a 100 m/s impulsive burn is applied at periapsis.
-   - **Effect of the Burn:**  
+    - **Effect of the Burn:**  
      The burn, performed at the point of highest orbital speed, efficiently increases the orbital energy due to the Oberth effect. This results in a significantly higher apogee compared to the baseline elliptical orbit.
-   - **Visual Distinction:**  
+    - **Visual Distinction:**  
      Although the altitude differences are small relative to Earth's overall size, the divergence between the red and green curves clearly illustrates the impact of the impulsive burn.
 
-4. **General Observations:**
-   - The simulation demonstrates that impulsive burns executed at periapsis are highly effective, as the added delta‑$V$ results in a markedly altered orbit with a raised apogee.
-   - Modifying the value of $\Delta V$ or changing the orbital parameters would result in more pronounced visual differences.
+4. **General Observations:**                    
+    - The simulation demonstrates that impulsive burns executed at periapsis are highly effective, as the added delta‑$V$ results in a markedly altered orbit with a raised apogee.
+    - Modifying the value of $\Delta V$ or changing the orbital parameters would result in more pronounced visual differences.
