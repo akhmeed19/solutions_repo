@@ -725,36 +725,40 @@ Labels for the axes, a title, and a legend are included to clarify the two diffe
 <hr/>
 <h2 id="explanation-of-the-output">Explanation of the Output</h2>
 <ol>
-<li><strong>Visualization Context:</strong></li>
+<li>
+<p><strong>Visualization Context:</strong> </p>
+<ul>
 <li><strong>Normalized Display:</strong><br/>
-     The plot displays Earth as a blue filled unit circle since all distances are normalized by Earth's radius.</li>
-<li>
-<p><strong>Starting Point:</strong><br/>
-     The simulation begins at a periapsis of 300 km (roughly <span class="arithmatex">\(1.05\,R_{\text{earth}}\)</span>), which places the orbits near Earth’s surface on the normalized scale.</p>
+ The plot displays Earth as a blue filled unit circle since all distances are normalized by Earth's radius.</li>
+<li><strong>Starting Point:</strong><br/>
+ The simulation begins at a periapsis of 300 km (roughly <span class="arithmatex">\(1.05\,R_{\text{earth}}\)</span>), which places the orbits near Earth’s surface on the normalized scale.</li>
+</ul>
 </li>
 <li>
-<p><strong>Baseline Orbit (No Burn):</strong></p>
+<p><strong>Baseline Orbit (No Burn):</strong> </p>
+<ul>
+<li><strong>Green Curve:</strong><br/>
+ The green curve represents the elliptical orbit with a periapsis at 300 km and an apogee at 600 km. This orbit follows the intended path without any modifications.</li>
+</ul>
 </li>
 <li>
-<p><strong>Green Curve:</strong><br/>
-     The green curve represents the elliptical orbit with a periapsis at 300 km and an apogee at 600 km. This orbit follows the intended path without any modifications.</p>
-</li>
-<li>
-<p><strong>Orbit with Impulsive Burn (Oberth Effect):</strong></p>
-</li>
+<p><strong>Orbit with Impulsive Burn (Oberth Effect):</strong> </p>
+<ul>
 <li><strong>Red Curve:</strong><br/>
-     The red curve shows the orbit after a 100 m/s impulsive burn is applied at periapsis.</li>
+ The red curve shows the orbit after a 100 m/s impulsive burn is applied at periapsis.</li>
 <li><strong>Effect of the Burn:</strong><br/>
-     The burn, performed at the point of highest orbital speed, efficiently increases the orbital energy due to the Oberth effect. This results in a significantly higher apogee compared to the baseline elliptical orbit.</li>
-<li>
-<p><strong>Visual Distinction:</strong><br/>
-     Although the altitude differences are small relative to Earth's overall size, the divergence between the red and green curves clearly illustrates the impact of the impulsive burn.</p>
+ The burn, performed at the point of highest orbital speed, efficiently increases the orbital energy due to the Oberth effect. This results in a significantly higher apogee compared to the baseline elliptical orbit.</li>
+<li><strong>Visual Distinction:</strong><br/>
+ Although the altitude differences are small relative to Earth's overall size, the divergence between the red and green curves clearly illustrates the impact of the impulsive burn.</li>
+</ul>
 </li>
 <li>
-<p><strong>General Observations:</strong></p>
-</li>
+<p><strong>General Observations:</strong> </p>
+<ul>
 <li>The simulation demonstrates that impulsive burns executed at periapsis are highly effective, as the added delta‑<span class="arithmatex">\(V\)</span> results in a markedly altered orbit with a raised apogee.</li>
 <li>Modifying the value of <span class="arithmatex">\(\Delta V\)</span> or changing the orbital parameters would result in more pronounced visual differences.</li>
+</ul>
+</li>
 </ol>
 </div>
 </div><footer>
