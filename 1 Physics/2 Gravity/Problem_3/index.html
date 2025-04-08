@@ -675,46 +675,48 @@ plt.show()
 <hr/>
 <h2 id="explanation-of-the-code">Explanation of the Code</h2>
 <ul>
-<li><strong>Orbital Parameters and Initial Conditions:</strong></li>
-<li><strong>Altitudes:</strong><br/>
-    The periapsis is set at 300 km and the apogee at 600 km above Earth’s surface. These values are converted into radii by adding them to Earth's radius.</li>
-<li><strong>Periapsis Velocity Calculation:</strong><br/>
-    The velocity at periapsis is computed with:
-    [
-    v_p = \sqrt{\frac{2\mu \, r_a}{r_p (r_a + r_p)}}
-    ]
-    This calculation ensures that the baseline elliptical orbit will have the specified periapsis and apogee.</li>
 <li>
-<p><strong>Impulsive Burn:</strong><br/>
-    A delta‑<span class="arithmatex">\(V\)</span> of 100 m/s is applied at periapsis for the second case. Two initial state vectors are defined:</p>
+<p><strong>Orbital Parameters and Initial Conditions:</strong> </p>
 <ul>
+<li><strong>Altitudes:</strong><br/>
+The periapsis is set at 300 km and the apogee at 600 km above Earth’s surface. These values are converted into radii by adding them to Earth's radius.</li>
+<li><strong>Periapsis Velocity Calculation:</strong><br/>
+The velocity at periapsis is computed with:
+[
+v_p = \sqrt{\frac{2\mu \, r_a}{r_p (r_a + r_p)}}
+]
+This calculation ensures that the baseline elliptical orbit will have the specified periapsis and apogee.</li>
+<li><strong>Impulsive Burn:</strong><br/>
+A delta‑<span class="arithmatex">\(V\)</span> of 100 m/s is applied at periapsis for the second case. Two initial state vectors are defined:</li>
 <li><strong>No Burn (Baseline):</strong> <span class="arithmatex">\([r_p, 0, 0, v_p]\)</span></li>
 <li><strong>With Burn:</strong> <span class="arithmatex">\([r_p, 0, 0, v_p + \Delta V]\)</span></li>
 </ul>
 </li>
 <li>
-<p><strong>Dynamics and Numerical Integration:</strong></p>
-</li>
+<p><strong>Dynamics and Numerical Integration:</strong> </p>
+<ul>
 <li><strong>Dynamics Function:</strong><br/>
-    The <code>dynamics</code> function calculates the acceleration using Newton’s law of gravitation:
-    [
-    \ddot{x} = -\frac{\mu x}{r^3}, \quad \ddot{y} = -\frac{\mu y}{r^3}
-    ]</li>
+The <code>dynamics</code> function calculates the acceleration using Newton’s law of gravitation:
+[
+\ddot{x} = -\frac{\mu x}{r^3}, \quad \ddot{y} = -\frac{\mu y}{r^3}
+]</li>
 <li><strong>Event Function:</strong><br/>
-    The <code>collision_event</code> function halts the integration if the payload reaches Earth's surface (i.e., when <span class="arithmatex">\( r = R_{\text{earth}} \)</span>).</li>
-<li>
-<p><strong>Integration:</strong><br/>
-    Both trajectories are simulated over a 6000-second window using <code>solve_ivp</code> with a tight relative tolerance of <span class="arithmatex">\(1 \times 10^{-8}\)</span> to ensure accuracy.</p>
+The <code>collision_event</code> function halts the integration if the payload reaches Earth's surface (i.e., when <span class="arithmatex">\( r = R_{\text{earth}} \)</span>).</li>
+<li><strong>Integration:</strong><br/>
+Both trajectories are simulated over a 6000-second window using <code>solve_ivp</code> with a tight relative tolerance of <span class="arithmatex">\(1 \times 10^{-8}\)</span> to ensure accuracy.</li>
+</ul>
 </li>
 <li>
-<p><strong>Plotting:</strong></p>
-</li>
+<p><strong>Plotting:</strong> </p>
+<ul>
 <li><strong>Earth Representation:</strong><br/>
-    Earth is plotted as a blue filled circle after normalizing positions by Earth's radius, so it appears as a unit circle.</li>
+Earth is plotted as a blue filled circle after normalizing positions by Earth's radius, so it appears as a unit circle.</li>
 <li><strong>Trajectory Plotting:</strong><br/>
-    The baseline elliptical orbit (no burn) is plotted in green, and the orbit after the impulsive burn is plotted in red.</li>
+The baseline elliptical orbit (no burn) is plotted in green, and the orbit after the impulsive burn is plotted in red.</li>
 <li><strong>Additional Plot Elements:</strong><br/>
-    Labels for the axes, a title, and a legend are included to clarify the two different scenarios.</li>
+Labels for the axes, a title, and a legend are included to clarify the two different scenarios.</li>
+</ul>
+</li>
 </ul>
 <hr/>
 <h2 id="output-image">Output Image</h2>
