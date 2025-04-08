@@ -624,3 +624,5 @@ Below is a representative sample output image from the simulation:
 4. **General Observations:**                    
     - The simulation demonstrates that impulsive burns executed at periapsis are highly effective, as the added delta‑$V$ results in a markedly altered orbit with a raised apogee.
     - Modifying the value of $\Delta V$ or changing the orbital parameters would result in more pronounced visual differences.
+
+---
