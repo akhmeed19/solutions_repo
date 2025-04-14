@@ -257,28 +257,28 @@ if __name__ == "__main__":
 
 ### 1. Wave Snapshot
 
-![ Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/sadada.png)
+![ Wave Snapshot](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Waves/Problem1/Wave%20Snapshot.png)
 
 **Explanation:**  
 The snapshot shows the instantaneous displacement of the wave field at \( t = 0 \) for a triangular configuration. The contour plot clearly illustrates areas where wave amplitudes reinforce (constructive interference) and cancel (destructive interference). The red markers denote the positions of the sources, and the dashed line outlines the triangular boundary.
 
 ### 2. Intensity Map
 
-![ Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/sadada.png)
+![ Interference Pattern Intensity Map](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Waves/Problem1/Intensity%20Map.png)
 
 **Explanation:**  
 The intensity map displays the time-averaged energy distribution of the wave field. Bright regions indicate consistent high amplitude (constructive interference), while darker areas reveal destructive interference. The map includes the marked source positions and the connecting polygon, providing a clear visual of the interference pattern’s overall structure.
 
 ### 3. Polygon Comparison
 
-![ Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/sadada.png)
+![ Polygon Comparison](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Waves/Problem1/Polygon%20comparison.png)
 
 **Explanation:**  
 This comparison presents displacement maps (top row) and intensity maps (bottom row) for polygons with 3, 4, 5, and 6 sides. The plots reveal that as the number of sides increases, the interference pattern becomes more intricate and symmetric, demonstrating the impact of source geometry on wave superposition.
 
 ### 4. Wave Animation
 
-![ Output](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/sadada.png)
+![ Wave Interference Animation](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Waves/Problem1/Wave%20animation.png)
 
 **Explanation:**  
 The animation shows the dynamic evolution of the interference pattern over time. The moving crests and troughs indicate phase variations, yet the overall symmetry dictated by the polygon is maintained throughout the animation. This dynamic visualization offers insight into how the interference pattern shifts while the basic structure remains constant.
@@ -300,4 +300,3 @@ The animation shows the dynamic evolution of the interference pattern over time.
   Provides a dynamic view of the wave evolution, emphasizing the temporal changes in the interference pattern while preserving the geometric symmetry.
 
 This solution, including theoretical background, full Python code, output images with explanations, and a summary, meets all the problem requirements.
-```
