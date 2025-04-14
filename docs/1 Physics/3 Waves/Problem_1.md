@@ -13,24 +13,24 @@ $$
 $$
 
 where  
-- $r_i = \sqrt{(x - x_i)^2 + (y - y_i)^2}$ is the distance from the source to the point \((x,y)\),  
+- $r_i = \sqrt{(x - x_i)^2 + (y - y_i)^2}$ is the distance from the source to the point $(x,y)$,  
 - $A$ is the amplitude,  
-- \(k = \frac{2\pi}{\lambda}\) is the wave number,  
-- \(\omega = 2\pi f\) is the angular frequency,  
-- \(\phi\) is the initial phase, and  
-- \(\epsilon\) (typically 0.01) prevents division by zero.
+- $k = \frac{2\pi}{\lambda}$ is the wave number,  
+- $\omega = 2\pi f$ is the angular frequency,  
+- $\phi$ is the initial phase, and  
+- $\epsilon$ (typically 0.01) prevents division by zero.
 
-For \(N\) sources arranged in a regular polygon of radius \(R\), the source coordinates are
+For $N$ sources arranged in a regular polygon of radius $R$, the source coordinates are
 
-\[
+$$
 x_i = R \cos\Bigl(\frac{2\pi i}{N}\Bigr), \quad y_i = R \sin\Bigl(\frac{2\pi i}{N}\Bigr), \quad i = 0, 1, \dots, N-1.
-\]
+$$
 
-The overall displacement at a point \((x,y)\) and time \(t\) is obtained by the superposition:
+The overall displacement at a point $(x,y)$ and time $t$ is obtained by the superposition:
 
-\[
+$$
 \eta(x, y, t) = \sum_{i=1}^{N} \eta_i(x, y, t).
-\]
+$$
 
 ## Python Code Implementation
 
@@ -260,7 +260,7 @@ if __name__ == "__main__":
 ![ Wave Snapshot](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Waves/Problem1/Wave%20Snapshot.png)
 
 **Explanation:**  
-The snapshot shows the instantaneous displacement of the wave field at \( t = 0 \) for a triangular configuration. The contour plot clearly illustrates areas where wave amplitudes reinforce (constructive interference) and cancel (destructive interference). The red markers denote the positions of the sources, and the dashed line outlines the triangular boundary.
+The snapshot shows the instantaneous displacement of the wave field at $t = 0$ for a triangular configuration. The contour plot clearly illustrates areas where wave amplitudes reinforce (constructive interference) and cancel (destructive interference). The red markers denote the positions of the sources, and the dashed line outlines the triangular boundary.
 
 ### 2. Intensity Map
 
