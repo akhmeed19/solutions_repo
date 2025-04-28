@@ -98,6 +98,8 @@
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#scenario-4-parameter-exploration">Scenario 4: Parameter Exploration</a>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="#scenario-5-magnetic-mirror">Scenario 5: Magnetic Mirror</a>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="#simulation-visualizations">Simulation Visualizations</a>
 </li>
 </ul>
@@ -281,484 +283,151 @@
 <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits.mplot3d import Axes3D  # registers 3D projection
 from scipy.integrate import solve_ivp
 
 class LorentzForceSimulator:
-    """Simulator for charged particle motion under Lorentz force"""
-
     def __init__(self, q=1.0, m=1.0):
-        """
-        Initialize simulator with particle properties
-
-        Parameters:
-        -----------
-        q : float
-            Charge of the particle
-        m : float
-            Mass of the particle
-        """
-        self.q = q
-        self.m = m
+        self.q, self.m = q, m
         self.results = None
 
     def _lorentz_force(self, t, state, E_func, B_func):
-        """
-        Calculate the derivatives for the system of ODEs
-
-        Parameters:
-        -----------
-        t : float
-            Time
-        state : array
-            State vector [x, y, z, vx, vy, vz]
-        E_func : function
-            Function that returns the electric field vector at a given position and time
-        B_func : function
-            Function that returns the magnetic field vector at a given position and time
-
-        Returns:
-        --------
-        array
-            Derivatives [dx/dt, dy/dt, dz/dt, dvx/dt, dvy/dt, dvz/dt]
-        """
         x, y, z, vx, vy, vz = state
-        position = np.array([x, y, z])
-        velocity = np.array([vx, vy, vz])
+        v = np.array([vx, vy, vz])
+        E = E_func(np.array([x, y, z]), t)
+        B = B_func(np.array([x, y, z]), t)
+        a = (self.q / self.m) * (E + np.cross(v, B))
+        return [vx, vy, vz, a[0], a[1], a[2]]
 
-        E = E_func(position, t)
-        B = B_func(position, t)
-
-        # Calculate acceleration from Lorentz force: F = q(E + v × B)
-        v_cross_B = np.cross(velocity, B)
-        acceleration = (self.q / self.m) * (E + v_cross_B)
-
-        return [vx, vy, vz, acceleration[0], acceleration[1], acceleration[2]]
-
-    def simulate(self, initial_state, t_span, t_eval, E_func, B_func):
-        """
-        Simulate the particle motion
-
-        Parameters:
-        -----------
-        initial_state : array
-            Initial state vector [x0, y0, z0, vx0, vy0, vz0]
-        t_span : tuple
-            Time span for simulation (t_start, t_end)
-        t_eval : array
-            Time points at which to evaluate the solution
-        E_func : function
-            Function that returns the electric field vector at a given position and time
-        B_func : function
-            Function that returns the magnetic field vector at a given position and time
-
-        Returns:
-        --------
-        OdeResult
-            Result of the simulation
-        """
-        result = solve_ivp(
-            lambda t, state: self._lorentz_force(t, state, E_func, B_func),
-            t_span,
-            initial_state,
-            t_eval=t_eval,
-            method='RK45',
-            rtol=1e-8,
-            atol=1e-8
+    def simulate(self, init, t_span, t_eval, E_func, B_func):
+        sol = solve_ivp(
+            lambda t, y: self._lorentz_force(t, y, E_func, B_func),
+            t_span, init, t_eval=t_eval,
+            method='RK45', rtol=1e-8, atol=1e-8
         )
+        self.results = sol
+        return sol
 
-        self.results = result
-        return result
-
-    def plot_trajectory_3d(self, title="Particle Trajectory", show_fields=True, field_density=5):
-        """
-        Plot the particle trajectory in 3D
-
-        Parameters:
-        -----------
-        title : str
-            Title of the plot
-        show_fields : bool
-            Whether to show field vectors
-        field_density : int
-            Density of field vectors in the plot
-        """
+    def plot_3d(self, title="3D Trajectory"):
         if self.results is None:
-            raise ValueError("No simulation results to plot. Run simulate() first.")
-
-        fig = plt.figure(figsize=(10, 8))
+            raise RuntimeError("No results—call simulate() first.")
+        x, y, z = self.results.y[0], self.results.y[1], self.results.y[2]
+        fig = plt.figure(figsize=(8, 6))
         ax = fig.add_subplot(111, projection='3d')
-
-        # Extract position data
-        x = self.results.y[0]
-        y = self.results.y[1]
-        z = self.results.y[2]
-
-        # Plot trajectory
-        ax.plot(x, y, z, '-', lw=2, label='Particle Path')
-        ax.scatter(x[0], y[0], z[0], c='g', s=100, label='Start')
-        ax.scatter(x[-1], y[-1], z[-1], c='r', s=100, label='End')
-
-        # Set labels and title
-        ax.set_xlabel('X')
-        ax.set_ylabel('Y')
-        ax.set_zlabel('Z')
+        # default blue line
+        ax.plot(x, y, z, '-', lw=2, label='Path')
+        ax.scatter(x[0], y[0], z[0], c='g', s=80, label='Start')
+        ax.scatter(x[-1], y[-1], z[-1], c='r', s=80, label='End')
         ax.set_title(title)
-
-        # Add legend
-        ax.legend()
-
+        ax.set_xlabel('X'); ax.set_ylabel('Y'); ax.set_zlabel('Z')
+        ax.legend(loc='upper left')
         plt.tight_layout()
         return fig, ax
 
-    def plot_trajectory_2d(self, plane='xy', title="Particle Trajectory (2D)"):
-        """
-        Plot the particle trajectory in 2D
-
-        Parameters:
-        -----------
-        plane : str
-            Plane to plot ('xy', 'xz', or 'yz')
-        title : str
-            Title of the plot
-        """
+    def plot_2d(self, plane='xy', title="2D Projection"):
         if self.results is None:
-            raise ValueError("No simulation results to plot. Run simulate() first.")
-
-        fig, ax = plt.subplots(figsize=(10, 6))
-
-        # Extract position data
-        x = self.results.y[0]
-        y = self.results.y[1]
-        z = self.results.y[2]
-
-        # Plot trajectory based on the selected plane
+            raise RuntimeError("No results—call simulate() first.")
+        x, y, z = self.results.y[0], self.results.y[1], self.results.y[2]
+        fig, ax = plt.subplots(figsize=(6, 5))
         if plane == 'xy':
-            ax.plot(x, y, '-', lw=2)
-            ax.scatter(x[0], y[0], c='g', s=100, label='Start')
-            ax.scatter(x[-1], y[-1], c='r', s=100, label='End')
-            ax.set_xlabel('X')
-            ax.set_ylabel('Y')
+            ax.plot(x, y, '-', lw=2)  # default blue
+            ax.scatter(x[0], y[0], c='g', s=80, label='Start')
+            ax.scatter(x[-1], y[-1], c='r', s=80, label='End')
+            ax.set_xlabel('X'); ax.set_ylabel('Y')
         elif plane == 'xz':
             ax.plot(x, z, '-', lw=2)
-            ax.scatter(x[0], z[0], c='g', s=100, label='Start')
-            ax.scatter(x[-1], z[-1], c='r', s=100, label='End')
-            ax.set_xlabel('X')
-            ax.set_ylabel('Z')
+            ax.scatter(x[0], z[0], c='g', s=80, label='Start')
+            ax.scatter(x[-1], z[-1], c='r', s=80, label='End')
+            ax.set_xlabel('X'); ax.set_ylabel('Z')
         elif plane == 'yz':
             ax.plot(y, z, '-', lw=2)
-            ax.scatter(y[0], z[0], c='g', s=100, label='Start')
-            ax.scatter(y[-1], z[-1], c='r', s=100, label='End')
-            ax.set_xlabel('Y')
-            ax.set_ylabel('Z')
+            ax.scatter(y[0], z[0], c='g', s=80, label='Start')
+            ax.scatter(y[-1], z[-1], c='r', s=80, label='End')
+            ax.set_xlabel('Y'); ax.set_ylabel('Z')
         else:
-            raise ValueError("Invalid plane. Choose 'xy', 'xz', or 'yz'.")
-
-        # Set title and add legend
-        ax.set_title(f"{title} - {plane.upper()} Plane")
+            raise ValueError("plane must be 'xy','xz' or 'yz'")
+        ax.set_title(f"{title} — {plane.upper()}")
         ax.legend()
-        ax.grid(True)
-
+        ax.grid(True, ls='--', alpha=0.5)
         plt.tight_layout()
         return fig, ax
 
-    def create_animation(self, plane='xy', interval=50):
-        """
-        Create an animation of the particle motion
-
-        Parameters:
-        -----------
-        plane : str
-            Plane to plot ('xy', 'xz', or 'yz')
-        interval : int
-            Interval between frames in milliseconds
-
-        Returns:
-        --------
-        animation
-            Animation object
-        """
+    def animate_xy(self, interval=50):
         if self.results is None:
-            raise ValueError("No simulation results to plot. Run simulate() first.")
-
-        fig, ax = plt.subplots(figsize=(8, 8))
-
-        # Extract position data
-        x = self.results.y[0]
-        y = self.results.y[1]
-        z = self.results.y[2]
-
-        # Set up the plot based on the selected plane
-        if plane == 'xy':
-            line, = ax.plot([], [], 'b-', lw=2)
-            point, = ax.plot([], [], 'ro', ms=10)
-            ax.set_xlabel('X')
-            ax.set_ylabel('Y')
-            xdata, ydata = x, y
-        elif plane == 'xz':
-            line, = ax.plot([], [], 'b-', lw=2)
-            point, = ax.plot([], [], 'ro', ms=10)
-            ax.set_xlabel('X')
-            ax.set_ylabel('Z')
-            xdata, ydata = x, z
-        elif plane == 'yz':
-            line, = ax.plot([], [], 'b-', lw=2)
-            point, = ax.plot([], [], 'ro', ms=10)
-            ax.set_xlabel('Y')
-            ax.set_ylabel('Z')
-            xdata, ydata = y, z
-        else:
-            raise ValueError("Invalid plane. Choose 'xy', 'xz', or 'yz'.")
-
-        # Set axis limits
-        ax.set_xlim(min(xdata) - 0.1 * (max(xdata) - min(xdata)), 
-                   max(xdata) + 0.1 * (max(xdata) - min(xdata)))
-        ax.set_ylim(min(ydata) - 0.1 * (max(ydata) - min(ydata)), 
-                   max(ydata) + 0.1 * (max(ydata) - min(ydata)))
-
-        ax.grid(True)
-        ax.set_title(f"Particle Motion - {plane.upper()} Plane")
+            raise RuntimeError("No results—call simulate() first.")
+        x, y = self.results.y[0], self.results.y[1]
+        fig, ax = plt.subplots(figsize=(6, 6))
+        line, = ax.plot([], [], 'b-', lw=2)
+        pt,   = ax.plot([], [], 'ro', ms=6)
+        ax.set_xlim(x.min()*1.1, x.max()*1.1)
+        ax.set_ylim(y.min()*1.1, y.max()*1.1)
+        ax.set_xlabel('X'); ax.set_ylabel('Y')
+        ax.set_title("Animation — XY Plane")
 
         def init():
-            line.set_data([], [])
-            point.set_data([], [])
-            return line, point
+            line.set_data([], []); pt.set_data([], [])
+            return line, pt
 
-        def animate(i):
-            line.set_data(xdata[:i+1], ydata[:i+1])
-            point.set_data(xdata[i], ydata[i])
-            return line, point
+        def anim(i):
+            line.set_data(x[:i], y[:i])
+            pt.set_data(x[i], y[i])
+            return line, pt
 
-        # Create animation
-        frames = len(self.results.t)
-        anim = FuncAnimation(fig, animate, init_func=init, frames=frames, 
-                             interval=interval, blit=True)
+        anim_obj = FuncAnimation(fig, anim, init_func=init,
+                                 frames=len(x), interval=interval, blit=True)
+        return anim_obj, fig, ax
 
-        return anim, fig, ax
-
-# Field functions
-def uniform_E_field(position, t, E_vector=[0, 0, 0]):
-    """Return a uniform electric field"""
-    return np.array(E_vector)
-
-def uniform_B_field(position, t, B_vector=[0, 0, 1]):
-    """Return a uniform magnetic field"""
-    return np.array(B_vector)
-
-def crossed_fields(position, t, E_vector=[0, 1, 0], B_vector=[0, 0, 1]):
-    """Return crossed electric and magnetic fields"""
-    E = uniform_E_field(position, t, E_vector)
-    B = uniform_B_field(position, t, B_vector)
-    return E, B
-
-# Interactive Demo with multiple scenarios
 def main():
-    plt.ion()  # Turn on interactive mode
-
-    print("Lorentz Force Simulation Demo")
-    print("============================")
-    print("\nScenario 1: Uniform Magnetic Field")
-    print("Shows circular motion in a uniform magnetic field.")
-
-    # Scenario 1: Uniform Magnetic Field
-    simulator = LorentzForceSimulator(q=1.0, m=1.0)
-
-    # Initial conditions: position (0,0,0) and velocity (1,1,0)
-    initial_state = [0, 0, 0, 1, 1, 0]
     t_span = (0, 20)
-    t_eval = np.linspace(*t_span, 1000)
+    t_eval = np.linspace(0, 20, 1000)
 
-    # Magnetic field in z-direction
-    B_field = lambda pos, t: np.array([0, 0, 1])
-    E_field = lambda pos, t: np.array([0, 0, 0])  # No electric field
+    scenarios = [
+        ("Scenario 1: Uniform B-Field",
+         [0, 0, 0, 1, 1, 0],
+         lambda pos, t: np.zeros(3),
+         lambda pos, t: np.array([0, 0, 1]),
+         'xy', "Circular Motion in Uniform B-Field"),
+        ("Scenario 2: Combined E &amp; B",
+         [0, 0, 0, 0, 0, 0],
+         lambda pos, t: np.array([0.5, 0, 0]),
+         lambda pos, t: np.array([0, 0, 1]),
+         'xy', "Cycloid Drift in Combined Fields"),
+        ("Scenario 3: Crossed E &amp; B",
+         [0, 0, 0, 0, 0, 0],
+         lambda pos, t: np.array([0, 1, 0]),
+         lambda pos, t: np.array([0, 0, 1]),
+         'xy', "E×B Drift Motion"),
+        ("Scenario 4: Helical Motion",
+         [0, 0, 0, 1, 0, 1],
+         lambda pos, t: np.zeros(3),
+         lambda pos, t: np.array([0, 0, 1]),
+         'xy', "Helical Motion (XY)"),
+        ("Scenario 5: Magnetic Mirror",
+         [0, 0, 0, 0.5, 0.5, 0.5],
+         lambda pos, t: np.zeros(3),
+         lambda pos, t: np.array([0, 0, 1 + 0.1*pos[2]**2]),
+         'xz', "Mirror Bounce (XZ)"),
+    ]
 
-    # Run simulation
-    result = simulator.simulate(initial_state, t_span, t_eval, E_field, B_field)
+    for title, init, Ef, Bf, plane, p2title in scenarios:
+        print("\n" + title)
+        sim = LorentzForceSimulator()
+        sim.simulate(init, t_span, t_eval, Ef, Bf)
+        sim.plot_3d(title)
+        plt.show()      # close this window to continue
+        sim.plot_2d(plane, p2title)
+        plt.show()
 
-    # Calculate and display the Larmor radius
-    v_perp = np.sqrt(initial_state[3]**2 + initial_state[4]**2)  # perpendicular velocity component
-    B_magnitude = np.linalg.norm(B_field(np.zeros(3), 0))
-    larmor_radius = simulator.m * v_perp / (simulator.q * B_magnitude)
-    print(f"Larmor radius: {larmor_radius:.4f}")
+    # Final animation
+    print("\nFinal Animation (Uniform B-Field Cyclotron)")
+    sim = LorentzForceSimulator()
+    sim.simulate([0, 0, 0, 1, 1, 0], (0, 10), np.linspace(0, 10, 200),
+                 lambda pos, t: np.zeros(3),
+                 lambda pos, t: np.array([0, 0, 1]))
+    anim, fig, ax = sim.animate_xy(interval=50)
+    plt.show()       # runs until you close the animation window
 
-    # Plot 3D trajectory
-    fig_3d, ax_3d = simulator.plot_trajectory_3d(title="Particle in Uniform Magnetic Field")
-    plt.show()
-
-    # Plot 2D projection
-    fig_xy, ax_xy = simulator.plot_trajectory_2d(plane='xy', title="Circular Motion in Uniform B-field")
-    plt.show()
-
-    input("\nPress Enter to continue to the next scenario...")
-    plt.close(fig_3d)
-    plt.close(fig_xy)
-
-    print("\nScenario 2: Combined Electric and Magnetic Fields")
-    print("Shows cycloid-like motion due to combined fields.")
-
-    # Scenario 2: Combined Electric and Magnetic Fields
-    simulator = LorentzForceSimulator(q=1.0, m=1.0)
-
-    # Initial conditions: position (0,0,0) and velocity (0,0,0)
-    initial_state = [0, 0, 0, 0, 0, 0]
-    t_span = (0, 20)
-    t_eval = np.linspace(*t_span, 1000)
-
-    # Fields: B in z-direction, E in x-direction
-    B_field = lambda pos, t: np.array([0, 0, 1])
-    E_field = lambda pos, t: np.array([0.5, 0, 0])
-
-    # Run simulation
-    result = simulator.simulate(initial_state, t_span, t_eval, E_field, B_field)
-
-    # Plot 3D trajectory
-    fig_3d, ax_3d = simulator.plot_trajectory_3d(title="Particle in Combined E and B Fields")
-    plt.show()
-
-    # Plot 2D projection
-    fig_xy, ax_xy = simulator.plot_trajectory_2d(plane='xy', title="Motion in Combined Fields")
-    plt.show()
-
-    input("\nPress Enter to continue to the next scenario...")
-    plt.close(fig_3d)
-    plt.close(fig_xy)
-
-    print("\nScenario 3: Crossed Electric and Magnetic Fields")
-    print("Shows E×B drift when E and B are perpendicular.")
-
-    # Scenario 3: Crossed E and B Fields
-    simulator = LorentzForceSimulator(q=1.0, m=1.0)
-
-    # Initial conditions: position (0,0,0) and velocity (0,0,0)
-    initial_state = [0, 0, 0, 0, 0, 0]
-    t_span = (0, 20)
-    t_eval = np.linspace(*t_span, 1000)
-
-    # Crossed fields: E in y-direction, B in z-direction
-    B_field = lambda pos, t: np.array([0, 0, 1])
-    E_field = lambda pos, t: np.array([0, 1, 0])
-
-    # Run simulation
-    result = simulator.simulate(initial_state, t_span, t_eval, E_field, B_field)
-
-    # Calculate the drift velocity
-    E = np.array([0, 1, 0])
-    B = np.array([0, 0, 1])
-    B_magnitude = np.linalg.norm(B)
-    drift_velocity = np.cross(E, B) / (B_magnitude**2)
-    print(f"E×B Drift velocity: {drift_velocity}")
-
-    # Plot 3D trajectory
-    fig_3d, ax_3d = simulator.plot_trajectory_3d(title="E×B Drift in Crossed Fields")
-    plt.show()
-
-    # Plot 2D projection
-    fig_xy, ax_xy = simulator.plot_trajectory_2d(plane='xy', title="E×B Drift Motion")
-    plt.show()
-
-    input("\nPress Enter to continue to the next scenario...")
-    plt.close(fig_3d)
-    plt.close(fig_xy)
-
-    print("\nScenario 4: Helical Motion")
-    print("Shows helical trajectory when velocity has component parallel to B.")
-
-    # Scenario 4: Helical Motion
-    simulator = LorentzForceSimulator(q=1.0, m=1.0)
-
-    # Initial conditions: position (0,0,0) and velocity (1,0,1) with z-component
-    initial_state = [0, 0, 0, 1, 0, 1]
-    t_span = (0, 20)
-    t_eval = np.linspace(*t_span, 1000)
-
-    # Magnetic field in z-direction
-    B_field = lambda pos, t: np.array([0, 0, 1])
-    E_field = lambda pos, t: np.array([0, 0, 0])  # No electric field
-
-    # Run simulation
-    result = simulator.simulate(initial_state, t_span, t_eval, E_field, B_field)
-
-    # Plot 3D trajectory
-    fig_3d, ax_3d = simulator.plot_trajectory_3d(title="Helical Motion in Uniform B Field")
-    plt.show()
-
-    # Plot 2D projections
-    fig_xy, ax_xy = simulator.plot_trajectory_2d(plane='xy', title="Helical Motion")
-    plt.show()
-    fig_xz, ax_xz = simulator.plot_trajectory_2d(plane='xz', title="Helical Motion")
-    plt.show()
-
-    input("\nPress Enter to continue to the next scenario...")
-    plt.close(fig_3d)
-    plt.close(fig_xy)
-    plt.close(fig_xz)
-
-    print("\nScenario 5: Magnetic Mirror")
-    print("Shows particle bouncing in a non-uniform magnetic field.")
-
-    # Scenario 5: Magnetic Mirror
-    simulator = LorentzForceSimulator(q=1.0, m=1.0)
-
-    # Initial conditions
-    initial_state = [0, 0, 0, 0.5, 0.5, 0.5]
-    t_span = (0, 30)
-    t_eval = np.linspace(*t_span, 1500)
-
-    # Magnetic mirror field
-    def magnetic_mirror_B_field(position, t, B0=1.0, k=0.1):
-        """Non-uniform magnetic field that increases in strength along z-axis"""
-        z = position[2]
-        Bz = B0 * (1 + k * z**2)  # Field strength increases quadratically with z
-        return np.array([0, 0, Bz])
-
-    E_field = lambda pos, t: np.array([0, 0, 0])
-
-    # Run simulation
-    result = simulator.simulate(initial_state, t_span, t_eval, E_field, magnetic_mirror_B_field)
-
-    # Plot 3D trajectory
-    fig_3d, ax_3d = simulator.plot_trajectory_3d(title="Magnetic Mirror Effect")
-    plt.show()
-
-    # Plot 2D projections
-    fig_xz, ax_xz = simulator.plot_trajectory_2d(plane='xz', title="Magnetic Mirror - Particle Bounce")
-    plt.show()
-
-    input("\nPress Enter to continue to the animation demo...")
-    plt.close(fig_3d)
-    plt.close(fig_xz)
-
-    print("\nAnimation Demo")
-    print("Shows animated particle motion in uniform magnetic field.")
-
-    # Animation demo
-    simulator = LorentzForceSimulator(q=1.0, m=1.0)
-
-    # Initial conditions
-    initial_state = [0, 0, 0, 1, 1, 0]
-    t_span = (0, 10)
-    t_eval = np.linspace(*t_span, 200)  # Fewer points for smoother animation
-
-    # Uniform magnetic field
-    B_field = lambda pos, t: np.array([0, 0, 1])
-    E_field = lambda pos, t: np.array([0, 0, 0])
-
-    # Run simulation
-    result = simulator.simulate(initial_state, t_span, t_eval, E_field, B_field)
-
-    # Create and show animation
-    anim, fig, ax = simulator.create_animation(plane='xy', interval=50)
-    plt.show()
-
-    print("\nFinished demo! Close the animation window to exit.")
-
-    try:
-        # Keep the plot window open until the user closes it
-        plt.waitforbuttonpress()
-    except Exception:
-        pass
-
-    print("\nThank you for using the Lorentz Force Simulator!")
+    print("\nAll done — thanks for watching!")
 
 if __name__ == "__main__":
     main()
@@ -959,18 +628,61 @@ axes[2].legend()
 plt.tight_layout()
 plt.close(fig)
 </code></pre>
+<h3 id="scenario-5-magnetic-mirror">Scenario 5: Magnetic Mirror</h3>
+<p>In a non‐uniform magnetic field that increases along the <span class="arithmatex">\(z\)</span>–axis, particles can “mirror” — i.e.\ bounce back when they encounter regions of stronger <span class="arithmatex">\(B\)</span>.</p>
+<pre><code class="language-python"># Scenario 5: Magnetic Mirror
+simulator = LorentzForceSimulator(q=1.0, m=1.0)
+
+# Initial conditions: position (0,0,0), velocity with both perpendicular and parallel components
+initial_state = [0, 0, 0, 0.5, 0.5, 1.0]
+t_span = (0, 30)
+t_eval = np.linspace(*t_span, 2000)
+
+# No electric field
+E_field = lambda pos, t: np.zeros(3)
+
+# Magnetic mirror: B increases as z^2
+def B_mirror(pos, t, B0=1.0, k=0.1):
+    z = pos[2]
+    return np.array([0, 0, B0 * (1 + k*z**2)])
+
+# Run simulation
+result = simulator.simulate(initial_state, t_span, t_eval, E_field, B_mirror)
+
+# Plot 3D trajectory
+fig_3d, ax_3d = simulator.plot_3d(title="Magnetic Mirror: 3D Trajectory")
+plt.show()
+
+# Plot XZ projection to highlight bouncing
+fig_xz, ax_xz = simulator.plot_2d(plane='xz', title="Magnetic Mirror: XZ Projection")
+plt.show()
+</code></pre>
+<p><strong>What you’ll observe:</strong><br/>
+- As the particle moves along <span class="arithmatex">\(+z\)</span>, the local field strength grows, converting parallel kinetic energy into gyration.<br/>
+- Once the parallel velocity is reduced to zero, the particle reverses direction, “mirroring” back toward <span class="arithmatex">\(z=0\)</span>.<br/>
+- The turning points occur where <span class="arithmatex">\(v_\parallel^2 / v_\perp^2 = B(z)/B(0)\)</span>, illustrating the mirror ratio effect.</p>
 <h3 id="simulation-visualizations">Simulation Visualizations</h3>
 <p>Here are the key visualizations from our simulations:</p>
-<p><img alt="Uniform Magnetic Field - 3D Trajectory" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Electromangetism/UniformMagneticField/trajectory_magnetic_field_3d.png"/>
+<p><img alt="Uniform Magnetic Field – 3D Trajectory" src="URL"/>
 <em>Figure 1: 3D trajectory of a charged particle in a uniform magnetic field showing circular motion.</em></p>
-<p><img alt="Uniform Magnetic Field - XY Plane" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Electromangetism/UniformMagneticField/trajectory_magnetic_field_xy.png"/>
+<p><img alt="Uniform Magnetic Field – XY Plane" src="URL"/>
 <em>Figure 2: 2D projection showing circular motion in the XY plane.</em></p>
-<p><img alt="Combined E and B Fields" src="https://placeholder.com/combined_fields.png"/>
-<em>Figure 3: Particle motion under combined electric and magnetic fields.</em></p>
-<p><img alt="E×B Drift" src="https://placeholder.com/exb_drift.png"/>
-<em>Figure 4: E×B drift motion showing the cycloid-like path in crossed fields.</em></p>
-<p><img alt="Parameter Exploration" src="https://placeholder.com/parameter_exploration.png"/>
-<em>Figure 5: Effects of varying B-field strength, charge-to-mass ratio, and initial velocity.</em></p>
+<p><img alt="Combined E and B Fields – 3D Trajectory" src="URL"/>
+<em>Figure 3: 3D trajectory under combined electric and magnetic fields showing cycloid drift.</em></p>
+<p><img alt="Combined E and B Fields – XY Plane" src="URL"/>
+<em>Figure 4: 2D projection of cycloid-like drift in combined fields.</em></p>
+<p><img alt="E×B Drift – 3D Trajectory" src="URL"/>
+<em>Figure 5: 3D trajectory in crossed electric and magnetic fields showing E×B drift.</em></p>
+<p><img alt="E×B Drift – XY Plane" src="URL"/>
+<em>Figure 6: 2D projection of E×B drift motion.</em></p>
+<p><img alt="Helical Motion – 3D Trajectory" src="URL"/>
+<em>Figure 7: 3D helical trajectory when the particle has a velocity component parallel to the magnetic field.</em></p>
+<p><img alt="Helical Motion – XY Plane" src="URL"/>
+<em>Figure 8: 2D projection of helical motion in the XY plane.</em></p>
+<p><img alt="Magnetic Mirror – 3D Trajectory" src="URL"/>
+<em>Figure 9: 3D trajectory in a magnetic mirror configuration showing the particle bouncing.</em></p>
+<p><img alt="Magnetic Mirror – XZ Projection" src="URL"/>
+<em>Figure 10: XZ projection highlighting the mirror-bounce points.</em></p>
 <h2 id="4-applications-to-real-systems">4. Applications to Real Systems</h2>
 <h3 id="cyclotron">Cyclotron</h3>
 <p>The cyclotron is a type of particle accelerator that uses a uniform magnetic field to bend charged particles in a circular path and an oscillating electric field to accelerate them. Our simulation of uniform magnetic fields demonstrates the fundamental principle behind cyclotrons:</p>
