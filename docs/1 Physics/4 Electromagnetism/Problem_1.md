@@ -454,10 +454,10 @@ plt.show()
 
 Here are the key visualizations from our simulations:
 
-![Uniform Magnetic Field – 3D Trajectory](<URL>)
+![Uniform Magnetic Field – 3D Trajectory](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Electromangetism/UniformMagneticField/trajectory_magnetic_field_3d.png)
 *Figure 1: 3D trajectory of a charged particle in a uniform magnetic field showing circular motion.*
 
-![Uniform Magnetic Field – XY Plane](<URL>)
+![Uniform Magnetic Field – XY Plane](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Electromangetism/UniformMagneticField/trajectory_magnetic_field_xy.png)
 *Figure 2: 2D projection showing circular motion in the XY plane.*
 
 ![Combined E and B Fields – 3D Trajectory](<URL>)
