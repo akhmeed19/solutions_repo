@@ -460,10 +460,10 @@ Here are the key visualizations from our simulations:
 ![Uniform Magnetic Field – XY Plane](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Electromangetism/UniformMagneticField/trajectory_magnetic_field_xy.png)
 *Figure 2: 2D projection showing circular motion in the XY plane.*
 
-![Combined E and B Fields – 3D Trajectory](<URL>)
+![Combined E and B Fields – 3D Trajectory](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Electromangetism/Scenario2CombinedEandB/CombinedEandB%20Fields%23D%20Trajectory.png)
 *Figure 3: 3D trajectory under combined electric and magnetic fields showing cycloid drift.*
 
-![Combined E and B Fields – XY Plane](<URL>)
+![Combined E and B Fields – XY Plane](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Electromangetism/Scenario2CombinedEandB/CycloidDrift2D.png)
 *Figure 4: 2D projection of cycloid-like drift in combined fields.*
 
 ![E×B Drift – 3D Trajectory](<URL>)
