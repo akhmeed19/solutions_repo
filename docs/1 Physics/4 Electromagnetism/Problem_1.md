@@ -478,10 +478,10 @@ Here are the key visualizations from our simulations:
 ![Helical Motion – XY Plane](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Electromangetism/Scenario4HelicalMotion/HelicalMotion2D.png)
 *Figure 8: 2D projection of helical motion in the XY plane.*
 
-![Magnetic Mirror – 3D Trajectory](<URL>)
+![Magnetic Mirror – 3D Trajectory](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Electromangetism/Scenario5MagneticMirror/MagneticMirror3D.png)
 *Figure 9: 3D trajectory in a magnetic mirror configuration showing the particle bouncing.*
 
-![Magnetic Mirror – XZ Projection](<URL>)
+![Magnetic Mirror – XZ Projection](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Electromangetism/Scenario5MagneticMirror/MagneticMirror2D.png)
 *Figure 10: XZ projection highlighting the mirror-bounce points.*
 
 ## 4. Applications to Real Systems
