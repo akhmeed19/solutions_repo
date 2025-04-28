@@ -581,46 +581,9 @@ The mass spectrometer demonstrates:
 - The radius is proportional to the mass-to-charge ratio
 - This allows precise separation of ions with different masses
 
-### Magnetic Mirror
-
-A magnetic mirror is a configuration where the magnetic field strength increases toward the ends of a confinement region, causing particles to bounce back:
-
-```python
-# Magnetic mirror simulation
-def magnetic_mirror_B_field(position, t, B0=1.0, k=0.1):
-    """
-    Non-uniform magnetic field that increases in strength along z-axis
-    Creates a magnetic mirror effect
-    """
-    z = position[2]
-    Bz = B0 * (1 + k * z**2)  # Field strength increases quadratically with z
-    return np.array([0, 0, Bz])
-
-simulator = LorentzForceSimulator(q=1.0, m=1.0)
-
-# Initial conditions: position at origin, velocity with components parallel and perpendicular to B
-initial_state = [0, 0, 0, 1, 1, 2]
-t_span = (0, 30)
-t_eval = np.linspace(*t_span, 2000)
-
-# Magnetic mirror field
-E_field = lambda pos, t: np.array([0, 0, 0])
-
-# Run simulation
-result = simulator.simulate(initial_state, t_span, t_eval, E_field, magnetic_mirror_B_field)
-
-# Plot trajectory showing the "bouncing" effect
-fig_mirror, ax_mirror = simulator.plot_trajectory_3d(title="Magnetic Mirror Effect")
-plt.close(fig_mirror)
-
-fig_mirror_xz, ax_mirror_xz = simulator.plot_trajectory_2d(plane='xz', title="Magnetic Mirror - Particle Bounce")
-plt.close(fig_mirror_xz)
-```
-
-The magnetic mirror demonstrates:
-- Particles with sufficient perpendicular velocity bounce back from regions of high field strength
-- The mirror ratio determines the "loss cone" - particles with too much parallel velocity escape
-- This principle is used in magnetic confinement fusion devices
+#### Output  
+![Mass Spectrometer – Separation Based on Mass](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Electromangetism/ApplicationstoRealSystems/Mass%20Spectrometer.png)  
+*Figure 12: Trajectories of ions with different mass-to-charge ratios in a uniform magnetic field, illustrating separation based on mass.*
 
 ### Hall Effect Thruster
 
