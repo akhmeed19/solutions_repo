@@ -472,10 +472,10 @@ Here are the key visualizations from our simulations:
 ![E×B Drift – XY Plane](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Electromangetism/Scenario3CrossedEandB/E×B_Drift_XY%20Plane.png)
 *Figure 6: 2D projection of E×B drift motion.*
 
-![Helical Motion – 3D Trajectory](<URL>)
+![Helical Motion – 3D Trajectory](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Electromangetism/Scenario4HelicalMotion/HelicalMotion3D.png)
 *Figure 7: 3D helical trajectory when the particle has a velocity component parallel to the magnetic field.*
 
-![Helical Motion – XY Plane](<URL>)
+![Helical Motion – XY Plane](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Electromangetism/Scenario4HelicalMotion/HelicalMotion2D.png)
 *Figure 8: 2D projection of helical motion in the XY plane.*
 
 ![Magnetic Mirror – 3D Trajectory](<URL>)
