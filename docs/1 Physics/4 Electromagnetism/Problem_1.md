@@ -466,10 +466,10 @@ Here are the key visualizations from our simulations:
 ![Combined E and B Fields – XY Plane](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Electromangetism/Scenario2CombinedEandB/CycloidDrift2D.png)
 *Figure 4: 2D projection of cycloid-like drift in combined fields.*
 
-![E×B Drift – 3D Trajectory](<URL>)
+![E×B Drift – 3D Trajectory](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Electromangetism/Scenario3CrossedEandB/E×BDrift_3D%20Trajectory.png)
 *Figure 5: 3D trajectory in crossed electric and magnetic fields showing E×B drift.*
 
-![E×B Drift – XY Plane](<URL>)
+![E×B Drift – XY Plane](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Electromangetism/Scenario3CrossedEandB/E×B_Drift_XY%20Plane.png)
 *Figure 6: 2D projection of E×B drift motion.*
 
 ![Helical Motion – 3D Trajectory](<URL>)
