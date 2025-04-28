@@ -526,6 +526,10 @@ The cyclotron demonstrates:
 - The cyclotron frequency (ω = qB/m) remains constant despite increasing energy
 - This constancy breaks down at relativistic speeds (not modeled in our simulation)
 
+#### Output
+![Cyclotron Acceleration – Spiral Trajectory](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Electromangetism/ApplicationstoRealSystems/CyclotronAcceleration.png)  
+*Figure 11: Spiral trajectory of a charged particle in a cyclotron, illustrating outward drift as energy increases.*
+
 ### Mass Spectrometer
 
 Mass spectrometers use the Lorentz force to separate ions based on their mass-to-charge ratio. Our simulations with varying q/m ratios demonstrate this principle:
