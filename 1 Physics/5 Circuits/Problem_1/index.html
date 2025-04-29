@@ -96,6 +96,8 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#3-implementation">3. Implementation</a>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#outputs">Outputs</a>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#4-example-circuits-and-visual-representations">4. Example Circuits and Visual Representations</a>
 <ul>
 <li class="toctree-l4"><a class="reference internal" href="#41-example-1-simple-series-parallel-circuit">4.1 Example 1: Simple Series-Parallel Circuit</a>
@@ -307,6 +309,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from typing import Tuple, Dict, Optional
 
+
 class CircuitAnalyzer:
     def __init__(self, graph: nx.Graph, source: int, sink: int):
         """
@@ -324,20 +327,17 @@ class CircuitAnalyzer:
 
     def calculate_equivalent_resistance(self, debug: bool = False) -&gt; float:
         """Calculate the equivalent resistance between source and sink nodes."""
-        # Start with a fresh copy of the original graph
         g = self.original_graph.copy()
         self.reduction_steps = [("Original Circuit", g.copy())]
 
-        # Keep applying reductions until we can't reduce further
+        # Basic series/parallel reductions
         while True:
             parallel_count = self._reduce_all_parallel(g, debug)
             series_count = self._reduce_all_series(g, debug)
-
-            # If no reductions were made, we're done with basic methods
             if parallel_count == 0 and series_count == 0:
                 break
 
-        # Check if we have a direct connection between source and sink
+        # Direct connection check
         if g.number_of_edges() == 1 and g.has_edge(self.source, self.sink):
             r_eq = g[self.source][self.sink]['weight']
             self.reduction_steps.append(("Final Reduced Circuit", g.copy()))
@@ -345,13 +345,10 @@ class CircuitAnalyzer:
                 print(f"Circuit fully reduced to {r_eq} ohms")
             return r_eq
 
-        # If basic reductions couldn't fully reduce the circuit, try Y-Delta transformations
+        # Y-Delta transformations
         if debug:
             print("Basic reductions insufficient. Attempting Y-Delta transformations...")
-
         delta_reductions = self._apply_y_delta_transformations(g, debug)
-
-        # After Y-Delta, try basic reductions again
         if delta_reductions &gt; 0:
             while True:
                 parallel_count = self._reduce_all_parallel(g, debug)
@@ -359,290 +356,214 @@ class CircuitAnalyzer:
                 if parallel_count == 0 and series_count == 0:
                     break
 
-        # Check if we now have a direct connection
         if g.number_of_edges() == 1 and g.has_edge(self.source, self.sink):
             r_eq = g[self.source][self.sink]['weight']
             self.reduction_steps.append(("Final Reduced Circuit", g.copy()))
             return r_eq
 
-        # If still not reduced, use the node elimination method
+        # Node elimination method as fallback
         if debug:
             print("Using node elimination method...")
-
         r_eq = self._node_elimination_method(g, debug)
         self.reduction_steps.append(("Final Result (Node Elimination)", 
                                    nx.Graph([(self.source, self.sink, {'weight': r_eq})])))
-
         return r_eq
 
     def _reduce_all_parallel(self, g: nx.Graph, debug: bool = False) -&gt; int:
-        """Reduce all parallel connections in the circuit."""
         reduction_count = 0
         parallel_edges = self._find_parallel_edges(g)
-
         for (n1, n2), edges in parallel_edges.items():
             if len(edges) &gt; 1:
-                # Calculate equivalent resistance for parallel resistors
                 total_conductance = sum(1.0 / g[n1][n2]['weight'] for _ in range(len(edges)))
                 r_eq = 1.0 / total_conductance
-
-                # Replace parallel edges with a single equivalent edge
                 for _ in range(len(edges) - 1):
                     g.remove_edge(n1, n2)
                 g[n1][n2]['weight'] = r_eq
-
                 if debug:
                     print(f"Parallel reduction: {len(edges)} resistors between nodes {n1}-{n2} → {r_eq:.2f}Ω")
-
                 reduction_count += 1
                 self.reduction_steps.append((f"Parallel Reduction: {n1}-{n2}", g.copy()))
-
         return reduction_count
 
     def _find_parallel_edges(self, g: nx.Graph) -&gt; Dict[Tuple[int, int], list]:
-        """Find all parallel edges in the graph."""
         parallel_edges = {}
-
         for edge in g.edges():
-            n1, n2 = min(edge), max(edge)  # Ensure consistent ordering
+            n1, n2 = min(edge), max(edge)
             key = (n1, n2)
-
-            if key not in parallel_edges:
-                parallel_edges[key] = []
-
-            parallel_edges[key].append(edge)
-
+            parallel_edges.setdefault(key, []).append(edge)
         return parallel_edges
 
     def _reduce_all_series(self, g: nx.Graph, debug: bool = False) -&gt; int:
-        """Reduce all series connections in the circuit."""
         reduction_count = 0
-        series_nodes = [node for node in g.nodes() 
-                      if g.degree(node) == 2 
-                      and node != self.source 
-                      and node != self.sink]
-
+        series_nodes = [node for node in g.nodes()
+                        if g.degree(node) == 2 and node not in (self.source, self.sink)]
         for node in series_nodes:
-            # Get the two neighbors of this node
-            neighbors = list(g.neighbors(node))
-            n1, n2 = neighbors[0], neighbors[1]
-
-            # Get the resistances of the two edges
+            n1, n2 = list(g.neighbors(node))
             r1 = g[node][n1]['weight']
             r2 = g[node][n2]['weight']
-
-            # Calculate equivalent resistance (series: R_eq = R1 + R2)
             r_eq = r1 + r2
-
-            # Remove the middle node and add a direct connection with equivalent resistance
             g.remove_node(node)
             g.add_edge(n1, n2, weight=r_eq)
-
             if debug:
                 print(f"Series reduction: Node {node} between {n1}-{n2} → {r_eq:.2f}Ω")
-
             reduction_count += 1
             self.reduction_steps.append((f"Series Reduction: Node {node}", g.copy()))
-
         return reduction_count
 
     def _apply_y_delta_transformations(self, g: nx.Graph, debug: bool = False) -&gt; int:
-        """Apply Y-Delta and Delta-Y transformations to reduce the circuit."""
         transformation_count = 0
-
-        # Try to find Y configurations (star patterns)
+        # Y to Δ
         for node in list(g.nodes()):
-            if node == self.source or node == self.sink:
+            if node in (self.source, self.sink) or g.degree(node) != 3:
                 continue
-
-            if g.degree(node) == 3:
-                # This node could be the center of a Y configuration
-                neighbors = list(g.neighbors(node))
-                if len(neighbors) == 3:
-                    # Apply Y to Delta transformation
-                    r_a = g[node][neighbors[0]]['weight']
-                    r_b = g[node][neighbors[1]]['weight']
-                    r_c = g[node][neighbors[2]]['weight']
-
-                    r_ab = (r_a * r_b + r_b * r_c + r_c * r_a) / r_c
-                    r_bc = (r_a * r_b + r_b * r_c + r_c * r_a) / r_a
-                    r_ca = (r_a * r_b + r_b * r_c + r_c * r_a) / r_b
-
-                    # Remove the center node
-                    g.remove_node(node)
-
-                    # Add edges between the neighbors in a triangle (delta configuration)
-                    g.add_edge(neighbors[0], neighbors[1], weight=r_ab)
-                    g.add_edge(neighbors[1], neighbors[2], weight=r_bc)
-                    g.add_edge(neighbors[2], neighbors[0], weight=r_ca)
-
-                    if debug:
-                        print(f"Y-Delta transformation: Center node {node} → Delta between {neighbors}")
-
-                    transformation_count += 1
-                    self.reduction_steps.append((f"Y-Delta Transformation: Node {node}", g.copy()))
-                    break
-
-        # If no Y configurations were found, try Delta configurations
-        if transformation_count == 0:
-            # Find triangles (cycles of length 3)
-            triangles = []
-            for node1 in g.nodes():
-                for node2 in g.neighbors(node1):
-                    for node3 in g.neighbors(node2):
-                        if node3 in g.neighbors(node1) and node1 &lt; node2 &lt; node3:
-                            triangles.append((node1, node2, node3))
-
-            for triangle in triangles:
-                # Apply Delta to Y transformation
-                r_ab = g[triangle[0]][triangle[1]]['weight'] 
-                r_bc = g[triangle[1]][triangle[2]]['weight']
-                r_ca = g[triangle[2]][triangle[0]]['weight']
-
-                denominator = r_ab + r_bc + r_ca
-                r_a = (r_ab * r_ca) / denominator
-                r_b = (r_ab * r_bc) / denominator
-                r_c = (r_bc * r_ca) / denominator
-
-                # Add a new center node
-                new_node = max(g.nodes()) + 1
-                g.add_node(new_node)
-
-                # Remove the triangle edges
-                g.remove_edge(triangle[0], triangle[1])
-                g.remove_edge(triangle[1], triangle[2])
-                g.remove_edge(triangle[2], triangle[0])
-
-                # Add edges from center to corners
-                g.add_edge(new_node, triangle[0], weight=r_a)
-                g.add_edge(new_node, triangle[1], weight=r_b)
-                g.add_edge(new_node, triangle[2], weight=r_c)
-
-                if debug:
-                    print(f"Delta-Y transformation: Triangle {triangle} → Star with center {new_node}")
-
-                transformation_count += 1
-                self.reduction_steps.append((f"Delta-Y Transformation: Triangle {triangle}", g.copy()))
-                break
-
+            neighbors = list(g.neighbors(node))
+            r_a, r_b, r_c = (g[node][n]['weight'] for n in neighbors)
+            r_ab = (r_a*r_b + r_b*r_c + r_c*r_a) / r_c
+            r_bc = (r_a*r_b + r_b*r_c + r_c*r_a) / r_a
+            r_ca = (r_a*r_b + r_b*r_c + r_c*r_a) / r_b
+            g.remove_node(node)
+            g.add_edge(neighbors[0], neighbors[1], weight=r_ab)
+            g.add_edge(neighbors[1], neighbors[2], weight=r_bc)
+            g.add_edge(neighbors[2], neighbors[0], weight=r_ca)
+            if debug:
+                print(f"Y-Delta transformation: Center node {node} → Delta")
+            transformation_count += 1
+            self.reduction_steps.append((f"Y-Delta: Node {node}", g.copy()))
+            break
+        if transformation_count &gt; 0:
+            return transformation_count
+        # Δ to Y
+        triangles = []
+        for n1 in g.nodes():
+            for n2 in g.neighbors(n1):
+                for n3 in g.neighbors(n2):
+                    if n3 in g.neighbors(n1) and n1 &lt; n2 &lt; n3:
+                        triangles.append((n1, n2, n3))
+        for tri in triangles:
+            r_ab = g[tri[0]][tri[1]]['weight']
+            r_bc = g[tri[1]][tri[2]]['weight']
+            r_ca = g[tri[2]][tri[0]]['weight']
+            denom = r_ab + r_bc + r_ca
+            r_a = r_ab*r_ca/denom
+            r_b = r_ab*r_bc/denom
+            r_c = r_bc*r_ca/denom
+            new_node = max(g.nodes()) + 1
+            g.add_node(new_node)
+            g.remove_edge(tri[0], tri[1])
+            g.remove_edge(tri[1], tri[2])
+            g.remove_edge(tri[2], tri[0])
+            g.add_edge(new_node, tri[0], weight=r_a)
+            g.add_edge(new_node, tri[1], weight=r_b)
+            g.add_edge(new_node, tri[2], weight=r_c)
+            if debug:
+                print(f"Delta-Y transformation: Triangle {tri} → Star node {new_node}")
+            transformation_count += 1
+            self.reduction_steps.append((f"Delta-Y: Triangle {tri}", g.copy()))
+            break
         return transformation_count
 
     def _node_elimination_method(self, g: nx.Graph, debug: bool = False) -&gt; float:
-        """Calculate equivalent resistance using the node elimination method."""
-        # Create a list of nodes excluding the source (ground node)
         nodes = list(g.nodes())
-        nodes.remove(self.source)  # Use source as reference ground
-
-        # If sink is not in the remaining nodes (disconnected), return infinity
+        nodes.remove(self.source)
         if self.sink not in nodes:
             return float('inf')
-
-        # Create the conductance matrix
         n = len(nodes)
-        G_matrix = np.zeros((n, n))
-
-        # Node index mapping for matrix positions
-        node_indices = {node: i for i, node in enumerate(nodes)}
-
-        # Fill the conductance matrix
-        for i, node_i in enumerate(nodes):
-            for j, node_j in enumerate(nodes):
+        G = np.zeros((n, n))
+        idx = {node: i for i, node in enumerate(nodes)}
+        for i, ni in enumerate(nodes):
+            for j, nj in enumerate(nodes):
                 if i == j:
-                    # Diagonal elements: sum of conductances connected to this node
-                    for neighbor in g.neighbors(node_i):
-                        G_matrix[i, i] += 1.0 / g[node_i][neighbor]['weight']
-                elif g.has_edge(node_i, node_j):
-                    # Off-diagonal elements: negative conductance between nodes
-                    G_matrix[i, j] = -1.0 / g[node_i][node_j]['weight']
-
-        # For equivalent resistance between source and sink
-        sink_index = node_indices[self.sink]
-
+                    for nbr in g.neighbors(ni):
+                        G[i, i] += 1.0/g[ni][nbr]['weight']
+                elif g.has_edge(ni, nj):
+                    G[i, j] = -1.0/g[ni][nj]['weight']
         try:
-            # Calculate resistance by matrix operations
-            if G_matrix.size &gt; 0:
-                # If we have a non-empty matrix
-                G_inv = np.linalg.inv(G_matrix)
-                r_eq = 1.0 / G_matrix[node_indices[self.sink], node_indices[self.sink]]
-            else:
-                # Direct connection case
-                r_eq = g[self.source][self.sink]['weight'] if g.has_edge(self.source, self.sink) else float('inf')
+            G_inv = np.linalg.inv(G)
+            r_eq = 1.0/G[idx[self.sink], idx[self.sink]]
         except np.linalg.LinAlgError:
-            # Fallback to direct edge if matrix is singular
             r_eq = g[self.source][self.sink]['weight'] if g.has_edge(self.source, self.sink) else float('inf')
-
         if debug:
-            print(f"Node elimination method result: {r_eq:.4f}Ω")
-
+            print(f"Node elimination result: {r_eq:.4f}Ω")
         return r_eq
 
     def draw_circuit(self, title="Circuit"):
-        """Draw the circuit with resistance values on edges."""
         g = self.original_graph.copy()
         plt.figure(figsize=(8, 6))
-
-        # Use spring layout
         pos = nx.spring_layout(g, seed=42)
-
-        # Draw nodes
         nx.draw_networkx_nodes(g, pos, node_size=500, node_color='lightblue')
-
-        # Highlight source and sink nodes
-        nx.draw_networkx_nodes(g, pos, nodelist=[self.source, self.sink], 
-                              node_color='red', node_size=700)
-
-        # Draw edges with resistance values as labels
+        nx.draw_networkx_nodes(g, pos, nodelist=[self.source, self.sink], node_color='red', node_size=700)
         nx.draw_networkx_edges(g, pos, width=1.5)
         edge_labels = {(u, v): f"{d['weight']}Ω" for u, v, d in g.edges(data=True)}
         nx.draw_networkx_edge_labels(g, pos, edge_labels=edge_labels)
-
-        # Draw node labels
         nx.draw_networkx_labels(g, pos)
-
         plt.title(title)
         plt.axis('off')
         plt.tight_layout()
         plt.show()
 
     def visualize_reduction_steps(self):
-        """Visualize the circuit reduction process step by step."""
         steps = self.reduction_steps
-        n_steps = len(steps)
-
-        # Calculate grid dimensions
-        cols = min(3, n_steps)
-        rows = (n_steps + cols - 1) // cols
-
-        plt.figure(figsize=(6 * cols, 4 * rows))
-
+        n = len(steps)
+        cols = min(3, n)
+        rows = (n + cols - 1) // cols
+        plt.figure(figsize=(6*cols, 4*rows))
         for i, (title, g) in enumerate(steps):
-            plt.subplot(rows, cols, i + 1)
-
-            # Use spring layout
+            plt.subplot(rows, cols, i+1)
             pos = nx.spring_layout(g, seed=42)
-
-            # Draw nodes
             nx.draw_networkx_nodes(g, pos, node_size=400, node_color='lightblue')
-
-            # Highlight source and sink
             if self.source in g.nodes() and self.sink in g.nodes():
-                nx.draw_networkx_nodes(g, pos, nodelist=[self.source, self.sink], 
-                                      node_color='red', node_size=600)
-
-            # Draw edges with resistance values as labels
+                nx.draw_networkx_nodes(g, pos, nodelist=[self.source, self.sink], node_color='red', node_size=600)
             nx.draw_networkx_edges(g, pos, width=1.5)
             edge_labels = {(u, v): f"{d['weight']}Ω" for u, v, d in g.edges(data=True)}
             nx.draw_networkx_edge_labels(g, pos, edge_labels=edge_labels, font_size=8)
-
-            # Draw node labels
             nx.draw_networkx_labels(g, pos)
-
             plt.title(f"Step {i+1}: {title}")
             plt.axis('off')
-
         plt.tight_layout()
         plt.show()
+
+
+if __name__ == "__main__":
+    # Example usage
+    # Create a circuit with series, parallel, and a triangle (for Y-Δ)
+    G = nx.Graph()
+    # Series: 4Ω and 6Ω between 0-1-2
+    G.add_edge(0, 1, weight=4)
+    G.add_edge(1, 2, weight=6)
+    # Parallel: two 8Ω resistors between 2-3
+    G.add_edge(2, 3, weight=8)
+    G.add_edge(2, 3, weight=8)
+    # Delta: triangle between 3-4-5
+    G.add_edge(3, 4, weight=3)
+    G.add_edge(4, 5, weight=5)
+    G.add_edge(5, 3, weight=7)
+
+    analyzer = CircuitAnalyzer(G, source=0, sink=5)
+    eq_resistance = analyzer.calculate_equivalent_resistance(debug=True)
+    print(f"Equivalent Resistance between 0 and 5: {eq_resistance:.2f} Ω")
+
+    # Visualize original circuit and reduction steps
+    analyzer.draw_circuit("Original Circuit")
+    analyzer.visualize_reduction_steps()
+
 </code></pre>
+<h2 id="outputs">Outputs</h2>
+<p><img alt="Original Circuit" src="outputs/original_circuit.png"/></p>
+<p><strong>Explanation:</strong><br/>
+The <strong>Original Circuit</strong> diagram displays the starting network:
+- <strong>Red nodes</strong> (0 and 5) are the source (input) and sink (output).<br/>
+- <strong>Light-blue nodes</strong> (1, 2, 3, 4) are intermediate junctions.<br/>
+- Edges are labeled with resistor values: a series chain (4 Ω–6 Ω), a parallel pair (8 Ω &amp; 8 Ω), and a Δ-triangle (3 Ω, 5 Ω, 7 Ω).</p>
+<hr/>
+<p><img alt="Reduction Steps" src="outputs/reduction_steps.png"/></p>
+<p><strong>Explanation:</strong><br/>
+The <strong>Reduction Steps</strong> grid shows six panels:
+1. <strong>Original Circuit</strong> – same as above.<br/>
+2. <strong>Series Reduction: Node 1</strong> – combines 4 Ω + 6 Ω → 10 Ω.<br/>
+3. <strong>Series Reduction: Node 2</strong> – next series step (10 Ω + parallel result) → 18 Ω.<br/>
+4. <strong>Series Reduction: Node 3</strong> – merges 18 Ω + 30 Ω → 48 Ω.<br/>
+5. <strong>Y-Δ / Δ-Y Transformations</strong> – converts the remaining triangle into a star (or vice versa) to enable further reductions.<br/>
+6. <strong>Final Reduced Circuit</strong> – a single 26 Ω resistor between source and sink, the net equivalent resistance.</p>
 <h2 id="4-example-circuits-and-visual-representations">4. Example Circuits and Visual Representations</h2>
 <h3 id="41-example-1-simple-series-parallel-circuit">4.1 Example 1: Simple Series-Parallel Circuit</h3>
 <pre><code>    A---[10Ω]---B---[20Ω]---C
