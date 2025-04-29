@@ -124,6 +124,8 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#7-example-python-usage">7. Example Python Usage</a>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#outputs_1">Outputs</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -679,6 +681,29 @@ print(f"Equivalent resistance: {r_eq} Ω")
 analyzer.draw_circuit("Wheatstone Bridge Circuit")
 analyzer.visualize_reduction_steps()
 </code></pre>
+<h2 id="outputs_1">Outputs</h2>
+<p><img alt="Wheatstone Bridge Circuit" src="outputs/wheatstone_bridge_circuit.png"/></p>
+<p><strong>Explanation:</strong><br/>
+The <strong>Wheatstone Bridge Circuit</strong> diagram shows the original network:<br/>
+- <strong>Red nodes</strong> (A and D) are the source and sink.<br/>
+- <strong>Light-blue nodes</strong> (B and C) are intermediate junctions.<br/>
+- Edges are labeled with resistor values:<br/>
+  - A–B: 10 Ω<br/>
+  - A–C: 20 Ω<br/>
+  - B–D: 30 Ω<br/>
+  - C–D: 40 Ω<br/>
+  - B–C (bridge): 50 Ω  </p>
+<hr/>
+<p><img alt="Wheatstone Reduction Steps" src="outputs/wheatstone_reduction_steps.png"/></p>
+<p><strong>Explanation:</strong><br/>
+The <strong>Reduction Steps</strong> figure is laid out in four panels:<br/>
+1. <strong>Original Circuit</strong> – same as above.<br/>
+2. <strong>Y-Δ: Node B</strong> – the star at B (10 Ω, 30 Ω, 50 Ω) is converted into a Δ, producing new resistances:<br/>
+   - A–C ≈ 76.67 Ω<br/>
+   - B–D ≈ 46 Ω<br/>
+   - C–D ≈ 230 Ω<br/>
+3. <strong>Series Reduction: Node C</strong> – combines 76.67 Ω + 230 Ω into a single 306.67 Ω resistor on the A–D path.<br/>
+4. <strong>Final Reduced Circuit</strong> – a single 306.67 Ω resistor between A and D, the net equivalent resistance.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
