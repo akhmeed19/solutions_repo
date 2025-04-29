@@ -505,6 +505,7 @@ analyzer.visualize_reduction_steps()
 
 **Explanation:**
 The **Wheatstone Bridge Circuit** diagram shows the original network:                                 
+ 
  - **Red nodes** (A and D) are the source and sink.                         
  - **Light-blue nodes** (B and C) are intermediate junctions.                  
  - Edges are labeled with resistor values:  
