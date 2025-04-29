@@ -972,7 +972,7 @@ This simulation demonstrates how the Lorentz force governs the motion of charged
 
 These phenomena form the basis for numerous technologies, from particle accelerators used in cancer treatment to spacecraft propulsion systems. By understanding and simulating the Lorentz force, we gain insights into both fundamental physics and practical applications.
 
-The simulation framework we've developed allows for exploration of various field configurations and particle parameters, providing a versatile tool for studying electromagnetic interactions.
+The simulation framework I've developed allows for exploration of various field configurations and particle parameters, providing a versatile tool for studying electromagnetic interactions.
 
 ## References
 
