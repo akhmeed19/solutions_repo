@@ -336,24 +336,24 @@ if __name__ == "__main__":
 
 ![Original Circuit](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Circuits/OriginalCircuit.png)
 
-**Explanation:**                         
-The **Original Circuit** diagram displays the starting network:             
-     - **Red nodes** (0 and 5) are the source (input) and sink (output).  
-     - **Light-blue nodes** (1, 2, 3, 4) are intermediate junctions.  
-     - Edges are labeled with resistor values: a series chain (4 Ω–6 Ω), a parallel pair (8 Ω & 8 Ω), and a Δ-triangle (3 Ω, 5 Ω, 7 Ω).
+**Explanation:**                                                
+The **Original Circuit** diagram displays the starting   network:                                 
+ - **Red nodes** (0 and 5) are the source (input) and sink (output).  
+ - **Light-blue nodes** (1, 2, 3, 4) are intermediate junctions.  
+ - Edges are labeled with resistor values: a series chain (4 Ω–6 Ω), a parallel pair (8 Ω & 8 Ω), and a Δ-triangle (3 Ω, 5 Ω, 7 Ω).
 
 ---
 
 ![Reduction Steps](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Circuits/ReductionSteps.png)
 
 **Explanation:**  
-The **Reduction Steps** grid shows six panels:                                    
-1. **Original Circuit** – same as above.  
-2. **Series Reduction: Node 1** – combines 4 Ω + 6 Ω → 10 Ω.  
-3. **Series Reduction: Node 2** – next series step (10 Ω + parallel result) → 18 Ω.  
-4. **Series Reduction: Node 3** – merges 18 Ω + 30 Ω → 48 Ω.  
-5. **Y-Δ / Δ-Y Transformations** – converts the remaining triangle into a star (or vice versa) to enable further reductions.  
-6. **Final Reduced Circuit** – a single 26 Ω resistor between source and sink, the net equivalent resistance.
+The **Reduction Steps** grid shows six panels:                                  
+ 1. **Original Circuit** – same as above.  
+ 2. **Series Reduction: Node 1** – combines 4 Ω + 6 Ω → 10 Ω.  
+ 3. **Series Reduction: Node 2** – next series step (10 Ω + parallel result) → 18 Ω.  
+ 4. **Series Reduction: Node 3** – merges 18 Ω + 30 Ω → 48 Ω.  
+ 5. **Y-Δ / Δ-Y Transformations** – converts the remaining triangle into a star (or vice versa) to enable further reductions.  
+ 6. **Final Reduced Circuit** – a single 26 Ω resistor between source and sink, the net equivalent resistance.
 
 
 ## 4. Example Circuits and Visual Representations
