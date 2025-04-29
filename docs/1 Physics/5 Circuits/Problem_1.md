@@ -378,11 +378,12 @@ A---10Ω---B---20Ω---C
 D---------E---------+
 ```
 
-This circuit combines series and parallel elements:
-- Path A-B-C: $10Ω + 20Ω = 30Ω$ (series)
-- Path A-D-E-C: $30Ω + 40Ω = 70Ω$ (series)
-- Paths are in parallel: $\frac{1}{R_{eq}} = \frac{1}{30} + \frac{1}{70} = \frac{7}{210}$
-- $R_{eq} = \frac{210}{7} = 30Ω$
+This circuit combines series and parallel elements:                        
+
+ - Path A-B-C: $10Ω + 20Ω = 30Ω$ (series)
+ - Path A-D-E-C: $30Ω + 40Ω = 70Ω$ (series)
+ - Paths are in parallel: $\frac{1}{R_{eq}} = \frac{1}{30} + \frac{1}{70} = \frac{7}{210}$
+ - $R_{eq} = \frac{210}{7} = 30Ω$
 
 ### 4.2 Example 2: Wheatstone Bridge Circuit
 
@@ -436,7 +437,7 @@ D---8Ω---E---6Ω---F
 ```
 
 This complex mesh circuit requires multiple reduction steps:
-                 
+
  1. Cannot be directly reduced with series-parallel only
  2. Need Y-Δ transformations for certain configurations
  3. Final solution may require node elimination method
