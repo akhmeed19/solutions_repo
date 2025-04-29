@@ -15,10 +15,10 @@ Our algorithm combines multiple techniques to handle circuits of any complexity:
 
 ### 2.1 Basic Reduction Rules
 
-1. **Series Reduction**:                  
-   - **Condition**: A node has exactly 2 connections and is neither source nor sink
-   - **Action**: Replace the node and its two adjacent resistors with a single resistor equal to their sum
-   - **Formula**: $R_{eq} = R_1 + R_2$
+1. **Series Reduction**:                           
+     - **Condition**: A node has exactly 2 connections and is neither source nor sink
+     - **Action**: Replace the node and its two adjacent resistors with a single resistor equal to their sum
+     - **Formula**: $R_{eq} = R_1 + R_2$
 
 2. **Parallel Reduction**:                        
    - **Condition**: Multiple resistors directly connect the same pair of nodes
