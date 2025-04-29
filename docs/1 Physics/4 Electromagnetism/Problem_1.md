@@ -707,6 +707,10 @@ Time-varying fields demonstrate:
 - This principle is used in RF accelerators and tokamaks
 - Complex 3D trajectories that can't be predicted from simple circular motion
 
+![Particle in Time-Varying B Field – 3D Trajectory](myurl.png)  
+*Figure 15: 3D trajectory of a charged particle in a magnetic field rotating in the xy-plane over time, illustrating complex time-dependent motion.*
+
+
 ## 6. Complete Simulation Example
 
 Let's run a complete simulation that demonstrates all the key concepts:
