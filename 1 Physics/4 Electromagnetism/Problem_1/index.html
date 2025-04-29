@@ -468,9 +468,9 @@ larmor_radius = simulator.m * v_perp / (simulator.q * B_magnitude)
 print(f"Larmor radius: {larmor_radius:.4f}")
 </code></pre>
 <p>In this scenario, we observe:
-- The particle follows a circular path in the xy-plane
-- The Larmor radius (cyclotron radius) is given by r = mv⊥/(qB)
-- The frequency of rotation (cyclotron frequency) is ω = qB/m</p>
+- The particle follows a circular path in the <span class="arithmatex">\(xy-plane\)</span>
+- The Larmor radius (cyclotron radius) is given by <span class="arithmatex">\(r = mv⊥/(qB)\)</span>
+- The frequency of rotation (cyclotron frequency) is <span class="arithmatex">\(ω = qB/m\)</span></p>
 <h3 id="scenario-2-combined-electric-and-magnetic-fields">Scenario 2: Combined Electric and Magnetic Fields</h3>
 <p>When both electric and magnetic fields are present, the particle motion becomes more complex.</p>
 <pre><code class="language-python"># Scenario 2: Combined Electric and Magnetic Fields
@@ -531,9 +531,9 @@ drift_velocity = np.cross(E, B) / (B_magnitude**2)
 print(f"E×B Drift velocity: {drift_velocity}")
 </code></pre>
 <p>In crossed fields, we observe:
-- E×B drift with velocity v_drift = E×B/|B|²
+- <span class="arithmatex">\(E×B\)</span> drift with velocity <span class="arithmatex">\(v_drift = E×B/|B|²\)</span>
 - This drift is independent of particle charge and mass
-- The particle moves perpendicular to both E and B fields</p>
+- The particle moves perpendicular to both <span class="arithmatex">\(E\)</span> and <span class="arithmatex">\(B\)</span> fields</p>
 <h3 id="scenario-4-parameter-exploration">Scenario 4: Parameter Exploration</h3>
 <p>Let's explore how different parameters affect the particle's motion.</p>
 <pre><code class="language-python"># Scenario 4: Parameter Exploration
