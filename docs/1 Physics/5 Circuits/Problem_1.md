@@ -504,8 +504,7 @@ analyzer.visualize_reduction_steps()
 ![Wheatstone Bridge Circuit](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Circuits/WheatBridgeCircuit.png)
 
 **Explanation:**  
-The **Wheatstone Bridge Circuit** diagram shows the original network:         
-   - **Red nodes** (A and D) are the source and sink.  
+   The **Wheatstone Bridge Circuit** diagram shows the original network:                              - **Red nodes** (A and D) are the source and sink.  
    - **Light-blue nodes** (B and C) are intermediate junctions.  
    - Edges are labeled with resistor values:  
         - A–B: 10 Ω  
@@ -518,12 +517,13 @@ The **Wheatstone Bridge Circuit** diagram shows the original network:
 
 ![Wheatstone Reduction Steps](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Circuits/ReducedWheatBridge.png)
 
-**Explanation:**                  
-The **Reduction Steps** figure is laid out in four panels:                       
- 1. **Original Circuit** – same as above.  
+**Explanation:**
+The **Reduction Steps** figure is laid out in four panels:
+    
+ 1. **Original Circuit** – same as above.                               
  2. **Y-Δ: Node B** – the star at B (10 Ω, 30 Ω, 50 Ω) is converted into a Δ, producing new resistances:  
-   - A–C ≈ 76.67 Ω  
-   - B–D ≈ 46 Ω  
-   - C–D ≈ 230 Ω  
+    - A–C ≈ 76.67 Ω  
+    - B–D ≈ 46 Ω  
+    - C–D ≈ 230 Ω  
  3. **Series Reduction: Node C** – combines 76.67 Ω + 230 Ω into a single 306.67 Ω resistor on the A–D path.  
  4. **Final Reduced Circuit** – a single 306.67 Ω resistor between A and D, the net equivalent resistance.
