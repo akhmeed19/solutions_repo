@@ -528,7 +528,7 @@ The **Reduction Steps** figure is laid out in four panels:
  4. **Final Reduced Circuit** – a single 306.67 Ω resistor between A and D, the net equivalent resistance.
 
  
-## 6. Conclusion
+## 7. Conclusion
 
 Graph theory provides a powerful framework for calculating equivalent resistance in electrical circuits. By representing circuits as graphs and applying systematic reduction techniques, we can handle circuits of arbitrary complexity. The combination of series-parallel reductions, Y-Δ transformations, and node elimination methods ensures that we can solve any valid resistor network.
 
