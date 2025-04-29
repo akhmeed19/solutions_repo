@@ -616,7 +616,7 @@ The Hall effect thruster demonstrates:
 - This differential behavior creates an efficient propulsion mechanism
 
 #### Output  
-![Hall Effect Thruster – 3D Trajectory](myurl.png)  
+![Hall Effect Thruster – 3D Trajectory](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Electromangetism/ApplicationstoRealSystems/HallEffectThruster.png)  
 *Figure 13: 3D trajectory of ions in a Hall effect thruster, showing acceleration due to crossed E and B fields.*
 
 ## 5. Extensions and Advanced Scenarios
