@@ -32,17 +32,13 @@ For circuits that cannot be fully reduced using only series and parallel reducti
 1. **Y-Δ (Wye-Delta) Transformation**:
    - Transforms three resistors in Y configuration to three resistors in Δ configuration or vice versa
    - **Y to Δ conversion**:
-     ```
-     R_AB = (R_A*R_B + R_B*R_C + R_C*R_A)/R_C
-     R_BC = (R_A*R_B + R_B*R_C + R_C*R_A)/R_A
-     R_CA = (R_A*R_B + R_B*R_C + R_C*R_A)/R_B
-     ```
+     $R_{AB} = \frac{R_A \cdot R_B + R_B \cdot R_C + R_C \cdot R_A}{R_C}$
+     $R_{BC} = \frac{R_A \cdot R_B + R_B \cdot R_C + R_C \cdot R_A}{R_A}$
+     $R_{CA} = \frac{R_A \cdot R_B + R_B \cdot R_C + R_C \cdot R_A}{R_B}$
    - **Δ to Y conversion**:
-     ```
-     R_A = (R_AB*R_CA)/(R_AB + R_BC + R_CA)
-     R_B = (R_AB*R_BC)/(R_AB + R_BC + R_CA)
-     R_C = (R_BC*R_CA)/(R_AB + R_BC + R_CA)
-     ```
+     $R_A = \frac{R_{AB} \cdot R_{CA}}{R_{AB} + R_{BC} + R_{CA}}$
+     $R_B = \frac{R_{AB} \cdot R_{BC}}{R_{AB} + R_{BC} + R_{CA}}$
+     $R_C = \frac{R_{BC} \cdot R_{CA}}{R_{AB} + R_{BC} + R_{CA}}$
 
 2. **Node Elimination Method**:
    - Based on Kirchhoff's laws and nodal analysis
