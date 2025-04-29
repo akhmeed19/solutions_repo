@@ -435,7 +435,8 @@ A---2Ω---B---5Ω---C
 D---8Ω---E---6Ω---F
 ```
 
-This complex mesh circuit requires multiple reduction steps:                 
+This complex mesh circuit requires multiple reduction steps:
+                 
  1. Cannot be directly reduced with series-parallel only
  2. Need Y-Δ transformations for certain configurations
  3. Final solution may require node elimination method
