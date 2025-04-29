@@ -29,20 +29,38 @@ Our algorithm combines multiple techniques to handle circuits of any complexity:
 
 For circuits that cannot be fully reduced using only series and parallel reductions:
 
-1. **Y-Δ (Wye-Delta) Transformation**:
-   - Transforms three resistors in Y configuration to three resistors in Δ configuration or vice versa
-   - **Y to Δ conversion**:
-     $$R_{AB} = \frac{R_A \cdot R_B + R_B \cdot R_C + R_C \cdot R_A}{R_C}$$
-     $$R_{BC} = \frac{R_A \cdot R_B + R_B \cdot R_C + R_C \cdot R_A}{R_A}$$
-     $$R_{CA} = \frac{R_A \cdot R_B + R_B \cdot R_C + R_C \cdot R_A}{R_B}$$
-   - **Δ to Y conversion**:
-     $$R_A = \frac{R_{AB} \cdot R_{CA}}{R_{AB} + R_{BC} + R_{CA}}$$
-     $$R_B = \frac{R_{AB} \cdot R_{BC}}{R_{AB} + R_{BC} + R_{CA}}$$
-     $$R_C = \frac{R_{BC} \cdot R_{CA}}{R_{AB} + R_{BC} + R_{CA}}$$
+### 1. **Y-Δ (Wye-Delta) Transformation**:
+- Transforms three resistors in Y configuration to three resistors in Δ configuration or vice versa.
 
-2. **Node Elimination Method**:
-   - Based on Kirchhoff's laws and nodal analysis
-   - Uses matrix operations to systematically eliminate nodes
+- **Y to Δ conversion**:
+  $$
+  R_{AB} = \frac{R_A R_B + R_B R_C + R_C R_A}{R_C}
+  $$
+  $$
+  R_{BC} = \frac{R_A R_B + R_B R_C + R_C R_A}{R_A}
+  $$
+  $$
+  R_{CA} = \frac{R_A R_B + R_B R_C + R_C R_A}{R_B}
+  $$
+
+- **Δ to Y conversion**:
+  $$
+  R_A = \frac{R_{AB} R_{CA}}{R_{AB} + R_{BC} + R_{CA}}
+  $$
+  $$
+  R_B = \frac{R_{AB} R_{BC}}{R_{AB} + R_{BC} + R_{CA}}
+  $$
+  $$
+  R_C = \frac{R_{BC} R_{CA}}{R_{AB} + R_{BC} + R_{CA}}
+  $$
+
+---
+
+### 2. **Node Elimination Method**:
+- Based on Kirchhoff’s laws and nodal analysis.
+- Uses matrix operations to systematically eliminate nodes.
+
+---
 
 ### 2.3 Algorithm Flow
 
