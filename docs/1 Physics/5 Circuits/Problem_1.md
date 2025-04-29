@@ -21,9 +21,9 @@ Our algorithm combines multiple techniques to handle circuits of any complexity:
      - **Formula**: $R_{eq} = R_1 + R_2$
 
 2. **Parallel Reduction**:                        
-   - **Condition**: Multiple resistors directly connect the same pair of nodes
-   - **Action**: Replace them with a single equivalent resistor
-   - **Formula**: $\frac{1}{R_{eq}} = \frac{1}{R_1} + \frac{1}{R_2} + ... + \frac{1}{R_n}$
+     - **Condition**: Multiple resistors directly connect the same pair of nodes
+     - **Action**: Replace them with a single equivalent resistor
+     - **Formula**: $\frac{1}{R_{eq}} = \frac{1}{R_1} + \frac{1}{R_2} + ... + \frac{1}{R_n}$
 
 ### 2.2 Advanced Techniques
 
