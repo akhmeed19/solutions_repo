@@ -503,15 +503,16 @@ analyzer.visualize_reduction_steps()
 
 ![Wheatstone Bridge Circuit](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Circuits/WheatBridgeCircuit.png)
 
-**Explanation:**  
-   The **Wheatstone Bridge Circuit** diagram shows the original network:                              - **Red nodes** (A and D) are the source and sink.  
-   - **Light-blue nodes** (B and C) are intermediate junctions.  
-   - Edges are labeled with resistor values:  
-        - A–B: 10 Ω  
-        - A–C: 20 Ω  
-        - B–D: 30 Ω  
-        - C–D: 40 Ω  
-        - B–C (bridge): 50 Ω  
+**Explanation:**
+The **Wheatstone Bridge Circuit** diagram shows the original network:                               
+ - **Red nodes** (A and D) are the source and sink.                         
+ - **Light-blue nodes** (B and C) are intermediate junctions.                  
+ - Edges are labeled with resistor values:  
+    - A–B: 10 Ω  
+    - A–C: 20 Ω  
+    - B–D: 30 Ω  
+    - C–D: 40 Ω  
+    - B–C (bridge): 50 Ω  
 
 ---
 
