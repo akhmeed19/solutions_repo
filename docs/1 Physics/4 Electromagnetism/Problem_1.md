@@ -615,6 +615,10 @@ The Hall effect thruster demonstrates:
 - Ions, due to their larger mass, are primarily accelerated by the electric field
 - This differential behavior creates an efficient propulsion mechanism
 
+#### Output  
+![Hall Effect Thruster – 3D Trajectory](myurl.png)  
+*Figure 13: 3D trajectory of ions in a Hall effect thruster, showing acceleration due to crossed E and B fields.*
+
 ## 5. Extensions and Advanced Scenarios
 
 ### Non-Uniform Fields
