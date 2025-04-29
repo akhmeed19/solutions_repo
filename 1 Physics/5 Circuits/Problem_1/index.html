@@ -86,6 +86,10 @@
 </li>
 <li class="toctree-l4"><a class="reference internal" href="#22-advanced-techniques">2.2 Advanced Techniques</a>
 </li>
+<li class="toctree-l4"><a class="reference internal" href="#1-y-wye-delta-transformation">1. Y-Δ (Wye-Delta) Transformation:</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-node-elimination-method">2. Node Elimination Method:</a>
+</li>
 <li class="toctree-l4"><a class="reference internal" href="#23-algorithm-flow">2.3 Algorithm Flow</a>
 </li>
 </ul>
@@ -237,25 +241,43 @@
 </ol>
 <h3 id="22-advanced-techniques">2.2 Advanced Techniques</h3>
 <p>For circuits that cannot be fully reduced using only series and parallel reductions:</p>
-<ol>
-<li><strong>Y-Δ (Wye-Delta) Transformation</strong>:</li>
-<li>Transforms three resistors in Y configuration to three resistors in Δ configuration or vice versa</li>
-<li><strong>Y to Δ conversion</strong>:
-     <span class="arithmatex">\(<span class="arithmatex">\(R_{AB} = \frac{R_A \cdot R_B + R_B \cdot R_C + R_C \cdot R_A}{R_C}\)</span>\)</span>
-<span class="arithmatex">\(<span class="arithmatex">\(R_{BC} = \frac{R_A \cdot R_B + R_B \cdot R_C + R_C \cdot R_A}{R_A}\)</span>\)</span>
-<span class="arithmatex">\(<span class="arithmatex">\(R_{CA} = \frac{R_A \cdot R_B + R_B \cdot R_C + R_C \cdot R_A}{R_B}\)</span>\)</span></li>
+<h3 id="1-y-wye-delta-transformation">1. <strong>Y-Δ (Wye-Delta) Transformation</strong>:</h3>
+<ul>
+<li>
+<p>Transforms three resistors in Y configuration to three resistors in Δ configuration or vice versa.</p>
+</li>
+<li>
+<p><strong>Y to Δ conversion</strong>:
+  $$
+  R_{AB} = \frac{R_A R_B + R_B R_C + R_C R_A}{R_C}
+  $$
+  $$
+  R_{BC} = \frac{R_A R_B + R_B R_C + R_C R_A}{R_A}
+  $$
+  $$
+  R_{CA} = \frac{R_A R_B + R_B R_C + R_C R_A}{R_B}
+  $$</p>
+</li>
 <li>
 <p><strong>Δ to Y conversion</strong>:
-     <span class="arithmatex">\(<span class="arithmatex">\(R_A = \frac{R_{AB} \cdot R_{CA}}{R_{AB} + R_{BC} + R_{CA}}\)</span>\)</span>
-<span class="arithmatex">\(<span class="arithmatex">\(R_B = \frac{R_{AB} \cdot R_{BC}}{R_{AB} + R_{BC} + R_{CA}}\)</span>\)</span>
-<span class="arithmatex">\(<span class="arithmatex">\(R_C = \frac{R_{BC} \cdot R_{CA}}{R_{AB} + R_{BC} + R_{CA}}\)</span>\)</span></p>
+  $$
+  R_A = \frac{R_{AB} R_{CA}}{R_{AB} + R_{BC} + R_{CA}}
+  $$
+  $$
+  R_B = \frac{R_{AB} R_{BC}}{R_{AB} + R_{BC} + R_{CA}}
+  $$
+  $$
+  R_C = \frac{R_{BC} R_{CA}}{R_{AB} + R_{BC} + R_{CA}}
+  $$</p>
 </li>
-<li>
-<p><strong>Node Elimination Method</strong>:</p>
-</li>
-<li>Based on Kirchhoff's laws and nodal analysis</li>
-<li>Uses matrix operations to systematically eliminate nodes</li>
-</ol>
+</ul>
+<hr/>
+<h3 id="2-node-elimination-method">2. <strong>Node Elimination Method</strong>:</h3>
+<ul>
+<li>Based on Kirchhoff’s laws and nodal analysis.</li>
+<li>Uses matrix operations to systematically eliminate nodes.</li>
+</ul>
+<hr/>
 <h3 id="23-algorithm-flow">2.3 Algorithm Flow</h3>
 <pre><code>ALGORITHM CalculateEquivalentResistance(G, source, sink):
     Initialize graph G with resistors as weighted edges
