@@ -235,9 +235,9 @@ print(f"Larmor radius: {larmor_radius:.4f}")
 ```
 
 In this scenario, we observe:
-- The particle follows a circular path in the xy-plane
-- The Larmor radius (cyclotron radius) is given by r = mv⊥/(qB)
-- The frequency of rotation (cyclotron frequency) is ω = qB/m
+- The particle follows a circular path in the $xy-plane$
+- The Larmor radius (cyclotron radius) is given by $r = mv⊥/(qB)$
+- The frequency of rotation (cyclotron frequency) is $ω = qB/m$
 
 ### Scenario 2: Combined Electric and Magnetic Fields
 
@@ -308,9 +308,9 @@ print(f"E×B Drift velocity: {drift_velocity}")
 ```
 
 In crossed fields, we observe:
-- E×B drift with velocity v_drift = E×B/|B|²
+- $E×B$ drift with velocity $v_drift = E×B/|B|²$
 - This drift is independent of particle charge and mass
-- The particle moves perpendicular to both E and B fields
+- The particle moves perpendicular to both $E$ and $B$ fields
 
 ### Scenario 4: Parameter Exploration
 
@@ -414,7 +414,7 @@ plt.close(fig)
 
 ### Scenario 5: Magnetic Mirror
 
-In a non‐uniform magnetic field that increases along the \(z\)–axis, particles can “mirror” — i.e.\ bounce back when they encounter regions of stronger \(B\).
+In a non‐uniform magnetic field that increases along the $z$–axis, particles can “mirror” — i.e.\ bounce back when they encounter regions of stronger $B$.
 
 ```python
 # Scenario 5: Magnetic Mirror
@@ -446,9 +446,9 @@ plt.show()
 ```
 
 **What you’ll observe:**  
-- As the particle moves along \(+z\), the local field strength grows, converting parallel kinetic energy into gyration.  
-- Once the parallel velocity is reduced to zero, the particle reverses direction, “mirroring” back toward \(z=0\).  
-- The turning points occur where \(v_\parallel^2 / v_\perp^2 = B(z)/B(0)\), illustrating the mirror ratio effect.
+- As the particle moves along $+z$, the local field strength grows, converting parallel kinetic energy into gyration.  
+- Once the parallel velocity is reduced to zero, the particle reverses direction, “mirroring” back toward $z=0$.  
+- The turning points occur where $v_\parallel^2 / v_\perp^2 = B(z)/B(0)$, illustrating the mirror ratio effect.
 
 ### Simulation Visualizations
 
