@@ -334,7 +334,7 @@ if __name__ == "__main__":
 
 ## Outputs
 
-![Original Circuit](outputs/original_circuit.png)
+![Original Circuit](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Circuits/OriginalCircuit.png)
 
 **Explanation:**  
 The **Original Circuit** diagram displays the starting network:
@@ -344,7 +344,7 @@ The **Original Circuit** diagram displays the starting network:
 
 ---
 
-![Reduction Steps](outputs/reduction_steps.png)
+![Reduction Steps](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Circuits/ReductionSteps.png)
 
 **Explanation:**  
 The **Reduction Steps** grid shows six panels:
