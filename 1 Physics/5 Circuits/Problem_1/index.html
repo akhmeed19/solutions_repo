@@ -684,8 +684,7 @@ analyzer.visualize_reduction_steps()
 <h2 id="outputs_1">Outputs</h2>
 <p><img alt="Wheatstone Bridge Circuit" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Circuits/WheatBridgeCircuit.png"/></p>
 <p><strong>Explanation:</strong><br/>
-The <strong>Wheatstone Bridge Circuit</strong> diagram shows the original network:       <br/>
-   - <strong>Red nodes</strong> (A and D) are the source and sink.<br/>
+   The <strong>Wheatstone Bridge Circuit</strong> diagram shows the original network:                              - <strong>Red nodes</strong> (A and D) are the source and sink.<br/>
    - <strong>Light-blue nodes</strong> (B and C) are intermediate junctions.<br/>
    - Edges are labeled with resistor values:<br/>
         - A–B: 10 Ω<br/>
@@ -695,15 +694,19 @@ The <strong>Wheatstone Bridge Circuit</strong> diagram shows the original networ
         - B–C (bridge): 50 Ω  </p>
 <hr/>
 <p><img alt="Wheatstone Reduction Steps" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Circuits/ReducedWheatBridge.png"/></p>
-<p><strong>Explanation:</strong> <br/>
-The <strong>Reduction Steps</strong> figure is laid out in four panels:                     <br/>
- 1. <strong>Original Circuit</strong> – same as above.<br/>
- 2. <strong>Y-Δ: Node B</strong> – the star at B (10 Ω, 30 Ω, 50 Ω) is converted into a Δ, producing new resistances:<br/>
-   - A–C ≈ 76.67 Ω<br/>
-   - B–D ≈ 46 Ω<br/>
-   - C–D ≈ 230 Ω<br/>
- 3. <strong>Series Reduction: Node C</strong> – combines 76.67 Ω + 230 Ω into a single 306.67 Ω resistor on the A–D path.<br/>
- 4. <strong>Final Reduced Circuit</strong> – a single 306.67 Ω resistor between A and D, the net equivalent resistance.</p>
+<p><strong>Explanation:</strong>
+The <strong>Reduction Steps</strong> figure is laid out in four panels:</p>
+<ol>
+<li><strong>Original Circuit</strong> – same as above.                               </li>
+<li><strong>Y-Δ: Node B</strong> – the star at B (10 Ω, 30 Ω, 50 Ω) is converted into a Δ, producing new resistances:  <ul>
+<li>A–C ≈ 76.67 Ω  </li>
+<li>B–D ≈ 46 Ω  </li>
+<li>C–D ≈ 230 Ω  </li>
+</ul>
+</li>
+<li><strong>Series Reduction: Node C</strong> – combines 76.67 Ω + 230 Ω into a single 306.67 Ω resistor on the A–D path.  </li>
+<li><strong>Final Reduced Circuit</strong> – a single 306.67 Ω resistor between A and D, the net equivalent resistance.</li>
+</ol>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
