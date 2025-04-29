@@ -337,7 +337,8 @@ if __name__ == "__main__":
 ![Original Circuit](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Circuits/OriginalCircuit.png)
 
 **Explanation:**                                                
-The **Original Circuit** diagram displays the starting   network:       
+The **Original Circuit** diagram displays the starting   network:     
+  
   - **Red nodes** (0 and 5) are the source (input) and sink (output).                        
   - **Light-blue nodes** (1, 2, 3, 4) are intermediate junctions.                  
   - Edges are labeled with resistor values: a series chain (4 Ω–6 Ω), a parallel pair (8 Ω & 8 Ω), and a Δ-triangle (3 Ω, 5 Ω, 7 Ω).
