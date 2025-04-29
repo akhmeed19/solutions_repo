@@ -470,13 +470,7 @@ This complex mesh circuit requires multiple reduction steps:
 3. **Parallel Processing**: Identify independent subcircuits for parallel calculation
 4. **Extension to AC Circuits**: Add support for complex impedances in AC circuit analysis
 
-## 6. Conclusion
-
-Graph theory provides a powerful framework for calculating equivalent resistance in electrical circuits. By representing circuits as graphs and applying systematic reduction techniques, we can handle circuits of arbitrary complexity. The combination of series-parallel reductions, Y-Δ transformations, and node elimination methods ensures that we can solve any valid resistor network.
-
-This approach not only automates circuit analysis but also provides insights into the mathematical structure of electrical networks, demonstrating the elegant intersection of graph theory and electrical engineering principles.
-
-## 7. Example Python Usage
+## 6. Example Python Usage
 
 ```python
 import networkx as nx
@@ -532,3 +526,9 @@ The **Reduction Steps** figure is laid out in four panels:
     - C–D ≈ 230 Ω  
  3. **Series Reduction: Node C** – combines 76.67 Ω + 230 Ω into a single 306.67 Ω resistor on the A–D path.  
  4. **Final Reduced Circuit** – a single 306.67 Ω resistor between A and D, the net equivalent resistance.
+
+ ## 6. Conclusion
+
+Graph theory provides a powerful framework for calculating equivalent resistance in electrical circuits. By representing circuits as graphs and applying systematic reduction techniques, we can handle circuits of arbitrary complexity. The combination of series-parallel reductions, Y-Δ transformations, and node elimination methods ensures that we can solve any valid resistor network.
+
+This approach not only automates circuit analysis but also provides insights into the mathematical structure of electrical networks, demonstrating the elegant intersection of graph theory and electrical engineering principles.
