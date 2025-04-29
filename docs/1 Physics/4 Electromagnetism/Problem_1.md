@@ -666,6 +666,10 @@ In the dipole field, we observe:
 - Particles can become trapped in magnetic "bottles"
 - Mirroring effects as particles enter regions of stronger field
 
+#### Output
+![Particle in Magnetic Dipole Field – 3D Trajectory](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Electromangetism/ExtensionsAndAdvancedScenarios/ParticleInMagneticDipole.png)  
+*Figure 14: 3D trajectory of a charged particle in a magnetic dipole field, showing complex, non‐circular motion and trapping effects.*
+
 ### Time-Varying Fields
 
 Many applications involve time-varying electromagnetic fields:
