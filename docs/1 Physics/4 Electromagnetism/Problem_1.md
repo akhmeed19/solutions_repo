@@ -883,6 +883,14 @@ plt.close(fig_demo1)
 plt.close(fig_demo2)
 ```
 
+### Output
+
+![Complete Simulation – Scenario Grid](myurl16.png)  
+*Figure 16: Combined trajectories for all six scenarios in a 2×3 grid.*
+
+![Cyclotron Energy – Kinetic Energy vs Time](myurl17.png)  
+*Figure 17: Kinetic energy of the particle in the cyclotron as a function of time.*
+
 ## 7. Practical Applications Discussion
 
 ### Particle Accelerators
