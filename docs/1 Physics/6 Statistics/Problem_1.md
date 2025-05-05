@@ -86,15 +86,15 @@ plot_and_show(
 
 ### Output: Population Distributions
 
-![Uniform Distribution (0, 1)](uniform_distribution.png)
+![Uniform Distribution (0, 1)](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Simulating%20Population%20Distributions/UniformDistrubition.png)
 
 *Figure 1: Histogram and KDE of 100 000 draws from a Uniform(0,1) population. The red dashed line marks the empirical mean (~0.500), and the green dashed line marks the median (~0.500), illustrating the flat shape with equal probability across [0,1].*
 
-![Exponential Distribution (λ = 1)](exponential_distribution.png)
+![Exponential Distribution (λ = 1)](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Simulating%20Population%20Distributions/ExponentialDistrubition.png)
 
 *Figure 2: Histogram and KDE of 100 000 draws from an Exponential(λ=1) population. Note the pronounced right skew and long tail. The red dashed line shows the empirical mean (~1.005), and the green dashed line shows the median (~0.693).*
 
-![Binomial Distribution (n=10, p=0.3)](binomial_distribution.png)
+![Binomial Distribution (n=10, p=0.3)](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Simulating%20Population%20Distributions/BinomialDistrubition.png)
 
 *Figure 3: Histogram and KDE of 100 000 draws from a Binomial(n=10, p=0.3) population. The discrete bars at integer values are visible. The red dashed line is the mean (~3.004), and the green dashed line is the median (3.000), reflecting the count‐data nature of this distribution.*  
 
