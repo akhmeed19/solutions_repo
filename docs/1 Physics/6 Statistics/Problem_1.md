@@ -240,15 +240,15 @@ print("\nSection 2 complete! Three figures have been displayed and saved.")
 
 ![Sampling Distributions of Means — Uniform Population](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Sampling%20and%20Visualization/uniform_sampling_distributions.png)
 
-*Figure 4: Four histograms (n=5, 10, 30, 50) of sample‐means drawn from the Uniform(0,1) population. As \(n\) increases, the distribution of the sample mean becomes more tightly clustered around the population mean (~0.5) and more closely matches the overlaid normal curve. Note the decrease in spread (standard error) and the skew/kurtosis approaching 0.*
+*Figure 4: Four histograms (n=5, 10, 30, 50) of sample‐means drawn from the Uniform(0,1) population. As $n$ increases, the distribution of the sample mean becomes more tightly clustered around the population mean $(~0.5)$ and more closely matches the overlaid normal curve. Note the decrease in spread (standard error) and the skew/kurtosis approaching 0.*
 
 ![Sampling Distributions of Means — Exponential Population](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Sampling%20and%20Visualization/exponential_sampling_distributions.png)
 
-*Figure 5: Sampling distributions of means from the Exponential(λ=1) population. For small \(n\) (e.g. 5), the sampling distribution retains some right skew; by \(n=50\), it is well‐approximated by a normal distribution centered at the population mean (~1.0). The red curve is the CLT‐predicted normal with standard error \(\sigma/\sqrt{n}\).*
+*Figure 5: Sampling distributions of means from the $Exponential(λ=1)$ population. For small $n$ (e.g. 5), the sampling distribution retains some right skew; by $n=50$, it is well‐approximated by a normal distribution centered at the population mean $(~1.0)$. The red curve is the CLT‐predicted normal with standard error $\sigma/\sqrt{n}$.*
 
 ![Sampling Distributions of Means — Binomial Population](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Sampling%20and%20Visualization/binomial_sampling_distributions.png)
 
-*Figure 6: Sampling distributions of means from the Binomial(n=10, p=0.3) population. Even at \(n=5\), the sample‐mean distribution is fairly symmetric; by \(n=50\), it is almost indistinguishable from the theoretical normal curve. The mean of means converges to the true population mean (~3.0) and the spread shrinks as \(n\) increases.*
+*Figure 6: Sampling distributions of means from the Binomial(n=10, p=0.3) population. Even at $n=5$, the sample‐mean distribution is fairly symmetric; by $n=50$, it is almost indistinguishable from the theoretical normal curve. The mean of means converges to the true population mean (~3.0) and the spread shrinks as $n$ increases.*
 
 
 ### 3. Parameter Exploration: Convergence Analysis
@@ -504,10 +504,10 @@ From our simulations, we can observe several key properties of the Central Limit
 
 1. **Convergence to Normality**: Regardless of the original population distribution (uniform, exponential, or binomial), the sampling distribution of the mean approaches a normal distribution as the sample size increases.
 
-2. **Rate of Convergence**: The rate at which the sampling distribution approaches normality depends on:
-   - The shape of the original population distribution
-   - The sample size
-   - The population variance
+2. **Rate of Convergence**: The rate at which the sampling distribution approaches normality depends on:                                                
+     - The shape of the original population distribution                        
+     - The sample size                                                          
+     - The population variance                                                  
 
 3. **Standard Error Behavior**: The standard error (standard deviation of the sampling distribution) decreases proportionally to √n, where n is the sample size, confirming the theoretical prediction from the CLT.
 
