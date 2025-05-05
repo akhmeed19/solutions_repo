@@ -108,99 +108,148 @@ Next, we'll implement a sampling process where we:
 4. Visualize how these sampling distributions evolve as sample size increases
 
 ```python
-# Define sample sizes to test
-sample_sizes = [5, 10, 30, 50]
-num_samples = 5000  # Number of samples to draw for each sample size
+import os
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
 
-# Function to generate sampling distributions
+# ----------------------------------------
+# Section 2: Sampling and Visualization
+# ----------------------------------------
+
+# Print current working directory
+print("Current working directory:", os.getcwd())
+
+# For reproducibility
+np.random.seed(42)
+
+# Aesthetic parameters
+plt.style.use('seaborn-v0_8-whitegrid')
+sns.set_palette("viridis")
+
+# Regenerate populations (if you ran Section 1 in a separate script, you can omit these)
+population_size = 100_000
+uniform_population     = np.random.uniform(0, 1, population_size)
+exponential_population = np.random.exponential(scale=1.0, size=population_size)
+binomial_population    = np.random.binomial(n=10, p=0.3, size=population_size)
+
+# Define the sample sizes and number of replicates
+sample_sizes = [5, 10, 30, 50]
+num_samples  = 5000
+
 def generate_sampling_distribution(population, sample_sizes, num_samples):
-    sampling_distributions = {}
-    
+    """Draw many samples of each size, return dict mapping n -> array of sample means."""
+    distributions = {}
     for n in sample_sizes:
-        # Draw many samples of size n and compute their means
-        sample_means = []
-        for _ in range(num_samples):
-            sample = np.random.choice(population, size=n, replace=True)
-            sample_means.append(np.mean(sample))
-        
-        sampling_distributions[n] = np.array(sample_means)
-    
-    return sampling_distributions
+        means = [
+            np.mean(np.random.choice(population, size=n, replace=True))
+            for _ in range(num_samples)
+        ]
+        distributions[n] = np.array(means)
+    return distributions
 
 # Generate sampling distributions for each population
-uniform_sampling_distributions = generate_sampling_distribution(uniform_population, sample_sizes, num_samples)
-exponential_sampling_distributions = generate_sampling_distribution(exponential_population, sample_sizes, num_samples)
-binomial_sampling_distributions = generate_sampling_distribution(binomial_population, sample_sizes, num_samples)
+print("\nGenerating sampling distributions...")
+uniform_samps     = generate_sampling_distribution(uniform_population,     sample_sizes, num_samples)
+exponential_samps = generate_sampling_distribution(exponential_population, sample_sizes, num_samples)
+binomial_samps    = generate_sampling_distribution(binomial_population,    sample_sizes, num_samples)
+print("Done.\n")
 
-# Function to plot sampling distributions
-def plot_sampling_distributions(sampling_distributions, population, title, filename):
-    population_mean = np.mean(population)
-    population_std = np.std(population)
-    
+def plot_and_show_sampling(samp_dist, population, title, filename, color):
+    """Plot 2×2 grid of sampling distributions for each n, save & show sequentially."""
+    pop_mean = np.mean(population)
+    pop_std  = np.std(population)
+
     fig, axes = plt.subplots(2, 2, figsize=(14, 12))
     axes = axes.flatten()
-    
-    for i, n in enumerate(sample_sizes):
-        sample_means = sampling_distributions[n]
-        
-        # Calculate expected standard error according to CLT
-        expected_se = population_std / np.sqrt(n)
-        
-        # Plot histogram of sample means
-        sns.histplot(sample_means, kde=True, ax=axes[i], stat="density")
-        
-        # Overlay theoretical normal distribution according to CLT
-        x = np.linspace(min(sample_means), max(sample_means), 1000)
-        y = stats.norm.pdf(x, population_mean, expected_se)
-        axes[i].plot(x, y, 'r-', linewidth=2, label='Theoretical Normal')
-        
-        # Add vertical line for population mean
-        axes[i].axvline(population_mean, color='green', linestyle='dashed', linewidth=2, 
-                         label=f'Population Mean: {population_mean:.4f}')
-        
-        # Add sample statistics
-        sample_mean_of_means = np.mean(sample_means)
-        sample_std_of_means = np.std(sample_means)
-        
-        # Calculate skewness and kurtosis to measure normality
-        skewness = stats.skew(sample_means)
-        kurtosis = stats.kurtosis(sample_means)
-        
-        # Add text with statistics
-        axes[i].text(0.05, 0.95, 
-                    f"Sample Size: {n}\n"
-                    f"Mean of Means: {sample_mean_of_means:.4f}\n"
-                    f"Std of Means: {sample_std_of_means:.4f}\n"
-                    f"Expected SE: {expected_se:.4f}\n"
-                    f"Skewness: {skewness:.4f}\n"
-                    f"Kurtosis: {kurtosis:.4f}",
-                    transform=axes[i].transAxes, 
-                    fontsize=10, 
-                    verticalalignment='top',
-                    bbox=dict(boxstyle="round,pad=0.3", facecolor="white", alpha=0.8))
-        
-        axes[i].set_title(f'Sampling Distribution with n = {n}', fontsize=14)
-        axes[i].legend()
-    
+
+    for ax, n in zip(axes, sample_sizes):
+        means = samp_dist[n]
+        se = pop_std / np.sqrt(n)
+
+        sns.histplot(means, kde=True, stat="density", ax=ax, color=color, bins=30)
+        # Overlay theoretical normal curve
+        x = np.linspace(means.min(), means.max(), 500)
+        ax.plot(x, stats.norm.pdf(x, loc=pop_mean, scale=se),
+                'r-', linewidth=2, label='Theoretical Normal')
+
+        # Population mean line
+        ax.axvline(pop_mean, color='green', linestyle='--', linewidth=2,
+                   label=f'Pop Mean = {pop_mean:.4f}')
+
+        # Compute diagnostics
+        mean_of_means = means.mean()
+        std_of_means  = means.std()
+        skewness      = stats.skew(means)
+        kurtosis      = stats.kurtosis(means)
+
+        # Annotate
+        ax.text(0.05, 0.95,
+                f"n = {n}\n"
+                f"Mean of Means: {mean_of_means:.4f}\n"
+                f"Std of Means:  {std_of_means:.4f}\n"
+                f"Expected SE:   {se:.4f}\n"
+                f"Skewness:      {skewness:.4f}\n"
+                f"Kurtosis:      {kurtosis:.4f}",
+                transform=ax.transAxes, va='top',
+                bbox=dict(facecolor='white', alpha=0.8))
+
+        ax.set_title(f"Sampling Distribution (n={n})")
+        ax.legend()
+
     plt.suptitle(title, fontsize=18)
     plt.tight_layout()
-    plt.subplots_adjust(top=0.93)
+    plt.subplots_adjust(top=0.92)
+
+    # Save and display
     plt.savefig(filename, dpi=300)
+    print(f"Saved sampling plot to: {os.path.abspath(filename)}")
+    plt.show()
     plt.close()
 
-# Plot sampling distributions for each population
-plot_sampling_distributions(uniform_sampling_distributions, uniform_population, 
-                          'Sampling Distributions of Means from Uniform Population', 
-                          'uniform_sampling_distributions.png')
+# Plot and show each population in sequence
+plot_and_show_sampling(
+    uniform_samps,
+    uniform_population,
+    "Sampling Distributions of Means — Uniform Population",
+    "uniform_sampling_distributions.png",
+    color='blue'
+)
 
-plot_sampling_distributions(exponential_sampling_distributions, exponential_population, 
-                          'Sampling Distributions of Means from Exponential Population', 
-                          'exponential_sampling_distributions.png')
+plot_and_show_sampling(
+    exponential_samps,
+    exponential_population,
+    "Sampling Distributions of Means — Exponential Population",
+    "exponential_sampling_distributions.png",
+    color='purple'
+)
 
-plot_sampling_distributions(binomial_sampling_distributions, binomial_population, 
-                          'Sampling Distributions of Means from Binomial Population', 
-                          'binomial_sampling_distributions.png')
+plot_and_show_sampling(
+    binomial_samps,
+    binomial_population,
+    "Sampling Distributions of Means — Binomial Population",
+    "binomial_sampling_distributions.png",
+    color='orange'
+)
+
+print("\nSection 2 complete! Three figures have been displayed and saved.")
 ```
+
+### Output: Sampling and Visualization
+
+![Sampling Distributions of Means — Uniform Population](uniform_sampling_distributions.png)
+
+*Figure 4: Four histograms (n=5, 10, 30, 50) of sample‐means drawn from the Uniform(0,1) population. As \(n\) increases, the distribution of the sample mean becomes more tightly clustered around the population mean (~0.5) and more closely matches the overlaid normal curve. Note the decrease in spread (standard error) and the skew/kurtosis approaching 0.*
+
+![Sampling Distributions of Means — Exponential Population](exponential_sampling_distributions.png)
+
+*Figure 5: Sampling distributions of means from the Exponential(λ=1) population. For small \(n\) (e.g. 5), the sampling distribution retains some right skew; by \(n=50\), it is well‐approximated by a normal distribution centered at the population mean (~1.0). The red curve is the CLT‐predicted normal with standard error \(\sigma/\sqrt{n}\).*
+
+![Sampling Distributions of Means — Binomial Population](binomial_sampling_distributions.png)
+
+*Figure 6: Sampling distributions of means from the Binomial(n=10, p=0.3) population. Even at \(n=5\), the sample‐mean distribution is fairly symmetric; by \(n=50\), it is almost indistinguishable from the theoretical normal curve. The mean of means converges to the true population mean (~3.0) and the spread shrinks as \(n\) increases.*
+
 
 ### 3. Parameter Exploration: Convergence Analysis
 
