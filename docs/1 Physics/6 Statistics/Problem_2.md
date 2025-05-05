@@ -266,10 +266,10 @@ def estimate_pi_buffon(num_needles, needle_length=1.0, line_distance=1.0):
     # Generate random needle angles (with horizontal)
     angles = np.random.uniform(0, np.pi, num_needles)
     
-    # Calculate the distance from each needle's center to the nearest line
+    # Distance from each needle's center to nearest line
     distances_to_nearest_line = np.minimum(y_positions, line_distance - y_positions)
     
-    # Calculate the y-projection of each needle's half-length
+    # y-projection of each needle's half-length
     y_projections = (needle_length / 2) * np.sin(angles)
     
     # Determine which needles cross a line
@@ -282,60 +282,39 @@ def estimate_pi_buffon(num_needles, needle_length=1.0, line_distance=1.0):
     if count_crosses > 0:
         pi_estimate = (2 * needle_length * num_needles) / (line_distance * count_crosses)
     else:
-        pi_estimate = float('inf')  # No crossings
+        pi_estimate = float('inf')
     
     return pi_estimate, y_positions, angles, crosses_line
 
 def visualize_buffon_needle(y_positions, angles, crosses_line, pi_estimate, num_needles):
     """
-    Create a visualization of Buffon's Needle experiment.
-    
-    Parameters:
-    -----------
-    y_positions : ndarray
-        Y-coordinates of needle centers
-    angles : ndarray
-        Angles of needles
-    crosses_line : ndarray
-        Boolean array indicating whether each needle crosses a line
-    pi_estimate : float
-        Estimated value of π
-    num_needles : int
-        Total number of needles used in the simulation
+    Visualize Buffon's Needle experiment.
     """
     plt.figure(figsize=(12, 8))
     
-    # Draw horizontal lines
+    # Draw parallel horizontal lines
     num_lines = 5
     for i in range(num_lines + 1):
         plt.axhline(y=i, color='black', linewidth=1)
     
-    # Calculate x-positions (arbitrary, for visualization only)
+    # Arbitrary x-positions for display
     x_positions = np.random.uniform(0.5, num_lines - 0.5, len(y_positions))
+    needle_length = 1.0
     
-    # Draw needles
-    needle_length = 1.0  # Same as in the simulation
-    for i in range(len(y_positions)):
-        # Map y-position to the correct line spacing
-        y_pos = y_positions[i] % 1 + int(x_positions[i])
-        
-        # Calculate needle endpoints
-        dx = (needle_length / 2) * np.cos(angles[i])
-        dy = (needle_length / 2) * np.sin(angles[i])
-        
-        x1, y1 = x_positions[i] - dx, y_pos - dy
-        x2, y2 = x_positions[i] + dx, y_pos + dy
-        
-        color = 'red' if crosses_line[i] else 'blue'
+    # Plot each needle
+    for x0, y0, theta, cross in zip(x_positions, y_positions, angles, crosses_line):
+        dy = (needle_length / 2) * np.sin(theta)
+        dx = (needle_length / 2) * np.cos(theta)
+        x1, y1 = x0 - dx, (y0 % 1) + int(x0) - dy
+        x2, y2 = x0 + dx, (y0 % 1) + int(x0) + dy
+        color = 'red' if cross else 'blue'
         plt.plot([x1, x2], [y1, y2], color=color, linewidth=1.5)
     
     plt.xlim(0, num_lines)
     plt.ylim(0, num_lines)
     plt.gca().set_aspect('equal')
-    plt.title(f"Buffon's Needle Experiment\n"
-              f"Needles: {num_needles}, Crossings: {np.sum(crosses_line)}, π ≈ {pi_estimate:.6f}")
-    
-    # Add a legend
+    plt.title(f"Buffon's Needle Experiment\nNeedles: {num_needles}, "
+              f"Crossings: {np.sum(crosses_line)}, π ≈ {pi_estimate:.6f}")
     plt.plot([], [], 'b-', label='No Crossing')
     plt.plot([], [], 'r-', label='Crossing Line')
     plt.legend()
@@ -345,60 +324,40 @@ def visualize_buffon_needle(y_positions, angles, crosses_line, pi_estimate, num_
 
 def analyze_convergence_buffon(max_needles=1000000, steps=20):
     """
-    Analyze how the estimation of π converges as the number of needles increases.
-    
-    Parameters:
-    -----------
-    max_needles : int
-        Maximum number of needles to use
-    steps : int
-        Number of steps to take between 1000 and max_needles
-    
-    Returns:
-    --------
-    ndarray
-        Array of numbers of needles used
-    ndarray
-        Array of π estimates
-    ndarray
-        Array of execution times
+    Analyze convergence of π estimate by Buffon's Needle.
     """
-    # Use logarithmic spacing for better visualization
     needles_range = np.logspace(3, np.log10(max_needles), steps).astype(int)
     pi_estimates = np.zeros(steps)
     exec_times = np.zeros(steps)
     
     for i, n in enumerate(needles_range):
-        start_time = time.time()
+        start = time.time()
         pi_estimates[i], _, _, _ = estimate_pi_buffon(n)
-        exec_times[i] = time.time() - start_time
+        exec_times[i] = time.time() - start
     
     return needles_range, pi_estimates, exec_times
 
-# Example usage
 if __name__ == "__main__":
-    # Estimate π using different numbers of needles
-    num_needles_visualization = 100  # For visualization
-    pi_estimate, y_positions, angles, crosses_line = estimate_pi_buffon(num_needles_visualization)
-    visualize_buffon_needle(y_positions, angles, crosses_line, pi_estimate, num_needles_visualization)
+    # 1) Visualization for a small number of needles
+    num_needles_visualization = 100
+    pi_est, y_pos, ang, crosses = estimate_pi_buffon(num_needles_visualization)
+    visualize_buffon_needle(y_pos, ang, crosses, pi_est, num_needles_visualization)
     
-    # Analyze convergence
-    needles_range, pi_estimates, exec_times = analyze_convergence_buffon(max_points=1000000)
+    # 2) Convergence analysis
+    needles_range, pi_estimates, exec_times = analyze_convergence_buffon(max_needles=1000000)
     
-    # Plot convergence
+    # Plot and save convergence figure
     plt.figure(figsize=(12, 6))
     
-    # Plot the estimates
     plt.subplot(1, 2, 1)
-    plt.semilogx(needles_range, pi_estimates, 'b-o')
+    plt.semilogx(needles_range, pi_estimates, 'b-o', label='Estimate')
     plt.axhline(y=np.pi, color='r', linestyle='--', label='True π')
     plt.xlabel('Number of Needles')
     plt.ylabel('Estimated π')
-    plt.title('Convergence of π Estimate (Buffon\'s Needle)')
+    plt.title('Convergence of π Estimate (Buffon’s Needle)')
     plt.grid(True)
     plt.legend()
     
-    # Plot the errors
     plt.subplot(1, 2, 2)
     plt.loglog(needles_range, np.abs(pi_estimates - np.pi), 'g-o')
     plt.xlabel('Number of Needles (log scale)')
@@ -410,12 +369,12 @@ if __name__ == "__main__":
     plt.savefig('buffon_convergence.png')
     plt.show()
     
-    # Print results
+    # 3) Print tabular results
     print("\nBuffon's Needle Method Results:")
-    print(f"{'Needles':<12} {'π Estimate':<15} {'Error':<15} {'Time (s)':<10}")
+    print(f"{'Needles':<12}{'π Estimate':<15}{'Error':<15}{'Time (s)':<10}")
     print("-" * 52)
-    for n, pi_est, t in zip(needles_range, pi_estimates, exec_times):
-        print(f"{n:<12} {pi_est:<15.8f} {abs(pi_est - np.pi):<15.8f} {t:<10.6f}")
+    for n, est, t in zip(needles_range, pi_estimates, exec_times):
+        print(f"{n:<12}{est:<15.8f}{abs(est - np.pi):<15.8f}{t:<10.6f}")
 ```
 
 ### 2.3 Visualization and Analysis
@@ -423,6 +382,22 @@ if __name__ == "__main__":
 Buffon's Needle experiment offers a fascinating geometric approach to estimating π. The visualization shows needles dropped randomly on a surface with parallel lines, with red needles indicating those that cross lines and blue needles indicating those that do not.
 
 While conceptually elegant, Buffon's Needle typically converges more slowly than the circle-based method. This is because the probability of a needle crossing a line is relatively small, leading to higher variance in the estimate. The error also decreases proportionally to $1/\sqrt{n}$, but with a larger constant factor compared to the circle-based method.
+
+---
+
+## Output: Buffon’s Needle Experiment
+
+![Buffon's Needle Visualization](buffon_needle.png)
+
+*Figure 1: Buffon’s Needle experiment with 100 needles dropped on parallel lines spaced 1 unit apart.  
+Red segments cross a line, blue segments do not.  
+Estimated π ≈ 3.174603 (63 crossings out of 100 needles).*
+
+![Convergence of π Estimate (Buffon’s Needle)](buffon_convergence.png)
+
+*Figure 2 (left): Estimated π vs. number of needles (log scale). The dashed red line shows true π.*  
+*Figure 2 (right): Absolute error vs. number of needles (both axes log scale), demonstrating roughly \(O(1/\sqrt{n})\) error decay.*  
+
 
 ## Part 3: Comparison of Methods
 
