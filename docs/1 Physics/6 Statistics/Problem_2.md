@@ -197,16 +197,16 @@ The visualization shows random points distributed within a square, with points c
 
 ## Output: Circle‐Based Monte Carlo Method
 
-![Monte Carlo Circle Visualization](circle_monte_carlo.png)
+![Monte Carlo Circle Visualization](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Estimating%20π%20Using%20a%20Circle/circle_monte_carlo.png)
 
-*Figure 1: Scatter plot of 5 000 random points in the square \([-1,1]^2\).  
+*Figure 1: Scatter plot of 5 000 random points in the square $[-1,1]^2$.  
 Green points lie inside the unit circle, red points lie outside.  
 Estimated π ≈ 3.155200 (error ≈ 0.013607).*
 
-![Convergence of π Estimate (Circle Method)](circle_convergence.png)
+![Convergence of π Estimate (Circle Method)](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Estimating%20π%20Using%20a%20Circle/circle_convergence.png)
 
 *Figure 2 (left): π estimates as a function of the number of random points (log scale). The dashed red line is the true π.*  
-*Figure 2 (right): Absolute error vs. number of points (both axes log scale), showing the expected \(O(1/\sqrt{n})\) decline in error.*  
+*Figure 2 (right): Absolute error vs. number of points (both axes log scale), showing the expected $O(1/\sqrt{n})$ decline in error.*  
 
 
 ## Part 2: Estimating π Using Buffon's Needle
