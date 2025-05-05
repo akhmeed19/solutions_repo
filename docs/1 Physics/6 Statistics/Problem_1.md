@@ -256,124 +256,156 @@ print("\nSection 2 complete! Three figures have been displayed and saved.")
 Let's investigate how different factors affect the convergence to normality. We'll quantify this by measuring how the sampling distribution's characteristics (like skewness and kurtosis) approach those of a normal distribution as sample size increases.
 
 ```python
-# Create a more extensive range of sample sizes for convergence analysis
+import os
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from scipy import stats
+
+# ----------------------------------------
+# Section 3: Parameter Exploration: Convergence Analysis
+# ----------------------------------------
+
+# Print current working directory
+print("Current working directory:", os.getcwd())
+
+# For reproducibility
+np.random.seed(42)
+
+# Aesthetic parameters
+plt.style.use('seaborn-v0_8-whitegrid')
+sns.set_palette("viridis")
+
+# (Re)generate populations
+population_size = 100_000
+uniform_population     = np.random.uniform(0, 1, population_size)
+exponential_population = np.random.exponential(scale=1.0, size=population_size)
+binomial_population    = np.random.binomial(n=10, p=0.3, size=population_size)
+
+# Detailed sample sizes and replicates
 detailed_sample_sizes = [2, 5, 10, 15, 20, 30, 50, 100]
-num_samples = 3000  # Number of samples for each sample size
+num_samples = 3000
 
-# Generate sampling distributions for the detailed analysis
-uniform_detailed = generate_sampling_distribution(uniform_population, detailed_sample_sizes, num_samples)
+def generate_sampling_distribution(population, sample_sizes, num_samples):
+    """Return dict mapping each n to an array of sample means."""
+    d = {}
+    for n in sample_sizes:
+        means = [
+            np.mean(np.random.choice(population, size=n, replace=True))
+            for _ in range(num_samples)
+        ]
+        d[n] = np.array(means)
+    return d
+
+print("\nGenerating detailed sampling distributions...")
+uniform_detailed     = generate_sampling_distribution(uniform_population,     detailed_sample_sizes, num_samples)
 exponential_detailed = generate_sampling_distribution(exponential_population, detailed_sample_sizes, num_samples)
-binomial_detailed = generate_sampling_distribution(binomial_population, detailed_sample_sizes, num_samples)
+binomial_detailed    = generate_sampling_distribution(binomial_population,    detailed_sample_sizes, num_samples)
+print("Done.\n")
 
-# Calculate statistics for each sampling distribution
 def calculate_sampling_statistics(sampling_distributions, population):
-    population_mean = np.mean(population)
-    population_std = np.std(population)
-    
-    stats_df = pd.DataFrame(columns=[
-        'Sample Size', 'Distribution', 'Mean', 'Standard Deviation', 
-        'Expected SE', 'Observed SE', 'SE Ratio', 'Skewness', 'Kurtosis',
-        'Shapiro-Wilk p-value'
-    ])
-    
-    for n in sampling_distributions:
-        sample_means = sampling_distributions[n]
-        expected_se = population_std / np.sqrt(n)
-        observed_se = np.std(sample_means)
-        
-        # Calculate Shapiro-Wilk test p-value (test for normality)
-        # For large samples, we'll use a random subset as Shapiro-Wilk has limitations
-        sw_sample = sample_means if len(sample_means) <= 5000 else np.random.choice(sample_means, 5000, replace=False)
-        _, sw_p_value = stats.shapiro(sw_sample)
-        
-        stats_df = pd.concat([stats_df, pd.DataFrame({
-            'Sample Size': [n],
-            'Distribution': ['Sampling Distribution'],
-            'Mean': [np.mean(sample_means)],
-            'Standard Deviation': [observed_se],
-            'Expected SE': [expected_se],
-            'Observed SE': [observed_se],
-            'SE Ratio': [observed_se / expected_se],
-            'Skewness': [stats.skew(sample_means)],
-            'Kurtosis': [stats.kurtosis(sample_means)],
-            'Shapiro-Wilk p-value': [sw_p_value]
-        })], ignore_index=True)
-    
-    return stats_df
+    """Compute diagnostics for each sampling distribution."""
+    pop_std = np.std(population)
+    records = []
+    for n, means in sampling_distributions.items():
+        expected_se = pop_std / np.sqrt(n)
+        observed_se = means.std()
+        # Shapiro–Wilk p-value (subset if >5000)
+        subset = means if len(means) <= 5000 else np.random.choice(means, 5000, replace=False)
+        _, p_sw = stats.shapiro(subset)
+        records.append({
+            'Sample Size': n,
+            'Skewness': stats.skew(means),
+            'Kurtosis': stats.kurtosis(means),
+            'SE Ratio': observed_se / expected_se,
+            'Shapiro-Wilk p-value': p_sw
+        })
+    return pd.DataFrame(records)
 
-# Calculate statistics for each distribution
-uniform_stats = calculate_sampling_statistics(uniform_detailed, uniform_population)
-uniform_stats['Distribution Type'] = 'Uniform'
+print("Calculating convergence statistics...")
+df_uni = calculate_sampling_statistics(uniform_detailed, uniform_population)
+df_uni['Distribution'] = 'Uniform'
+df_exp = calculate_sampling_statistics(exponential_detailed, exponential_population)
+df_exp['Distribution'] = 'Exponential'
+df_bin = calculate_sampling_statistics(binomial_detailed, binomial_population)
+df_bin['Distribution'] = 'Binomial'
 
-exponential_stats = calculate_sampling_statistics(exponential_detailed, exponential_population)
-exponential_stats['Distribution Type'] = 'Exponential'
+all_stats = pd.concat([df_uni, df_exp, df_bin], ignore_index=True)
+print("Done.\n")
 
-binomial_stats = calculate_sampling_statistics(binomial_detailed, binomial_population)
-binomial_stats['Distribution Type'] = 'Binomial'
+# Create 2×2 figure with constrained_layout to avoid overlaps
+fig, axes = plt.subplots(2, 2, figsize=(14, 12), constrained_layout=True)
+axes = axes.flatten()
 
-# Combine all statistics
-all_stats = pd.concat([uniform_stats, exponential_stats, binomial_stats], ignore_index=True)
+# 1. Skewness
+for dist in ['Uniform', 'Exponential', 'Binomial']:
+    sub = all_stats[all_stats['Distribution'] == dist]
+    axes[0].plot(sub['Sample Size'], sub['Skewness'], 'o-', label=dist)
+axes[0].axhline(0, linestyle='--', color='black', alpha=0.7)
+axes[0].set_xscale('log')
+axes[0].set_title('Convergence of Skewness')
+axes[0].set_xlabel('Sample Size')
+axes[0].set_ylabel('Skewness')
+axes[0].legend()
+axes[0].grid(alpha=0.3)
 
-# Plot convergence metrics
-plt.figure(figsize=(15, 12))
+# 2. Excess Kurtosis
+for dist in ['Uniform', 'Exponential', 'Binomial']:
+    sub = all_stats[all_stats['Distribution'] == dist]
+    axes[1].plot(sub['Sample Size'], sub['Kurtosis'], 'o-', label=dist)
+axes[1].axhline(0, linestyle='--', color='black', alpha=0.7)
+axes[1].set_xscale('log')
+axes[1].set_title('Convergence of Excess Kurtosis')
+axes[1].set_xlabel('Sample Size')
+axes[1].set_ylabel('Excess Kurtosis')
+axes[1].legend()
+axes[1].grid(alpha=0.3)
 
-# Plot 1: Skewness convergence
-plt.subplot(2, 2, 1)
-for dist_type in ['Uniform', 'Exponential', 'Binomial']:
-    subset = all_stats[all_stats['Distribution Type'] == dist_type]
-    plt.plot(subset['Sample Size'], subset['Skewness'], 'o-', label=dist_type)
-plt.axhline(y=0, color='black', linestyle='--', alpha=0.7, label='Normal Distribution')
-plt.title('Convergence of Skewness by Sample Size', fontsize=14)
-plt.xlabel('Sample Size')
-plt.ylabel('Skewness')
-plt.xscale('log')
-plt.grid(True, alpha=0.3)
-plt.legend()
+# 3. SE Ratio
+for dist in ['Uniform', 'Exponential', 'Binomial']:
+    sub = all_stats[all_stats['Distribution'] == dist]
+    axes[2].plot(sub['Sample Size'], sub['SE Ratio'], 'o-', label=dist)
+axes[2].axhline(1, linestyle='--', color='black', alpha=0.7)
+axes[2].set_xscale('log')
+axes[2].set_title('Standard Error Ratio (Observed / Expected)')
+axes[2].set_xlabel('Sample Size')
+axes[2].set_ylabel('SE Ratio')
+axes[2].legend()
+axes[2].grid(alpha=0.3)
 
-# Plot 2: Kurtosis convergence
-plt.subplot(2, 2, 2)
-for dist_type in ['Uniform', 'Exponential', 'Binomial']:
-    subset = all_stats[all_stats['Distribution Type'] == dist_type]
-    plt.plot(subset['Sample Size'], subset['Kurtosis'], 'o-', label=dist_type)
-plt.axhline(y=0, color='black', linestyle='--', alpha=0.7, label='Normal Distribution')
-plt.title('Convergence of Kurtosis by Sample Size', fontsize=14)
-plt.xlabel('Sample Size')
-plt.ylabel('Excess Kurtosis')
-plt.xscale('log')
-plt.grid(True, alpha=0.3)
-plt.legend()
+# 4. Shapiro–Wilk p-value
+for dist in ['Uniform', 'Exponential', 'Binomial']:
+    sub = all_stats[all_stats['Distribution'] == dist]
+    axes[3].plot(sub['Sample Size'], sub['Shapiro-Wilk p-value'], 'o-', label=dist)
+axes[3].axhline(0.05, linestyle='--', color='red', alpha=0.7)
+axes[3].set_xscale('log')
+axes[3].set_yscale('log')
+axes[3].set_title('Shapiro–Wilk p-value')
+axes[3].set_xlabel('Sample Size')
+axes[3].set_ylabel('p-value')
+axes[3].legend()
+axes[3].grid(alpha=0.3)
 
-# Plot 3: SE Ratio (how well the standard error follows CLT prediction)
-plt.subplot(2, 2, 3)
-for dist_type in ['Uniform', 'Exponential', 'Binomial']:
-    subset = all_stats[all_stats['Distribution Type'] == dist_type]
-    plt.plot(subset['Sample Size'], subset['SE Ratio'], 'o-', label=dist_type)
-plt.axhline(y=1, color='black', linestyle='--', alpha=0.7, label='Perfect Match')
-plt.title('Standard Error Ratio (Observed/Expected) by Sample Size', fontsize=14)
-plt.xlabel('Sample Size')
-plt.ylabel('SE Ratio')
-plt.xscale('log')
-plt.grid(True, alpha=0.3)
-plt.legend()
-
-# Plot 4: Shapiro-Wilk p-value (measure of normality)
-plt.subplot(2, 2, 4)
-for dist_type in ['Uniform', 'Exponential', 'Binomial']:
-    subset = all_stats[all_stats['Distribution Type'] == dist_type]
-    plt.plot(subset['Sample Size'], subset['Shapiro-Wilk p-value'], 'o-', label=dist_type)
-plt.axhline(y=0.05, color='red', linestyle='--', alpha=0.7, label='p=0.05 threshold')
-plt.title('Shapiro-Wilk Normality Test p-value by Sample Size', fontsize=14)
-plt.xlabel('Sample Size')
-plt.ylabel('p-value')
-plt.xscale('log')
-plt.yscale('log')
-plt.grid(True, alpha=0.3)
-plt.legend()
-
-plt.tight_layout()
-plt.savefig('convergence_analysis.png', dpi=300)
+# Save and show
+output_file = 'convergence_analysis.png'
+fig.suptitle('Convergence Diagnostics for Sample Means', fontsize=18)
+fig.savefig(output_file, dpi=300)
+print(f"Saved plot to: {os.path.abspath(output_file)}")
+plt.show()
 plt.close()
 ```
+
+### Output: Convergence Analysis
+
+![Convergence Diagnostics for Sample Means](convergence_analysis.png)
+
+*Figure 7: Four‐panel plot illustrating how the sampling distribution of the mean converges to normality as sample size increases.  
+1. **Skewness** (top‐left) approaches 0.  
+2. **Excess kurtosis** (top‐right) approaches 0.  
+3. **Standard error ratio** (bottom‐left) converges to 1 (observed vs. theoretical SE).  
+4. **Shapiro–Wilk p-value** (bottom‐right) rises above the 0.05 threshold, indicating normality for large \(n\).*  
+
 
 ### 4. Variance Impact Analysis
 
