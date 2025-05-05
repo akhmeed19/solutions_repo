@@ -486,7 +486,7 @@ plt.close()
 
 ## Output: Variance Impact Analysis
 
-![Effect of Population Variance on Sampling Distribution (n=30)](variance_impact.png)
+![Effect of Population Variance on Sampling Distribution (n=30)](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Variance%20Impact%20Analysis/variance_impact.png)
 
 \*Figure 8: KDEs of sample‐means (n=30) from Exponential populations with different rate parameters λ.
 
