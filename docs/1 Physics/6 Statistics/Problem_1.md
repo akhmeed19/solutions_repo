@@ -16,59 +16,88 @@ We'll begin by generating large datasets from different types of distributions t
 - Binomial distribution (discrete, representing count data)
 
 ```python
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from scipy import stats
-import pandas as pd
 
-# Set random seed for reproducibility
+# Print current working directory
+print("Current working directory:", os.getcwd())
+
+# For reproducibility
 np.random.seed(42)
 
-# Set aesthetic parameters for plots
+# Aesthetic parameters
 plt.style.use('seaborn-v0_8-whitegrid')
 sns.set_palette("viridis")
 
-# Generate populations (large datasets)
-population_size = 100000
+# Population size
+population_size = 100_000
 
-# 1. Uniform Distribution (between 0 and 1)
+# 1. Uniform Distribution (0,1)
 uniform_population = np.random.uniform(0, 1, population_size)
-
-# 2. Exponential Distribution (lambda = 1)
-exponential_population = np.random.exponential(1, population_size)
-
+# 2. Exponential Distribution (λ = 1)
+exponential_population = np.random.exponential(scale=1.0, size=population_size)
 # 3. Binomial Distribution (n=10, p=0.3)
-binomial_population = np.random.binomial(10, 0.3, population_size)
+binomial_population = np.random.binomial(n=10, p=0.3, size=population_size)
 
-# Plot the population distributions
-fig, axes = plt.subplots(3, 1, figsize=(12, 18))
+# Helper function to plot one distribution, save, show, then close
+def plot_and_show(data, title, filename, color):
+    mean = np.mean(data)
+    median = np.median(data)
+    print(f"\n{title} → mean={mean:.4f}, median={median:.4f}, std={np.std(data):.4f}")
+    
+    plt.figure(figsize=(8, 6))
+    sns.histplot(data, kde=True, stat='density', bins=50, color=color)
+    plt.title(title, fontsize=16)
+    plt.axvline(mean, color='red', linestyle='--', linewidth=2, label=f"Mean = {mean:.4f}")
+    plt.axvline(median, color='green', linestyle='--', linewidth=2, label=f"Median = {median:.4f}")
+    plt.legend()
+    plt.tight_layout()
+    
+    plt.savefig(filename, dpi=300)
+    print(f"Saved plot to: {os.path.abspath(filename)}")
+    
+    plt.show()
+    plt.close()
 
-# Plot uniform distribution
-sns.histplot(uniform_population, kde=True, ax=axes[0], color='blue')
-axes[0].set_title('Uniform Distribution', fontsize=16)
-axes[0].axvline(np.mean(uniform_population), color='red', linestyle='dashed', linewidth=2, label=f'Mean: {np.mean(uniform_population):.4f}')
-axes[0].axvline(np.median(uniform_population), color='green', linestyle='dashed', linewidth=2, label=f'Median: {np.median(uniform_population):.4f}')
-axes[0].legend()
+# Plot each distribution one by one
+plot_and_show(
+    uniform_population,
+    "Uniform Distribution (0, 1)",
+    "uniform_distribution.png",
+    color='blue'
+)
 
-# Plot exponential distribution
-sns.histplot(exponential_population, kde=True, ax=axes[1], color='purple')
-axes[1].set_title('Exponential Distribution', fontsize=16)
-axes[1].axvline(np.mean(exponential_population), color='red', linestyle='dashed', linewidth=2, label=f'Mean: {np.mean(exponential_population):.4f}')
-axes[1].axvline(np.median(exponential_population), color='green', linestyle='dashed', linewidth=2, label=f'Median: {np.median(exponential_population):.4f}')
-axes[1].legend()
+plot_and_show(
+    exponential_population,
+    "Exponential Distribution (λ = 1)",
+    "exponential_distribution.png",
+    color='purple'
+)
 
-# Plot binomial distribution
-sns.histplot(binomial_population, kde=True, ax=axes[2], color='orange')
-axes[2].set_title('Binomial Distribution', fontsize=16)
-axes[2].axvline(np.mean(binomial_population), color='red', linestyle='dashed', linewidth=2, label=f'Mean: {np.mean(binomial_population):.4f}')
-axes[2].axvline(np.median(binomial_population), color='green', linestyle='dashed', linewidth=2, label=f'Median: {np.median(binomial_population):.4f}')
-axes[2].legend()
-
-plt.tight_layout()
-plt.savefig('population_distributions.png', dpi=300)
-plt.close()
+plot_and_show(
+    binomial_population,
+    "Binomial Distribution (n=10, p=0.3)",
+    "binomial_distribution.png",
+    color='orange'
+)
 ```
+
+### Output: Population Distributions
+
+![Uniform Distribution (0, 1)](uniform_distribution.png)
+
+*Figure 1: Histogram and KDE of 100 000 draws from a Uniform(0,1) population. The red dashed line marks the empirical mean (~0.500), and the green dashed line marks the median (~0.500), illustrating the flat shape with equal probability across [0,1].*
+
+![Exponential Distribution (λ = 1)](exponential_distribution.png)
+
+*Figure 2: Histogram and KDE of 100 000 draws from an Exponential(λ=1) population. Note the pronounced right skew and long tail. The red dashed line shows the empirical mean (~1.005), and the green dashed line shows the median (~0.693).*
+
+![Binomial Distribution (n=10, p=0.3)](binomial_distribution.png)
+
+*Figure 3: Histogram and KDE of 100 000 draws from a Binomial(n=10, p=0.3) population. The discrete bars at integer values are visible. The red dashed line is the mean (~3.004), and the green dashed line is the median (3.000), reflecting the count‐data nature of this distribution.*  
+
 
 ### 2. Sampling and Visualization
 
