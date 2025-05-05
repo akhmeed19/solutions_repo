@@ -193,6 +193,22 @@ The circle-based Monte Carlo method provides a straightforward and intuitive way
 
 The visualization shows random points distributed within a square, with points colored based on whether they fall inside or outside the unit circle. As more points are generated, the ratio of points inside the circle to the total number of points converges to $\pi/4$.
 
+---
+
+## Output: Circle‐Based Monte Carlo Method
+
+![Monte Carlo Circle Visualization](circle_monte_carlo.png)
+
+*Figure 1: Scatter plot of 5 000 random points in the square \([-1,1]^2\).  
+Green points lie inside the unit circle, red points lie outside.  
+Estimated π ≈ 3.155200 (error ≈ 0.013607).*
+
+![Convergence of π Estimate (Circle Method)](circle_convergence.png)
+
+*Figure 2 (left): π estimates as a function of the number of random points (log scale). The dashed red line is the true π.*  
+*Figure 2 (right): Absolute error vs. number of points (both axes log scale), showing the expected \(O(1/\sqrt{n})\) decline in error.*  
+
+
 ## Part 2: Estimating π Using Buffon's Needle
 
 ### 2.1 Theoretical Foundation
