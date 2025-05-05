@@ -398,7 +398,7 @@ plt.close()
 
 ### Output: Convergence Analysis
 
-![Convergence Diagnostics for Sample Means](convergence_analysis.png)
+![Convergence Diagnostics for Sample Means](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Convergence%20Analysis/convergence_analysis.png)
 
 *Figure 7: Four‐panel plot illustrating how the sampling distribution of the mean converges to normality as sample size increases.  
 1. **Skewness** (top‐left) approaches 0.  
