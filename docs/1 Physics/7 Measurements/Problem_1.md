@@ -254,12 +254,6 @@ print(f"g from slope: {g_from_slope:.4f} m/s²  (R²={r**2:.4f})")
 
 ## Terminal Output
 
-Thought for a couple of seconds
-
-
-Here’s the fully corrected terminal‐output block with all the math in proper `$…$` form:
-
-```text
 === PENDULUM EXPERIMENT RESULTS ===
 
 --- Results for 50 g ---
@@ -295,8 +289,6 @@ Here’s the fully corrected terminal‐output block with all the math in proper
 
 Average relative uncertainty in period: 0.20%  
 Average relative uncertainty in $g$: 0.40%
-```
-
 
 ---
 
@@ -304,11 +296,11 @@ Average relative uncertainty in $g$: 0.40%
 
 ![Measured g Values](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth%27s%20Gravitational%20Acceleration%20with%20a%20Pendulum/pendulum_g_values.png)
 
-**Figure 1.** Bar chart comparing measured `$g$` values across different pendulum configurations. The red dashed line indicates the standard `$g = 9.81\ \mathrm{m/s^2}$`. Deviations show the combined effect of timing and length uncertainties.
+**Figure 1.** Bar chart comparing measured $g$ values across different pendulum configurations. The red dashed line indicates the standard $g = 9.81\ \mathrm{m/s^2}$. Deviations show the combined effect of timing and length uncertainties.
 
 ![Period vs. Length](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth%27s%20Gravitational%20Acceleration%20with%20a%20Pendulum/period_vs_length.png)
 
-**Figure 2.** Period vs. pendulum length for each mass (error bars reflect $\\Delta T$), overlaid with the theoretical curve $T = 2\\pi\\sqrt{L/g}$. Good agreement confirms the square-root relationship.
+Figure 2. Period vs. pendulum length for each mass (error bars reflect $\Delta T$), overlaid with the theoretical curve $T = 2\pi\sqrt{L/g}$. Good agreement confirms the square‐root relationship.
 
 ![Percent Error in g](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth%27s%20Gravitational%20Acceleration%20with%20a%20Pendulum/percent_error.png)
 
@@ -316,7 +308,7 @@ Average relative uncertainty in $g$: 0.40%
 
 ![Uncertainty in g vs. Length](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth%27s%20Gravitational%20Acceleration%20with%20a%20Pendulum/uncertainty_vs_length.png)
 
-**Figure 4.** Absolute uncertainty $\\Delta g$ as a function of pendulum length. Intermediate lengths minimize combined relative uncertainties in length and period.
+Figure 4. Absolute uncertainty $\Delta g$ as a function of pendulum length. Intermediate lengths minimize combined relative uncertainties in length and period.
 
 ![g vs. L/T²](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth%27s%20Gravitational%20Acceleration%20with%20a%20Pendulum/g_vs_lt2.png)
 
