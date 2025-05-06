@@ -201,11 +201,11 @@ The visualization shows random points distributed within a square, with points c
 
 *Figure 1: Scatter plot of 5 000 random points in the square $[-1,1]^2$.  
 Green points lie inside the unit circle, red points lie outside.  
-Estimated π ≈ 3.155200 (error ≈ 0.013607).*
+Estimated $π ≈ 3.155200$ (error ≈ 0.013607).*
 
 ![Convergence of π Estimate (Circle Method)](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Estimating%20π%20Using%20a%20Circle/circle_convergence.png)
 
-*Figure 2 (left): π estimates as a function of the number of random points (log scale). The dashed red line is the true π.*  
+*Figure 2 (left): $π$ estimates as a function of the number of random points (log scale). The dashed red line is the true $π$.*  
 *Figure 2 (right): Absolute error vs. number of points (both axes log scale), showing the expected $O(1/\sqrt{n})$ decline in error.*  
 
 
@@ -387,16 +387,16 @@ While conceptually elegant, Buffon's Needle typically converges more slowly than
 
 ## Output: Buffon’s Needle Experiment
 
-![Buffon's Needle Visualization](buffon_needle.png)
+![Buffon's Needle Visualization](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Estimating%20π%20Using%20Buffon's%20Needle/buffon_needle.png)
 
-*Figure 1: Buffon’s Needle experiment with 100 needles dropped on parallel lines spaced 1 unit apart.  
+*Figure 1: Buffon’s Needle experiment with 100 needles dropped on parallel lines spaced 1 unit apart.
 Red segments cross a line, blue segments do not.  
-Estimated π ≈ 3.174603 (63 crossings out of 100 needles).*
+Estimated $π ≈ 3.174603$ (63 crossings out of 100 needles).*
 
-![Convergence of π Estimate (Buffon’s Needle)](buffon_convergence.png)
+![Convergence of π Estimate (Buffon’s Needle)](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Estimating%20π%20Using%20Buffon's%20Needle/buffon_convergence.png)
 
-*Figure 2 (left): Estimated π vs. number of needles (log scale). The dashed red line shows true π.*  
-*Figure 2 (right): Absolute error vs. number of needles (both axes log scale), demonstrating roughly \(O(1/\sqrt{n})\) error decay.*  
+*Figure 2 (left): Estimated $π$ vs. number of needles (log scale). The dashed red line shows true $π$.*  
+*Figure 2 (right): Absolute error vs. number of needles (both axes log scale), demonstrating roughly $O(1/\sqrt{n})$ error decay.*  
 
 
 ## Part 3: Comparison of Methods
