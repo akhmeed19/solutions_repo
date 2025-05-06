@@ -257,77 +257,75 @@ print(f"Speed of light from slope: {c_from_slope/1e8:.4f} ± {c_uncertainty/1e8:
 
 **Figure 5:** Linear regression analysis showing the relationship between antinode number and position. The slope of the line directly relates to half the wavelength, and the high R² value confirms the linear relationship predicted by theory.
 
+**From linear regression:**                                                     
+ - Slope: 6.1260 ± 0.0000 cm/antinode                                         
+ - Wavelength from slope: 12.2520 ± 0.0000 cm                                 
+ - Speed of light from slope: 3.0017 ± 0.0000 × 10⁸ m/s                         
+
 ## Analysis and Discussion
 
 ### Sources of Uncertainty
 
-1. **Measurement Resolution:** The ruler used has a precision of 1 mm, resulting in an uncertainty of ±0.5 mm in each distance measurement.
-
-2. **Food Melting Pattern:** The exact center of each melted region can be difficult to determine precisely, especially if the melting is gradual or irregular.
-
-3. **Frequency Uncertainty:** Consumer microwave ovens typically operate at 2.45 GHz, but there can be variations of ±0.05 GHz between different models.
-
-4. **Non-uniform Field:** The microwave field inside the oven may not be perfectly uniform, leading to slight variations in the standing wave pattern.
-
-5. **Small-Angle Approximation:** The electromagnetic waves in a microwave oven may not propagate in perfectly straight lines due to reflections from multiple surfaces.
+1. **Measurement Resolution:** The ruler’s $1\,\text{mm}$ precision yields an uncertainty of $\pm0.5\,\text{mm}$ in each node‑to‑node distance.  
+2. **Food Melting Pattern:** Gradual or irregular melting makes pinpointing each antinode’s center uncertain by several millimeters.  
+3. **Frequency Uncertainty:** The oven’s nominal $2.45\,\text{GHz}$ may vary by $\pm0.05\,\text{GHz}$ between units, directly affecting the calculated $c$.  
+4. **Non‑uniform Field:** Reflection geometry and mode superpositions inside the cavity can shift hot‑spot locations by a few percent.  
+5. **Field Propagation Assumptions:** Multiple internal reflections and boundary conditions mean the simple straight‑line model is only approximate.
 
 ### Systematic Error Analysis
 
-1. **Frequency Deviation:** If the actual microwave frequency differs from the stated value, this would introduce a systematic error proportional to the frequency deviation.
+#### Electromagnetic‑Property Systematics
+- **Frequency Deviation:** A $\pm0.05\,\text{GHz}$ error in $f$ translates to $\delta c/c \approx \delta f/f \approx 2\%$.  
+- **Refractive Index of Air:**  
+  $$ 
+    c_{\rm air} \;=\;\frac{c_{\rm vacuum}}{n_{\rm air}}
+    \;\approx\;\frac{2.998\times10^8}{1.0003}
+    \;=\;2.997\times10^8\ \mathrm{m/s},
+  $$
+  a $0.03\%$ downward bias.
 
-2. **Edge Effects:** Near the edges of the microwave cavity, the wave pattern can be distorted due to boundary conditions.
-
-3. **Food Properties:** Different foods have different dielectric properties, which could affect how they respond to the microwave field and introduce systematic differences between trials.
-
-4. **Refractive Index:** The speed of electromagnetic waves in air is slightly less than in vacuum (approximately 0.03% difference), causing a small systematic error.
-
-To quantify one systematic error, we can consider the refractive index of air. The speed of light in air is:
-
-$$c_{air} = \frac{c_{vacuum}}{n_{air}} \approx \frac{2.998 \times 10^8}{1.0003} \approx 2.997 \times 10^8 \text{ m/s}$$
-
-This represents a systematic error of approximately 0.03%, which is small compared to our experimental uncertainty of 0.86%.
+#### Geometric & Material Systematics
+- **Edge Effects:** Fields distort near cavity walls, shifting antinode spacing by up to $\sim5\,\text{mm}$.  
+- **Food Dielectric Properties:** Variations in absorption alter hot‑spot contrast and can bias distance measurements.
 
 ### Experimental Limitations
 
-1. **Resolution of Melting Pattern:** The melting pattern may not have sharp boundaries, making precise measurement challenging.
-
-2. **Cavity Modes:** The microwave cavity supports various resonant modes, which can complicate the standing wave pattern.
-
-3. **Temperature Dependence:** The dielectric properties of the food items change with temperature, potentially affecting the wave pattern during the heating process.
-
-4. **Equipment Precision:** Consumer-grade microwave ovens are not designed for precision scientific measurements, and their operating frequency may fluctuate.
+1. **Melt Boundary Sharpness:** Blurred antinode edges reduce repeatability.  
+2. **Mode Overlap:** Higher‑order resonant modes complicate the simple $\lambda/2$ pattern.  
+3. **Temperature Dependence:** Food’s dielectric constant changes as it heats, slightly shifting node positions.  
+4. **Equipment Variability:** Home microwaves are not engineered for scientific precision; power and frequency can drift.
 
 ### Statistical Analysis
 
-The linear regression analysis confirms the theoretical relationship between antinode position and antinode number. The high coefficient of determination (R² = 0.9992) indicates excellent agreement with the linear model predicted by theory.
+The regression of antinode number vs. position (Figure 5) gave a near‑perfect fit ($R^2 = 0.9992$).  
 
-The calculated speed of light from slope analysis is $(3.003 \pm 0.028) \times 10^8$ m/s, which is within 0.17% of the accepted value. This confirms the validity of our experimental approach and gives us confidence in our measurements.
+> **From linear regression:**  
+> - Slope: $6.1260\pm0.0000\ \text{cm/antinode}$  
+> - Wavelength: $12.2520\pm0.0000\ \text{cm}$  
+> - $c = (3.0017\pm0.0000)\times10^8\ \text{m/s}$  
 
-The consistency across different food items (chocolate, cheese, and marshmallows) demonstrates the robustness of the method, with each food type yielding results within 1% of the accepted value.
+Because our five points lie exactly on a straight line, the formal regression uncertainty is zero—real experiments will exhibit small scatter and yield a nonzero standard error, as shown by our SEM of the direct measurements ($\pm0.026\times10^8\ \text{m/s}$).
+
+The direct calculation produced  
+$$
+  c \;=\; (3.002\pm0.026)\times10^8\ \mathrm{m/s},
+$$  
+within $0.13\%$ of the accepted $2.998\times10^8\ \mathrm{m/s}$, confirming the method’s validity.
 
 ## Conclusion
 
-This experiment successfully measured the speed of light using a household microwave oven, yielding a result of $(3.002 \pm 0.026) \times 10^8$ m/s. This value is within 0.13% of the accepted value of $2.998 \times 10^8$ m/s, demonstrating the remarkable accuracy achievable with simple equipment.
+**Key Results:**  
+- **Direct method:** $c = (3.002\pm0.026)\times10^8\ \mathrm{m/s}$ (0.13 % error)  
+- **Regression fit:** $c = (3.0017\pm0.0000)\times10^8\ \mathrm{m/s}$ (idealized)  
+- **Dominant uncertainty:** distance measurement ($\pm0.5\,\text{mm}$)
 
-The experiment illustrates several important physical principles:
-
-1. The wave nature of electromagnetic radiation
-2. The relationship between wavelength, frequency, and wave speed
-3. The formation of standing waves through reflection and interference
-4. The practical application of these principles in everyday technology
-
-The small percent error and relatively low uncertainty highlight the elegance of this method for determining one of the most fundamental constants in physics. With careful attention to experimental technique and rigorous analysis of uncertainties, even simple household equipment can be used to measure physical constants with impressive accuracy.
+This simple microwave‑oven experiment elegantly demonstrates the wave nature of light, the relationship $c = \lambda f$, and the formation of standing waves—achieving sub‑percent accuracy with everyday equipment.
 
 ## Further Investigations
 
-1. **Multiple Frequencies:** If available, repeat the experiment with microwave ovens operating at different frequencies to verify the inverse relationship between frequency and wavelength.
-
-2. **Different Media:** Place different materials in the microwave path to investigate the effect of dielectric properties on wave propagation.
-
-3. **Temperature Dependence:** Measure the pattern at different starting temperatures to investigate any temperature-dependent effects.
-
-4. **Cavity Mapping:** Create a complete 2D map of the standing wave pattern throughout the entire microwave cavity.
-
-5. **Computational Modeling:** Compare the experimental results with computational models of electromagnetic wave propagation in rectangular cavities.
-
-These extensions would provide deeper insights into the behavior of electromagnetic waves and further validate the fundamental relationship $c = \lambda \times f$.
+1. **Multiple Frequencies:** Use ovens at different $f$ to verify $c\propto f$.  
+2. **Different Media:** Insert dielectric slabs to measure refractive‑index effects on $\lambda$.  
+3. **Temperature Dependence:** Record antinode patterns at varied starting temperatures.  
+4. **Cavity Mapping:** Create full 2D field maps using fine spatial grids.  
+5. **Computational Modeling:** Simulate modes in a rectangular cavity and compare to data.  
+6. **Automated Detection:** Employ infrared thermal imaging to locate hot spots and reduce human measurement error.  
