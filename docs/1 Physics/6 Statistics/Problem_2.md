@@ -711,6 +711,41 @@ Estimated $π ≈ 2.985075$ $(error ≈ 0.156518)$.*
 *Figure 5 (bottom‐left): Execution time vs. sample size.*
 *Figure 5 (bottom‐right): Error vs. computation time—showing the circle method’s superior efficiency and accuracy.*
 
+---
+
+## Terminal Output: Comparison of Methods
+
+```
+Comparing methods:
+
+Sample   Circle π     Err       Time(s)    Buffon π    Err
+----------------------------------------------------------------
+1000     3.176000     0.034407   0.0002     3.225806    0.084214
+1558     3.160462     0.018869   0.0002     3.182840    0.041247
+2429     3.170029     0.028436   0.0003     3.122108    0.019485
+3787     3.082123     0.059470   0.0004     3.174350    0.032758
+5903     3.127901     0.013692   0.0005     3.116684    0.024908
+9202     3.153662     0.012070   0.0007     3.170917    0.029324
+14345    3.154549     0.012956   0.0010     3.147214    0.005621
+22360    3.132021     0.009571   0.0016     3.162659    0.021066
+34855    3.140324     0.001268   0.0024     3.141081    0.000512
+54331    3.141190     0.000403   0.0032     3.156669    0.015076
+84690    3.140300     0.001293   0.0050     3.142719    0.001127
+132013   3.141781     0.000189   0.0070     3.137899    0.003693
+205779   3.140865     0.000728   0.0100     3.147816    0.006223
+320764   3.143657     0.002064   0.0116     3.143589    0.001997
+499999   3.142790     0.001198   0.0150     3.133307    0.008286
+```
+
+**Explanation:**
+
+* **Sample:** Number of random samples used for each method (points for circle, needles for Buffon).
+* **Circle π:** Estimated $π$ from the circle‐based Monte Carlo method.
+* **Err (Circle):** Absolute error of the circle estimate relative to true $π$.
+* **Time(s):** Computation time for each simulation (in seconds).
+* **Buffon π:** Estimated $π$ from Buffon’s Needle experiment.
+* **Err (Buffon):** Absolute error of the Buffon estimate relative to true $π$.
+
 
 ## Conclusion
 
