@@ -1,6 +1,3 @@
-Thought for a second
-
-
 # Measuring Earth's Gravitational Acceleration with a Pendulum
 
 ## Introduction
