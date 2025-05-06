@@ -819,24 +819,26 @@ if __name__ == "__main__":
 <h3 id="32-comparative-analysis">3.2 Comparative Analysis</h3>
 <p>Both Monte Carlo methods converge to π as the number of samples increases, but they differ in efficiency and convergence rate:</p>
 <ol>
-<li><strong>Accuracy and Convergence</strong>:</li>
-<li>Both methods exhibit the expected <span class="arithmatex">\(O(1/\sqrt{n})\)</span> convergence rate, typical of Monte Carlo methods.</li>
-<li>The circle-based method generally provides more accurate estimates with fewer samples due to its lower variance.</li>
 <li>
-<p>Buffon's Needle shows higher variability, especially at lower sample counts.</p>
+<p><strong>Accuracy and Convergence</strong>:                                                </p>
+<ul>
+<li>Both methods exhibit the expected <span class="arithmatex">\(O(1/\sqrt{n})\)</span> convergence rate, typical of Monte Carlo methods.                                          </li>
+<li>The circle-based method generally provides more accurate estimates with fewer samples due to its lower variance.                             </li>
+<li>Buffon's Needle shows higher variability, especially at lower sample counts.                                                                 </li>
+</ul>
 </li>
 <li>
-<p><strong>Computational Efficiency</strong>:</p>
+<p><strong>Computational Efficiency</strong>:                                                </p>
+<ul>
+<li>The circle-based method is computationally more efficient, requiring simpler calculations per sample.                                        </li>
+<li>Buffon's Needle involves more complex geometry calculations, leading to slightly longer execution times.                                     </li>
+</ul>
 </li>
-<li>The circle-based method is computationally more efficient, requiring simpler calculations per sample.</li>
 <li>
-<p>Buffon's Needle involves more complex geometry calculations, leading to slightly longer execution times.</p>
+<p><strong>Practical Considerations</strong>:                                                </p>
 </li>
-<li>
-<p><strong>Practical Considerations</strong>:</p>
-</li>
-<li>The circle-based method is easier to implement and visualize, making it more suitable for educational purposes.</li>
-<li>Buffon's Needle provides a fascinating historical connection and demonstrates how physical experiments can be used to estimate mathematical constants.</li>
+<li>The circle-based method is easier to implement and visualize, making it more suitable for educational purposes.                                </li>
+<li>Buffon's Needle provides a fascinating historical connection and demonstrates how physical experiments can be used to estimate mathematical constants.                                                     </li>
 </ol>
 <hr/>
 <h2 id="output">Output</h2>
