@@ -84,7 +84,7 @@ Below are the raw time measurements for the **100 g** mass with a **0.75 m** pen
 
 **Calculation of these averages:**
 
-The average relative uncertainty in period was computed by taking the ratio $\displaystyle \frac{\Delta T}{T}$ for each configuration, converting to percent, and averaging across all nine data sets:
+The average relative uncertainty in period was computed by taking the ratio $\displaystyle \frac{\Delta T}{T}$ for each configuration, converting to percent, and averaging across all nine data sets: 
 
 $$
 \text{Average }\frac{\Delta T}{T}\times100\% = \frac{1}{9}\sum_{i=1}^9\Bigl(\tfrac{\Delta T_i}{T_i}\times100\%\Bigr) \approx 0.20\%.
