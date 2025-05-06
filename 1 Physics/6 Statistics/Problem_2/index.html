@@ -116,6 +116,8 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#output-buffons-needle-experiment">Output: Buffon’s Needle Experiment</a>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#terminal-output-buffons-needle-method-results">Terminal Output: Buffon’s Needle Method Results</a>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#part-3-comparison-of-methods">Part 3: Comparison of Methods</a>
 <ul>
 <li class="toctree-l4"><a class="reference internal" href="#31-implementation">3.1 Implementation</a>
@@ -408,7 +410,6 @@ Estimated <span class="arithmatex">\(π ≈ 3.155200\)</span> (error ≈ 0.01360
 <p><em>Figure 2 (left): <span class="arithmatex">\(π\)</span> estimates as a function of the number of random points (log scale). The dashed red line is the true <span class="arithmatex">\(π\)</span>.</em><br/>
 <em>Figure 2 (right): Absolute error vs. number of points (both axes log scale), showing the expected <span class="arithmatex">\(O(1/\sqrt{n})\)</span> decline in error.</em> </p>
 <hr/>
-<p>Thought for a second</p>
 <h3 id="terminal-output">Terminal Output</h3>
 <p>Below is the summary table printed in console, showing how the π estimate, absolute error, and execution time evolve with increasing sample size:</p>
 <pre><code>Circle-based Monte Carlo Method Results:
@@ -609,6 +610,40 @@ Estimated <span class="arithmatex">\(π ≈ 3.174603\)</span> (63 crossings out 
 <p><img alt="Convergence of π Estimate (Buffon’s Needle)" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Estimating%20π%20Using%20Buffon's%20Needle/buffon_convergence.png"/></p>
 <p><em>Figure 2 (left): Estimated <span class="arithmatex">\(π\)</span> vs. number of needles (log scale). The dashed red line shows true <span class="arithmatex">\(π\)</span>.</em><br/>
 <em>Figure 2 (right): Absolute error vs. number of needles (both axes log scale), demonstrating roughly <span class="arithmatex">\(O(1/\sqrt{n})\)</span> error decay.</em> </p>
+<hr/>
+<p>Thought for a couple of seconds</p>
+<h2 id="terminal-output-buffons-needle-method-results">Terminal Output: Buffon’s Needle Method Results</h2>
+<pre><code>Buffon's Needle Method Results:
+Needles     π Estimate     Error          Time (s)
+----------------------------------------------------
+1000        3.13971743     0.00187523     0.000123
+1438        3.16391639     0.02232374     0.000079
+2069        3.25826772     0.11667506     0.000097
+2976        3.13593256     0.00566009     0.000127
+4281        3.13282108     0.00877158     0.000183
+6158        3.24617818     0.10458552     0.000323
+8858        3.16470168     0.02310903     0.000403
+12742       3.13071253     0.01088012     0.000496
+18329       3.17715375     0.03556110     0.000638
+26366       3.13619603     0.00539663     0.000872
+37926       3.15721124     0.01561858     0.002770
+54555       3.14347450     0.00188185     0.001754
+78475       3.13398562     0.00760703     0.002509
+112883      3.13825410     0.00333855     0.003378
+162377      3.15362505     0.01203239     0.004511
+233572      3.14177338     0.00018072     0.006737
+335981      3.14290258     0.00130992     0.008787
+483293      3.14567082     0.00407816     0.011356
+695192      3.13842264     0.00317001     0.014808
+1000000     3.14327026     0.00167760     0.020506
+</code></pre>
+<p><em>Explanation:</em></p>
+<ul>
+<li><strong>Needles:</strong> Number of needle drops simulated.</li>
+<li><strong>π Estimate:</strong> Monte Carlo estimate of π from those drops.</li>
+<li><strong>Error:</strong> Absolute difference from the true value of π.</li>
+<li><strong>Time (s):</strong> Computation time for each simulation, illustrating how runtime increases with sample size.</li>
+</ul>
 <h2 id="part-3-comparison-of-methods">Part 3: Comparison of Methods</h2>
 <h3 id="31-implementation">3.1 Implementation</h3>
 <pre><code class="language-python">import numpy as np
