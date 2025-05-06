@@ -237,23 +237,23 @@ print(f"Speed of light from slope: {c_from_slope/1e8:.4f} ± {c_uncertainty/1e8:
 
 ## Visualizations and Explanations
 
-![Speed of Light by Food Type](microwave_speed_by_food.png)
+![Speed of Light by Food Type](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20the%20Speed%20of%20Light%20Using%20a%20Microwave%20Oven/microwave_speed_by_food.png)
 
 **Figure 1:** Bar chart comparing the speed of light calculated from measurements with different food items. Error bars represent standard deviation. The red dashed line indicates the accepted value of $c = 2.998 \times 10^8$ m/s.
 
-![Distribution of Speed of Light Measurements](microwave_speed_histogram.png)
+![Distribution of Speed of Light Measurements](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20the%20Speed%20of%20Light%20Using%20a%20Microwave%20Oven/microwave_speed_histogram.png)
 
 **Figure 2:** Histogram showing the distribution of all speed of light measurements. The green solid line represents the mean calculated value, while the red dashed line shows the accepted value. The normal distribution curve indicates good measurement precision.
 
-![Distance Measurements by Position](microwave_distance_position.png)
+![Distance Measurements by Position](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20the%20Speed%20of%20Light%20Using%20a%20Microwave%20Oven/microwave_distance_position.png)
 
 **Figure 3:** Box plot showing the distribution of distance measurements by position in the microwave. FB = Front to Back, LR = Left to Right, with L, C, R, F, B indicating Left, Center, Right, Front, and Back positions respectively.
 
-![Standing Wave Pattern](microwave_standing_wave.png)
+![Standing Wave Pattern](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20the%20Speed%20of%20Light%20Using%20a%20Microwave%20Oven/microwave_standing_wave.png)
 
 **Figure 4:** Visualization of the standing wave pattern in the microwave oven. Red dots mark the antinodes (hot spots) where constructive interference creates maximum amplitude. These correspond to the melted regions in the food item.
 
-![Linear Regression: Antinode Number vs Position](microwave_regression.png)
+![Linear Regression: Antinode Number vs Position](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20the%20Speed%20of%20Light%20Using%20a%20Microwave%20Oven/microwave_regression.png)
 
 **Figure 5:** Linear regression analysis showing the relationship between antinode number and position. The slope of the line directly relates to half the wavelength, and the high R² value confirms the linear relationship predicted by theory.
 
