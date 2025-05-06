@@ -440,9 +440,6 @@ Estimated $π ≈ 3.174603$ (63 crossings out of 100 needles).*
 
 ---
 
-Thought for a couple of seconds
-
-
 ## Terminal Output: Buffon’s Needle Method Results
 
 ```
