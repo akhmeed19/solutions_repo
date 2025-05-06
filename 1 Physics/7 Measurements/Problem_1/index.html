@@ -577,30 +577,24 @@ print(f"g from slope: {g_from_slope:.4f} m/s²  (R²={r**2:.4f})")
 </code></pre>
 <hr/>
 <h2 id="terminal-output">Terminal Output</h2>
-<p>Thought for a couple of seconds</p>
-<p>Here’s the fully corrected terminal‐output block with all the math in proper <code>$…$</code> form:</p>
-<pre><code class="language-text">=== PENDULUM EXPERIMENT RESULTS ===
-
---- Results for 50 g ---
- Length (m)  Period (s)  $\Delta T$ (s)  $g$ (m/s²)  $\Delta g$ (m/s²)  Within Uncertainty
+<p>=== PENDULUM EXPERIMENT RESULTS ===</p>
+<p>--- Results for 50 g ---
+ Length (m)  Period (s)  <span class="arithmatex">\(\Delta T\)</span> (s)  <span class="arithmatex">\(g\)</span> (m/s²)  <span class="arithmatex">\(\Delta g\)</span> (m/s²)  Within Uncertainty
       0.50    1.486484       0.002920     8.933243           0.036212              False
       0.75    1.732027       0.002278     9.869879           0.026778              False
-      1.00    1.931850       0.003983    10.578226           0.043936              False
-
---- Results for 100 g ---
- Length (m)  Period (s)  $\Delta T$ (s)  $g$ (m/s²)  $\Delta g$ (m/s²)  Within Uncertainty
+      1.00    1.931850       0.003983    10.578226           0.043936              False</p>
+<p>--- Results for 100 g ---
+ Length (m)  Period (s)  <span class="arithmatex">\(\Delta T\)</span> (s)  <span class="arithmatex">\(g\)</span> (m/s²)  <span class="arithmatex">\(\Delta g\)</span> (m/s²)  Within Uncertainty
       0.50    1.502775       0.004449     8.740616           0.052489              False
       0.75    1.772278       0.003417     9.426647           0.036890              False
-      1.00    1.950583       0.004744    10.376022           0.050735              False
-
---- Results for 200 g ---
- Length (m)  Period (s)  $\Delta T$ (s)  $g$ (m/s²)  $\Delta g$ (m/s²)  Within Uncertainty
+      1.00    1.950583       0.004744    10.376022           0.050735              False</p>
+<p>--- Results for 200 g ---
+ Length (m)  Period (s)  <span class="arithmatex">\(\Delta T\)</span> (s)  <span class="arithmatex">\(g\)</span> (m/s²)  <span class="arithmatex">\(\Delta g\)</span> (m/s²)  Within Uncertainty
       0.50    1.423741       0.003223     9.737961           0.045155              False
       0.75    1.789798       0.002666     9.242999           0.028221              False
-      1.00    1.942303       0.002514    10.464673           0.027588              False
-
---- Raw Data for 100 g, $L = 0.75$ m ---
- Trial    $T_{10}$ (s)    $T$ (s)
+      1.00    1.942303       0.002514    10.464673           0.027588              False</p>
+<p>--- Raw Data for 100 g, <span class="arithmatex">\(L = 0.75\)</span> m ---
+ Trial    <span class="arithmatex">\(T_{10}\)</span> (s)    <span class="arithmatex">\(T\)</span> (s)
      1       17.807292       1.780729
      2       17.693740       1.769374
      3       17.796117       1.779612
@@ -610,21 +604,19 @@ print(f"g from slope: {g_from_slope:.4f} m/s²  (R²={r**2:.4f})")
      7       17.668733       1.766873
      8       17.780058       1.778006
      9       17.886610       1.788661
-    10       17.750641       1.775064
-
-Average relative uncertainty in period: 0.20%  
-Average relative uncertainty in $g$: 0.40%
-</code></pre>
+    10       17.750641       1.775064</p>
+<p>Average relative uncertainty in period: 0.20%<br/>
+Average relative uncertainty in <span class="arithmatex">\(g\)</span>: 0.40%</p>
 <hr/>
 <h2 id="visualizations-and-explanations">Visualizations and Explanations</h2>
 <p><img alt="Measured g Values" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth%27s%20Gravitational%20Acceleration%20with%20a%20Pendulum/pendulum_g_values.png"/></p>
-<p><strong>Figure 1.</strong> Bar chart comparing measured <code>$g$</code> values across different pendulum configurations. The red dashed line indicates the standard <code>$g = 9.81\ \mathrm{m/s^2}$</code>. Deviations show the combined effect of timing and length uncertainties.</p>
+<p><strong>Figure 1.</strong> Bar chart comparing measured <span class="arithmatex">\(g\)</span> values across different pendulum configurations. The red dashed line indicates the standard <span class="arithmatex">\(g = 9.81\ \mathrm{m/s^2}\)</span>. Deviations show the combined effect of timing and length uncertainties.</p>
 <p><img alt="Period vs. Length" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth%27s%20Gravitational%20Acceleration%20with%20a%20Pendulum/period_vs_length.png"/></p>
-<p><strong>Figure 2.</strong> Period vs. pendulum length for each mass (error bars reflect <span class="arithmatex">\(\\Delta T\)</span>), overlaid with the theoretical curve <span class="arithmatex">\(T = 2\\pi\\sqrt{L/g}\)</span>. Good agreement confirms the square-root relationship.</p>
+<p>Figure 2. Period vs. pendulum length for each mass (error bars reflect <span class="arithmatex">\(\Delta T\)</span>), overlaid with the theoretical curve <span class="arithmatex">\(T = 2\pi\sqrt{L/g}\)</span>. Good agreement confirms the square‐root relationship.</p>
 <p><img alt="Percent Error in g" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth%27s%20Gravitational%20Acceleration%20with%20a%20Pendulum/percent_error.png"/></p>
 <p><strong>Figure 3.</strong> Percent error in measured <span class="arithmatex">\(g\)</span> for each configuration. Shorter lengths and lighter masses tend to exhibit larger errors due to timing uncertainty and air resistance.</p>
 <p><img alt="Uncertainty in g vs. Length" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth%27s%20Gravitational%20Acceleration%20with%20a%20Pendulum/uncertainty_vs_length.png"/></p>
-<p><strong>Figure 4.</strong> Absolute uncertainty <span class="arithmatex">\(\\Delta g\)</span> as a function of pendulum length. Intermediate lengths minimize combined relative uncertainties in length and period.</p>
+<p>Figure 4. Absolute uncertainty <span class="arithmatex">\(\Delta g\)</span> as a function of pendulum length. Intermediate lengths minimize combined relative uncertainties in length and period.</p>
 <p><img alt="g vs. L/T²" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth%27s%20Gravitational%20Acceleration%20with%20a%20Pendulum/g_vs_lt2.png"/></p>
 <p>Figure 5. Scatter plot of <span class="arithmatex">\(g\)</span> vs. <span class="arithmatex">\(L/T^2\)</span>. Ideally, all points lie on the horizontal line at <span class="arithmatex">\(g = 9.81\)</span> m/s²; scatter reflects measurement noise.</p>
 <p><img alt="T² vs. Length" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth%27s%20Gravitational%20Acceleration%20with%20a%20Pendulum/period_squared_vs_length.png"/></p>
