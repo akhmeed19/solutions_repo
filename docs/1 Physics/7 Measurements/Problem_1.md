@@ -90,7 +90,7 @@ $$
 \text{Average }\frac{\Delta T}{T}\times100\% = \frac{1}{9}\sum_{i=1}^9\Bigl(\tfrac{\Delta T_i}{T_i}\times100\%\Bigr) \approx 0.20\%.
 $$
 
-Similarly, the average relative uncertainty in g was obtained by averaging the percent values of \$(\Delta g/g)\$ across all configurations:
+Similarly, the average relative uncertainty in g was obtained by averaging the percent values of $\displaystyle \frac{\Delta g}{g}$ across all configurations:
 
 $$
 \text{Average }\frac{\Delta g}{g}\times100\% = \frac{1}{9}\sum_{i=1}^9\Bigl(\tfrac{\Delta g_i}{g_i}\times100\%\Bigr) \approx 0.40\%.
