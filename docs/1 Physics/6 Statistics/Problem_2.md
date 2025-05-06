@@ -665,8 +665,8 @@ Both Monte Carlo methods converge to π as the number of samples increases, but 
      - Buffon's Needle involves more complex geometry calculations, leading to slightly longer execution times.                                     
 
 3. **Practical Considerations**:                                                
-   - The circle-based method is easier to implement and visualize, making it more suitable for educational purposes.                                
-   - Buffon's Needle provides a fascinating historical connection and demonstrates how physical experiments can be used to estimate mathematical constants.                                                     
+     - The circle-based method is easier to implement and visualize, making it more suitable for educational purposes.                                                              
+     - Buffon's Needle provides a fascinating historical connection and demonstrates how physical experiments can be used to estimate mathematical constants.                                                     
 
 ---
 
