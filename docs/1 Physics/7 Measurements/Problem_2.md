@@ -26,23 +26,23 @@ where $d$ is the distance between adjacent nodes (or hot spots).
 - Digital camera or smartphone (for documentation)
 - Thermometer (optional, for measuring initial temperature)
 
-### Procedure
-1. **Preparation:**
-   - Remove the turntable from the microwave oven to prevent rotation.
-   - Place the food item (chocolate bar/cheese/marshmallows) on a microwave-safe tray.
-   - Ensure the item covers a distance of at least 15 cm in a straight line.
+### Procedure                                                                   
+1. **Preparation:**                                                             
+     - Remove the turntable from the microwave oven to prevent rotation.        
+     - Place the food item (chocolate bar/cheese/marshmallows) on a microwave-safe tray.                                                    
+     - Ensure the item covers a distance of at least 15 cm in a straight line.                                                                      
 
-2. **Measurement:**
-   - Set the microwave to low power (30-50%) to allow gradual melting.
-   - Heat the food item for a short time (10-20 seconds), just enough to observe partial melting.
-   - Remove and observe the pattern of melted spots - these correspond to antinodes where energy concentration is highest.
-   - Measure the distances between consecutive melted regions (corresponding to the distance between antinodes).
-   - Record at least 5 different measurements of these distances.
-   - Repeat the experiment 3 times with different food items for cross-validation.
+2. **Measurement:**                                                             
+     - Set the microwave to low power (30-50%) to allow gradual melting.        
+     - Heat the food item for a short time (10-20 seconds), just enough to observe partial melting.                                                 
+     - Remove and observe the pattern of melted spots - these correspond to antinodes where energy concentration is highest.                        
+     - Measure the distances between consecutive melted regions (corresponding to the distance between antinodes).                      
+     - Record at least 5 different measurements of these distances.             
+     - Repeat the experiment 3 times with different food items for cross-validation.                                                        
 
-3. **Frequency Determination:**
-   - Locate the frequency information on the back or inside of the microwave oven (typically 2.45 GHz).
-   - If unavailable, use the standard frequency for consumer microwave ovens: 2.45 GHz.
+3. **Frequency Determination:**                                                 
+     - Locate the frequency information on the back or inside of the microwave oven (typically 2.45 GHz).                                       
+     - If unavailable, use the standard frequency for consumer microwave ovens: 2.45 GHz.                                                           
 
 ## Data and Results
 
