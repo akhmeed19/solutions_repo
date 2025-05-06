@@ -120,6 +120,16 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#output">Output</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#circlebased-monte-carlo-method">Circle‐Based Monte Carlo Method</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#buffons-needle-experiment">Buffon’s Needle Experiment</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#comparison-of-methods">Comparison of Methods</a>
+</li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
 </li>
 </ul>
@@ -564,109 +574,172 @@ Estimated <span class="arithmatex">\(π ≈ 3.174603\)</span> (63 crossings out 
 <h3 id="31-implementation">3.1 Implementation</h3>
 <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 import time
+from matplotlib.patches import Circle
 
-def compare_methods(max_samples=1000000, steps=15):
-    """
-    Compare the circle-based and Buffon's Needle methods for estimating π.
+# ——————————————————————————————————————
+# Part 1: Circle-based Monte Carlo for π
+# ——————————————————————————————————————
 
-    Parameters:
-    -----------
-    max_samples : int
-        Maximum number of samples (points/needles) to use
-    steps : int
-        Number of steps to take between 1000 and max_samples
-    """
-    # Use logarithmic spacing for better visualization
-    samples_range = np.logspace(3, np.log10(max_samples), steps).astype(int)
+def estimate_pi_circle(num_points):
+    x = np.random.uniform(-1, 1, num_points)
+    y = np.random.uniform(-1, 1, num_points)
+    inside = x**2 + y**2 &lt;= 1
+    count_inside = inside.sum()
+    pi_estimate = 4 * count_inside / num_points
+    pts_in = np.column_stack((x[inside], y[inside]))
+    pts_out = np.column_stack((x[~inside], y[~inside]))
+    return pi_estimate, pts_in, pts_out
 
-    # Arrays to store results
-    circle_estimates = np.zeros(steps)
-    circle_errors = np.zeros(steps)
-    circle_times = np.zeros(steps)
-
-    buffon_estimates = np.zeros(steps)
-    buffon_errors = np.zeros(steps)
-    buffon_times = np.zeros(steps)
-
-    # Run simulations for both methods
-    for i, n in enumerate(samples_range):
-        # Circle-based method
-        start_time = time.time()
-        circle_estimates[i], _, _ = estimate_pi_circle(n)
-        circle_times[i] = time.time() - start_time
-        circle_errors[i] = abs(circle_estimates[i] - np.pi)
-
-        # Buffon's Needle method
-        start_time = time.time()
-        buffon_estimates[i], _, _, _ = estimate_pi_buffon(n)
-        buffon_times[i] = time.time() - start_time
-        buffon_errors[i] = abs(buffon_estimates[i] - np.pi)
-
-    # Plot comparison
-    plt.figure(figsize=(18, 12))
-
-    # Plot estimated π values
-    plt.subplot(2, 2, 1)
-    plt.semilogx(samples_range, circle_estimates, 'b-o', label='Circle Method')
-    plt.semilogx(samples_range, buffon_estimates, 'g-o', label='Buffon\'s Needle')
-    plt.axhline(y=np.pi, color='r', linestyle='--', label='True π')
-    plt.xlabel('Number of Samples (log scale)')
-    plt.ylabel('Estimated π')
-    plt.title('Comparison of π Estimates')
-    plt.grid(True)
+def visualize_circle_method(pts_in, pts_out, pi_est, num_points):
+    plt.figure(figsize=(8,8))
+    circle = Circle((0,0),1,fill=False,color='r',linewidth=2)
+    plt.gca().add_patch(circle)
+    plt.scatter(pts_in[:,0], pts_in[:,1], c='green', s=5, alpha=0.5, label='Inside')
+    plt.scatter(pts_out[:,0], pts_out[:,1], c='red',   s=5, alpha=0.5, label='Outside')
+    plt.plot([-1,1,1,-1,-1],[-1,-1,1,1,-1],'b-',linewidth=2)
+    plt.axis('equal'); plt.grid(True)
+    plt.title(f'Circle MC: {num_points} pts → π≈{pi_est:.6f} (err {abs(pi_est-np.pi):.6f})')
     plt.legend()
+    plt.savefig('circle_monte_carlo.png')
+    plt.show()
 
-    # Plot errors
-    plt.subplot(2, 2, 2)
-    plt.loglog(samples_range, circle_errors, 'b-o', label='Circle Method')
-    plt.loglog(samples_range, buffon_errors, 'g-o', label='Buffon\'s Needle')
+def analyze_convergence_circle(max_points=1_000_000, steps=20):
+    ns = np.logspace(3, np.log10(max_points), steps).astype(int)
+    pis = np.zeros(steps); times = np.zeros(steps)
+    for i,n in enumerate(ns):
+        t0 = time.time()
+        pis[i],_,_ = estimate_pi_circle(n)
+        times[i] = time.time() - t0
+    return ns, pis, times
 
-    # Add a reference line for 1/sqrt(n) convergence
-    ref_line = circle_errors[0] * np.sqrt(samples_range[0] / samples_range)
-    plt.loglog(samples_range, ref_line, 'k--', label='1/√n Reference')
+# ——————————————————————————————————————
+# Part 2: Buffon’s Needle for π
+# ——————————————————————————————————————
 
-    plt.xlabel('Number of Samples (log scale)')
-    plt.ylabel('Absolute Error (log scale)')
-    plt.title('Error Comparison')
-    plt.grid(True)
-    plt.legend()
+def estimate_pi_buffon(num_needles, needle_length=1.0, line_dist=1.0):
+    y = np.random.uniform(0, line_dist, num_needles)
+    theta = np.random.uniform(0, np.pi, num_needles)
+    d_min = np.minimum(y, line_dist - y)
+    proj = (needle_length/2) * np.sin(theta)
+    crosses = proj &gt;= d_min
+    c = crosses.sum()
+    pi_est = (2 * needle_length * num_needles) / (line_dist * c) if c&gt;0 else np.nan
+    return pi_est, y, theta, crosses
 
-    # Plot execution times
-    plt.subplot(2, 2, 3)
-    plt.loglog(samples_range, circle_times, 'b-o', label='Circle Method')
-    plt.loglog(samples_range, buffon_times, 'g-o', label='Buffon\'s Needle')
-    plt.xlabel('Number of Samples (log scale)')
-    plt.ylabel('Execution Time (s) (log scale)')
-    plt.title('Computational Efficiency')
-    plt.grid(True)
-    plt.legend()
+def visualize_buffon_needle(y, theta, crosses, pi_est, num_needles):
+    plt.figure(figsize=(8,6))
+    # draw lines
+    for k in range(6):
+        plt.axhline(k, color='black', lw=1)
+    x = np.random.uniform(0.5,4.5,len(y))
+    for xi, yi, th, cr in zip(x, y, theta, crosses):
+        dy = (0.5)*np.sin(th)
+        dx = (0.5)*np.cos(th)
+        y0 = (yi % 1) + int(xi)
+        x1,y1 = xi-dx, y0-dy
+        x2,y2 = xi+dx, y0+dy
+        plt.plot([x1,x2],[y1,y2], c='red' if cr else 'blue', lw=1.5)
+    plt.title(f"Buffon’s Needle: {num_needles} drops → π≈{pi_est:.6f}")
+    plt.xlim(0,5); plt.ylim(0,5); plt.gca().set_aspect('equal')
+    plt.savefig('buffon_needle.png')
+    plt.show()
 
-    # Plot error vs. time
-    plt.subplot(2, 2, 4)
-    plt.loglog(circle_times, circle_errors, 'b-o', label='Circle Method')
-    plt.loglog(buffon_times, buffon_errors, 'g-o', label='Buffon\'s Needle')
-    plt.xlabel('Execution Time (s) (log scale)')
-    plt.ylabel('Absolute Error (log scale)')
-    plt.title('Error vs. Computation Time')
-    plt.grid(True)
-    plt.legend()
+def analyze_convergence_buffon(max_needles=1_000_000, steps=20):
+    ns = np.logspace(3, np.log10(max_needles), steps).astype(int)
+    pis = np.zeros(steps); times = np.zeros(steps)
+    for i,n in enumerate(ns):
+        t0 = time.time()
+        pis[i],_,_,_ = estimate_pi_buffon(n)
+        times[i] = time.time() - t0
+    return ns, pis, times
+
+# ——————————————————————————————————————
+# Part 3: Comparison
+# ——————————————————————————————————————
+
+def compare_methods(max_samples=500_000, steps=15):
+    ns = np.logspace(3, np.log10(max_samples), steps).astype(int)
+    c_pi = np.zeros(steps); c_err = np.zeros(steps); c_t = np.zeros(steps)
+    b_pi = np.zeros(steps); b_err = np.zeros(steps); b_t = np.zeros(steps)
+
+    for i,n in enumerate(ns):
+        t0=time.time(); c_pi[i],_,_ = estimate_pi_circle(n); c_t[i]=time.time()-t0
+        c_err[i]=abs(c_pi[i]-np.pi)
+        t0=time.time(); b_pi[i],_,_,_= estimate_pi_buffon(n); b_t[i]=time.time()-t0
+        b_err[i]=abs(b_pi[i]-np.pi)
+
+    # Plot
+    plt.figure(figsize=(12,10))
+    plt.subplot(2,2,1)
+    plt.semilogx(ns,c_pi,'b-o',label='Circle')
+    plt.semilogx(ns,b_pi,'g-o',label='Buffon')
+    plt.axhline(np.pi,color='r',ls='--',label='True π')
+    plt.title("π Estimate"); plt.legend(); plt.grid(True)
+
+    plt.subplot(2,2,2)
+    plt.loglog(ns,c_err,'b-o',label='Circle')
+    plt.loglog(ns,b_err,'g-o',label='Buffon')
+    ref=c_err[0]*np.sqrt(ns[0]/ns)
+    plt.loglog(ns,ref,'k--',label='1/√n')
+    plt.title("Error vs n"); plt.legend(); plt.grid(True)
+
+    plt.subplot(2,2,3)
+    plt.loglog(ns,c_t,'b-o',label='Circle')
+    plt.loglog(ns,b_t,'g-o',label='Buffon')
+    plt.title("Time vs n"); plt.legend(); plt.grid(True)
+
+    plt.subplot(2,2,4)
+    plt.loglog(c_t,c_err,'b-o',label='Circle')
+    plt.loglog(b_t,b_err,'g-o',label='Buffon')
+    plt.title("Error vs Time"); plt.legend(); plt.grid(True)
 
     plt.tight_layout()
     plt.savefig('method_comparison.png')
     plt.show()
 
-    # Print comparative table
-    print("\nComparison of Methods:")
-    print(f"{'Samples':&lt;12} {'Circle π':&lt;15} {'Circle Error':&lt;15} {'Buffon π':&lt;15} {'Buffon Error':&lt;15}")
-    print("-" * 72)
-    for n, c_est, c_err, b_est, b_err in zip(samples_range, circle_estimates, circle_errors, buffon_estimates, buffon_errors):
-        print(f"{n:&lt;12} {c_est:&lt;15.8f} {c_err:&lt;15.8f} {b_est:&lt;15.8f} {b_err:&lt;15.8f}")
+    # Print table
+    print("\nSample   Circle π     Err       Time(s)    Buffon π    Err")
+    print("----------------------------------------------------------------")
+    for n,cp,ce,ct,bp,be in zip(ns,c_pi,c_err,c_t,b_pi,b_err):
+        print(f"{n:&lt;8}{cp:&gt;8.6f}{ce:&gt;10.6f}{ct:&gt;10.4f}{bp:&gt;10.6f}{be:&gt;10.6f}")
 
-# Run the comparison
+# ——————————————————————————————————————
+# Main
+# ——————————————————————————————————————
+
 if __name__ == "__main__":
-    print("\nComparing Circle and Buffon's Needle Methods:")
-    compare_methods(max_samples=500000)
+    sns.set()
+    # 1. Circle
+    pi_v, pin, pout = estimate_pi_circle(5_000)
+    visualize_circle_method(pin, pout, pi_v, 5_000)
+    nc, pc, tc = analyze_convergence_circle()
+    plt.figure(figsize=(10,4))
+    plt.subplot(1,2,1)
+    plt.semilogx(nc,pc,'b-o'); plt.axhline(np.pi,color='r',ls='--'); plt.title("Circle Convergence"); plt.grid(True)
+    plt.subplot(1,2,2)
+    plt.loglog(nc,abs(pc-np.pi),'g-o'); plt.title("Error vs pts"); plt.grid(True)
+    plt.tight_layout()
+    plt.savefig('circle_convergence.png')
+    plt.show()
+
+    # 2. Buffon
+    pi_b, yb, thb, crb = estimate_pi_buffon(100)
+    visualize_buffon_needle(yb, thb, crb, pi_b, 100)
+    nb, pb, tb = analyze_convergence_buffon()
+    plt.figure(figsize=(10,4))
+    plt.subplot(1,2,1)
+    plt.semilogx(nb,pb,'b-o'); plt.axhline(np.pi,color='r',ls='--'); plt.title("Buffon Convergence"); plt.grid(True)
+    plt.subplot(1,2,2)
+    plt.loglog(nb,abs(pb-np.pi),'g-o'); plt.title("Error vs needles"); plt.grid(True)
+    plt.tight_layout()
+    plt.savefig('buffon_convergence.png')
+    plt.show()
+
+    # 3. Comparison
+    print("\nComparing methods:")
+    compare_methods()
 </code></pre>
 <h3 id="32-comparative-analysis">3.2 Comparative Analysis</h3>
 <p>Both Monte Carlo methods converge to π as the number of samples increases, but they differ in efficiency and convergence rate:</p>
@@ -690,6 +763,32 @@ if __name__ == "__main__":
 <li>The circle-based method is easier to implement and visualize, making it more suitable for educational purposes.</li>
 <li>Buffon's Needle provides a fascinating historical connection and demonstrates how physical experiments can be used to estimate mathematical constants.</li>
 </ol>
+<hr/>
+<h2 id="output">Output</h2>
+<h3 id="circlebased-monte-carlo-method">Circle‐Based Monte Carlo Method</h3>
+<p><img alt="Monte Carlo Circle Visualization" src="circle_monte_carlo.png"/>
+<em>Figure 1: Scatter plot of 5 000 random points in the square <span class="arithmatex">\([-1,1]^2\)</span>.
+Green points lie inside the unit circle, red points lie outside.
+Estimated π ≈ 3.126400 (error ≈ 0.015193).</em></p>
+<p><img alt="Circle Convergence" src="circle_convergence.png"/>
+<em>Figure 2 (left): π estimates vs. number of points (log scale). The dashed red line marks true π.</em>
+<em>Figure 2 (right): Absolute error vs. number of points (both axes log–log), illustrating the <span class="arithmatex">\(O(1/\sqrt{n})\)</span> decline.</em></p>
+<hr/>
+<h3 id="buffons-needle-experiment">Buffon’s Needle Experiment</h3>
+<p><img alt="Buffon’s Needle Visualization" src="buffon_needle.png"/>
+<em>Figure 3: 100 needles dropped onto parallel lines.
+Red needles cross a line; blue do not.
+Estimated π ≈ 2.985075 (error ≈ 0.156518).</em></p>
+<p><img alt="Buffon Convergence" src="buffon_convergence.png"/>
+<em>Figure 4 (left): π estimates vs. number of needles (log scale) converge slowly toward π.</em>
+<em>Figure 4 (right): Absolute error vs. number of needles (log–log), again showing roughly <span class="arithmatex">\(O(1/\sqrt{n})\)</span> behavior.</em></p>
+<hr/>
+<h3 id="comparison-of-methods">Comparison of Methods</h3>
+<p><img alt="Method Comparison" src="method_comparison.png"/>
+<em>Figure 5 (top‐left): Estimated π vs. sample size for both methods.</em>
+<em>Figure 5 (top‐right): Error vs. sample size with a 1/√n reference (dashed).</em>
+<em>Figure 5 (bottom‐left): Execution time vs. sample size.</em>
+<em>Figure 5 (bottom‐right): Error vs. computation time—showing the circle method’s superior efficiency and accuracy.</em></p>
 <h2 id="conclusion">Conclusion</h2>
 <p>Monte Carlo methods offer elegant and intuitive approaches to estimating π, demonstrating the power of probabilistic techniques in numerical computation. The circle-based method provides a more efficient and accurate estimate with fewer samples, while Buffon's Needle offers historical and educational value despite its slower convergence.</p>
 <p>These methods highlight the versatility of Monte Carlo simulation across various domains, from mathematics and physics to finance and computer science. They also provide insights into the trade-offs between different simulation approaches and the relationship between sample size and estimation accuracy.</p>
