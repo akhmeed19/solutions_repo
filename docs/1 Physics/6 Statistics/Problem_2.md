@@ -597,25 +597,25 @@ Both Monte Carlo methods converge to π as the number of samples increases, but 
 
 ### Circle‐Based Monte Carlo Method
 
-![Monte Carlo Circle Visualization](circle_monte_carlo.png)
+![Monte Carlo Circle Visualization](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Comparison%20of%20Methods/circle_monte_carlo.png)
 *Figure 1: Scatter plot of 5 000 random points in the square $[-1,1]^2$.
 Green points lie inside the unit circle, red points lie outside.
-Estimated π ≈ 3.126400 (error ≈ 0.015193).*
+Estimated $π ≈ 3.126400$ (error ≈ 0.015193).*
 
-![Circle Convergence](circle_convergence.png)
-*Figure 2 (left): π estimates vs. number of points (log scale). The dashed red line marks true π.*
+![Circle Convergence](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Comparison%20of%20Methods/circle_convergence.png)
+*Figure 2 (left): $π $estimates vs. number of points (log scale). The dashed red line marks true $π$.*
 *Figure 2 (right): Absolute error vs. number of points (both axes log–log), illustrating the $O(1/\sqrt{n})$ decline.*
 
 ---
 
 ### Buffon’s Needle Experiment
 
-![Buffon’s Needle Visualization](buffon_needle.png)
+![Buffon’s Needle Visualization](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Comparison%20of%20Methods/buffon_needle.png)
 *Figure 3: 100 needles dropped onto parallel lines.
 Red needles cross a line; blue do not.
-Estimated π ≈ 2.985075 (error ≈ 0.156518).*
+Estimated $π ≈ 2.985075$ $(error ≈ 0.156518)$.*
 
-![Buffon Convergence](buffon_convergence.png)
+![Buffon Convergence](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Comparison%20of%20Methods/buffon_convergence.png)
 *Figure 4 (left): π estimates vs. number of needles (log scale) converge slowly toward π.*
 *Figure 4 (right): Absolute error vs. number of needles (log–log), again showing roughly $O(1/\sqrt{n})$ behavior.*
 
@@ -623,7 +623,7 @@ Estimated π ≈ 2.985075 (error ≈ 0.156518).*
 
 ### Comparison of Methods
 
-![Method Comparison](method_comparison.png)
+![Method Comparison](https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Comparison%20of%20Methods/method_comparison.png)
 *Figure 5 (top‐left): Estimated π vs. sample size for both methods.*
 *Figure 5 (top‐right): Error vs. sample size with a 1/√n reference (dashed).*
 *Figure 5 (bottom‐left): Execution time vs. sample size.*
