@@ -247,9 +247,9 @@ g = \frac{4\pi^2L}{T^2}
 <ol>
 <li>The pendulum was set up with precisely measured lengths (0.50 m, 0.75 m, and 1.00 m).</li>
 <li>For each configuration, the pendulum was displaced by approximately 10° and released.</li>
-<li>The time for 10 complete oscillations (<span class="arithmatex">\(T_{10}\)</span>) was measured and repeated 10 times for statistical significance.</li>
+<li>The time for 10 complete oscillations ($T_{10}$) was measured and repeated 10 times for statistical significance.</li>
 <li>The experiment was conducted with three different masses to investigate whether mass affects the period.</li>
-<li>For each configuration, <span class="arithmatex">\(g\)</span> was calculated along with its associated uncertainty.</li>
+<li>For each configuration, $g$ was calculated along with its associated uncertainty.</li>
 </ol>
 <h2 id="data-and-results">Data and Results</h2>
 <h3 id="detailed-measurements">Detailed Measurements</h3>
@@ -258,8 +258,8 @@ g = \frac{4\pi^2L}{T^2}
 <thead>
 <tr>
 <th>Trial</th>
-<th style="text-align: right;"><span class="arithmatex">\(T_{10}\)</span> (s)</th>
-<th style="text-align: right;"><span class="arithmatex">\(T\)</span> (s)</th>
+<th style="text-align: right;">$T_{10}$ (s)</th>
+<th style="text-align: right;">$T$ (s)</th>
 </tr>
 </thead>
 <tbody>
@@ -323,7 +323,7 @@ g = \frac{4\pi^2L}{T^2}
 <th style="text-align: right;">Length (m)</th>
 <th style="text-align: right;">Period (s)</th>
 <th style="text-align: right;">ΔT (s)</th>
-<th style="text-align: right;"><span class="arithmatex">\(g\)</span> (m/s²)</th>
+<th style="text-align: right;">$g$ (m/s²)</th>
 <th style="text-align: right;">Δg (m/s²)</th>
 <th style="text-align: right;">Within Uncertainty</th>
 </tr>
@@ -417,9 +417,18 @@ g = \frac{4\pi^2L}{T^2}
 <li><strong>Average relative uncertainty in period:</strong> 0.20%</li>
 <li><strong>Average relative uncertainty in g:</strong> 0.40%</li>
 </ul>
+<p><strong>Calculation of these averages:</strong></p>
+<p>The average relative uncertainty in period was computed by taking the ratio $(\Delta T/T)$ for each configuration, converting to percent, and averaging across all nine data sets:</p>
+<div class="arithmatex">\[
+\text{Average }\frac{\Delta T}{T}\times100\% = \frac{1}{9}\sum_{i=1}^9\Bigl(\tfrac{\Delta T_i}{T_i}\times100\%\Bigr) \approx 0.20\%.
+\]</div>
+<p>Similarly, the average relative uncertainty in g was obtained by averaging the percent values of $(\Delta g/g)$ across all configurations:</p>
+<div class="arithmatex">\[
+\text{Average }\frac{\Delta g}{g}\times100\% = \frac{1}{9}\sum_{i=1}^9\Bigl(\tfrac{\Delta g_i}{g_i}\times100\%\Bigr) \approx 0.40\%.
+\]</div>
 <hr/>
 <h2 id="simulation-and-data-analysis-code">Simulation and Data Analysis Code</h2>
-<p>To verify our analysis pipeline and explore how measurement noise influences our results, we simulate pendulum timing data with realistic random and systematic errors. The following Python code performs the simulation, computes <span class="arithmatex">\(g\)</span> and its uncertainty for each trial set, and generates all key visualizations.</p>
+<p>To verify our analysis pipeline and explore how measurement noise influences our results, we simulate pendulum timing data with realistic random and systematic errors. The following Python code performs the simulation, computes $g$ and its uncertainty for each trial set, and generates all key visualizations.</p>
 <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -606,35 +615,35 @@ Average relative uncertainty in g: 0.40%
 </code></pre>
 <hr/>
 <h2 id="visualizations-and-explanations">Visualizations and Explanations</h2>
-<p><img alt="Measured g Values" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth's%20Gravitational%20Acceleration%20with%20a%20Pendulum/pendulum_g_values.png"/>
-<strong>Figure 1.</strong> Bar chart comparing measured <span class="arithmatex">\(g\)</span> values across different pendulum configurations. The red dashed line indicates the standard <span class="arithmatex">\(g = 9.81\)</span> m/s². Deviations show the combined effect of timing and length uncertainties.</p>
-<p><img alt="Period vs. Length" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth's%20Gravitational%20Acceleration%20with%20a%20Pendulum/period_vs_length.png"/>
-<strong>Figure 2.</strong> Period vs. pendulum length for each mass (error bars reflect <span class="arithmatex">\(\Delta T\)</span>), overlaid with the theoretical curve <span class="arithmatex">\(T = 2\pi\sqrt{L/g}\)</span>. Good agreement confirms the square‐root relationship.</p>
-<p><img alt="Percent Error in g" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth's%20Gravitational%20Acceleration%20with%20a%20Pendulum/percent_error.png"/>
-<strong>Figure 3.</strong> Percent error in measured <span class="arithmatex">\(g\)</span> for each configuration. Shorter lengths and lighter masses tend to exhibit larger errors due to timing uncertainty and air resistance.</p>
-<p><img alt="Uncertainty in g vs. Length" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth's%20Gravitational%20Acceleration%20with%20a%20Pendulum/uncertainty_vs_length.png"/>
-<strong>Figure 4.</strong> Absolute uncertainty <span class="arithmatex">\(\Delta g\)</span> as a function of pendulum length. Intermediate lengths minimize combined relative uncertainties in length and period.</p>
-<p><img alt="g vs. L/T²" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth's%20Gravitational%20Acceleration%20with%20a%20Pendulum/g_vs_lt2.png"/>
-<strong>Figure 5.</strong> Scatter plot of <span class="arithmatex">\(g\)</span> vs. <span class="arithmatex">\(L/T^2\)</span>. Ideally, all points lie on the horizontal line at <span class="arithmatex">\(g = 9.81\)</span> m/s²; scatter reflects measurement noise.</p>
-<p><img alt="T² vs. Length" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth's%20Gravitational%20Acceleration%20with%20a%20Pendulum/period_squared_vs_length.png"/>
-<strong>Figure 6.</strong> <span class="arithmatex">\(T^2\)</span> vs. <span class="arithmatex">\(L\)</span> with linear regression. The fit slope (3.8287 s²/m, <span class="arithmatex">\(R^2 = 0.9624\)</span>) yields <span class="arithmatex">\(g = 4\pi^2/\text{slope} = 10.28\)</span> m/s², close toExpected.</p>
+<p><img alt="Measured g Values" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth%27s%20Gravitational%20Acceleration%20with%20a%20Pendulum/pendulum_g_values.png"/></p>
+<p><strong>Figure 1.</strong> Bar chart comparing measured $g$ values across different pendulum configurations. The red dashed line indicates the standard $g = 9.81$ m/s². Deviations show the combined effect of timing and length uncertainties.</p>
+<p><img alt="Period vs. Length" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth%27s%20Gravitational%20Acceleration%20with%20a%20Pendulum/period_vs_length.png"/></p>
+<p><strong>Figure 2.</strong> Period vs. pendulum length for each mass (error bars reflect $\Delta T$), overlaid with the theoretical curve $T = 2\pi\sqrt{L/g}$. Good agreement confirms the square‐root relationship.</p>
+<p><img alt="Percent Error in g" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth%27s%20Gravitational%20Acceleration%20with%20a%20Pendulum/percent_error.png"/></p>
+<p><strong>Figure 3.</strong> Percent error in measured $g$ for each configuration. Shorter lengths and lighter masses tend to exhibit larger errors due to timing uncertainty and air resistance.</p>
+<p><img alt="Uncertainty in g vs. Length" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth%27s%20Gravitational%20Acceleration%20with%20a%20Pendulum/uncertainty_vs_length.png"/></p>
+<p><strong>Figure 4.</strong> Absolute uncertainty $\Delta g$ as a function of pendulum length. Intermediate lengths minimize combined relative uncertainties in length and period.</p>
+<p><img alt="g vs. L/T²" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth%27s%20Gravitational%20Acceleration%20with%20a%20Pendulum/g_vs_lt2.png"/></p>
+<p><strong>Figure 5.</strong> Scatter plot of $g$ vs. $L/T^2$. Ideally, all points lie on the horizontal line at $g = 9.81$ m/s²; scatter reflects measurement noise.</p>
+<p><img alt="T² vs. Length" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth%27s%20Gravitational%20Acceleration%20with%20a%20Pendulum/period_squared_vs_length.png"/></p>
+<p><strong>Figure 6.</strong> $T^2$ vs. $L$ with linear regression. The fit slope (3.8287 s²/m, $R^2 = 0.9624$) yields $g = 4\pi^2/\text{slope} = 10.28$ m/s², close to the expected value.</p>
 <hr/>
 <h2 id="analysis-and-discussion">Analysis and Discussion</h2>
 <h3 id="period-vs-length-relationship">Period vs. Length Relationship</h3>
-<p>The theoretical relationship <span class="arithmatex">\(T = 2\pi\sqrt{L/g}\)</span> predicts a linear trend when plotting <span class="arithmatex">\(T^2\)</span> vs. <span class="arithmatex">\(L\)</span>, with slope <span class="arithmatex">\(4\pi^2/g\)</span>. Our data follows this trend closely (Figure 6), confirming the theory.</p>
+<p>The theoretical relationship $T = 2\pi\sqrt{L/g}$ predicts a linear trend when plotting $T^2$ vs. $L$, with slope $4\pi^2/g$. Our data follows this trend closely (Figure 6), confirming the theory.</p>
 <h3 id="mass-effects">Mass Effects</h3>
-<p>Heavier masses yielded measured <span class="arithmatex">\(g\)</span> values closer to 9.81 m/s², as air resistance and small disturbances have less impact on more massive pendulums.</p>
+<p>Heavier masses yielded measured $g$ values closer to 9.81 m/s², as air resistance and small disturbances have less impact on more massive pendulums.</p>
 <h3 id="length-effects">Length Effects</h3>
-<p>Longer pendulums produced smaller relative uncertainties: timing errors become less significant for larger periods, and the relative length uncertainty <span class="arithmatex">\(\Delta L/L\)</span> decreases with length.</p>
+<p>Longer pendulums produced smaller relative uncertainties: timing errors become less significant for larger periods, and the relative length uncertainty $\Delta L/L$ decreases with length.</p>
 <h3 id="uncertainty-analysis">Uncertainty Analysis</h3>
 <ul>
-<li><strong><span class="arithmatex">\(\Delta L\)</span>:</strong> fixed at 0.0005 m; relative impact decreases with length.</li>
-<li><strong><span class="arithmatex">\(\Delta T\)</span>:</strong> derived from standard error over ten repeats; dominated by human reaction time.</li>
-<li><strong><span class="arithmatex">\(\Delta g\)</span>:</strong> ranged from 0.027 to 0.052 m/s²; period uncertainty contributes twice as much as length uncertainty due to the squared term.</li>
+<li><strong>$\Delta L$:</strong> fixed at 0.0005 m; relative impact decreases with length.</li>
+<li><strong>$\Delta T$:</strong> derived from standard error over ten repeats; dominated by human reaction time.</li>
+<li><strong>$\Delta g$:</strong> ranged from 0.027 to 0.052 m/s²; period uncertainty contributes twice as much as length uncertainty due to the squared term.</li>
 </ul>
 <h3 id="experimental-limitations">Experimental Limitations</h3>
 <ol>
-<li><strong>Small‐angle approximation:</strong> deviations from <span class="arithmatex">\(\sin\theta\approx\theta\)</span>.</li>
+<li><strong>Small‐angle approximation:</strong> deviations from $\sin\theta\approx\theta$.</li>
 <li><strong>Damping:</strong> air resistance and pivot friction.</li>
 <li><strong>Non‐ideal pendulum:</strong> string mass and distributed bob mass.</li>
 <li><strong>Environmental factors:</strong> air currents, temperature, vibrations.</li>
@@ -645,7 +654,7 @@ Average relative uncertainty in g: 0.40%
 <li>Employ electronic timing gates to eliminate human reaction time.</li>
 <li>Explore a wider range of lengths and masses.</li>
 <li>Study amplitude dependence beyond the small‐angle regime.</li>
-<li>Measure <span class="arithmatex">\(g\)</span> at different locations to observe geological or altitude variations.</li>
+<li>Measure $g$ at different locations to observe geological or altitude variations.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
 <p>This experiment measured Earth’s gravitational acceleration with an overall mean within 0.40% of the standard 9.81 m/s². The period–length relationship held as predicted, and careful uncertainty analysis highlighted the dominant sources of error. A simple pendulum, coupled with rigorous statistical treatment, provides a robust method to determine fundamental constants in physics.</p>
