@@ -210,9 +210,6 @@ Estimated $π ≈ 3.155200$ (error ≈ 0.013607).*
 
 ---
 
-Thought for a second
-
-
 ### Terminal Output
 
 Below is the summary table printed in console, showing how the π estimate, absolute error, and execution time evolve with increasing sample size:
@@ -440,6 +437,46 @@ Estimated $π ≈ 3.174603$ (63 crossings out of 100 needles).*
 
 *Figure 2 (left): Estimated $π$ vs. number of needles (log scale). The dashed red line shows true $π$.*  
 *Figure 2 (right): Absolute error vs. number of needles (both axes log scale), demonstrating roughly $O(1/\sqrt{n})$ error decay.*  
+
+---
+
+Thought for a couple of seconds
+
+
+## Terminal Output: Buffon’s Needle Method Results
+
+```
+Buffon's Needle Method Results:
+Needles     π Estimate     Error          Time (s)
+----------------------------------------------------
+1000        3.13971743     0.00187523     0.000123
+1438        3.16391639     0.02232374     0.000079
+2069        3.25826772     0.11667506     0.000097
+2976        3.13593256     0.00566009     0.000127
+4281        3.13282108     0.00877158     0.000183
+6158        3.24617818     0.10458552     0.000323
+8858        3.16470168     0.02310903     0.000403
+12742       3.13071253     0.01088012     0.000496
+18329       3.17715375     0.03556110     0.000638
+26366       3.13619603     0.00539663     0.000872
+37926       3.15721124     0.01561858     0.002770
+54555       3.14347450     0.00188185     0.001754
+78475       3.13398562     0.00760703     0.002509
+112883      3.13825410     0.00333855     0.003378
+162377      3.15362505     0.01203239     0.004511
+233572      3.14177338     0.00018072     0.006737
+335981      3.14290258     0.00130992     0.008787
+483293      3.14567082     0.00407816     0.011356
+695192      3.13842264     0.00317001     0.014808
+1000000     3.14327026     0.00167760     0.020506
+```
+
+*Explanation:*
+
+* **Needles:** Number of needle drops simulated.
+* **π Estimate:** Monte Carlo estimate of π from those drops.
+* **Error:** Absolute difference from the true value of π.
+* **Time (s):** Computation time for each simulation, illustrating how runtime increases with sample size.
 
 
 ## Part 3: Comparison of Methods
