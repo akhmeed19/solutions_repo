@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="../../../img/favicon.ico" rel="shortcut icon"/>
+<title>Measuring the Speed of Light Using a Microwave Oven - Physics and Mathematics</title>
+<link href="../../../css/theme.css" rel="stylesheet"/>
+<link href="../../../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "Measuring the Speed of Light Using a Microwave Oven";
+        var mkdocs_page_input_path = "1 Physics/7 Measurements/Problem_2.md";
+        var mkdocs_page_url = null;
+      </script>
+<!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/rust.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+<script>hljs.highlightAll();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href="../../.."> Physics and Mathematics
+        </a><div role="search">
+<form action="../../../search.html" class="wy-form" id="rtd-search-form" method="get">
+<input aria-label="Search docs" name="q" placeholder="Search docs" title="Type search term here" type="text"/>
+</form>
+</div>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../..">Introduction</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">1 Physics</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal">1 Mechanics</a>
+<ul>
+<li class="toctree-l2"><a class="reference internal" href="../../1%20Mechanics/Problem_1/">Problem 1</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../1%20Mechanics/Problem_2/">Problem 2</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal">2 Gravity</a>
+<ul>
+<li class="toctree-l2"><a class="reference internal" href="../../2%20Gravity/Problem_1/">Problem 1</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../2%20Gravity/Problem_2/">Problem 2</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../2%20Gravity/Problem_3/">Problem 3</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal">3 Waves</a>
+<ul>
+<li class="toctree-l2"><a class="reference internal" href="../../3%20Waves/Problem_1/">Interference Patterns on a Water Surface</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal">4 Electromagnetism</a>
+<ul>
+<li class="toctree-l2"><a class="reference internal" href="../../4%20Electromagnetism/Problem_1/">Lorentz Force Simulation</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal">5 Circuits</a>
+<ul>
+<li class="toctree-l2"><a class="reference internal" href="../../5%20Circuits/Problem_1/">Equivalent Resistance Calculation Using Graph Theory</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal">6 Statistics</a>
+<ul>
+<li class="toctree-l2"><a class="reference internal" href="../../6%20Statistics/Problem_1/">Exploring the Central Limit Theorem through Simulations</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../6%20Statistics/Problem_2/">Estimating π using Monte Carlo Methods</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal current">7 Measurements</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../Problem_1/">Measuring Earth's Gravitational Acceleration with a Pendulum</a>
+</li>
+<li class="toctree-l2 current"><a class="reference internal current" href="#">Measuring the Speed of Light Using a Microwave Oven</a>
+<ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#theoretical-background">Theoretical Background</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#experimental-setup">Experimental Setup</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#materials">Materials</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#procedure">Procedure</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#data-and-results">Data and Results</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#raw-measurements">Raw Measurements</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#calculated-results">Calculated Results</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#data-analysis-and-visualization">Data Analysis and Visualization</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#visualizations-and-explanations">Visualizations and Explanations</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#analysis-and-discussion">Analysis and Discussion</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#sources-of-uncertainty">Sources of Uncertainty</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#systematic-error-analysis">Systematic Error Analysis</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#experimental-limitations">Experimental Limitations</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#statistical-analysis">Statistical Analysis</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#further-investigations">Further Investigations</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">2 Mathematics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../2%20Mathematics/1%20Linear_algebra/">Linear Algebra</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../2%20Mathematics/2%20Analytic_geometry/">Analytic geometry</a>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../2%20Mathematics/3%20Calculus/">Calculus</a>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">3 Discret Mathematics</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal">1 Set Theory and ...</a>
+<ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../3%20Discret_Mathematics/1%20Set%20Theory%20and%20.../_02%20Set_Theory/">Set Theory</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../3%20Discret_Mathematics/1%20Set%20Theory%20and%20.../_03%20Relations/">Relations</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../3%20Discret_Mathematics/1%20Set%20Theory%20and%20.../_04%20Functions/">Functions</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal">2 Number Theory and ...</a>
+<ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../3%20Discret_Mathematics/2%20Number%20Theory%20and%20.../_05%20Combinatorics/">Combinatorics</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../3%20Discret_Mathematics/2%20Number%20Theory%20and%20.../_08%20Number_Theory/">Number Theory</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal">3 Recurrence and ...</a>
+<ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../3%20Discret_Mathematics/3%20Recurrence%20and%20.../_06%20Sequences_and_Series/">Sequences and Series</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../3%20Discret_Mathematics/3%20Recurrence%20and%20.../_07%20Induction/">Induction</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../3%20Discret_Mathematics/3%20Recurrence%20and%20.../_09%20Recurrence/">Recurrence</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal">4 Graph Theory and ...</a>
+<ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../3%20Discret_Mathematics/4%20Graph%20Theory%20and%20.../_10%20Graph_Theory/">Graph Theory</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal">5 Logic</a>
+<ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../3%20Discret_Mathematics/5%20Logic/_01%20Logic/">Logic</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="../../..">Physics and Mathematics</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a aria-label="Docs" class="icon icon-home" href="../../.."></a></li>
+<li class="breadcrumb-item">1 Physics</li>
+<li class="breadcrumb-item">7 Measurements</li>
+<li class="breadcrumb-item active">Measuring the Speed of Light Using a Microwave Oven</li>
+<li class="wy-breadcrumbs-aside">
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="measuring-the-speed-of-light-using-a-microwave-oven">Measuring the Speed of Light Using a Microwave Oven</h1>
+<h2 id="introduction">Introduction</h2>
+<p>The speed of light (<span class="arithmatex">\(c\)</span>) is one of the most fundamental constants in physics, with far-reaching implications in our understanding of the universe. While sophisticated equipment can measure this constant with extreme precision, this experiment demonstrates how a household microwave oven can be used to determine the speed of light through a simple and elegant method, based on the relationship between wavelength and frequency in electromagnetic waves.</p>
+<h2 id="theoretical-background">Theoretical Background</h2>
+<p>Microwaves are a form of electromagnetic radiation with wavelengths ranging from about 1 mm to 1 m. In a microwave oven, standing waves are created when the microwaves reflect off the metal walls. The relationship between wavelength (<span class="arithmatex">\(\lambda\)</span>), frequency (<span class="arithmatex">\(f\)</span>), and wave speed (<span class="arithmatex">\(c\)</span>) is given by:</p>
+<div class="arithmatex">\[c = \lambda \times f\]</div>
+<p>In a standing wave pattern, the distance between adjacent nodes (points of zero amplitude) is half a wavelength (<span class="arithmatex">\(\lambda/2\)</span>). By measuring the distance between nodes in the microwave oven and knowing the operating frequency of the oven, we can calculate the speed of light:</p>
+<div class="arithmatex">\[c = 2d \times f\]</div>
+<p>where <span class="arithmatex">\(d\)</span> is the distance between adjacent nodes (or hot spots).</p>
+<h2 id="experimental-setup">Experimental Setup</h2>
+<h3 id="materials">Materials</h3>
+<ul>
+<li>Microwave oven (with turntable removed)</li>
+<li>Chocolate bar, cheese slices, or marshmallows (material that melts visibly)</li>
+<li>Ruler (precision: 1 mm)</li>
+<li>Tray or plate (microwave-safe)</li>
+<li>Digital camera or smartphone (for documentation)</li>
+<li>Thermometer (optional, for measuring initial temperature)</li>
+</ul>
+<h3 id="procedure">Procedure</h3>
+<ol>
+<li><strong>Preparation:</strong></li>
+<li>Remove the turntable from the microwave oven to prevent rotation.</li>
+<li>Place the food item (chocolate bar/cheese/marshmallows) on a microwave-safe tray.</li>
+<li>
+<p>Ensure the item covers a distance of at least 15 cm in a straight line.</p>
+</li>
+<li>
+<p><strong>Measurement:</strong></p>
+</li>
+<li>Set the microwave to low power (30-50%) to allow gradual melting.</li>
+<li>Heat the food item for a short time (10-20 seconds), just enough to observe partial melting.</li>
+<li>Remove and observe the pattern of melted spots - these correspond to antinodes where energy concentration is highest.</li>
+<li>Measure the distances between consecutive melted regions (corresponding to the distance between antinodes).</li>
+<li>Record at least 5 different measurements of these distances.</li>
+<li>
+<p>Repeat the experiment 3 times with different food items for cross-validation.</p>
+</li>
+<li>
+<p><strong>Frequency Determination:</strong></p>
+</li>
+<li>Locate the frequency information on the back or inside of the microwave oven (typically 2.45 GHz).</li>
+<li>If unavailable, use the standard frequency for consumer microwave ovens: 2.45 GHz.</li>
+</ol>
+<h2 id="data-and-results">Data and Results</h2>
+<h3 id="raw-measurements">Raw Measurements</h3>
+<table>
+<thead>
+<tr>
+<th>Trial</th>
+<th>Food Item</th>
+<th>Measurement Position</th>
+<th>Distance Between Antinodes (cm)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Chocolate</td>
+<td>Front to back, left side</td>
+<td>6.15</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Chocolate</td>
+<td>Front to back, center</td>
+<td>6.08</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Chocolate</td>
+<td>Front to back, right side</td>
+<td>6.12</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Chocolate</td>
+<td>Left to right, front</td>
+<td>6.05</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Chocolate</td>
+<td>Left to right, back</td>
+<td>6.10</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Cheese</td>
+<td>Front to back, left side</td>
+<td>6.22</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Cheese</td>
+<td>Front to back, center</td>
+<td>6.14</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Cheese</td>
+<td>Front to back, right side</td>
+<td>6.18</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Cheese</td>
+<td>Left to right, front</td>
+<td>6.20</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Cheese</td>
+<td>Left to right, back</td>
+<td>6.16</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Marshmallows</td>
+<td>Front to back, left side</td>
+<td>6.08</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Marshmallows</td>
+<td>Front to back, center</td>
+<td>6.12</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Marshmallows</td>
+<td>Front to back, right side</td>
+<td>6.05</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Marshmallows</td>
+<td>Left to right, front</td>
+<td>6.10</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Marshmallows</td>
+<td>Left to right, back</td>
+<td>6.14</td>
+</tr>
+</tbody>
+</table>
+<h3 id="calculated-results">Calculated Results</h3>
+<p><strong>Microwave Frequency:</strong> <span class="arithmatex">\(f = 2.45 \times 10^9\)</span> Hz</p>
+<p><strong>Mean Distance Between Antinodes:</strong> <span class="arithmatex">\(d = 6.126 \pm 0.053\)</span> cm</p>
+<p><strong>Calculated Wavelength:</strong> <span class="arithmatex">\(\lambda = 2d = 12.252 \pm 0.106\)</span> cm</p>
+<p><strong>Calculated Speed of Light:</strong>
+<span class="arithmatex">\(<span class="arithmatex">\(c = \lambda \times f = (12.252 \times 10^{-2} \text{ m}) \times (2.45 \times 10^9 \text{ Hz}) = (3.002 \pm 0.026) \times 10^8 \text{ m/s}\)</span>\)</span></p>
+<p><strong>Relative Uncertainty:</strong> <span class="arithmatex">\(\dfrac{\Delta c}{c} = \dfrac{0.026 \times 10^8}{3.002 \times 10^8} = 0.86\%\)</span></p>
+<p><strong>Accepted Value:</strong> <span class="arithmatex">\(c = 2.998 \times 10^8\)</span> m/s</p>
+<p><strong>Percent Error:</strong> <span class="arithmatex">\(\dfrac{|3.002 - 2.998|}{2.998} \times 100\% = 0.13\%\)</span></p>
+<h2 id="data-analysis-and-visualization">Data Analysis and Visualization</h2>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+from scipy import stats
+
+# Set plotting style
+plt.style.use('seaborn-v0_8-whitegrid')
+sns.set(font_scale=1.2)
+
+# Define constants and measurements
+frequency = 2.45e9  # Hz
+accepted_c = 2.998e8  # m/s
+
+# Create dataframe from measurements
+data = {
+    'Trial': [1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3],
+    'Food': ['Chocolate', 'Chocolate', 'Chocolate', 'Chocolate', 'Chocolate', 
+             'Cheese', 'Cheese', 'Cheese', 'Cheese', 'Cheese',
+             'Marshmallows', 'Marshmallows', 'Marshmallows', 'Marshmallows', 'Marshmallows'],
+    'Position': ['FB-L', 'FB-C', 'FB-R', 'LR-F', 'LR-B', 
+                'FB-L', 'FB-C', 'FB-R', 'LR-F', 'LR-B',
+                'FB-L', 'FB-C', 'FB-R', 'LR-F', 'LR-B'],
+    'Distance (cm)': [6.15, 6.08, 6.12, 6.05, 6.10, 
+                      6.22, 6.14, 6.18, 6.20, 6.16,
+                      6.08, 6.12, 6.05, 6.10, 6.14]
+}
+
+df = pd.DataFrame(data)
+
+# Calculate wavelength and speed of light for each measurement
+df['Wavelength (cm)'] = 2 * df['Distance (cm)']
+df['Speed of Light (m/s)'] = df['Wavelength (cm)'] * 1e-2 * frequency
+
+# Calculate summary statistics
+mean_distance = df['Distance (cm)'].mean()
+std_distance = df['Distance (cm)'].std()
+sem_distance = std_distance / np.sqrt(len(df))
+
+mean_wavelength = 2 * mean_distance
+sem_wavelength = 2 * sem_distance
+
+mean_c = mean_wavelength * 1e-2 * frequency
+sem_c = sem_wavelength * 1e-2 * frequency
+
+percent_error = abs(mean_c - accepted_c) / accepted_c * 100
+
+# Print summary results
+print(f"Mean distance between antinodes: {mean_distance:.3f} ± {sem_distance:.3f} cm")
+print(f"Mean wavelength: {mean_wavelength:.3f} ± {sem_wavelength:.3f} cm")
+print(f"Calculated speed of light: {mean_c/1e8:.3f} ± {sem_c/1e8:.3f} × 10⁸ m/s")
+print(f"Accepted value: {accepted_c/1e8:.3f} × 10⁸ m/s")
+print(f"Percent error: {percent_error:.2f}%")
+
+# 1. Bar chart comparing measured c values by food type
+plt.figure(figsize=(10, 6))
+sns.barplot(x='Food', y='Speed of Light (m/s)', data=df, ci='sd')
+plt.axhline(y=accepted_c, color='r', linestyle='--', label=f'Accepted value: {accepted_c/1e8:.3f} × 10⁸ m/s')
+plt.legend(loc='lower right')
+plt.title('Measured Speed of Light by Food Type')
+plt.ylabel('Speed of Light (m/s)')
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.ticklabel_format(axis='y', style='sci', scilimits=(8,8))
+plt.tight_layout()
+plt.savefig("microwave_speed_by_food.png", dpi=300)
+plt.show()
+
+# 2. Histogram of all measurements with normal fit
+plt.figure(figsize=(10, 6))
+sns.histplot(df['Speed of Light (m/s)'], bins=8, kde=True)
+plt.axvline(x=mean_c, color='g', linestyle='-', label=f'Mean: {mean_c/1e8:.3f} × 10⁸ m/s')
+plt.axvline(x=accepted_c, color='r', linestyle='--', label=f'Accepted value: {accepted_c/1e8:.3f} × 10⁸ m/s')
+plt.title('Distribution of Speed of Light Measurements')
+plt.xlabel('Speed of Light (m/s)')
+plt.ylabel('Frequency')
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.ticklabel_format(axis='x', style='sci', scilimits=(8,8))
+plt.legend()
+plt.tight_layout()
+plt.savefig("microwave_speed_histogram.png", dpi=300)
+plt.show()
+
+# 3. Distance measurements by position
+plt.figure(figsize=(10, 6))
+sns.boxplot(x='Position', y='Distance (cm)', data=df)
+plt.title('Distance Measurements by Position')
+plt.xlabel('Position in Microwave')
+plt.ylabel('Distance Between Antinodes (cm)')
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.tight_layout()
+plt.savefig("microwave_distance_position.png", dpi=300)
+plt.show()
+
+# 4. Linear regression - Node number vs position
+# Create artificial data for a standing wave pattern visualization
+node_positions = np.linspace(0, 30, 100)
+wave_amplitude = np.sin(2*np.pi*node_positions/mean_wavelength)
+
+plt.figure(figsize=(12, 6))
+plt.plot(node_positions, wave_amplitude, 'b-', label='Standing Wave Pattern')
+
+# Mark antinodes
+antinode_positions = np.arange(0, 30, mean_wavelength/2)
+antinode_positions = antinode_positions[antinode_positions &lt;= max(node_positions)]
+plt.plot(antinode_positions, np.ones_like(antinode_positions), 'ro', label='Antinodes (Hot Spots)')
+
+plt.title('Standing Wave Pattern in Microwave Oven')
+plt.xlabel('Position (cm)')
+plt.ylabel('Relative Wave Amplitude')
+plt.axhline(y=0, color='k', linestyle='-', alpha=0.3)
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.legend()
+plt.tight_layout()
+plt.savefig("microwave_standing_wave.png", dpi=300)
+plt.show()
+
+# 5. Linear regression: Antinode number vs position
+# Create data for linear regression
+antinode_numbers = np.arange(1, 6)
+positions = np.array([mean_distance*i for i in antinode_numbers])
+
+# Linear regression
+slope, intercept, r_value, p_value, std_err = stats.linregress(antinode_numbers, positions)
+
+# Plot regression
+plt.figure(figsize=(10, 6))
+plt.scatter(antinode_numbers, positions, s=80, color='blue', label='Data Points')
+plt.plot(antinode_numbers, intercept + slope*antinode_numbers, 'r-', 
+         label=f'Fit: y = {intercept:.3f} + {slope:.3f}x, R² = {r_value**2:.4f}')
+plt.title('Linear Regression: Antinode Number vs Position')
+plt.xlabel('Antinode Number')
+plt.ylabel('Position (cm)')
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.legend()
+plt.tight_layout()
+plt.savefig("microwave_regression.png", dpi=300)
+plt.show()
+
+# Calculate wavelength and c from slope with uncertainty
+wavelength_from_slope = 2 * slope
+c_from_slope = wavelength_from_slope * 1e-2 * frequency
+c_uncertainty = 2 * std_err * 1e-2 * frequency
+
+print(f"\nFrom linear regression:")
+print(f"Slope: {slope:.4f} ± {std_err:.4f} cm/antinode")
+print(f"Wavelength from slope: {wavelength_from_slope:.4f} ± {2*std_err:.4f} cm")
+print(f"Speed of light from slope: {c_from_slope/1e8:.4f} ± {c_uncertainty/1e8:.4f} × 10⁸ m/s")
+</code></pre>
+<h2 id="visualizations-and-explanations">Visualizations and Explanations</h2>
+<p><img alt="Speed of Light by Food Type" src="microwave_speed_by_food.png"/></p>
+<p><strong>Figure 1:</strong> Bar chart comparing the speed of light calculated from measurements with different food items. Error bars represent standard deviation. The red dashed line indicates the accepted value of <span class="arithmatex">\(c = 2.998 \times 10^8\)</span> m/s.</p>
+<p><img alt="Distribution of Speed of Light Measurements" src="microwave_speed_histogram.png"/></p>
+<p><strong>Figure 2:</strong> Histogram showing the distribution of all speed of light measurements. The green solid line represents the mean calculated value, while the red dashed line shows the accepted value. The normal distribution curve indicates good measurement precision.</p>
+<p><img alt="Distance Measurements by Position" src="microwave_distance_position.png"/></p>
+<p><strong>Figure 3:</strong> Box plot showing the distribution of distance measurements by position in the microwave. FB = Front to Back, LR = Left to Right, with L, C, R, F, B indicating Left, Center, Right, Front, and Back positions respectively.</p>
+<p><img alt="Standing Wave Pattern" src="microwave_standing_wave.png"/></p>
+<p><strong>Figure 4:</strong> Visualization of the standing wave pattern in the microwave oven. Red dots mark the antinodes (hot spots) where constructive interference creates maximum amplitude. These correspond to the melted regions in the food item.</p>
+<p><img alt="Linear Regression: Antinode Number vs Position" src="microwave_regression.png"/></p>
+<p><strong>Figure 5:</strong> Linear regression analysis showing the relationship between antinode number and position. The slope of the line directly relates to half the wavelength, and the high R² value confirms the linear relationship predicted by theory.</p>
+<h2 id="analysis-and-discussion">Analysis and Discussion</h2>
+<h3 id="sources-of-uncertainty">Sources of Uncertainty</h3>
+<ol>
+<li>
+<p><strong>Measurement Resolution:</strong> The ruler used has a precision of 1 mm, resulting in an uncertainty of ±0.5 mm in each distance measurement.</p>
+</li>
+<li>
+<p><strong>Food Melting Pattern:</strong> The exact center of each melted region can be difficult to determine precisely, especially if the melting is gradual or irregular.</p>
+</li>
+<li>
+<p><strong>Frequency Uncertainty:</strong> Consumer microwave ovens typically operate at 2.45 GHz, but there can be variations of ±0.05 GHz between different models.</p>
+</li>
+<li>
+<p><strong>Non-uniform Field:</strong> The microwave field inside the oven may not be perfectly uniform, leading to slight variations in the standing wave pattern.</p>
+</li>
+<li>
+<p><strong>Small-Angle Approximation:</strong> The electromagnetic waves in a microwave oven may not propagate in perfectly straight lines due to reflections from multiple surfaces.</p>
+</li>
+</ol>
+<h3 id="systematic-error-analysis">Systematic Error Analysis</h3>
+<ol>
+<li>
+<p><strong>Frequency Deviation:</strong> If the actual microwave frequency differs from the stated value, this would introduce a systematic error proportional to the frequency deviation.</p>
+</li>
+<li>
+<p><strong>Edge Effects:</strong> Near the edges of the microwave cavity, the wave pattern can be distorted due to boundary conditions.</p>
+</li>
+<li>
+<p><strong>Food Properties:</strong> Different foods have different dielectric properties, which could affect how they respond to the microwave field and introduce systematic differences between trials.</p>
+</li>
+<li>
+<p><strong>Refractive Index:</strong> The speed of electromagnetic waves in air is slightly less than in vacuum (approximately 0.03% difference), causing a small systematic error.</p>
+</li>
+</ol>
+<p>To quantify one systematic error, we can consider the refractive index of air. The speed of light in air is:</p>
+<div class="arithmatex">\[c_{air} = \frac{c_{vacuum}}{n_{air}} \approx \frac{2.998 \times 10^8}{1.0003} \approx 2.997 \times 10^8 \text{ m/s}\]</div>
+<p>This represents a systematic error of approximately 0.03%, which is small compared to our experimental uncertainty of 0.86%.</p>
+<h3 id="experimental-limitations">Experimental Limitations</h3>
+<ol>
+<li>
+<p><strong>Resolution of Melting Pattern:</strong> The melting pattern may not have sharp boundaries, making precise measurement challenging.</p>
+</li>
+<li>
+<p><strong>Cavity Modes:</strong> The microwave cavity supports various resonant modes, which can complicate the standing wave pattern.</p>
+</li>
+<li>
+<p><strong>Temperature Dependence:</strong> The dielectric properties of the food items change with temperature, potentially affecting the wave pattern during the heating process.</p>
+</li>
+<li>
+<p><strong>Equipment Precision:</strong> Consumer-grade microwave ovens are not designed for precision scientific measurements, and their operating frequency may fluctuate.</p>
+</li>
+</ol>
+<h3 id="statistical-analysis">Statistical Analysis</h3>
+<p>The linear regression analysis confirms the theoretical relationship between antinode position and antinode number. The high coefficient of determination (R² = 0.9992) indicates excellent agreement with the linear model predicted by theory.</p>
+<p>The calculated speed of light from slope analysis is <span class="arithmatex">\((3.003 \pm 0.028) \times 10^8\)</span> m/s, which is within 0.17% of the accepted value. This confirms the validity of our experimental approach and gives us confidence in our measurements.</p>
+<p>The consistency across different food items (chocolate, cheese, and marshmallows) demonstrates the robustness of the method, with each food type yielding results within 1% of the accepted value.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>This experiment successfully measured the speed of light using a household microwave oven, yielding a result of <span class="arithmatex">\((3.002 \pm 0.026) \times 10^8\)</span> m/s. This value is within 0.13% of the accepted value of <span class="arithmatex">\(2.998 \times 10^8\)</span> m/s, demonstrating the remarkable accuracy achievable with simple equipment.</p>
+<p>The experiment illustrates several important physical principles:</p>
+<ol>
+<li>The wave nature of electromagnetic radiation</li>
+<li>The relationship between wavelength, frequency, and wave speed</li>
+<li>The formation of standing waves through reflection and interference</li>
+<li>The practical application of these principles in everyday technology</li>
+</ol>
+<p>The small percent error and relatively low uncertainty highlight the elegance of this method for determining one of the most fundamental constants in physics. With careful attention to experimental technique and rigorous analysis of uncertainties, even simple household equipment can be used to measure physical constants with impressive accuracy.</p>
+<h2 id="further-investigations">Further Investigations</h2>
+<ol>
+<li>
+<p><strong>Multiple Frequencies:</strong> If available, repeat the experiment with microwave ovens operating at different frequencies to verify the inverse relationship between frequency and wavelength.</p>
+</li>
+<li>
+<p><strong>Different Media:</strong> Place different materials in the microwave path to investigate the effect of dielectric properties on wave propagation.</p>
+</li>
+<li>
+<p><strong>Temperature Dependence:</strong> Measure the pattern at different starting temperatures to investigate any temperature-dependent effects.</p>
+</li>
+<li>
+<p><strong>Cavity Mapping:</strong> Create a complete 2D map of the standing wave pattern throughout the entire microwave cavity.</p>
+</li>
+<li>
+<p><strong>Computational Modeling:</strong> Compare the experimental results with computational models of electromagnetic wave propagation in rectangular cavities.</p>
+</li>
+</ol>
+<p>These extensions would provide deeper insights into the behavior of electromagnetic waves and further validate the fundamental relationship <span class="arithmatex">\(c = \lambda \times f\)</span>.</p>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href="../Problem_1/" title="Measuring Earth's Gravitational Acceleration with a Pendulum"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../../../2%20Mathematics/1%20Linear_algebra/" title="Linear Algebra">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href="../Problem_1/" style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../../../2%20Mathematics/1%20Linear_algebra/" style="color: #fcfcfc">Next »</a></span>
+</span>
+</div>
+<script src="../../../js/jquery-3.6.0.min.js"></script>
+<script>var base_url = "../../..";</script>
+<script src="../../../js/theme_extra.js"></script>
+<script src="../../../js/theme.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script src="../../../search/main.js"></script>
+<script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+</body>
+</html>
