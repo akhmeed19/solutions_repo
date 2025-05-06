@@ -406,109 +406,172 @@ Estimated $π ≈ 3.174603$ (63 crossings out of 100 needles).*
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
+import seaborn as sns
 import time
+from matplotlib.patches import Circle
 
-def compare_methods(max_samples=1000000, steps=15):
-    """
-    Compare the circle-based and Buffon's Needle methods for estimating π.
-    
-    Parameters:
-    -----------
-    max_samples : int
-        Maximum number of samples (points/needles) to use
-    steps : int
-        Number of steps to take between 1000 and max_samples
-    """
-    # Use logarithmic spacing for better visualization
-    samples_range = np.logspace(3, np.log10(max_samples), steps).astype(int)
-    
-    # Arrays to store results
-    circle_estimates = np.zeros(steps)
-    circle_errors = np.zeros(steps)
-    circle_times = np.zeros(steps)
-    
-    buffon_estimates = np.zeros(steps)
-    buffon_errors = np.zeros(steps)
-    buffon_times = np.zeros(steps)
-    
-    # Run simulations for both methods
-    for i, n in enumerate(samples_range):
-        # Circle-based method
-        start_time = time.time()
-        circle_estimates[i], _, _ = estimate_pi_circle(n)
-        circle_times[i] = time.time() - start_time
-        circle_errors[i] = abs(circle_estimates[i] - np.pi)
-        
-        # Buffon's Needle method
-        start_time = time.time()
-        buffon_estimates[i], _, _, _ = estimate_pi_buffon(n)
-        buffon_times[i] = time.time() - start_time
-        buffon_errors[i] = abs(buffon_estimates[i] - np.pi)
-    
-    # Plot comparison
-    plt.figure(figsize=(18, 12))
-    
-    # Plot estimated π values
-    plt.subplot(2, 2, 1)
-    plt.semilogx(samples_range, circle_estimates, 'b-o', label='Circle Method')
-    plt.semilogx(samples_range, buffon_estimates, 'g-o', label='Buffon\'s Needle')
-    plt.axhline(y=np.pi, color='r', linestyle='--', label='True π')
-    plt.xlabel('Number of Samples (log scale)')
-    plt.ylabel('Estimated π')
-    plt.title('Comparison of π Estimates')
-    plt.grid(True)
+# ——————————————————————————————————————
+# Part 1: Circle-based Monte Carlo for π
+# ——————————————————————————————————————
+
+def estimate_pi_circle(num_points):
+    x = np.random.uniform(-1, 1, num_points)
+    y = np.random.uniform(-1, 1, num_points)
+    inside = x**2 + y**2 <= 1
+    count_inside = inside.sum()
+    pi_estimate = 4 * count_inside / num_points
+    pts_in = np.column_stack((x[inside], y[inside]))
+    pts_out = np.column_stack((x[~inside], y[~inside]))
+    return pi_estimate, pts_in, pts_out
+
+def visualize_circle_method(pts_in, pts_out, pi_est, num_points):
+    plt.figure(figsize=(8,8))
+    circle = Circle((0,0),1,fill=False,color='r',linewidth=2)
+    plt.gca().add_patch(circle)
+    plt.scatter(pts_in[:,0], pts_in[:,1], c='green', s=5, alpha=0.5, label='Inside')
+    plt.scatter(pts_out[:,0], pts_out[:,1], c='red',   s=5, alpha=0.5, label='Outside')
+    plt.plot([-1,1,1,-1,-1],[-1,-1,1,1,-1],'b-',linewidth=2)
+    plt.axis('equal'); plt.grid(True)
+    plt.title(f'Circle MC: {num_points} pts → π≈{pi_est:.6f} (err {abs(pi_est-np.pi):.6f})')
     plt.legend()
-    
-    # Plot errors
-    plt.subplot(2, 2, 2)
-    plt.loglog(samples_range, circle_errors, 'b-o', label='Circle Method')
-    plt.loglog(samples_range, buffon_errors, 'g-o', label='Buffon\'s Needle')
-    
-    # Add a reference line for 1/sqrt(n) convergence
-    ref_line = circle_errors[0] * np.sqrt(samples_range[0] / samples_range)
-    plt.loglog(samples_range, ref_line, 'k--', label='1/√n Reference')
-    
-    plt.xlabel('Number of Samples (log scale)')
-    plt.ylabel('Absolute Error (log scale)')
-    plt.title('Error Comparison')
-    plt.grid(True)
-    plt.legend()
-    
-    # Plot execution times
-    plt.subplot(2, 2, 3)
-    plt.loglog(samples_range, circle_times, 'b-o', label='Circle Method')
-    plt.loglog(samples_range, buffon_times, 'g-o', label='Buffon\'s Needle')
-    plt.xlabel('Number of Samples (log scale)')
-    plt.ylabel('Execution Time (s) (log scale)')
-    plt.title('Computational Efficiency')
-    plt.grid(True)
-    plt.legend()
-    
-    # Plot error vs. time
-    plt.subplot(2, 2, 4)
-    plt.loglog(circle_times, circle_errors, 'b-o', label='Circle Method')
-    plt.loglog(buffon_times, buffon_errors, 'g-o', label='Buffon\'s Needle')
-    plt.xlabel('Execution Time (s) (log scale)')
-    plt.ylabel('Absolute Error (log scale)')
-    plt.title('Error vs. Computation Time')
-    plt.grid(True)
-    plt.legend()
-    
+    plt.savefig('circle_monte_carlo.png')
+    plt.show()
+
+def analyze_convergence_circle(max_points=1_000_000, steps=20):
+    ns = np.logspace(3, np.log10(max_points), steps).astype(int)
+    pis = np.zeros(steps); times = np.zeros(steps)
+    for i,n in enumerate(ns):
+        t0 = time.time()
+        pis[i],_,_ = estimate_pi_circle(n)
+        times[i] = time.time() - t0
+    return ns, pis, times
+
+# ——————————————————————————————————————
+# Part 2: Buffon’s Needle for π
+# ——————————————————————————————————————
+
+def estimate_pi_buffon(num_needles, needle_length=1.0, line_dist=1.0):
+    y = np.random.uniform(0, line_dist, num_needles)
+    theta = np.random.uniform(0, np.pi, num_needles)
+    d_min = np.minimum(y, line_dist - y)
+    proj = (needle_length/2) * np.sin(theta)
+    crosses = proj >= d_min
+    c = crosses.sum()
+    pi_est = (2 * needle_length * num_needles) / (line_dist * c) if c>0 else np.nan
+    return pi_est, y, theta, crosses
+
+def visualize_buffon_needle(y, theta, crosses, pi_est, num_needles):
+    plt.figure(figsize=(8,6))
+    # draw lines
+    for k in range(6):
+        plt.axhline(k, color='black', lw=1)
+    x = np.random.uniform(0.5,4.5,len(y))
+    for xi, yi, th, cr in zip(x, y, theta, crosses):
+        dy = (0.5)*np.sin(th)
+        dx = (0.5)*np.cos(th)
+        y0 = (yi % 1) + int(xi)
+        x1,y1 = xi-dx, y0-dy
+        x2,y2 = xi+dx, y0+dy
+        plt.plot([x1,x2],[y1,y2], c='red' if cr else 'blue', lw=1.5)
+    plt.title(f"Buffon’s Needle: {num_needles} drops → π≈{pi_est:.6f}")
+    plt.xlim(0,5); plt.ylim(0,5); plt.gca().set_aspect('equal')
+    plt.savefig('buffon_needle.png')
+    plt.show()
+
+def analyze_convergence_buffon(max_needles=1_000_000, steps=20):
+    ns = np.logspace(3, np.log10(max_needles), steps).astype(int)
+    pis = np.zeros(steps); times = np.zeros(steps)
+    for i,n in enumerate(ns):
+        t0 = time.time()
+        pis[i],_,_,_ = estimate_pi_buffon(n)
+        times[i] = time.time() - t0
+    return ns, pis, times
+
+# ——————————————————————————————————————
+# Part 3: Comparison
+# ——————————————————————————————————————
+
+def compare_methods(max_samples=500_000, steps=15):
+    ns = np.logspace(3, np.log10(max_samples), steps).astype(int)
+    c_pi = np.zeros(steps); c_err = np.zeros(steps); c_t = np.zeros(steps)
+    b_pi = np.zeros(steps); b_err = np.zeros(steps); b_t = np.zeros(steps)
+
+    for i,n in enumerate(ns):
+        t0=time.time(); c_pi[i],_,_ = estimate_pi_circle(n); c_t[i]=time.time()-t0
+        c_err[i]=abs(c_pi[i]-np.pi)
+        t0=time.time(); b_pi[i],_,_,_= estimate_pi_buffon(n); b_t[i]=time.time()-t0
+        b_err[i]=abs(b_pi[i]-np.pi)
+
+    # Plot
+    plt.figure(figsize=(12,10))
+    plt.subplot(2,2,1)
+    plt.semilogx(ns,c_pi,'b-o',label='Circle')
+    plt.semilogx(ns,b_pi,'g-o',label='Buffon')
+    plt.axhline(np.pi,color='r',ls='--',label='True π')
+    plt.title("π Estimate"); plt.legend(); plt.grid(True)
+
+    plt.subplot(2,2,2)
+    plt.loglog(ns,c_err,'b-o',label='Circle')
+    plt.loglog(ns,b_err,'g-o',label='Buffon')
+    ref=c_err[0]*np.sqrt(ns[0]/ns)
+    plt.loglog(ns,ref,'k--',label='1/√n')
+    plt.title("Error vs n"); plt.legend(); plt.grid(True)
+
+    plt.subplot(2,2,3)
+    plt.loglog(ns,c_t,'b-o',label='Circle')
+    plt.loglog(ns,b_t,'g-o',label='Buffon')
+    plt.title("Time vs n"); plt.legend(); plt.grid(True)
+
+    plt.subplot(2,2,4)
+    plt.loglog(c_t,c_err,'b-o',label='Circle')
+    plt.loglog(b_t,b_err,'g-o',label='Buffon')
+    plt.title("Error vs Time"); plt.legend(); plt.grid(True)
+
     plt.tight_layout()
     plt.savefig('method_comparison.png')
     plt.show()
-    
-    # Print comparative table
-    print("\nComparison of Methods:")
-    print(f"{'Samples':<12} {'Circle π':<15} {'Circle Error':<15} {'Buffon π':<15} {'Buffon Error':<15}")
-    print("-" * 72)
-    for n, c_est, c_err, b_est, b_err in zip(samples_range, circle_estimates, circle_errors, buffon_estimates, buffon_errors):
-        print(f"{n:<12} {c_est:<15.8f} {c_err:<15.8f} {b_est:<15.8f} {b_err:<15.8f}")
 
-# Run the comparison
+    # Print table
+    print("\nSample   Circle π     Err       Time(s)    Buffon π    Err")
+    print("----------------------------------------------------------------")
+    for n,cp,ce,ct,bp,be in zip(ns,c_pi,c_err,c_t,b_pi,b_err):
+        print(f"{n:<8}{cp:>8.6f}{ce:>10.6f}{ct:>10.4f}{bp:>10.6f}{be:>10.6f}")
+
+# ——————————————————————————————————————
+# Main
+# ——————————————————————————————————————
+
 if __name__ == "__main__":
-    print("\nComparing Circle and Buffon's Needle Methods:")
-    compare_methods(max_samples=500000)
+    sns.set()
+    # 1. Circle
+    pi_v, pin, pout = estimate_pi_circle(5_000)
+    visualize_circle_method(pin, pout, pi_v, 5_000)
+    nc, pc, tc = analyze_convergence_circle()
+    plt.figure(figsize=(10,4))
+    plt.subplot(1,2,1)
+    plt.semilogx(nc,pc,'b-o'); plt.axhline(np.pi,color='r',ls='--'); plt.title("Circle Convergence"); plt.grid(True)
+    plt.subplot(1,2,2)
+    plt.loglog(nc,abs(pc-np.pi),'g-o'); plt.title("Error vs pts"); plt.grid(True)
+    plt.tight_layout()
+    plt.savefig('circle_convergence.png')
+    plt.show()
+
+    # 2. Buffon
+    pi_b, yb, thb, crb = estimate_pi_buffon(100)
+    visualize_buffon_needle(yb, thb, crb, pi_b, 100)
+    nb, pb, tb = analyze_convergence_buffon()
+    plt.figure(figsize=(10,4))
+    plt.subplot(1,2,1)
+    plt.semilogx(nb,pb,'b-o'); plt.axhline(np.pi,color='r',ls='--'); plt.title("Buffon Convergence"); plt.grid(True)
+    plt.subplot(1,2,2)
+    plt.loglog(nb,abs(pb-np.pi),'g-o'); plt.title("Error vs needles"); plt.grid(True)
+    plt.tight_layout()
+    plt.savefig('buffon_convergence.png')
+    plt.show()
+
+    # 3. Comparison
+    print("\nComparing methods:")
+    compare_methods()
 ```
 
 ### 3.2 Comparative Analysis
@@ -527,6 +590,45 @@ Both Monte Carlo methods converge to π as the number of samples increases, but 
 3. **Practical Considerations**:
    - The circle-based method is easier to implement and visualize, making it more suitable for educational purposes.
    - Buffon's Needle provides a fascinating historical connection and demonstrates how physical experiments can be used to estimate mathematical constants.
+
+---
+
+## Output
+
+### Circle‐Based Monte Carlo Method
+
+![Monte Carlo Circle Visualization](circle_monte_carlo.png)
+*Figure 1: Scatter plot of 5 000 random points in the square $[-1,1]^2$.
+Green points lie inside the unit circle, red points lie outside.
+Estimated π ≈ 3.126400 (error ≈ 0.015193).*
+
+![Circle Convergence](circle_convergence.png)
+*Figure 2 (left): π estimates vs. number of points (log scale). The dashed red line marks true π.*
+*Figure 2 (right): Absolute error vs. number of points (both axes log–log), illustrating the $O(1/\sqrt{n})$ decline.*
+
+---
+
+### Buffon’s Needle Experiment
+
+![Buffon’s Needle Visualization](buffon_needle.png)
+*Figure 3: 100 needles dropped onto parallel lines.
+Red needles cross a line; blue do not.
+Estimated π ≈ 2.985075 (error ≈ 0.156518).*
+
+![Buffon Convergence](buffon_convergence.png)
+*Figure 4 (left): π estimates vs. number of needles (log scale) converge slowly toward π.*
+*Figure 4 (right): Absolute error vs. number of needles (log–log), again showing roughly $O(1/\sqrt{n})$ behavior.*
+
+---
+
+### Comparison of Methods
+
+![Method Comparison](method_comparison.png)
+*Figure 5 (top‐left): Estimated π vs. sample size for both methods.*
+*Figure 5 (top‐right): Error vs. sample size with a 1/√n reference (dashed).*
+*Figure 5 (bottom‐left): Execution time vs. sample size.*
+*Figure 5 (bottom‐right): Error vs. computation time—showing the circle method’s superior efficiency and accuracy.*
+
 
 ## Conclusion
 
