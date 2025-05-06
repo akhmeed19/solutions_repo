@@ -389,9 +389,9 @@ if __name__ == "__main__":
 <p><img alt="Monte Carlo Circle Visualization" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Estimating%20π%20Using%20a%20Circle/circle_monte_carlo.png"/></p>
 <p><em>Figure 1: Scatter plot of 5 000 random points in the square <span class="arithmatex">\([-1,1]^2\)</span>.<br/>
 Green points lie inside the unit circle, red points lie outside.<br/>
-Estimated π ≈ 3.155200 (error ≈ 0.013607).</em></p>
+Estimated <span class="arithmatex">\(π ≈ 3.155200\)</span> (error ≈ 0.013607).</em></p>
 <p><img alt="Convergence of π Estimate (Circle Method)" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Estimating%20π%20Using%20a%20Circle/circle_convergence.png"/></p>
-<p><em>Figure 2 (left): π estimates as a function of the number of random points (log scale). The dashed red line is the true π.</em><br/>
+<p><em>Figure 2 (left): <span class="arithmatex">\(π\)</span> estimates as a function of the number of random points (log scale). The dashed red line is the true <span class="arithmatex">\(π\)</span>.</em><br/>
 <em>Figure 2 (right): Absolute error vs. number of points (both axes log scale), showing the expected <span class="arithmatex">\(O(1/\sqrt{n})\)</span> decline in error.</em> </p>
 <h2 id="part-2-estimating-using-buffons-needle">Part 2: Estimating π Using Buffon's Needle</h2>
 <h3 id="21-theoretical-foundation">2.1 Theoretical Foundation</h3>
@@ -553,12 +553,12 @@ if __name__ == "__main__":
 <p>While conceptually elegant, Buffon's Needle typically converges more slowly than the circle-based method. This is because the probability of a needle crossing a line is relatively small, leading to higher variance in the estimate. The error also decreases proportionally to <span class="arithmatex">\(1/\sqrt{n}\)</span>, but with a larger constant factor compared to the circle-based method.</p>
 <hr/>
 <h2 id="output-buffons-needle-experiment">Output: Buffon’s Needle Experiment</h2>
-<p><img alt="Buffon's Needle Visualization" src="buffon_needle.png"/></p>
-<p><em>Figure 1: Buffon’s Needle experiment with 100 needles dropped on parallel lines spaced 1 unit apart.<br/>
+<p><img alt="Buffon's Needle Visualization" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Estimating%20π%20Using%20Buffon's%20Needle/buffon_needle.png"/></p>
+<p><em>Figure 1: Buffon’s Needle experiment with 100 needles dropped on parallel lines spaced 1 unit apart.
 Red segments cross a line, blue segments do not.<br/>
-Estimated π ≈ 3.174603 (63 crossings out of 100 needles).</em></p>
-<p><img alt="Convergence of π Estimate (Buffon’s Needle)" src="buffon_convergence.png"/></p>
-<p><em>Figure 2 (left): Estimated π vs. number of needles (log scale). The dashed red line shows true π.</em><br/>
+Estimated <span class="arithmatex">\(π ≈ 3.174603\)</span> (63 crossings out of 100 needles).</em></p>
+<p><img alt="Convergence of π Estimate (Buffon’s Needle)" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Statistics/Problem2/Estimating%20π%20Using%20Buffon's%20Needle/buffon_convergence.png"/></p>
+<p><em>Figure 2 (left): Estimated <span class="arithmatex">\(π\)</span> vs. number of needles (log scale). The dashed red line shows true <span class="arithmatex">\(π\)</span>.</em><br/>
 <em>Figure 2 (right): Absolute error vs. number of needles (both axes log scale), demonstrating roughly <span class="arithmatex">\(O(1/\sqrt{n})\)</span> error decay.</em> </p>
 <h2 id="part-3-comparison-of-methods">Part 3: Comparison of Methods</h2>
 <h3 id="31-implementation">3.1 Implementation</h3>
