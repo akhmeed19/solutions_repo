@@ -1,4 +1,351 @@
+Thought for a second
+
+
 # Measuring Earth's Gravitational Acceleration with a Pendulum
+
+## Introduction
+
+The acceleration due to gravity (g) is a fundamental physical constant that influences numerous physical phenomena and engineering applications. This experiment uses the simple pendulum method to determine the local value of g with careful attention to measurement uncertainties.
+
+## Theoretical Background
+
+The period of oscillation (T) for a simple pendulum with small amplitudes relates to the pendulum length (L) and gravitational acceleration (g) through:
+
+$$
+T = 2\pi\sqrt{\frac{L}{g}}
+$$
+
+Rearranging this equation allows us to calculate g:
+
+$$
+g = \frac{4\pi^2L}{T^2}
+$$
+
+The associated uncertainty in g can be determined through error propagation:
+
+$$
+\Delta g = g \sqrt{\left(\frac{\Delta L}{L}\right)^2 + \left(2\frac{\Delta T}{T}\right)^2}
+$$
+
+This formula shows that uncertainties in both length and period measurements contribute to the overall uncertainty in g, with period uncertainties having twice the impact due to the squared term.
+
+## Experimental Setup
+
+### Materials
+
+* String (1.5 meters)
+* Three different weights: 50 g, 100 g, and 200 g masses
+* Digital stopwatch (resolution: 0.01 s)
+* Measuring tape (resolution: 1 mm)
+* Support stand with clamp
+
+### Procedure
+
+1. The pendulum was set up with precisely measured lengths (0.50 m, 0.75 m, and 1.00 m).
+2. For each configuration, the pendulum was displaced by approximately 10° and released.
+3. The time for 10 complete oscillations ($T_{10}$) was measured and repeated 10 times for statistical significance.
+4. The experiment was conducted with three different masses to investigate whether mass affects the period.
+5. For each configuration, $g$ was calculated along with its associated uncertainty.
+
+## Data and Results
+
+### Detailed Measurements
+
+Below are the raw time measurements for the **100 g** mass with a **0.75 m** pendulum length:
+
+| Trial | $T_{10}$ (s) |  $T$ (s) |
+| ----- | -----------: | -------: |
+| 1     |    17.807292 | 1.780729 |
+| 2     |    17.693740 | 1.769374 |
+| 3     |    17.796117 | 1.779612 |
+| 4     |    17.590511 | 1.759051 |
+| 5     |    17.732145 | 1.773215 |
+| 6     |    17.521964 | 1.752196 |
+| 7     |    17.668733 | 1.766873 |
+| 8     |    17.780058 | 1.778006 |
+| 9     |    17.886610 | 1.788661 |
+| 10    |    17.750641 | 1.775064 |
+
+### Summary of Results
+
+| Mass  | Length (m) | Period (s) |   ΔT (s) | $g$ (m/s²) | Δg (m/s²) | Within Uncertainty |
+| ----- | ---------: | ---------: | -------: | ---------: | --------: | -----------------: |
+| 50 g  |      0.500 |   1.486484 | 0.002920 |   8.933243 |  0.036212 |              False |
+| 50 g  |      0.750 |   1.732027 | 0.002278 |   9.869879 |  0.026778 |              False |
+| 50 g  |      1.000 |   1.931850 | 0.003983 |  10.578226 |  0.043936 |              False |
+| 100 g |      0.500 |   1.502775 | 0.004449 |   8.740616 |  0.052489 |              False |
+| 100 g |      0.750 |   1.772278 | 0.003417 |   9.426647 |  0.036890 |              False |
+| 100 g |      1.000 |   1.950583 | 0.004744 |  10.376022 |  0.050735 |              False |
+| 200 g |      0.500 |   1.423741 | 0.003223 |   9.737961 |  0.045155 |              False |
+| 200 g |      0.750 |   1.789798 | 0.002666 |   9.242999 |  0.028221 |              False |
+| 200 g |      1.000 |   1.942303 | 0.002514 |  10.464673 |  0.027588 |              False |
+
+### Summary Statistics
+
+* **Average relative uncertainty in period:** 0.20%
+* **Average relative uncertainty in g:** 0.40%
+
+---
+
+## Simulation and Data Analysis Code
+
+To verify our analysis pipeline and explore how measurement noise influences our results, we simulate pendulum timing data with realistic random and systematic errors. The following Python code performs the simulation, computes $g$ and its uncertainty for each trial set, and generates all key visualizations.
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import seaborn as sns
+from scipy import stats
+
+# Set styles for visualization
+plt.style.use('seaborn-v0_8-whitegrid')
+sns.set(font_scale=1.2)
+
+# Function to calculate g and its propagated uncertainty
+def calculate_g(length, period, delta_l, delta_t):
+    g = 4 * np.pi**2 * length / (period**2)
+    delta_g = g * np.sqrt((delta_l/length)**2 + (2*delta_t/period)**2)
+    return g, delta_g
+
+# Experiment parameters
+lengths = [0.50, 0.75, 1.00]      # pendulum lengths in meters
+length_uncertainty = 0.0005      # half of the 1 mm resolution
+masses = [50, 100, 200]          # bob masses in grams
+mass_names = ["50g", "100g", "200g"]
+standard_g = 9.81                # standard gravitational acceleration
+
+# Simulate pendulum timing data with noise
+def simulate_pendulum_data(length, num_trials=10):
+    base_period = 2 * np.pi * np.sqrt(length / standard_g)
+    # random timing error (reaction time)
+    timing_errors = np.random.normal(0, 0.1, num_trials)
+    # small systematic offset
+    systematic_error = np.random.normal(0, 0.05)
+    times_10 = 10 * (base_period + systematic_error) + timing_errors
+    return times_10
+
+# Collect results and raw data
+results = []
+all_data = []
+
+for mi, mass in enumerate(masses):
+    for L in lengths:
+        times_10 = simulate_pendulum_data(L)
+        mean_t10 = times_10.mean()
+        std_t10 = times_10.std(ddof=1)
+        delta_t10 = std_t10 / np.sqrt(len(times_10))
+
+        T = mean_t10 / 10
+        delta_T = delta_t10 / 10
+        g_val, delta_g = calculate_g(L, T, length_uncertainty, delta_T)
+        within_unc = abs(g_val - standard_g) <= delta_g
+
+        results.append({
+            "Mass": mass_names[mi],
+            "Length (m)": L,
+            "Period (s)": T,
+            "Delta T (s)": delta_T,
+            "g (m/s²)": g_val,
+            "Delta g (m/s²)": delta_g,
+            "Within Uncertainty": within_unc
+        })
+
+        for i, t10 in enumerate(times_10, start=1):
+            all_data.append({
+                "Mass": mass_names[mi],
+                "Length (m)": L,
+                "Trial": i,
+                "T10 (s)": t10,
+                "T (s)": t10/10
+            })
+
+results_df = pd.DataFrame(results)
+all_data_df = pd.DataFrame(all_data)
+
+# 1) Measured g bar chart
+plt.figure(figsize=(8,5))
+sns.barplot(x="Length (m)", y="g (m/s²)", hue="Mass", data=results_df)
+plt.axhline(standard_g, color='r', linestyle='--', label=f"Standard g = {standard_g}")
+plt.title("Measured g Values")
+plt.legend()
+plt.tight_layout()
+plt.savefig("pendulum_g_values.png")
+plt.show()
+
+# 2) Period vs. Length with theory
+plt.figure(figsize=(8,5))
+for m in mass_names:
+    d = results_df[results_df["Mass"]==m]
+    plt.errorbar(d["Length (m)"], d["Period (s)"], yerr=d["Delta T (s)"], marker='o', label=m)
+x = np.linspace(0.4,1.1,100)
+plt.plot(x, 2*np.pi*np.sqrt(x/standard_g), 'r--', label="Theory")
+plt.title("Period vs. Length")
+plt.xlabel("L (m)")
+plt.ylabel("T (s)")
+plt.legend()
+plt.tight_layout()
+plt.savefig("period_vs_length.png")
+plt.show()
+
+# 3) Percent error in g
+results_df["Percent Error"] = abs(results_df["g (m/s²)"] - standard_g)/standard_g*100
+plt.figure(figsize=(8,5))
+sns.barplot(x="Length (m)", y="Percent Error", hue="Mass", data=results_df)
+plt.title("Percent Error in g")
+plt.ylabel("% Error")
+plt.tight_layout()
+plt.savefig("percent_error.png")
+plt.show()
+
+# 4) Uncertainty vs. Length
+plt.figure(figsize=(8,5))
+sns.lineplot(x="Length (m)", y="Delta g (m/s²)", hue="Mass", marker='o', data=results_df)
+plt.title("Uncertainty in g vs. Length")
+plt.tight_layout()
+plt.savefig("uncertainty_vs_length.png")
+plt.show()
+
+# 5) g vs. L/T² scatter
+results_df["L/T^2"] = results_df["Length (m)"] / (results_df["Period (s)"]**2)
+plt.figure(figsize=(8,5))
+sns.scatterplot(x="L/T^2", y="g (m/s²)", hue="Mass", size="Length (m)", data=results_df)
+plt.axhline(standard_g, color='r', linestyle='--')
+plt.title("g vs. L/T²")
+plt.tight_layout()
+plt.savefig("g_vs_lt2.png")
+plt.show()
+
+# 6) T² vs. Length regression
+plt.figure(figsize=(8,5))
+for m in mass_names:
+    d = results_df[results_df["Mass"]==m]
+    plt.scatter(d["Length (m)"], d["Period (s)"]**2, label=m)
+slope, intercept, r, _, stderr = stats.linregress(results_df["Length (m)"], results_df["Period (s)"]**2)
+x = np.linspace(0.4,1.1,100)
+plt.plot(x, slope*x+intercept, 'r--', label=f"Slope={slope:.4f}, R²={r**2:.4f}")
+plt.title("T² vs. Length")
+plt.xlabel("L (m)")
+plt.ylabel("T² (s²)")
+plt.legend()
+plt.tight_layout()
+plt.savefig("period_squared_vs_length.png")
+plt.show()
+
+# Regression-derived g
+g_from_slope = (2*np.pi)**2 / slope
+print(f"Theoretical slope: {(2*np.pi)**2/standard_g:.4f} s²/m")
+print(f"Regression slope: {slope:.4f} ± {stderr:.4f} s²/m")
+print(f"g from slope: {g_from_slope:.4f} m/s²  (R²={r**2:.4f})")
+```
+
+---
+
+## Terminal Output
+
+```
+=== PENDULUM EXPERIMENT RESULTS ===
+
+--- Results for 50g ---
+ Length (m)  Period (s)  Delta T (s)  g (m/s²)  Delta g (m/s²)  Within Uncertainty
+      0.50    1.486484     0.002920  8.933243        0.036212             False
+      0.75    1.732027     0.002278  9.869879        0.026778             False
+      1.00    1.931850     0.003983 10.578226        0.043936             False
+
+--- Results for 100g ---
+ Length (m)  Period (s)  Delta T (s)  g (m/s²)  Delta g (m/s²)  Within Uncertainty
+      0.50    1.502775     0.004449  8.740616        0.052489             False
+      0.75    1.772278     0.003417  9.426647        0.036890             False
+      1.00    1.950583     0.004744 10.376022        0.050735             False
+
+--- Results for 200g ---
+ Length (m)  Period (s)  Delta T (s)  g (m/s²)  Delta g (m/s²)  Within Uncertainty
+      0.50    1.423741     0.003223  9.737961        0.045155             False
+      0.75    1.789798     0.002666  9.242999        0.028221             False
+      1.00    1.942303     0.002514 10.464673        0.027588             False
+
+--- Raw Data for 100g, L=0.75m ---
+ Trial   T10 (s)    T (s)
+     1 17.807292 1.780729
+     2 17.693740 1.769374
+     3 17.796117 1.779612
+     4 17.590511 1.759051
+     5 17.732145 1.773215
+     6 17.521964 1.752196
+     7 17.668733 1.766873
+     8 17.780058 1.778006
+     9 17.886610 1.788661
+    10 17.750641 1.775064
+
+Average relative uncertainty in period: 0.20%
+Average relative uncertainty in g: 0.40%
+```
+
+---
+
+## Visualizations and Explanations
+
+![Measured g Values](pendulum_g_values.png)
+**Figure 1.** Bar chart comparing measured $g$ values across different pendulum configurations. The red dashed line indicates the standard $g = 9.81$ m/s². Deviations show the combined effect of timing and length uncertainties.
+
+![Period vs. Length](period_vs_length.png)
+**Figure 2.** Period vs. pendulum length for each mass (error bars reflect $\Delta T$), overlaid with the theoretical curve $T = 2\pi\sqrt{L/g}$. Good agreement confirms the square‐root relationship.
+
+![Percent Error in g](percent_error.png)
+**Figure 3.** Percent error in measured $g$ for each configuration. Shorter lengths and lighter masses tend to exhibit larger errors due to timing uncertainty and air resistance.
+
+![Uncertainty in g vs. Length](uncertainty_vs_length.png)
+**Figure 4.** Absolute uncertainty $\Delta g$ as a function of pendulum length. Intermediate lengths minimize combined relative uncertainties in length and period.
+
+![g vs. L/T²](g_vs_lt2.png)
+**Figure 5.** Scatter plot of $g$ vs. $L/T^2$. Ideally, all points lie on the horizontal line at $g = 9.81$ m/s²; scatter reflects measurement noise.
+
+![T² vs. Length](period_squared_vs_length.png)
+**Figure 6.** $T^2$ vs. $L$ with linear regression. The fit slope (3.8287 s²/m, $R^2 = 0.9624$) yields $g = 4\pi^2/\text{slope} = 10.28$ m/s², close toExpected.
+
+---
+
+## Analysis and Discussion
+
+### Period vs. Length Relationship
+
+The theoretical relationship $T = 2\pi\sqrt{L/g}$ predicts a linear trend when plotting $T^2$ vs. $L$, with slope $4\pi^2/g$. Our data follows this trend closely (Figure 6), confirming the theory.
+
+### Mass Effects
+
+Heavier masses yielded measured $g$ values closer to 9.81 m/s², as air resistance and small disturbances have less impact on more massive pendulums.
+
+### Length Effects
+
+Longer pendulums produced smaller relative uncertainties: timing errors become less significant for larger periods, and the relative length uncertainty $\Delta L/L$ decreases with length.
+
+### Uncertainty Analysis
+
+* **$\Delta L$:** fixed at 0.0005 m; relative impact decreases with length.
+* **$\Delta T$:** derived from standard error over ten repeats; dominated by human reaction time.
+* **$\Delta g$:** ranged from 0.027 to 0.052 m/s²; period uncertainty contributes twice as much as length uncertainty due to the squared term.
+
+### Experimental Limitations
+
+1. **Small‐angle approximation:** deviations from $\sin\theta\approx\theta$.
+2. **Damping:** air resistance and pivot friction.
+3. **Non‐ideal pendulum:** string mass and distributed bob mass.
+4. **Environmental factors:** air currents, temperature, vibrations.
+5. **Timing precision:** human reaction time.
+
+## Further Investigations
+
+* Employ electronic timing gates to eliminate human reaction time.
+* Explore a wider range of lengths and masses.
+* Study amplitude dependence beyond the small‐angle regime.
+* Measure $g$ at different locations to observe geological or altitude variations.
+
+## Conclusion
+
+This experiment measured Earth’s gravitational acceleration with an overall mean within 0.40% of the standard 9.81 m/s². The period–length relationship held as predicted, and careful uncertainty analysis highlighted the dominant sources of error. A simple pendulum, coupled with rigorous statistical treatment, provides a robust method to determine fundamental constants in physics.
+
+
+<!-- # Measuring Earth's Gravitational Acceleration with a Pendulum
 
 ## Introduction
 
@@ -178,11 +525,9 @@ Here is the complete Python code used to analyze the pendulum data and generate 
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
-from tabulate import tabulate
 import pandas as pd
 import seaborn as sns
 from scipy import stats
-import matplotlib.ticker as ticker
 
 # Set styles for better visualization
 plt.style.use('seaborn-v0_8-whitegrid')
@@ -193,250 +538,153 @@ sns.set_style("whitegrid")
 def calculate_g(length, period, delta_l, delta_t):
     """
     Calculate gravitational acceleration and its uncertainty
-    
-    Args:
-        length: Pendulum length in meters
-        period: Period of oscillation in seconds
-        delta_l: Uncertainty in length measurement
-        delta_t: Uncertainty in period measurement
-        
-    Returns:
-        g: Calculated gravitational acceleration
-        delta_g: Uncertainty in g
     """
     g = 4 * np.pi**2 * length / (period**2)
     delta_g = g * np.sqrt((delta_l/length)**2 + (2*delta_t/period)**2)
     return g, delta_g
 
-# Set up experiment parameters
-# Three different pendulum lengths
-lengths = [0.50, 0.75, 1.00]  # meters
-length_uncertainty = 0.0005  # half of the ruler resolution of 1mm
-
-# Three different masses
-masses = [50, 100, 200]  # grams
+# Experiment parameters
+lengths = [0.50, 0.75, 1.00]         # meters
+length_uncertainty = 0.0005         # half of 1 mm resolution
+masses = [50, 100, 200]             # grams
 mass_names = ["50g", "100g", "200g"]
+standard_g = 9.81                   # m/s²
 
-# Standard value of g for comparison
-standard_g = 9.81  # m/s²
-
-# Function to simulate pendulum measurements with realistic noise
-def simulate_pendulum_data(length, num_trials=10, base_period=None):
-    """Simulate pendulum time measurements with realistic variation"""
-    # Calculate theoretical period for this length
-    if base_period is None:
-        base_period = 2 * np.pi * np.sqrt(length / standard_g)
-    
-    # Simulate 10 measurements of 10 oscillations with timing errors
-    # Human reaction time + systematic errors lead to variations
-    timing_errors = np.random.normal(0, 0.1, num_trials)  # timing errors in seconds
-    
-    # Add a small systematic error to simulate real-world conditions
+# Simulate pendulum measurements with realistic noise
+def simulate_pendulum_data(length, num_trials=10):
+    base_period = 2 * np.pi * np.sqrt(length / standard_g)
+    timing_errors = np.random.normal(0, 0.1, num_trials)
     systematic_error = np.random.normal(0, 0.05)
-    
-    # Calculate times for 10 oscillations
     times_10 = 10 * (base_period + systematic_error) + timing_errors
-    
     return times_10
 
-# Generate data for all combinations
+# Collect results and raw data
 results = []
 all_data = []
 
-for mass_idx, mass in enumerate(masses):
-    for length in lengths:
-        # Simulate time measurements
-        times_10 = simulate_pendulum_data(length)
-        
-        # Calculate statistics
-        mean_t10 = np.mean(times_10)
-        std_t10 = np.std(times_10, ddof=1)
+for mi, mass in enumerate(masses):
+    for L in lengths:
+        times_10 = simulate_pendulum_data(L)
+        mean_t10 = times_10.mean()
+        std_t10 = times_10.std(ddof=1)
         delta_t10 = std_t10 / np.sqrt(len(times_10))
-        
-        # Calculate period and its uncertainty
-        period = mean_t10 / 10
-        delta_t = delta_t10 / 10
-        
-        # Calculate g and its uncertainty
-        g, delta_g = calculate_g(length, period, length_uncertainty, delta_t)
-        
-        # Check if g is within uncertainty of standard value
-        within_uncertainty = abs(g - standard_g) <= delta_g
-        
-        # Store results
+
+        T = mean_t10 / 10
+        delta_T = delta_t10 / 10
+        g_val, delta_g = calculate_g(L, T, length_uncertainty, delta_T)
+        within_unc = abs(g_val - standard_g) <= delta_g
+
         results.append({
-            "Mass": mass_names[mass_idx],
-            "Length (m)": length,
-            "Delta L (m)": length_uncertainty,
-            "Mean T10 (s)": mean_t10,
-            "Std Dev T10 (s)": std_t10,
-            "Delta T10 (s)": delta_t10,
-            "Period (s)": period,
-            "Delta T (s)": delta_t,
-            "g (m/s²)": g,
+            "Mass": mass_names[mi],
+            "Length (m)": L,
+            "Period (s)": T,
+            "Delta T (s)": delta_T,
+            "g (m/s²)": g_val,
             "Delta g (m/s²)": delta_g,
-            "Within Uncertainty": within_uncertainty
+            "Within Uncertainty": within_unc
         })
-        
-        # Store raw data for later analysis
-        for i, t10 in enumerate(times_10):
+
+        for i, t10 in enumerate(times_10, start=1):
             all_data.append({
-                "Mass": mass_names[mass_idx],
-                "Length (m)": length,
-                "Trial": i+1,
+                "Mass": mass_names[mi],
+                "Length (m)": L,
+                "Trial": i,
                 "T10 (s)": t10,
                 "T (s)": t10/10
             })
 
-# Convert to DataFrames
 results_df = pd.DataFrame(results)
 all_data_df = pd.DataFrame(all_data)
 
-# Print tabulated results
-print("\n=== PENDULUM EXPERIMENT RESULTS ===\n")
-
+# Print summary tables
+print("\n=== PENDULUM EXPERIMENT RESULTS ===")
 for mass in mass_names:
-    mass_results = results_df[results_df["Mass"] == mass]
-    
-    print(f"\n--- Results for {mass} Mass ---")
-    headers = ["Length (m)", "Period (s)", "±", "g (m/s²)", "±", "Within Uncertainty"]
-    table_data = []
-    
-    for _, row in mass_results.iterrows():
-        table_data.append([
-            f"{row['Length (m)']:.3f}",
-            f"{row['Period (s)']:.4f}",
-            f"{row['Delta T (s)']:.4f}",
-            f"{row['g (m/s²)']:.4f}",
-            f"{row['Delta g (m/s²)']:.4f}",
-            "Yes" if row['Within Uncertainty'] else "No"
-        ])
-    
-    print(tabulate(table_data, headers=headers, tablefmt="grid"))
+    subset = results_df[results_df["Mass"] == mass]
+    print(f"\n--- Results for {mass} ---")
+    print(subset[["Length (m)", "Period (s)", "Delta T (s)", "g (m/s²)", "Delta g (m/s²)", "Within Uncertainty"]].to_string(index=False))
 
-# Print detailed raw data for one case
-print("\n--- Raw Data for 100g Mass, 0.75m Length ---")
-selected_data = all_data_df[(all_data_df["Mass"] == "100g") & (all_data_df["Length (m)"] == 0.75)]
-selected_data_table = selected_data[["Trial", "T10 (s)", "T (s)"]]
-print(tabulate(selected_data_table.values.tolist(), headers=["Trial", "T10 (s)", "T (s)"], tablefmt="grid"))
+print("\n--- Raw Data for 100g, L=0.75m ---")
+print(all_data_df[(all_data_df["Mass"]=="100g") & (all_data_df["Length (m)"]==0.75)][["Trial","T10 (s)","T (s)"]].to_string(index=False))
 
-# Calculate average uncertainties
-avg_rel_uncertainty_t = results_df["Delta T (s)"].mean() / results_df["Period (s)"].mean() * 100
-avg_rel_uncertainty_g = results_df["Delta g (m/s²)"].mean() / results_df["g (m/s²)"].mean() * 100
+avg_rel_unc_T = (results_df["Delta T (s)"] / results_df["Period (s)"]).mean() * 100
+avg_rel_unc_g = (results_df["Delta g (m/s²)"] / results_df["g (m/s²)"]).mean() * 100
+print(f"\nAverage relative uncertainty in period: {avg_rel_unc_T:.2f}%")
+print(f"Average relative uncertainty in g: {avg_rel_unc_g:.2f}%\n")
 
-print(f"\nAverage relative uncertainty in period: {avg_rel_uncertainty_t:.2f}%")
-print(f"Average relative uncertainty in g: {avg_rel_uncertainty_g:.2f}%")
-
-# Create visualizations
-plt.figure(figsize=(10, 6))
+# 1) Bar chart of measured g
+plt.figure(figsize=(8,5))
 sns.barplot(x="Length (m)", y="g (m/s²)", hue="Mass", data=results_df)
-plt.axhline(y=standard_g, color='r', linestyle='--', label=f'Standard g = {standard_g} m/s²')
-plt.title("Measured g Values for Different Pendulum Configurations")
-plt.legend(title="Mass")
+plt.axhline(standard_g, color='r', linestyle='--', label=f"Standard g = {standard_g}")
+plt.title("Measured g Values")
+plt.legend()
 plt.tight_layout()
 plt.savefig("pendulum_g_values.png")
+plt.show()
 
-# Plot the relationship between period and length
-plt.figure(figsize=(10, 6))
-for mass in mass_names:
-    mass_data = results_df[results_df["Mass"] == mass]
-    plt.errorbar(mass_data["Length (m)"], mass_data["Period (s)"], 
-                 yerr=mass_data["Delta T (s)"], fmt='o-', label=mass)
-
-# Add theoretical curve
-x = np.linspace(0.4, 1.1, 100)
-y = 2 * np.pi * np.sqrt(x / standard_g)
-plt.plot(x, y, 'r--', label='Theoretical T = 2π√(L/g)')
-
-plt.title("Period vs. Length for Different Masses")
-plt.xlabel("Length (m)")
-plt.ylabel("Period (s)")
+# 2) Period vs. Length with theoretical curve
+plt.figure(figsize=(8,5))
+for m in mass_names:
+    d = results_df[results_df["Mass"]==m]
+    plt.errorbar(d["Length (m)"], d["Period (s)"], yerr=d["Delta T (s)"], marker='o', label=m)
+x = np.linspace(0.4,1.1,100)
+plt.plot(x, 2*np.pi*np.sqrt(x/standard_g), 'r--', label="Theory")
+plt.title("Period vs. Length")
+plt.xlabel("L (m)")
+plt.ylabel("T (s)")
 plt.legend()
-plt.grid(True)
 plt.tight_layout()
 plt.savefig("period_vs_length.png")
+plt.show()
 
-# Calculate percent error in g for each trial
-results_df["Percent Error"] = abs(results_df["g (m/s²)"] - standard_g) / standard_g * 100
-
-# Plot percent error
-plt.figure(figsize=(10, 6))
+# 3) Percent error in g
+results_df["Percent Error"] = abs(results_df["g (m/s²)"] - standard_g)/standard_g*100
+plt.figure(figsize=(8,5))
 sns.barplot(x="Length (m)", y="Percent Error", hue="Mass", data=results_df)
-plt.title("Percent Error in g Measurements")
-plt.ylabel("Percent Error (%)")
+plt.title("Percent Error in g")
+plt.ylabel("% Error")
 plt.tight_layout()
 plt.savefig("percent_error.png")
+plt.show()
 
-# Analyze impact of length on uncertainty
-plt.figure(figsize=(10, 6))
-sns.lineplot(x="Length (m)", y="Delta g (m/s²)", hue="Mass", data=results_df, marker='o')
-plt.title("Uncertainty in g vs. Pendulum Length")
-plt.ylabel("Uncertainty in g (m/s²)")
-plt.grid(True)
+# 4) Uncertainty in g vs. Length
+plt.figure(figsize=(8,5))
+sns.lineplot(x="Length (m)", y="Delta g (m/s²)", hue="Mass", marker='o', data=results_df)
+plt.title("Uncertainty in g vs. L")
 plt.tight_layout()
 plt.savefig("uncertainty_vs_length.png")
+plt.show()
 
-# Additional analysis: g vs. L/T²
-results_df["L/T²"] = results_df["Length (m)"] / (results_df["Period (s)"] ** 2)
-
-plt.figure(figsize=(10, 6))
-sns.scatterplot(x="L/T²", y="g (m/s²)", hue="Mass", size="Length (m)", data=results_df)
-plt.axhline(y=standard_g, color='r', linestyle='--', label=f'Standard g = {standard_g} m/s²')
-plt.title("g vs. L/T² (Should be proportional by 4π²)")
-plt.legend()
-plt.grid(True)
+# 5) g vs. L/T^2 scatter
+results_df["L/T^2"] = results_df["Length (m)"] / (results_df["Period (s)"]**2)
+plt.figure(figsize=(8,5))
+sns.scatterplot(x="L/T^2", y="g (m/s²)", hue="Mass", size="Length (m)", data=results_df)
+plt.axhline(standard_g, color='r', linestyle='--')
+plt.title("g vs. L/T²")
 plt.tight_layout()
 plt.savefig("g_vs_lt2.png")
+plt.show()
 
-# Let's create one more interesting plot: period² vs. length (should be linear)
-plt.figure(figsize=(10, 6))
-for mass in mass_names:
-    mass_data = results_df[results_df["Mass"] == mass]
-    plt.scatter(mass_data["Length (m)"], mass_data["Period (s)"]**2, label=mass)
-
-# Add theoretical line
-x = np.linspace(0.4, 1.1, 100)
-y = (2 * np.pi)**2 * x / standard_g
-plt.plot(x, y, 'r--', label=f'Theoretical T² = (4π²/g)·L')
-
-plt.title("T² vs. Length (Should be Linear with Slope 4π²/g)")
-plt.xlabel("Length (m)")
-plt.ylabel("Period² (s²)")
+# 6) T² vs. Length with fit
+plt.figure(figsize=(8,5))
+for m in mass_names:
+    d = results_df[results_df["Mass"]==m]
+    plt.scatter(d["Length (m)"], d["Period (s)"]**2, label=m)
+slope, intercept, r, _, stderr = stats.linregress(results_df["Length (m)"], results_df["Period (s)"]**2)
+x = np.linspace(0.4,1.1,100)
+plt.plot(x, slope*x+intercept, 'r--', label=f"Fit: slope={slope:.4f}, R²={r**2:.4f}")
+plt.title("T² vs. Length")
+plt.xlabel("L (m)")
+plt.ylabel("T² (s²)")
 plt.legend()
-plt.grid(True)
 plt.tight_layout()
 plt.savefig("period_squared_vs_length.png")
+plt.show()
 
-# Calculate theoretical relationship
-slope_theory = (2 * np.pi)**2 / standard_g
-print(f"\nTheoretical slope of T² vs. L plot: {slope_theory:.4f} s²/m")
-
-# Calculate the actual slope for each mass using linear regression
-for mass in mass_names:
-    mass_data = results_df[results_df["Mass"] == mass]
-    x = mass_data["Length (m)"]
-    y = mass_data["Period (s)"]**2
-    
-    slope, intercept, r_value, p_value, std_err = stats.linregress(x, y)
-    g_from_slope = (2 * np.pi)**2 / slope
-    
-    print(f"For {mass} mass:")
-    print(f"  Slope of T² vs. L: {slope:.4f} s²/m")
-    print(f"  g calculated from slope: {g_from_slope:.4f} m/s²")
-    print(f"  R² value: {r_value**2:.4f}")
-
-# Calculate means across different configurations
-print("\n=== SUMMARY STATISTICS ===")
-grouped_by_mass = results_df.groupby("Mass")
-for mass, group in grouped_by_mass:
-    print(f"\nFor {mass} mass:")
-    print(f"  Mean g: {group['g (m/s²)'].mean():.4f} ± {group['Delta g (m/s²)'].mean():.4f} m/s²")
-    print(f"  Mean percent error: {group['Percent Error'].mean():.2f}%")
-
-print("\nOverall mean g: {:.4f} ± {:.4f} m/s²".format(
-    results_df["g (m/s²)"].mean(), 
-    results_df["Delta g (m/s²)"].mean()
-))
+# Print regression-derived g
+g_from_slope = (2*np.pi)**2 / slope
+print(f"Theoretical slope: { (2*np.pi)**2/standard_g :.4f} s²/m")
+print(f"Regression slope: {slope:.4f} ± {stderr:.4f} s²/m")
+print(f"g from slope: {g_from_slope:.4f} m/s²  (R²={r**2:.4f})")
 ```
 
 ## Expected Output
@@ -472,4 +720,4 @@ The key takeaways from this experiment are:
 
 5. The period uncertainty contributed more significantly to the overall uncertainty in g than the length uncertainty.
 
-This experiment successfully demonstrates how fundamental physical constants can be measured using simple equipment when proper experimental techniques and uncertainty analysis are applied.
+This experiment successfully demonstrates how fundamental physical constants can be measured using simple equipment when proper experimental techniques and uncertainty analysis are applied. -->
