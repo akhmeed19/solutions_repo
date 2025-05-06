@@ -116,7 +116,17 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#simulation-and-data-analysis-code">Simulation and Data Analysis Code</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#terminal-output">Terminal Output</a>
+<li class="toctree-l3"><a class="reference internal" href="#pendulum-experiment-results-terminal-output">PENDULUM EXPERIMENT RESULTS (Terminal output)</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#results-for-50-g">Results for 50 g</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#results-for-100-g">Results for 100 g</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#results-for-200-g">Results for 200 g</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#raw-data-for-100-g-l-075-m">Raw Data for 100 g, \(L = 0.75\) m</a>
+</li>
+</ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#visualizations-and-explanations">Visualizations and Explanations</a>
 </li>
@@ -576,37 +586,188 @@ print(f"Regression slope: {slope:.4f} ± {stderr:.4f} s²/m")
 print(f"g from slope: {g_from_slope:.4f} m/s²  (R²={r**2:.4f})")
 </code></pre>
 <hr/>
-<h2 id="terminal-output">Terminal Output</h2>
-<p>=== PENDULUM EXPERIMENT RESULTS ===</p>
-<p>--- Results for 50 g ---
- Length (m)  Period (s)  <span class="arithmatex">\(\Delta T\)</span> (s)  <span class="arithmatex">\(g\)</span> (m/s²)  <span class="arithmatex">\(\Delta g\)</span> (m/s²)  Within Uncertainty
-      0.50    1.486484       0.002920     8.933243           0.036212              False
-      0.75    1.732027       0.002278     9.869879           0.026778              False
-      1.00    1.931850       0.003983    10.578226           0.043936              False</p>
-<p>--- Results for 100 g ---
- Length (m)  Period (s)  <span class="arithmatex">\(\Delta T\)</span> (s)  <span class="arithmatex">\(g\)</span> (m/s²)  <span class="arithmatex">\(\Delta g\)</span> (m/s²)  Within Uncertainty
-      0.50    1.502775       0.004449     8.740616           0.052489              False
-      0.75    1.772278       0.003417     9.426647           0.036890              False
-      1.00    1.950583       0.004744    10.376022           0.050735              False</p>
-<p>--- Results for 200 g ---
- Length (m)  Period (s)  <span class="arithmatex">\(\Delta T\)</span> (s)  <span class="arithmatex">\(g\)</span> (m/s²)  <span class="arithmatex">\(\Delta g\)</span> (m/s²)  Within Uncertainty
-      0.50    1.423741       0.003223     9.737961           0.045155              False
-      0.75    1.789798       0.002666     9.242999           0.028221              False
-      1.00    1.942303       0.002514    10.464673           0.027588              False</p>
-<p>--- Raw Data for 100 g, <span class="arithmatex">\(L = 0.75\)</span> m ---
- Trial    <span class="arithmatex">\(T_{10}\)</span> (s)    <span class="arithmatex">\(T\)</span> (s)
-     1       17.807292       1.780729
-     2       17.693740       1.769374
-     3       17.796117       1.779612
-     4       17.590511       1.759051
-     5       17.732145       1.773215
-     6       17.521964       1.752196
-     7       17.668733       1.766873
-     8       17.780058       1.778006
-     9       17.886610       1.788661
-    10       17.750641       1.775064</p>
-<p>Average relative uncertainty in period: 0.20%<br/>
-Average relative uncertainty in <span class="arithmatex">\(g\)</span>: 0.40%</p>
+<h2 id="pendulum-experiment-results-terminal-output">PENDULUM EXPERIMENT RESULTS (Terminal output)</h2>
+<h3 id="results-for-50-g">Results for 50 g</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Length <span class="arithmatex">\(L\)</span> (m)</th>
+<th style="text-align: center;">Period <span class="arithmatex">\(T\)</span> (s)</th>
+<th style="text-align: center;">ΔT (s)</th>
+<th style="text-align: center;"><span class="arithmatex">\(g\)</span> (m/s²)</th>
+<th style="text-align: center;">Δg (m/s²)</th>
+<th style="text-align: center;">Within Uncertainty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0.50</td>
+<td style="text-align: center;">1.486484</td>
+<td style="text-align: center;">0.002920</td>
+<td style="text-align: center;">8.933243</td>
+<td style="text-align: center;">0.036212</td>
+<td style="text-align: center;">False</td>
+</tr>
+<tr>
+<td style="text-align: center;">0.75</td>
+<td style="text-align: center;">1.732027</td>
+<td style="text-align: center;">0.002278</td>
+<td style="text-align: center;">9.869879</td>
+<td style="text-align: center;">0.026778</td>
+<td style="text-align: center;">False</td>
+</tr>
+<tr>
+<td style="text-align: center;">1.00</td>
+<td style="text-align: center;">1.931850</td>
+<td style="text-align: center;">0.003983</td>
+<td style="text-align: center;">10.578226</td>
+<td style="text-align: center;">0.043936</td>
+<td style="text-align: center;">False</td>
+</tr>
+</tbody>
+</table>
+<h3 id="results-for-100-g">Results for 100 g</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Length <span class="arithmatex">\(L\)</span> (m)</th>
+<th style="text-align: center;">Period <span class="arithmatex">\(T\)</span> (s)</th>
+<th style="text-align: center;">ΔT (s)</th>
+<th style="text-align: center;"><span class="arithmatex">\(g\)</span> (m/s²)</th>
+<th style="text-align: center;">Δg (m/s²)</th>
+<th style="text-align: center;">Within Uncertainty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0.50</td>
+<td style="text-align: center;">1.502775</td>
+<td style="text-align: center;">0.004449</td>
+<td style="text-align: center;">8.740616</td>
+<td style="text-align: center;">0.052489</td>
+<td style="text-align: center;">False</td>
+</tr>
+<tr>
+<td style="text-align: center;">0.75</td>
+<td style="text-align: center;">1.772278</td>
+<td style="text-align: center;">0.003417</td>
+<td style="text-align: center;">9.426647</td>
+<td style="text-align: center;">0.036890</td>
+<td style="text-align: center;">False</td>
+</tr>
+<tr>
+<td style="text-align: center;">1.00</td>
+<td style="text-align: center;">1.950583</td>
+<td style="text-align: center;">0.004744</td>
+<td style="text-align: center;">10.376022</td>
+<td style="text-align: center;">0.050735</td>
+<td style="text-align: center;">False</td>
+</tr>
+</tbody>
+</table>
+<h3 id="results-for-200-g">Results for 200 g</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Length <span class="arithmatex">\(L\)</span> (m)</th>
+<th style="text-align: center;">Period <span class="arithmatex">\(T\)</span> (s)</th>
+<th style="text-align: center;">ΔT (s)</th>
+<th style="text-align: center;"><span class="arithmatex">\(g\)</span> (m/s²)</th>
+<th style="text-align: center;">Δg (m/s²)</th>
+<th style="text-align: center;">Within Uncertainty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0.50</td>
+<td style="text-align: center;">1.423741</td>
+<td style="text-align: center;">0.003223</td>
+<td style="text-align: center;">9.737961</td>
+<td style="text-align: center;">0.045155</td>
+<td style="text-align: center;">False</td>
+</tr>
+<tr>
+<td style="text-align: center;">0.75</td>
+<td style="text-align: center;">1.789798</td>
+<td style="text-align: center;">0.002666</td>
+<td style="text-align: center;">9.242999</td>
+<td style="text-align: center;">0.028221</td>
+<td style="text-align: center;">False</td>
+</tr>
+<tr>
+<td style="text-align: center;">1.00</td>
+<td style="text-align: center;">1.942303</td>
+<td style="text-align: center;">0.002514</td>
+<td style="text-align: center;">10.464673</td>
+<td style="text-align: center;">0.027588</td>
+<td style="text-align: center;">False</td>
+</tr>
+</tbody>
+</table>
+<h3 id="raw-data-for-100-g-l-075-m">Raw Data for 100 g, <span class="arithmatex">\(L = 0.75\)</span> m</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Trial</th>
+<th style="text-align: center;"><span class="arithmatex">\(T_{10}\)</span> (s)</th>
+<th style="text-align: center;"><span class="arithmatex">\(T\)</span> (s)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">17.807292</td>
+<td style="text-align: center;">1.780729</td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">17.693740</td>
+<td style="text-align: center;">1.769374</td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">17.796117</td>
+<td style="text-align: center;">1.779612</td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: center;">17.590511</td>
+<td style="text-align: center;">1.759051</td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">17.732145</td>
+<td style="text-align: center;">1.773215</td>
+</tr>
+<tr>
+<td style="text-align: center;">6</td>
+<td style="text-align: center;">17.521964</td>
+<td style="text-align: center;">1.752196</td>
+</tr>
+<tr>
+<td style="text-align: center;">7</td>
+<td style="text-align: center;">17.668733</td>
+<td style="text-align: center;">1.766873</td>
+</tr>
+<tr>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">17.780058</td>
+<td style="text-align: center;">1.778006</td>
+</tr>
+<tr>
+<td style="text-align: center;">9</td>
+<td style="text-align: center;">17.886610</td>
+<td style="text-align: center;">1.788661</td>
+</tr>
+<tr>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">17.750641</td>
+<td style="text-align: center;">1.775064</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Average relative uncertainty in period:</strong> 0.20%
+<strong>Average relative uncertainty in <span class="arithmatex">\(g\)</span>:</strong> 0.40%</p>
 <hr/>
 <h2 id="visualizations-and-explanations">Visualizations and Explanations</h2>
 <p><img alt="Measured g Values" src="https://raw.githubusercontent.com/akhmeed19/solutions_repo/refs/heads/main/docs/_pics/Measurements/Measuring%20Earth%27s%20Gravitational%20Acceleration%20with%20a%20Pendulum/pendulum_g_values.png"/></p>
